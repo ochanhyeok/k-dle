@@ -62,7 +62,7 @@ export async function recordDailyResult(
 }
 
 export function computeDisplayStats(raw: DailyStatsData): DisplayStats {
-  const dist = [raw.g1, raw.g2, raw.g3, raw.g4, raw.g5, raw.g6];
+  const dist = [raw.g1 || 0, raw.g2 || 0, raw.g3 || 0, raw.g4 || 0, raw.g5 || 0, raw.g6 || 0];
   const totalWinGuesses = dist.reduce((sum, count, i) => sum + count * (i + 1), 0);
   const totalWins = raw.wins || 0;
 
