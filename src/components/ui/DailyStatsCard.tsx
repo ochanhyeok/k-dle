@@ -52,24 +52,35 @@ export default function DailyStatsCard({ mode }: Props) {
       </div>
 
       {/* Guess Distribution */}
-      <div className="space-y-1.5">
-        {stats.guessDistribution.map((count, i) => (
-          <div key={i} className="flex items-center gap-2 text-xs">
-            <span className="w-3 text-[var(--color-muted)] text-right">{i + 1}</span>
-            <div className="flex-1 h-5 bg-[var(--color-border)]/30 rounded overflow-hidden">
-              <div
-                className="h-full bg-[var(--color-success)]/60 rounded flex items-center justify-end pr-1.5 transition-all duration-500"
-                style={{ width: `${Math.max((count / maxCount) * 100, count > 0 ? 8 : 0)}%` }}
-              >
-                {count > 0 && (
-                  <span className="text-[10px] font-medium text-[var(--color-foreground)]">
-                    {count}
-                  </span>
-                )}
+      <p className="text-[10px] text-[var(--color-muted)] uppercase tracking-wider mb-2">
+        Guess Distribution
+      </p>
+      <div className="space-y-1">
+        {stats.guessDistribution.map((count, i) => {
+          const pct = stats.totalPlays > 0 ? Math.round((count / stats.totalPlays) * 100) : 0;
+          return (
+            <div key={i} className="flex items-center gap-2 text-xs">
+              <span className="w-8 text-right text-[var(--color-muted)] font-mono shrink-0">
+                {i + 1}try
+              </span>
+              <div className="flex-1 h-6 bg-[var(--color-border)]/30 rounded overflow-hidden">
+                <div
+                  className="h-full bg-[var(--color-success)]/60 rounded flex items-center justify-end pr-2 transition-all duration-500"
+                  style={{ width: `${Math.max((count / maxCount) * 100, count > 0 ? 12 : 0)}%` }}
+                >
+                  {count > 0 && (
+                    <span className="text-[10px] font-bold text-[var(--color-foreground)]">
+                      {count}
+                    </span>
+                  )}
+                </div>
               </div>
+              <span className="w-8 text-right text-[10px] text-[var(--color-muted)] shrink-0">
+                {pct}%
+              </span>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
