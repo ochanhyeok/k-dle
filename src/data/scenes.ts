@@ -42,7 +42,7 @@ export const scenes: Scene[] = [
   {
     id: "goblin-scene",
     dramaTitle: "Goblin",
-    dramaTitleKo: "쓸쓸하고 찬란하神 - 도깨비",
+    dramaTitleKo: "도깨비",
     year: 2016,
     descriptions: [
       "A young woman blows out a small flame on a dark night.",

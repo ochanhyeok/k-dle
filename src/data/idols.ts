@@ -185,6 +185,21 @@ export const idols: Idol[] = [
     difficulty: "easy",
   },
 
+  // BLACKPINK (1 more)
+  {
+    id: "rose",
+    name: "Rosé",
+    nameKo: "로제",
+    group: "BLACKPINK",
+    gender: "Female",
+    position: "Main Vocalist",
+    nationality: "Korean-Australian",
+    debutYear: 2016,
+    company: "YG",
+    generation: "3rd Gen",
+    difficulty: "easy",
+  },
+
   // aespa (2)
   {
     id: "karina",
