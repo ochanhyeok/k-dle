@@ -99,7 +99,7 @@ export default function SceneDle() {
           (d) =>
             d.title.toLowerCase().includes(input.toLowerCase()) ||
             d.titleKo.includes(input)
-        ).slice(0, 8)
+        ).slice(0, 20)
       : [];
 
   const handleGuess = (guessTitle: string) => {
