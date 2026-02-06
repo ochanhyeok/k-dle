@@ -10,6 +10,7 @@ import {
   generateLyricShareText,
 } from "@/lib/lyric-game";
 import type { LyricSong } from "@/data/lyrics";
+import NextGameBanner from "@/components/ui/NextGameBanner";
 
 const MAX_GUESSES = 6;
 const STORAGE_KEY = "k-dle-lyric-state";
@@ -246,6 +247,8 @@ export default function LyricDle() {
           }`} />
         ))}
       </div>
+
+      {status !== "playing" && <NextGameBanner currentMode="lyric-dle" />}
     </div>
   );
 }

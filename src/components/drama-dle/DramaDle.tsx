@@ -15,6 +15,7 @@ import {
   type StoredStats,
 } from "@/lib/game";
 import type { Drama } from "@/data/dramas";
+import NextGameBanner from "@/components/ui/NextGameBanner";
 
 const MAX_GUESSES = 6;
 
@@ -352,6 +353,9 @@ export default function DramaDle() {
           />
         ))}
       </div>
+
+      {/* Next Game */}
+      {status !== "playing" && <NextGameBanner currentMode="drama-dle" />}
     </div>
   );
 }

@@ -10,6 +10,7 @@ import {
   generateSceneShareText,
 } from "@/lib/scene-game";
 import type { Scene } from "@/data/scenes";
+import NextGameBanner from "@/components/ui/NextGameBanner";
 
 const MAX_GUESSES = 6;
 const STORAGE_KEY = "k-dle-scene-state";
@@ -238,6 +239,8 @@ export default function SceneDle() {
           }`} />
         ))}
       </div>
+
+      {status !== "playing" && <NextGameBanner currentMode="scene-dle" />}
     </div>
   );
 }

@@ -11,6 +11,7 @@ import {
   type CompareRow,
 } from "@/lib/idol-game";
 import type { Idol } from "@/data/idols";
+import NextGameBanner from "@/components/ui/NextGameBanner";
 
 const MAX_GUESSES = 6;
 const STORAGE_KEY = "k-dle-idol-state";
@@ -267,6 +268,8 @@ export default function IdolDle() {
           }`} />
         ))}
       </div>
+
+      {status !== "playing" && <NextGameBanner currentMode="idol-dle" />}
     </div>
   );
 }
