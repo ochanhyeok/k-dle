@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import CopyText from "@/components/ui/CopyText";
 
 export const metadata: Metadata = {
   title: "About K-Dle",
@@ -133,9 +134,7 @@ export default function AboutPage() {
             <h3 className="text-lg font-semibold mb-3">Contact</h3>
             <p className="text-sm text-[var(--color-muted)] leading-relaxed">
               For questions, feedback, or DMCA requests, please email us at{" "}
-              <a href="mailto:pon07084@gmail.com" className="text-[var(--color-accent)] hover:underline">
-                pon07084@gmail.com
-              </a>
+              <CopyText text="pon07084@gmail.com" className="text-[var(--color-accent)] hover:underline cursor-pointer" />
             </p>
           </section>
         </div>
