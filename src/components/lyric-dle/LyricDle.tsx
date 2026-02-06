@@ -12,9 +12,11 @@ import {
 import type { LyricSong } from "@/data/lyrics";
 import { shareResult } from "@/lib/share";
 import { recordGameResult, loadUnifiedStats, type UnifiedStats } from "@/lib/unified-stats";
+import { recordDailyResult } from "@/lib/daily-stats";
 import { decodeCompareData, type CompareData } from "@/lib/compare";
 import CountdownTimer from "@/components/ui/CountdownTimer";
 import NextGameBanner from "@/components/ui/NextGameBanner";
+import DailyStatsCard from "@/components/ui/DailyStatsCard";
 import Toast from "@/components/ui/Toast";
 
 const MAX_GUESSES = 6;
@@ -133,6 +135,7 @@ export default function LyricDle() {
     if (won || lost) {
       const newStats = recordGameResult(won, newGuesses.length);
       setStats(newStats);
+      recordDailyResult("lyric", won, newGuesses.length);
     }
   };
 
@@ -323,6 +326,7 @@ export default function LyricDle() {
               </div>
             </div>
           )}
+          <DailyStatsCard mode="lyric" />
           <CountdownTimer />
         </div>
       )}

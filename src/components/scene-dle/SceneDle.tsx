@@ -12,9 +12,11 @@ import {
 import type { Scene } from "@/data/scenes";
 import { shareResult } from "@/lib/share";
 import { recordGameResult, loadUnifiedStats, type UnifiedStats } from "@/lib/unified-stats";
+import { recordDailyResult } from "@/lib/daily-stats";
 import { decodeCompareData, type CompareData } from "@/lib/compare";
 import CountdownTimer from "@/components/ui/CountdownTimer";
 import NextGameBanner from "@/components/ui/NextGameBanner";
+import DailyStatsCard from "@/components/ui/DailyStatsCard";
 import Toast from "@/components/ui/Toast";
 
 const MAX_GUESSES = 6;
@@ -133,6 +135,7 @@ export default function SceneDle() {
     if (won || lost) {
       const newStats = recordGameResult(won, newGuesses.length);
       setStats(newStats);
+      recordDailyResult("scene", won, newGuesses.length);
     }
   };
 
@@ -315,6 +318,7 @@ export default function SceneDle() {
               </div>
             </div>
           )}
+          <DailyStatsCard mode="scene" />
           <CountdownTimer />
         </div>
       )}

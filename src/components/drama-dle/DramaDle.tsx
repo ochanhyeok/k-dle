@@ -12,10 +12,12 @@ import {
   saveGameState,
 } from "@/lib/game";
 import { recordGameResult, loadUnifiedStats, type UnifiedStats } from "@/lib/unified-stats";
+import { recordDailyResult } from "@/lib/daily-stats";
 import type { Drama } from "@/data/dramas";
 import { shareResult } from "@/lib/share";
 import CountdownTimer from "@/components/ui/CountdownTimer";
 import NextGameBanner from "@/components/ui/NextGameBanner";
+import DailyStatsCard from "@/components/ui/DailyStatsCard";
 import Toast from "@/components/ui/Toast";
 import { decodeCompareData, type CompareData } from "@/lib/compare";
 
@@ -123,6 +125,7 @@ export default function DramaDle() {
       if (won || lost) {
         const newStats = recordGameResult(won, newGuesses.length);
         setStats(newStats);
+        recordDailyResult("drama", won, newGuesses.length);
       }
     },
     [target, status, guesses, puzzleNumber, allTitles]
@@ -360,6 +363,7 @@ export default function DramaDle() {
               </div>
             </div>
           )}
+          <DailyStatsCard mode="drama" />
           <CountdownTimer />
         </div>
       )}

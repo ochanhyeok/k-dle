@@ -13,8 +13,10 @@ import {
 import type { Idol } from "@/data/idols";
 import { shareResult } from "@/lib/share";
 import { recordGameResult, loadUnifiedStats, type UnifiedStats } from "@/lib/unified-stats";
+import { recordDailyResult } from "@/lib/daily-stats";
 import CountdownTimer from "@/components/ui/CountdownTimer";
 import NextGameBanner from "@/components/ui/NextGameBanner";
+import DailyStatsCard from "@/components/ui/DailyStatsCard";
 import Toast from "@/components/ui/Toast";
 import { decodeCompareData, type CompareData } from "@/lib/compare";
 
@@ -160,6 +162,7 @@ export default function IdolDle() {
     if (won || lost) {
       const newStats = recordGameResult(won, newRows.length);
       setStats(newStats);
+      recordDailyResult("idol", won, newRows.length);
     }
   };
 
@@ -357,6 +360,7 @@ export default function IdolDle() {
               </div>
             </div>
           )}
+          <DailyStatsCard mode="idol" />
           <CountdownTimer />
         </div>
       )}
