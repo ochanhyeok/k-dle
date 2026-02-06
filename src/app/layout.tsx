@@ -116,6 +116,12 @@ export default function RootLayout({
       <head>
         <link rel="canonical" href={SITE_URL} />
         <meta name="google-site-verification" content="MrECvrjpt3wmdi56cllNejohfsaWjgcWO-xS15ZWp00" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-T8FPHCKHM4" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-T8FPHCKHM4');`,
+          }}
+        />
         <meta name="google-adsense-account" content="ca-pub-2403565022366483" />
         <script
           async
