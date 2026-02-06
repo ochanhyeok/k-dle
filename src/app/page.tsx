@@ -62,8 +62,8 @@ export default function Home() {
       <main className="flex-1 px-4 py-8">
         <div className="max-w-2xl mx-auto">
           {/* Hero */}
-          <div className="text-center mb-10 animate-stagger-in">
-            <div className="text-5xl mb-4">🇰🇷</div>
+          <div className="text-center mb-8 animate-stagger-in">
+            <div className="text-5xl mb-3">🇰🇷</div>
             <h2 className="text-2xl font-bold mb-2">
               Daily K-Drama & K-Pop Puzzles
             </h2>
@@ -74,7 +74,7 @@ export default function Home() {
           </div>
 
           {/* Game Modes Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
             {MODES.map((mode, i) => (
               <Link
                 href={`/${mode.id}`}
@@ -83,7 +83,7 @@ export default function Home() {
                 style={{ animationDelay: `${0.05 + i * 0.07}s` }}
               >
                 <div
-                  className={`game-card relative rounded-xl border ${mode.borderColor} ${mode.hoverBorder} bg-gradient-to-b ${mode.color} p-5 cursor-pointer group`}
+                  className={`game-card relative rounded-xl border ${mode.borderColor} ${mode.hoverBorder} bg-gradient-to-b ${mode.color} p-5 cursor-pointer group h-full`}
                 >
                   <div className="flex items-start justify-between mb-3">
                     <span className="text-3xl group-active:scale-110 transition-transform">{mode.emoji}</span>
