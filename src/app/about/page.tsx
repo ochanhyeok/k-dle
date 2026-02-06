@@ -133,8 +133,8 @@ export default function AboutPage() {
             <h3 className="text-lg font-semibold mb-3">Contact</h3>
             <p className="text-sm text-[var(--color-muted)] leading-relaxed">
               For questions, feedback, or DMCA requests, please email us at{" "}
-              <a href="mailto:k-dle@proton.me" className="text-[var(--color-accent)] hover:underline">
-                k-dle@proton.me
+              <a href="mailto:pon07084@gmail.com" className="text-[var(--color-accent)] hover:underline">
+                pon07084@gmail.com
               </a>
             </p>
           </section>

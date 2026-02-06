@@ -4,6 +4,7 @@ import { useState } from "react";
 import { loadUnifiedStats, generateStatsShareText, type UnifiedStats } from "@/lib/unified-stats";
 import { shareResult } from "@/lib/share";
 import Modal from "./Modal";
+import Toast from "./Toast";
 
 interface StatsModalProps {
   isOpen: boolean;
@@ -21,18 +22,13 @@ function getStreakTitle(streak: number): { title: string; emoji: string } {
 
 export default function StatsModal({ isOpen, onClose }: StatsModalProps) {
   const stats: UnifiedStats = loadUnifiedStats();
-  const [shareStatus, setShareStatus] = useState<"shared" | "copied" | null>(null);
+  const [showToast, setShowToast] = useState(false);
 
   const handleShareStats = async () => {
     if (!stats) return;
     const text = generateStatsShareText(stats);
-    try {
-      const result = await shareResult(text);
-      setShareStatus(result);
-      setTimeout(() => setShareStatus(null), 2000);
-    } catch {
-      // user cancelled
-    }
+    await shareResult(text);
+    setShowToast(true);
   };
 
   const winPct =
@@ -145,8 +141,9 @@ export default function StatsModal({ isOpen, onClose }: StatsModalProps) {
         onClick={handleShareStats}
         className="mt-4 w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] py-2.5 text-sm font-medium hover:bg-[var(--color-card-hover)] transition-colors"
       >
-        {shareStatus === "copied" ? "Copied! ✓" : shareStatus === "shared" ? "Shared! ✓" : "Share My Stats 📤"}
+        Share My Stats 📋
       </button>
+      <Toast message="Copied to clipboard! 📋" show={showToast} onClose={() => setShowToast(false)} />
     </Modal>
   );
 }

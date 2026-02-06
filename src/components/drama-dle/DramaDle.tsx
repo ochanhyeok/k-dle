@@ -16,6 +16,7 @@ import type { Drama } from "@/data/dramas";
 import { shareResult } from "@/lib/share";
 import CountdownTimer from "@/components/ui/CountdownTimer";
 import NextGameBanner from "@/components/ui/NextGameBanner";
+import Toast from "@/components/ui/Toast";
 import { decodeCompareData, type CompareData } from "@/lib/compare";
 
 const MAX_GUESSES = 6;
@@ -27,7 +28,7 @@ export default function DramaDle() {
   const [input, setInput] = useState("");
   const [status, setStatus] = useState<"playing" | "won" | "lost">("playing");
   const [showAutocomplete, setShowAutocomplete] = useState(false);
-  const [shareStatus, setShareStatus] = useState<"shared" | "copied" | null>(null);
+  const [showToast, setShowToast] = useState(false);
   const [stats, setStats] = useState<UnifiedStats | null>(null);
   const [shakeInput, setShakeInput] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -134,13 +135,8 @@ export default function DramaDle() {
       status === "won",
       MAX_GUESSES
     );
-    try {
-      const result = await shareResult(text);
-      setShareStatus(result);
-      setTimeout(() => setShareStatus(null), 2000);
-    } catch {
-      // user cancelled
-    }
+    await shareResult(text);
+    setShowToast(true);
   };
 
   if (!target) {
@@ -341,7 +337,7 @@ export default function DramaDle() {
             onClick={handleShare}
             className="cta-btn mt-2 w-full rounded-lg bg-[var(--color-success)] text-black font-semibold py-3 text-sm"
           >
-            {shareStatus === "copied" ? "Copied! ✓" : shareStatus === "shared" ? "Shared! ✓" : "Share Result 📤"}
+            Share Result 📋
           </button>
           {friendResult && friendResult.puzzleNum === puzzleNumber && (
             <div className="mt-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-4">
@@ -386,6 +382,7 @@ export default function DramaDle() {
 
       {/* Next Game */}
       {status !== "playing" && <NextGameBanner currentMode="drama-dle" />}
+      <Toast message="Copied to clipboard! 📋" show={showToast} onClose={() => setShowToast(false)} />
     </div>
   );
 }

@@ -15,6 +15,7 @@ import { recordGameResult, loadUnifiedStats, type UnifiedStats } from "@/lib/uni
 import { decodeCompareData, type CompareData } from "@/lib/compare";
 import CountdownTimer from "@/components/ui/CountdownTimer";
 import NextGameBanner from "@/components/ui/NextGameBanner";
+import Toast from "@/components/ui/Toast";
 
 const MAX_GUESSES = 6;
 const STORAGE_KEY = "k-dle-scene-state";
@@ -44,7 +45,7 @@ export default function SceneDle() {
   const [input, setInput] = useState("");
   const [status, setStatus] = useState<"playing" | "won" | "lost">("playing");
   const [showAutocomplete, setShowAutocomplete] = useState(false);
-  const [shareStatus, setShareStatus] = useState<"shared" | "copied" | null>(null);
+  const [showToast, setShowToast] = useState(false);
   const [shakeInput, setShakeInput] = useState(false);
   const [stats, setStats] = useState<UnifiedStats | null>(null);
   const [friendResult, setFriendResult] = useState<CompareData | null>(null);
@@ -137,11 +138,8 @@ export default function SceneDle() {
 
   const handleShare = async () => {
     const text = generateSceneShareText(puzzleNumber, guesses, status === "won", MAX_GUESSES);
-    try {
-      const result = await shareResult(text);
-      setShareStatus(result);
-      setTimeout(() => setShareStatus(null), 2000);
-    } catch {}
+    await shareResult(text);
+    setShowToast(true);
   };
 
   if (!target) {
@@ -294,7 +292,7 @@ export default function SceneDle() {
           )}
 
           <button onClick={handleShare} className="cta-btn mt-2 w-full rounded-lg bg-[var(--color-success)] text-black font-semibold py-3 text-sm">
-            {shareStatus === "copied" ? "Copied! ✓" : shareStatus === "shared" ? "Shared! ✓" : "Share Result 📤"}
+            Share Result 📋
           </button>
           {friendResult && friendResult.puzzleNum === puzzleNumber && (
             <div className="mt-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-4">
@@ -330,6 +328,7 @@ export default function SceneDle() {
       </div>
 
       {status !== "playing" && <NextGameBanner currentMode="scene-dle" />}
+      <Toast message="Copied to clipboard! 📋" show={showToast} onClose={() => setShowToast(false)} />
     </div>
   );
 }
