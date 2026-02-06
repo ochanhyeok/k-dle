@@ -15,6 +15,7 @@ import { shareResult } from "@/lib/share";
 import { recordGameResult, loadUnifiedStats, type UnifiedStats } from "@/lib/unified-stats";
 import { recordDailyResult } from "@/lib/daily-stats";
 import { useTranslation, type TranslationKey } from "@/lib/i18n";
+import { translateIdolAttr } from "@/data/i18n/idol-enums";
 import CountdownTimer from "@/components/ui/CountdownTimer";
 import NextGameBanner from "@/components/ui/NextGameBanner";
 import DailyStatsCard from "@/components/ui/DailyStatsCard";
@@ -75,7 +76,7 @@ export default function IdolDle() {
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
 
   const allNames = getAllIdolNames();
 
@@ -207,7 +208,11 @@ export default function IdolDle() {
                   <td className="py-1.5 px-1 font-medium whitespace-nowrap">{row.guess.name}</td>
                   {ATTR_KEYS.map((a) => {
                     const result = row.results[a.key];
-                    const value = row.guess[a.key];
+                    const rawValue = row.guess[a.key];
+                    const translatableKeys = ["gender", "position", "nationality", "generation"] as const;
+                    const displayValue = translatableKeys.includes(a.key as typeof translatableKeys[number])
+                      ? translateIdolAttr(a.key as "gender" | "position" | "nationality" | "generation", String(rawValue), locale)
+                      : rawValue;
                     const indicator =
                       result === "correct" ? " ✓"
                       : result === "higher" ? " ▲"
@@ -216,11 +221,11 @@ export default function IdolDle() {
                       : "";
                     const label = t(a.labelKey);
                     const ariaLabel =
-                      result === "correct" ? `${label}: ${value} (correct)`
-                      : result === "higher" ? `${label}: ${value} (too low, go higher)`
-                      : result === "lower" ? `${label}: ${value} (too high, go lower)`
-                      : result === "partial" ? `${label}: ${value} (partial match)`
-                      : `${label}: ${value} (wrong)`;
+                      result === "correct" ? `${label}: ${displayValue} (correct)`
+                      : result === "higher" ? `${label}: ${displayValue} (too low, go higher)`
+                      : result === "lower" ? `${label}: ${displayValue} (too high, go lower)`
+                      : result === "partial" ? `${label}: ${displayValue} (partial match)`
+                      : `${label}: ${displayValue} (wrong)`;
                     return (
                       <td key={a.key} className="py-1.5 px-1">
                         <span
@@ -228,7 +233,7 @@ export default function IdolDle() {
                           aria-label={ariaLabel}
                           role="cell"
                         >
-                          {value}{indicator}
+                          {displayValue}{indicator}
                         </span>
                       </td>
                     );

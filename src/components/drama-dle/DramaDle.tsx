@@ -39,7 +39,7 @@ export default function DramaDle() {
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
 
   const allTitles = getAllDramaTitles();
 
@@ -152,7 +152,12 @@ export default function DramaDle() {
     );
   }
 
-  const hints = getHints(target, guesses.length + (status === "playing" ? 1 : 0));
+  const hintLabels = {
+    genre: t("hint.genre"), year: t("hint.year"), network: t("hint.network"),
+    episodes: t("hint.episodes"), keywords: t("hint.keywords"),
+    initials: t("hint.initials"), starring: t("hint.starring"),
+  };
+  const hints = getHints(target, guesses.length + (status === "playing" ? 1 : 0), hintLabels, locale);
 
   return (
     <div className="max-w-lg mx-auto px-4 py-6">

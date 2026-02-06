@@ -1,5 +1,6 @@
 import { lyrics, type LyricSong } from "@/data/lyrics";
 import { encodeCompareData } from "@/lib/compare";
+import { getLocalizedLyrics } from "@/data/i18n/lyric-i18n";
 
 /** Scramble index for mixed difficulty distribution */
 function mixIndex(num: number, len: number): number {
@@ -25,8 +26,9 @@ export function getLyricPuzzleNumber(): number {
   return Math.round((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
 }
 
-export function getLyricHints(song: LyricSong, revealedCount: number): string[] {
-  return song.lyrics.slice(0, revealedCount);
+export function getLyricHints(song: LyricSong, revealedCount: number, locale?: string): string[] {
+  const lines = getLocalizedLyrics(song.id, locale ?? "en") ?? song.lyrics;
+  return lines.slice(0, revealedCount);
 }
 
 export function checkLyricGuess(guess: string, target: LyricSong): boolean {

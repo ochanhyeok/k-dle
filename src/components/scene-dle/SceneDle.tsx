@@ -56,7 +56,7 @@ export default function SceneDle() {
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
 
   const allTitles = getAllDramaTitlesForScene();
 
@@ -155,7 +155,7 @@ export default function SceneDle() {
     );
   }
 
-  const hints = getSceneHints(target, guesses.length + (status === "playing" ? 1 : 0));
+  const hints = getSceneHints(target, guesses.length + (status === "playing" ? 1 : 0), locale);
 
   return (
     <div className="max-w-lg mx-auto px-4 py-6">

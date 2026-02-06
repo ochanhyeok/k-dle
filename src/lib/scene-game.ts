@@ -1,6 +1,7 @@
 import { scenes, type Scene } from "@/data/scenes";
 import { dramas } from "@/data/dramas";
 import { encodeCompareData } from "@/lib/compare";
+import { getLocalizedDescriptions } from "@/data/i18n/scene-i18n";
 
 /** Scramble index for mixed difficulty distribution */
 function mixIndex(num: number, len: number): number {
@@ -26,8 +27,9 @@ export function getScenePuzzleNumber(): number {
   return Math.round((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
 }
 
-export function getSceneHints(scene: Scene, revealedCount: number): string[] {
-  return scene.descriptions.slice(0, revealedCount);
+export function getSceneHints(scene: Scene, revealedCount: number, locale?: string): string[] {
+  const descs = getLocalizedDescriptions(scene.id, locale ?? "en") ?? scene.descriptions;
+  return descs.slice(0, revealedCount);
 }
 
 export function checkSceneGuess(guess: string, target: Scene): boolean {

@@ -145,6 +145,15 @@ const translations = {
     "aria.statistics": "Statistics",
     "aria.help": "Help",
 
+    // Drama hint labels
+    "hint.genre": "Genre",
+    "hint.year": "Year",
+    "hint.network": "Network",
+    "hint.episodes": "Episodes",
+    "hint.keywords": "Keywords",
+    "hint.initials": "Lead actor initials",
+    "hint.starring": "Starring",
+
     // About page
     "about.title": "About K-Dle",
     "about.tagline": "The daily guessing game for K-Drama and K-Pop fans worldwide.",
@@ -362,6 +371,15 @@ const translations = {
     "aria.statistics": "Estadisticas",
     "aria.help": "Ayuda",
 
+    // Drama hint labels
+    "hint.genre": "Genero",
+    "hint.year": "Ano",
+    "hint.network": "Cadena",
+    "hint.episodes": "Episodios",
+    "hint.keywords": "Palabras clave",
+    "hint.initials": "Iniciales del actor principal",
+    "hint.starring": "Protagonistas",
+
     // About page
     "about.title": "Acerca de K-Dle",
     "about.tagline": "El juego diario de adivinanzas para fans de K-Drama y K-Pop en todo el mundo.",
@@ -578,6 +596,15 @@ const translations = {
     "aria.backHome": "홈으로 돌아가기",
     "aria.statistics": "통계",
     "aria.help": "도움말",
+
+    // Drama hint labels
+    "hint.genre": "장르",
+    "hint.year": "연도",
+    "hint.network": "방송사",
+    "hint.episodes": "회차",
+    "hint.keywords": "키워드",
+    "hint.initials": "주연 이니셜",
+    "hint.starring": "주연",
 
     // About page
     "about.title": "K-Dle 소개",

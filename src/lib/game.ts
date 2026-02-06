@@ -1,5 +1,6 @@
 import { dramas, type Drama } from "@/data/dramas";
 import { encodeCompareData } from "@/lib/compare";
+import { getLocalizedDrama } from "@/data/i18n/drama-i18n";
 
 /** Scramble index for mixed difficulty distribution */
 function mixIndex(num: number, len: number): number {
@@ -33,14 +34,25 @@ export function getTodaysDrama(): Drama {
 }
 
 /** Generate hints for a drama based on attempt number (0-indexed) */
-export function getHints(drama: Drama, revealedCount: number): string[] {
+export function getHints(
+  drama: Drama,
+  revealedCount: number,
+  labels?: { genre: string; year: string; network: string; episodes: string; keywords: string; initials: string; starring: string },
+  locale?: string,
+): string[] {
+  const l = labels ?? { genre: "Genre", year: "Year", network: "Network", episodes: "Episodes", keywords: "Keywords", initials: "Lead actor initials", starring: "Starring" };
+  const loc = getLocalizedDrama(drama.id, locale ?? "en");
+  const genre = loc?.genre ?? drama.genre;
+  const keywords = loc?.synopsisKeywords ?? drama.synopsisKeywords;
+  const quote = loc?.famousQuote ?? drama.famousQuote;
+
   const allHints = [
-    `📌 Genre: ${drama.genre.join(", ")} • Year: ${drama.year}`,
-    `📺 Network: ${drama.network} • Episodes: ${drama.episodes}`,
-    `🔑 Keywords: ${drama.synopsisKeywords.join(", ")}`,
-    `👤 Lead actor initials: ${drama.cast.slice(0, 2).map((name) => name.split(" ").map((n) => n[0]).join(".")).join(", ")}`,
-    `💬 "${drama.famousQuote}"`,
-    `🌟 Starring: ${drama.cast.slice(0, 2).join(", ")}`,
+    `📌 ${l.genre}: ${genre.join(", ")} • ${l.year}: ${drama.year}`,
+    `📺 ${l.network}: ${drama.network} • ${l.episodes}: ${drama.episodes}`,
+    `🔑 ${l.keywords}: ${keywords.join(", ")}`,
+    `👤 ${l.initials}: ${drama.cast.slice(0, 2).map((name) => name.split(" ").map((n) => n[0]).join(".")).join(", ")}`,
+    `💬 "${quote}"`,
+    `🌟 ${l.starring}: ${drama.cast.slice(0, 2).join(", ")}`,
   ];
   return allHints.slice(0, revealedCount);
 }
