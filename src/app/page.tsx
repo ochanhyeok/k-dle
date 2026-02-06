@@ -114,11 +114,21 @@ export default function Home() {
       {/* Footer */}
       <footer className="border-t border-[var(--color-border)] px-4 py-4">
         <div className="max-w-2xl mx-auto text-center">
-          <p className="text-xs text-[var(--color-muted)]">
-            K-Dle is an unofficial fan project. Not affiliated with any
-            entertainment company.
-            <br />
-            All intellectual property belongs to their respective owners.
+          <div className="flex items-center justify-center gap-3 mb-2 text-xs">
+            <Link href="/about" className="text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">
+              About
+            </Link>
+            <span className="text-[var(--color-border)]">|</span>
+            <Link href="/privacy" className="text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">
+              Privacy
+            </Link>
+            <span className="text-[var(--color-border)]">|</span>
+            <Link href="/terms" className="text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">
+              Terms
+            </Link>
+          </div>
+          <p className="text-[10px] text-[var(--color-muted)]">
+            K-Dle is an unofficial fan project. All IP belongs to respective owners.
           </p>
         </div>
       </footer>
