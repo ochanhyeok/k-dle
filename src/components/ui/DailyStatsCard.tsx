@@ -57,28 +57,23 @@ export default function DailyStatsCard({ mode }: Props) {
       <p className="text-[10px] text-[var(--color-muted)] uppercase tracking-wider mb-2">
         {t("stats.guessDistribution")}
       </p>
-      <div className="space-y-1">
+      <div className="space-y-1.5">
         {stats.guessDistribution.map((count, i) => {
           const pct = stats.totalPlays > 0 ? Math.round((count / stats.totalPlays) * 100) : 0;
+          const isTop = count === maxCount && count > 0;
           return (
             <div key={i} className="flex items-center gap-2 text-xs">
-              <span className="w-8 text-right text-[var(--color-muted)] font-mono shrink-0">
-                {i + 1}try
+              <span className={`w-4 text-center font-mono shrink-0 ${isTop ? "text-[var(--color-accent)] font-bold" : "text-[var(--color-muted)]"}`}>
+                {i + 1}
               </span>
-              <div className="flex-1 h-6 bg-[var(--color-border)]/30 rounded overflow-hidden">
+              <div className="flex-1 h-7 bg-[var(--color-border)]/20 rounded-md overflow-hidden relative">
                 <div
-                  className="h-full bg-[var(--color-success)]/60 rounded flex items-center justify-end pr-2 transition-all duration-500"
-                  style={{ width: `${Math.max((count / maxCount) * 100, count > 0 ? 12 : 0)}%` }}
-                >
-                  {count > 0 && (
-                    <span className="text-[10px] font-bold text-[var(--color-foreground)]">
-                      {count}
-                    </span>
-                  )}
-                </div>
+                  className={`h-full rounded-md transition-all duration-500 ${isTop ? "bg-[var(--color-accent)]" : "bg-[var(--color-success)]/40"}`}
+                  style={{ width: `${Math.max((count / maxCount) * 100, count > 0 ? 6 : 0)}%` }}
+                />
               </div>
-              <span className="w-8 text-right text-[10px] text-[var(--color-muted)] shrink-0">
-                {pct}%
+              <span className={`w-16 text-right tabular-nums shrink-0 ${isTop ? "text-[var(--color-accent)] font-bold text-xs" : "text-[var(--color-muted)] text-[11px]"}`}>
+                {count > 0 ? `${count} (${pct}%)` : "-"}
               </span>
             </div>
           );

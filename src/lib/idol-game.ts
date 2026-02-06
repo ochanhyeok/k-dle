@@ -25,19 +25,19 @@ export interface CompareRow {
 }
 
 export function getTodaysIdol(): Idol {
-  const start = new Date("2026-02-06");
   const now = new Date();
-  const diff = now.getTime() - start.getTime();
-  const puzzleNum = Math.floor(diff / (1000 * 60 * 60 * 24));
-  // Offset so it's different from drama
+  const start = new Date(2026, 1, 6);
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const puzzleNum = Math.round((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
   const index = mixIndex(puzzleNum + 17, idols.length);
   return idols[index];
 }
 
 export function getIdolPuzzleNumber(): number {
-  const start = new Date("2026-02-06");
   const now = new Date();
-  return Math.floor((now.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+  const start = new Date(2026, 1, 6);
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  return Math.round((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
 }
 
 export function compareIdols(guess: Idol, target: Idol): CompareRow["results"] {

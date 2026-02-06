@@ -3,9 +3,9 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "@/lib/i18n";
 
-function getTimeUntilMidnightUTC(): { h: number; m: number; s: number } {
+function getTimeUntilLocalMidnight(): { h: number; m: number; s: number } {
   const now = new Date();
-  const tomorrow = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1));
+  const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
   const diff = tomorrow.getTime() - now.getTime();
   const totalSeconds = Math.max(0, Math.floor(diff / 1000));
   return {
@@ -20,12 +20,12 @@ function pad(n: number): string {
 }
 
 export default function CountdownTimer() {
-  const [time, setTime] = useState(getTimeUntilMidnightUTC);
+  const [time, setTime] = useState(getTimeUntilLocalMidnight);
   const { t } = useTranslation();
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTime(getTimeUntilMidnightUTC());
+      setTime(getTimeUntilLocalMidnight());
     }, 1000);
     return () => clearInterval(interval);
   }, []);

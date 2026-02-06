@@ -17,12 +17,12 @@ export interface GameState {
   puzzleNumber: number;
 }
 
-/** Get a consistent daily puzzle number based on date */
+/** Get a consistent daily puzzle number based on local midnight */
 export function getPuzzleNumber(): number {
-  const start = new Date("2026-02-06");
   const now = new Date();
-  const diff = now.getTime() - start.getTime();
-  return Math.floor(diff / (1000 * 60 * 60 * 24));
+  const start = new Date(2026, 1, 6); // local midnight Feb 6, 2026
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  return Math.round((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
 }
 
 /** Get today's drama deterministically */

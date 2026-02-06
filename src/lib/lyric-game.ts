@@ -10,18 +10,19 @@ function mixIndex(num: number, len: number): number {
 }
 
 export function getTodaysLyric(): LyricSong {
-  const start = new Date("2026-02-06");
   const now = new Date();
-  const diff = now.getTime() - start.getTime();
-  const puzzleNum = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const start = new Date(2026, 1, 6);
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const puzzleNum = Math.round((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
   const index = mixIndex(puzzleNum + 31, lyrics.length);
   return lyrics[index];
 }
 
 export function getLyricPuzzleNumber(): number {
-  const start = new Date("2026-02-06");
   const now = new Date();
-  return Math.floor((now.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+  const start = new Date(2026, 1, 6);
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  return Math.round((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
 }
 
 export function getLyricHints(song: LyricSong, revealedCount: number): string[] {
