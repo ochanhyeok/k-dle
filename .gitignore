@@ -1,1 +1,11 @@
 project-overview.jsx
+K-DLE_PRD.md
+node_modules/
+.next/
+out/
+.env
+.env.local
+.env.production
+*.tsbuildinfo
+next-env.d.ts
+.vercel
