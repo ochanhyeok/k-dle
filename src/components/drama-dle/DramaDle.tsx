@@ -29,8 +29,20 @@ export default function DramaDle() {
   const [stats, setStats] = useState<StoredStats | null>(null);
   const [shakeInput, setShakeInput] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   const allTitles = getAllDramaTitles();
+
+  // Close autocomplete on outside click
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+        setShowAutocomplete(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   useEffect(() => {
     const drama = getTodaysDrama();
@@ -201,7 +213,7 @@ export default function DramaDle() {
 
       {/* Input */}
       {status === "playing" && (
-        <div className="relative mb-6">
+        <div className="relative mb-6" ref={wrapperRef}>
           <div className={shakeInput ? "animate-shake" : ""}>
             <input
               ref={inputRef}
@@ -227,7 +239,7 @@ export default function DramaDle() {
 
           {/* Autocomplete */}
           {showAutocomplete && filteredTitles.length > 0 && (
-            <div className="absolute z-10 w-full mt-1 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] shadow-xl overflow-hidden">
+            <div className="absolute z-10 w-full mt-1 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] shadow-xl overflow-hidden max-h-64 overflow-y-auto">
               {filteredTitles.map((drama) => (
                 <button
                   key={drama.title}

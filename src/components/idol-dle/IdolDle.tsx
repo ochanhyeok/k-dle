@@ -13,6 +13,7 @@ import {
 import type { Idol } from "@/data/idols";
 
 const MAX_GUESSES = 6;
+const STORAGE_KEY = "k-dle-idol-state";
 
 const RESULT_COLOR = {
   correct: "bg-[var(--color-success)]/20 text-[var(--color-success)] border-[var(--color-success)]/30",
@@ -32,6 +33,24 @@ const ATTRS = [
   { key: "generation", label: "Gen" },
 ] as const;
 
+function saveIdolState(puzzleNumber: number, guessNames: string[], status: string) {
+  if (typeof window === "undefined") return;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({ puzzleNumber, guessNames, status }));
+}
+
+function loadIdolState(puzzleNumber: number): { guessNames: string[]; status: "playing" | "won" | "lost" } | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const state = JSON.parse(raw);
+    if (state.puzzleNumber !== puzzleNumber) return null;
+    return { guessNames: state.guessNames, status: state.status };
+  } catch {
+    return null;
+  }
+}
+
 export default function IdolDle() {
   const [target, setTarget] = useState<Idol | null>(null);
   const [puzzleNumber, setPuzzleNumber] = useState(0);
@@ -42,12 +61,40 @@ export default function IdolDle() {
   const [copied, setCopied] = useState(false);
   const [shakeInput, setShakeInput] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   const allNames = getAllIdolNames();
 
+  // Close autocomplete on outside click
   useEffect(() => {
-    setTarget(getTodaysIdol());
-    setPuzzleNumber(getIdolPuzzleNumber());
+    const handleClickOutside = (e: MouseEvent) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+        setShowAutocomplete(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    const idol = getTodaysIdol();
+    const num = getIdolPuzzleNumber();
+    setTarget(idol);
+    setPuzzleNumber(num);
+
+    // Restore saved state
+    const saved = loadIdolState(num);
+    if (saved && idol) {
+      const restoredRows: CompareRow[] = [];
+      for (const name of saved.guessNames) {
+        const guessIdol = findIdolByName(name);
+        if (guessIdol) {
+          restoredRows.push({ guess: guessIdol, results: compareIdols(guessIdol, idol) });
+        }
+      }
+      setRows(restoredRows);
+      setStatus(saved.status);
+    }
   }, []);
 
   const filteredNames =
@@ -84,7 +131,10 @@ export default function IdolDle() {
 
     const won = idol.id === target.id;
     const lost = !won && newRows.length >= MAX_GUESSES;
-    setStatus(won ? "won" : lost ? "lost" : "playing");
+    const newStatus = won ? "won" : lost ? "lost" : "playing";
+    setStatus(newStatus);
+
+    saveIdolState(puzzleNumber, newRows.map((r) => r.guess.name), newStatus);
   };
 
   const handleShare = async () => {
@@ -97,7 +147,11 @@ export default function IdolDle() {
   };
 
   if (!target) {
-    return <div className="flex items-center justify-center min-h-[60vh] text-[var(--color-muted)]">Loading...</div>;
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="text-[var(--color-muted)]">Loading...</div>
+      </div>
+    );
   }
 
   return (
@@ -129,10 +183,9 @@ export default function IdolDle() {
                       a.key === "debutYear"
                         ? `${row.guess.debutYear}${result === "higher" ? " ↑" : result === "lower" ? " ↓" : ""}`
                         : row.guess[a.key];
-                    const colorKey = result === "higher" || result === "lower" ? result : result;
                     return (
                       <td key={a.key} className="py-1.5 px-1">
-                        <span className={`inline-block w-full text-center rounded px-1.5 py-1 border text-[10px] ${RESULT_COLOR[colorKey]}`}>
+                        <span className={`inline-block w-full text-center rounded px-1.5 py-1 border text-[10px] ${RESULT_COLOR[result]}`}>
                           {value}
                         </span>
                       </td>
@@ -147,7 +200,7 @@ export default function IdolDle() {
 
       {/* Input */}
       {status === "playing" && (
-        <div className="relative mb-6">
+        <div className="relative mb-6" ref={wrapperRef}>
           <div className={shakeInput ? "animate-shake" : ""}>
             <input
               ref={inputRef}
@@ -164,7 +217,7 @@ export default function IdolDle() {
             />
           </div>
           {showAutocomplete && filteredNames.length > 0 && (
-            <div className="absolute z-10 w-full mt-1 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] shadow-xl overflow-hidden">
+            <div className="absolute z-10 w-full mt-1 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] shadow-xl overflow-hidden max-h-64 overflow-y-auto">
               {filteredNames.map((idol) => (
                 <button
                   key={idol.name}

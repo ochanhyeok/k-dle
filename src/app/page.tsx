@@ -1,5 +1,6 @@
 import Link from "next/link";
 import HeaderButtons from "@/components/ui/HeaderButtons";
+import StreakBanner from "@/components/ui/StreakBanner";
 
 const MODES = [
   {
@@ -106,15 +107,7 @@ export default function Home() {
           </div>
 
           {/* Daily Streak Banner */}
-          <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] p-4 text-center">
-            <p className="text-sm text-[var(--color-muted)] mb-1">
-              Your Daily Streak
-            </p>
-            <p className="text-3xl font-bold">🔥 0</p>
-            <p className="text-xs text-[var(--color-muted)] mt-1">
-              Play any mode to start your streak
-            </p>
-          </div>
+          <StreakBanner />
         </div>
       </main>
 

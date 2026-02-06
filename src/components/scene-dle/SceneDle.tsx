@@ -12,6 +12,25 @@ import {
 import type { Scene } from "@/data/scenes";
 
 const MAX_GUESSES = 6;
+const STORAGE_KEY = "k-dle-scene-state";
+
+function saveSceneState(puzzleNumber: number, guesses: string[], status: string) {
+  if (typeof window === "undefined") return;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({ puzzleNumber, guesses, status }));
+}
+
+function loadSceneState(puzzleNumber: number): { guesses: string[]; status: "playing" | "won" | "lost" } | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const state = JSON.parse(raw);
+    if (state.puzzleNumber !== puzzleNumber) return null;
+    return { guesses: state.guesses, status: state.status };
+  } catch {
+    return null;
+  }
+}
 
 export default function SceneDle() {
   const [target, setTarget] = useState<Scene | null>(null);
@@ -23,12 +42,32 @@ export default function SceneDle() {
   const [copied, setCopied] = useState(false);
   const [shakeInput, setShakeInput] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   const allTitles = getAllDramaTitlesForScene();
 
+  // Close autocomplete on outside click
   useEffect(() => {
-    setTarget(getTodaysScene());
-    setPuzzleNumber(getScenePuzzleNumber());
+    const handleClickOutside = (e: MouseEvent) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+        setShowAutocomplete(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    const scene = getTodaysScene();
+    const num = getScenePuzzleNumber();
+    setTarget(scene);
+    setPuzzleNumber(num);
+
+    const saved = loadSceneState(num);
+    if (saved) {
+      setGuesses(saved.guesses);
+      setStatus(saved.status);
+    }
   }, []);
 
   const filteredTitles =
@@ -65,7 +104,10 @@ export default function SceneDle() {
 
     const won = checkSceneGuess(guessTitle, target);
     const lost = !won && newGuesses.length >= MAX_GUESSES;
-    setStatus(won ? "won" : lost ? "lost" : "playing");
+    const newStatus = won ? "won" : lost ? "lost" : "playing";
+    setStatus(newStatus);
+
+    saveSceneState(puzzleNumber, newGuesses, newStatus);
   };
 
   const handleShare = async () => {
@@ -78,7 +120,11 @@ export default function SceneDle() {
   };
 
   if (!target) {
-    return <div className="flex items-center justify-center min-h-[60vh] text-[var(--color-muted)]">Loading...</div>;
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="text-[var(--color-muted)]">Loading...</div>
+      </div>
+    );
   }
 
   const hints = getSceneHints(target, guesses.length + (status === "playing" ? 1 : 0));
@@ -125,7 +171,7 @@ export default function SceneDle() {
 
       {/* Input */}
       {status === "playing" && (
-        <div className="relative mb-6">
+        <div className="relative mb-6" ref={wrapperRef}>
           <div className={shakeInput ? "animate-shake" : ""}>
             <input
               ref={inputRef}
@@ -142,7 +188,7 @@ export default function SceneDle() {
             />
           </div>
           {showAutocomplete && filteredTitles.length > 0 && (
-            <div className="absolute z-10 w-full mt-1 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] shadow-xl overflow-hidden">
+            <div className="absolute z-10 w-full mt-1 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] shadow-xl overflow-hidden max-h-64 overflow-y-auto">
               {filteredTitles.map((drama) => (
                 <button
                   key={drama.title}

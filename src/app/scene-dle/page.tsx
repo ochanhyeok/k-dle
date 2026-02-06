@@ -1,24 +1,29 @@
-import Link from "next/link";
+import type { Metadata } from "next";
+import GameHeader from "@/components/ui/GameHeader";
 import SceneDle from "@/components/scene-dle/SceneDle";
+
+export const metadata: Metadata = {
+  title: "Scene-dle — Recognize the K-Drama Scene",
+  description:
+    "Can you recognize the K-Drama from a scene description? Clues get more specific with each guess. A new puzzle every day!",
+  openGraph: {
+    title: "Scene-dle — Recognize the K-Drama Scene | K-Dle",
+    description: "Recognize the K-Drama from scene descriptions. New puzzle daily!",
+  },
+};
 
 export default function SceneDlePage() {
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="border-b border-[var(--color-border)] px-4 py-3">
-        <div className="max-w-2xl mx-auto flex items-center gap-3">
-          <Link href="/" className="p-2 -ml-2 rounded-lg hover:bg-[var(--color-card)] transition-colors" aria-label="Back">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
-          </Link>
-          <div>
-            <h1 className="text-lg font-bold tracking-tight">🎭 Scene-dle</h1>
-            <p className="text-[10px] text-[var(--color-muted)] uppercase tracking-wider">Recognize the K-Drama Scene</p>
-          </div>
-        </div>
-      </header>
-      <main className="flex-1"><SceneDle /></main>
+      <GameHeader emoji="🎭" title="Scene-dle" subtitle="Recognize the K-Drama Scene" />
+      <main className="flex-1">
+        <SceneDle />
+      </main>
       <footer className="border-t border-[var(--color-border)] px-4 py-3">
         <div className="max-w-2xl mx-auto text-center">
-          <p className="text-[10px] text-[var(--color-muted)]">K-Dle is an unofficial fan project. All IP belongs to respective owners.</p>
+          <p className="text-[10px] text-[var(--color-muted)]">
+            K-Dle is an unofficial fan project. All IP belongs to respective owners.
+          </p>
         </div>
       </footer>
     </div>
