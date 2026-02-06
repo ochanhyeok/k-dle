@@ -726,4 +726,383 @@ export const idols: Idol[] = [
     generation: "4th Gen",
     difficulty: "hard",
   },
+
+  // ==========================================================
+  // NEW ADDITIONS (25) - 8 easy, 9 medium, 8 hard
+  // ==========================================================
+
+  // --- EASY (8) ---
+
+  // BTS (4 more)
+  {
+    id: "rm",
+    name: "RM",
+    nameKo: "알엠",
+    group: "BTS",
+    gender: "Male",
+    position: "Leader",
+    nationality: "Korean",
+    debutYear: 2013,
+    company: "HYBE",
+    generation: "3rd Gen",
+    difficulty: "easy",
+  },
+  {
+    id: "jin",
+    name: "Jin",
+    nameKo: "진",
+    group: "BTS",
+    gender: "Male",
+    position: "Sub Vocalist",
+    nationality: "Korean",
+    debutYear: 2013,
+    company: "HYBE",
+    generation: "3rd Gen",
+    difficulty: "easy",
+  },
+  {
+    id: "jhope",
+    name: "J-Hope",
+    nameKo: "제이홉",
+    group: "BTS",
+    gender: "Male",
+    position: "Main Dancer",
+    nationality: "Korean",
+    debutYear: 2013,
+    company: "HYBE",
+    generation: "3rd Gen",
+    difficulty: "easy",
+  },
+  {
+    id: "suga",
+    name: "Suga",
+    nameKo: "슈가",
+    group: "BTS",
+    gender: "Male",
+    position: "Lead Rapper",
+    nationality: "Korean",
+    debutYear: 2013,
+    company: "HYBE",
+    generation: "3rd Gen",
+    difficulty: "easy",
+  },
+
+  // ATEEZ (1)
+  {
+    id: "hongjoong",
+    name: "Hongjoong",
+    nameKo: "홍중",
+    group: "ATEEZ",
+    gender: "Male",
+    position: "Leader",
+    nationality: "Korean",
+    debutYear: 2018,
+    company: "KQ",
+    generation: "4th Gen",
+    difficulty: "easy",
+  },
+
+  // TREASURE (1)
+  {
+    id: "jihoon_treasure",
+    name: "Jihoon",
+    nameKo: "지훈",
+    group: "TREASURE",
+    gender: "Male",
+    position: "Main Dancer",
+    nationality: "Korean",
+    debutYear: 2020,
+    company: "YG",
+    generation: "4th Gen",
+    difficulty: "easy",
+  },
+
+  // GOT7 (1)
+  {
+    id: "jackson",
+    name: "Jackson Wang",
+    nameKo: "잭슨",
+    group: "GOT7",
+    gender: "Male",
+    position: "Main Rapper",
+    nationality: "Chinese",
+    debutYear: 2014,
+    company: "JYP",
+    generation: "3rd Gen",
+    difficulty: "easy",
+  },
+
+  // NMIXX (1)
+  {
+    id: "haewon",
+    name: "Haewon",
+    nameKo: "해원",
+    group: "NMIXX",
+    gender: "Female",
+    position: "Main Vocalist",
+    nationality: "Korean",
+    debutYear: 2022,
+    company: "JYP",
+    generation: "4th Gen",
+    difficulty: "easy",
+  },
+
+  // --- MEDIUM (9) ---
+
+  // ZEROBASEONE (1)
+  {
+    id: "sunghanbin",
+    name: "Sung Hanbin",
+    nameKo: "성한빈",
+    group: "ZEROBASEONE",
+    gender: "Male",
+    position: "Leader",
+    nationality: "Korean",
+    debutYear: 2023,
+    company: "WakeOne",
+    generation: "5th Gen",
+    difficulty: "medium",
+  },
+
+  // BOYNEXTDOOR (1)
+  {
+    id: "jaehyun_bnd",
+    name: "Jaehyun",
+    nameKo: "재현",
+    group: "BOYNEXTDOOR",
+    gender: "Male",
+    position: "Leader",
+    nationality: "Korean",
+    debutYear: 2023,
+    company: "KOZ",
+    generation: "5th Gen",
+    difficulty: "medium",
+  },
+
+  // RIIZE (1)
+  {
+    id: "shotaro",
+    name: "Shotaro",
+    nameKo: "쇼타로",
+    group: "RIIZE",
+    gender: "Male",
+    position: "Main Dancer",
+    nationality: "Japanese",
+    debutYear: 2023,
+    company: "SM",
+    generation: "5th Gen",
+    difficulty: "medium",
+  },
+
+  // BABYMONSTER (1)
+  {
+    id: "ahyeon",
+    name: "Ahyeon",
+    nameKo: "아현",
+    group: "BABYMONSTER",
+    gender: "Female",
+    position: "Main Vocalist",
+    nationality: "Korean",
+    debutYear: 2023,
+    company: "YG",
+    generation: "5th Gen",
+    difficulty: "medium",
+  },
+
+  // ILLIT (1)
+  {
+    id: "wonhee",
+    name: "Wonhee",
+    nameKo: "원희",
+    group: "ILLIT",
+    gender: "Female",
+    position: "Lead Vocalist",
+    nationality: "Korean",
+    debutYear: 2024,
+    company: "Belift Lab",
+    generation: "5th Gen",
+    difficulty: "medium",
+  },
+
+  // KISS OF LIFE (1)
+  {
+    id: "julie",
+    name: "Julie",
+    nameKo: "쥴리",
+    group: "KISS OF LIFE",
+    gender: "Female",
+    position: "Main Rapper",
+    nationality: "American",
+    debutYear: 2023,
+    company: "S2",
+    generation: "5th Gen",
+    difficulty: "medium",
+  },
+
+  // MONSTA X (1)
+  {
+    id: "joohoney",
+    name: "Joohoney",
+    nameKo: "주헌",
+    group: "MONSTA X",
+    gender: "Male",
+    position: "Main Rapper",
+    nationality: "Korean",
+    debutYear: 2015,
+    company: "Starship",
+    generation: "3rd Gen",
+    difficulty: "medium",
+  },
+
+  // Day6 (1)
+  {
+    id: "youngk",
+    name: "Young K",
+    nameKo: "영케이",
+    group: "DAY6",
+    gender: "Male",
+    position: "Main Vocalist",
+    nationality: "Korean",
+    debutYear: 2015,
+    company: "JYP",
+    generation: "3rd Gen",
+    difficulty: "medium",
+  },
+
+  // STAYC (1)
+  {
+    id: "sieun",
+    name: "Sieun",
+    nameKo: "시은",
+    group: "STAYC",
+    gender: "Female",
+    position: "Main Vocalist",
+    nationality: "Korean",
+    debutYear: 2020,
+    company: "High Up",
+    generation: "4th Gen",
+    difficulty: "medium",
+  },
+
+  // --- HARD (8) ---
+
+  // Kep1er (1)
+  {
+    id: "xiaoting",
+    name: "Xiaoting",
+    nameKo: "샤오팅",
+    group: "Kep1er",
+    gender: "Female",
+    position: "Main Dancer",
+    nationality: "Chinese",
+    debutYear: 2022,
+    company: "WakeOne",
+    generation: "4th Gen",
+    difficulty: "hard",
+  },
+
+  // Billlie (1)
+  {
+    id: "tsuki",
+    name: "Tsuki",
+    nameKo: "츠키",
+    group: "Billlie",
+    gender: "Female",
+    position: "Main Dancer",
+    nationality: "Japanese",
+    debutYear: 2021,
+    company: "Mystic Story",
+    generation: "4th Gen",
+    difficulty: "hard",
+  },
+
+  // tripleS (1)
+  {
+    id: "yooyeon",
+    name: "Yooyeon",
+    nameKo: "유연",
+    group: "tripleS",
+    gender: "Female",
+    position: "Leader",
+    nationality: "Korean",
+    debutYear: 2023,
+    company: "MODHAUS",
+    generation: "5th Gen",
+    difficulty: "hard",
+  },
+
+  // VIVIZ (1)
+  {
+    id: "sinb",
+    name: "SinB",
+    nameKo: "신비",
+    group: "VIVIZ",
+    gender: "Female",
+    position: "Main Dancer",
+    nationality: "Korean",
+    debutYear: 2022,
+    company: "BPM",
+    generation: "4th Gen",
+    difficulty: "hard",
+  },
+
+  // Xdinary Heroes (1)
+  {
+    id: "gunil",
+    name: "Gunil",
+    nameKo: "건일",
+    group: "Xdinary Heroes",
+    gender: "Male",
+    position: "Leader",
+    nationality: "Korean",
+    debutYear: 2021,
+    company: "JYP",
+    generation: "4th Gen",
+    difficulty: "hard",
+  },
+
+  // fromis_9 (1)
+  {
+    id: "nagyung",
+    name: "Nagyung",
+    nameKo: "나경",
+    group: "fromis_9",
+    gender: "Female",
+    position: "Lead Dancer",
+    nationality: "Korean",
+    debutYear: 2018,
+    company: "Pledis",
+    generation: "4th Gen",
+    difficulty: "hard",
+  },
+
+  // Apink (1)
+  {
+    id: "chorong",
+    name: "Chorong",
+    nameKo: "초롱",
+    group: "Apink",
+    gender: "Female",
+    position: "Leader",
+    nationality: "Korean",
+    debutYear: 2011,
+    company: "IST",
+    generation: "2nd Gen",
+    difficulty: "hard",
+  },
+
+  // RIIZE (1 more)
+  {
+    id: "anton",
+    name: "Anton",
+    nameKo: "앤톤",
+    group: "RIIZE",
+    gender: "Male",
+    position: "Sub Vocalist",
+    nationality: "Korean-American",
+    debutYear: 2023,
+    company: "SM",
+    generation: "5th Gen",
+    difficulty: "hard",
+  },
 ];
