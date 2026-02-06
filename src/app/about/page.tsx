@@ -1,22 +1,13 @@
-import type { Metadata } from "next";
+"use client";
+
 import Link from "next/link";
 import CopyText from "@/components/ui/CopyText";
-
-export const metadata: Metadata = {
-  title: "About K-Dle",
-  description:
-    "Learn about K-Dle, the daily K-Drama and K-Pop guessing game for fans worldwide.",
-  alternates: {
-    canonical: "https://k-dle.vercel.app/about",
-  },
-  openGraph: {
-    title: "About K-Dle | K-Dle",
-    description:
-      "Learn about K-Dle, the daily K-Drama and K-Pop guessing game for fans worldwide.",
-  },
-};
+import { useTranslation } from "@/lib/i18n";
+import GameFooter from "@/components/ui/GameFooter";
 
 export default function AboutPage() {
+  const { t } = useTranslation();
+
   return (
     <div className="min-h-screen flex flex-col">
       <header className="border-b border-[var(--color-border)] px-4 py-3">
@@ -24,13 +15,13 @@ export default function AboutPage() {
           <Link
             href="/"
             className="p-2 -ml-2 rounded-lg hover:bg-[var(--color-card)] transition-colors"
-            aria-label="Back to home"
+            aria-label={t("aria.backHome")}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
               <path d="M19 12H5M12 19l-7-7 7-7" />
             </svg>
           </Link>
-          <h1 className="text-lg font-bold tracking-tight">About K-Dle</h1>
+          <h1 className="text-lg font-bold tracking-tight">{t("about.title")}</h1>
         </div>
       </header>
 
@@ -43,37 +34,37 @@ export default function AboutPage() {
               <span className="text-[var(--color-accent)]">K</span>-Dle
             </h2>
             <p className="text-[var(--color-muted)] text-sm max-w-md mx-auto leading-relaxed">
-              The daily guessing game for K-Drama and K-Pop fans worldwide.
+              {t("about.tagline")}
             </p>
           </div>
 
           {/* What is K-Dle */}
           <section className="mb-8">
-            <h3 className="text-lg font-semibold mb-3">What is K-Dle?</h3>
+            <h3 className="text-lg font-semibold mb-3">{t("about.whatIs")}</h3>
             <p className="text-sm text-[var(--color-muted)] leading-relaxed mb-3">
-              K-Dle is a free daily puzzle game inspired by Wordle, designed for fans of Korean entertainment. Every day, new puzzles challenge your knowledge of K-Dramas, K-Pop idols, song lyrics, and iconic drama scenes.
+              {t("about.whatIsP1")}
             </p>
             <p className="text-sm text-[var(--color-muted)] leading-relaxed">
-              With four unique game modes, K-Dle offers something for every type of fan — whether you binge-watch dramas, follow K-Pop groups, or know every OST by heart.
+              {t("about.whatIsP2")}
             </p>
           </section>
 
           {/* Game Modes */}
           <section className="mb-8">
-            <h3 className="text-lg font-semibold mb-4">Game Modes</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("about.gameModes")}</h3>
             <div className="space-y-3">
               {[
-                { emoji: "🎬", title: "Drama-dle", desc: "Guess the K-Drama from progressive text clues including genre, cast, and famous quotes." },
-                { emoji: "🎤", title: "Idol-dle", desc: "Identify the K-Pop idol by comparing attributes like group, position, nationality, and debut year." },
-                { emoji: "📝", title: "Lyric-dle", desc: "Name the K-Pop song or K-Drama OST from translated lyrics revealed one line at a time." },
-                { emoji: "🎭", title: "Scene-dle", desc: "Recognize the K-Drama from scene descriptions that become more specific with each guess." },
+                { emoji: "🎬", title: "Drama-dle", descKey: "about.drama" as const },
+                { emoji: "🎤", title: "Idol-dle", descKey: "about.idol" as const },
+                { emoji: "📝", title: "Lyric-dle", descKey: "about.lyric" as const },
+                { emoji: "🎭", title: "Scene-dle", descKey: "about.scene" as const },
               ].map((mode) => (
                 <div key={mode.title} className="rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-4">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-xl">{mode.emoji}</span>
                     <h4 className="font-semibold text-sm">{mode.title}</h4>
                   </div>
-                  <p className="text-xs text-[var(--color-muted)] leading-relaxed">{mode.desc}</p>
+                  <p className="text-xs text-[var(--color-muted)] leading-relaxed">{t(mode.descKey)}</p>
                 </div>
               ))}
             </div>
@@ -81,72 +72,52 @@ export default function AboutPage() {
 
           {/* How it Works */}
           <section className="mb-8">
-            <h3 className="text-lg font-semibold mb-3">How It Works</h3>
+            <h3 className="text-lg font-semibold mb-3">{t("about.howItWorks")}</h3>
             <div className="space-y-2 text-sm text-[var(--color-muted)] leading-relaxed">
-              <div className="flex items-start gap-3">
-                <span className="text-[var(--color-accent)] font-mono text-xs mt-0.5">1.</span>
-                <p>Choose a game mode from the homepage</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="text-[var(--color-accent)] font-mono text-xs mt-0.5">2.</span>
-                <p>You have 6 tries to guess the correct answer</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="text-[var(--color-accent)] font-mono text-xs mt-0.5">3.</span>
-                <p>Each wrong guess reveals more clues</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="text-[var(--color-accent)] font-mono text-xs mt-0.5">4.</span>
-                <p>Share your results with friends — no spoilers!</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="text-[var(--color-accent)] font-mono text-xs mt-0.5">5.</span>
-                <p>Come back every day to build your streak</p>
-              </div>
+              {(["about.step1", "about.step2", "about.step3", "about.step4", "about.step5"] as const).map((key, i) => (
+                <div key={key} className="flex items-start gap-3">
+                  <span className="text-[var(--color-accent)] font-mono text-xs mt-0.5">{i + 1}.</span>
+                  <p>{t(key)}</p>
+                </div>
+              ))}
             </div>
           </section>
 
           {/* Disclaimer */}
           <section className="mb-8">
-            <h3 className="text-lg font-semibold mb-3">Disclaimer</h3>
+            <h3 className="text-lg font-semibold mb-3">{t("about.disclaimerTitle")}</h3>
             <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-4">
               <p className="text-xs text-[var(--color-muted)] leading-relaxed">
-                K-Dle is an unofficial fan project created for entertainment purposes only. It is not affiliated with, endorsed by, or sponsored by any entertainment company, record label, or broadcasting network. All K-Drama titles, K-Pop artist names, song titles, and related intellectual property belong to their respective owners. The use of these names constitutes nominative fair use within the context of a trivia game.
+                {t("about.disclaimerText")}
               </p>
             </div>
           </section>
 
           {/* Links */}
           <section className="mb-8">
-            <h3 className="text-lg font-semibold mb-3">Links</h3>
+            <h3 className="text-lg font-semibold mb-3">{t("about.links")}</h3>
             <div className="flex flex-col gap-2 text-sm">
               <Link href="/privacy" className="text-[var(--color-accent)] hover:underline">
-                Privacy Policy
+                {t("about.privacyPolicy")}
               </Link>
               <Link href="/terms" className="text-[var(--color-accent)] hover:underline">
-                Terms of Service
+                {t("about.termsOfService")}
               </Link>
             </div>
           </section>
 
           {/* Contact */}
           <section>
-            <h3 className="text-lg font-semibold mb-3">Contact</h3>
+            <h3 className="text-lg font-semibold mb-3">{t("about.contact")}</h3>
             <p className="text-sm text-[var(--color-muted)] leading-relaxed">
-              For questions, feedback, or DMCA requests, please email us at{" "}
+              {t("about.contactText")}{" "}
               <CopyText text="pon07084@gmail.com" className="text-[var(--color-accent)] hover:underline cursor-pointer" />
             </p>
           </section>
         </div>
       </main>
 
-      <footer className="border-t border-[var(--color-border)] px-4 py-3">
-        <div className="max-w-2xl mx-auto text-center">
-          <p className="text-[10px] text-[var(--color-muted)]">
-            K-Dle is an unofficial fan project. All IP belongs to respective owners.
-          </p>
-        </div>
-      </footer>
+      <GameFooter />
     </div>
   );
 }
