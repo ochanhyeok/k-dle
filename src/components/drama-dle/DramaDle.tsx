@@ -15,6 +15,7 @@ import {
   type StoredStats,
 } from "@/lib/game";
 import type { Drama } from "@/data/dramas";
+import { shareResult } from "@/lib/share";
 import NextGameBanner from "@/components/ui/NextGameBanner";
 
 const MAX_GUESSES = 6;
@@ -26,7 +27,7 @@ export default function DramaDle() {
   const [input, setInput] = useState("");
   const [status, setStatus] = useState<"playing" | "won" | "lost">("playing");
   const [showAutocomplete, setShowAutocomplete] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [shareStatus, setShareStatus] = useState<"shared" | "copied" | null>(null);
   const [stats, setStats] = useState<StoredStats | null>(null);
   const [shakeInput, setShakeInput] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -144,11 +145,11 @@ export default function DramaDle() {
       MAX_GUESSES
     );
     try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      const result = await shareResult(text);
+      setShareStatus(result);
+      setTimeout(() => setShareStatus(null), 2000);
     } catch {
-      // fallback
+      // user cancelled
     }
   };
 
@@ -333,7 +334,7 @@ export default function DramaDle() {
             onClick={handleShare}
             className="cta-btn mt-2 w-full rounded-lg bg-[var(--color-success)] text-black font-semibold py-3 text-sm"
           >
-            {copied ? "Copied to clipboard! ✓" : "Share Result 📋"}
+            {shareStatus === "copied" ? "Copied to clipboard! ✓" : shareStatus === "shared" ? "Shared! ✓" : "Share Result 📋"}
           </button>
         </div>
       )}
