@@ -1,6 +1,8 @@
 "use client";
 
-import { loadUnifiedStats, type UnifiedStats } from "@/lib/unified-stats";
+import { useState } from "react";
+import { loadUnifiedStats, generateStatsShareText, type UnifiedStats } from "@/lib/unified-stats";
+import { shareResult } from "@/lib/share";
 import Modal from "./Modal";
 
 interface StatsModalProps {
@@ -19,6 +21,20 @@ function getStreakTitle(streak: number): { title: string; emoji: string } {
 
 export default function StatsModal({ isOpen, onClose }: StatsModalProps) {
   const stats: UnifiedStats = loadUnifiedStats();
+  const [shareStatus, setShareStatus] = useState<"shared" | "copied" | null>(null);
+
+  const handleShareStats = async () => {
+    if (!stats) return;
+    const text = generateStatsShareText(stats);
+    try {
+      const result = await shareResult(text);
+      setShareStatus(result);
+      setTimeout(() => setShareStatus(null), 2000);
+    } catch {
+      // user cancelled
+    }
+  };
+
   const winPct =
     stats.gamesPlayed > 0
       ? Math.round((stats.gamesWon / stats.gamesPlayed) * 100)
@@ -124,6 +140,13 @@ export default function StatsModal({ isOpen, onClose }: StatsModalProps) {
           ))}
         </div>
       </div>
+
+      <button
+        onClick={handleShareStats}
+        className="mt-4 w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] py-2.5 text-sm font-medium hover:bg-[var(--color-card-hover)] transition-colors"
+      >
+        {shareStatus === "copied" ? "Copied! ✓" : shareStatus === "shared" ? "Shared! ✓" : "Share My Stats 📤"}
+      </button>
     </Modal>
   );
 }

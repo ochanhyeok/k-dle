@@ -1,5 +1,6 @@
 import { scenes, type Scene } from "@/data/scenes";
 import { dramas } from "@/data/dramas";
+import { encodeCompareData } from "@/lib/compare";
 
 /** Scramble index for mixed difficulty distribution */
 function mixIndex(num: number, len: number): number {
@@ -50,5 +51,6 @@ export function generateSceneShareText(
   const squares = guesses
     .map((_, i) => (i === guesses.length - 1 && won ? "🟩" : "🟥"))
     .join("");
-  return `🎭 K-Dle #${puzzleNumber} Scene-dle ${score}\n\n${squares}\n\nPlay at k-dle.vercel.app 🎮`;
+  const r = encodeCompareData({ puzzleNum: puzzleNumber, guessCount: guesses.length, won });
+  return `🎭 K-Dle #${puzzleNumber} Scene-dle ${score}\n\n${squares}\n\nk-dle.vercel.app/scene-dle?r=${r}`;
 }

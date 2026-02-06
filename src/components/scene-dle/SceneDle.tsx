@@ -12,6 +12,7 @@ import {
 import type { Scene } from "@/data/scenes";
 import { shareResult } from "@/lib/share";
 import { recordGameResult, loadUnifiedStats, type UnifiedStats } from "@/lib/unified-stats";
+import { decodeCompareData, type CompareData } from "@/lib/compare";
 import CountdownTimer from "@/components/ui/CountdownTimer";
 import NextGameBanner from "@/components/ui/NextGameBanner";
 
@@ -46,6 +47,7 @@ export default function SceneDle() {
   const [shareStatus, setShareStatus] = useState<"shared" | "copied" | null>(null);
   const [shakeInput, setShakeInput] = useState(false);
   const [stats, setStats] = useState<UnifiedStats | null>(null);
+  const [friendResult, setFriendResult] = useState<CompareData | null>(null);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -75,6 +77,16 @@ export default function SceneDle() {
     if (saved) {
       setGuesses(saved.guesses);
       setStatus(saved.status);
+    }
+  }, []);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const r = params.get("r");
+    if (r) {
+      const data = decodeCompareData(r);
+      if (data) setFriendResult(data);
+      window.history.replaceState({}, "", window.location.pathname);
     }
   }, []);
 
@@ -284,6 +296,27 @@ export default function SceneDle() {
           <button onClick={handleShare} className="cta-btn mt-2 w-full rounded-lg bg-[var(--color-success)] text-black font-semibold py-3 text-sm">
             {shareStatus === "copied" ? "Copied! ✓" : shareStatus === "shared" ? "Shared! ✓" : "Share Result 📤"}
           </button>
+          {friendResult && friendResult.puzzleNum === puzzleNumber && (
+            <div className="mt-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-4">
+              <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-3 text-center">
+                👥 Compare
+              </p>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-[var(--color-muted)]">Friend</span>
+                  <span className={friendResult.won ? "text-[var(--color-success)] font-medium" : "text-[var(--color-error)] font-medium"}>
+                    {friendResult.won ? `${friendResult.guessCount}/6 ✓` : "X/6"}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-[var(--color-muted)]">You</span>
+                  <span className={status === "won" ? "text-[var(--color-success)] font-medium" : "text-[var(--color-error)] font-medium"}>
+                    {status === "won" ? `${guesses.length}/6 ✓` : "X/6"}
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
           <CountdownTimer />
         </div>
       )}

@@ -1,4 +1,5 @@
 import { idols, type Idol } from "@/data/idols";
+import { encodeCompareData } from "@/lib/compare";
 
 /** Scramble index for mixed difficulty distribution */
 function mixIndex(num: number, len: number): number {
@@ -98,5 +99,6 @@ export function generateIdolShareText(
     })
     .join("\n");
 
-  return `🎤 K-Dle #${puzzleNumber} Idol-dle ${score}\n\n${grid}\n\nPlay at k-dle.vercel.app 🎮`;
+  const r = encodeCompareData({ puzzleNum: puzzleNumber, guessCount: rows.length, won });
+  return `🎤 K-Dle #${puzzleNumber} Idol-dle ${score}\n\n${grid}\n\nk-dle.vercel.app/idol-dle?r=${r}`;
 }

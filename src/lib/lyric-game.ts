@@ -1,4 +1,5 @@
 import { lyrics, type LyricSong } from "@/data/lyrics";
+import { encodeCompareData } from "@/lib/compare";
 
 /** Scramble index for mixed difficulty distribution */
 function mixIndex(num: number, len: number): number {
@@ -49,5 +50,6 @@ export function generateLyricShareText(
   const squares = guesses
     .map((_, i) => (i === guesses.length - 1 && won ? "🟩" : "🟥"))
     .join("");
-  return `📝 K-Dle #${puzzleNumber} Lyric-dle ${score}\n\n${squares}\n\nPlay at k-dle.vercel.app 🎮`;
+  const r = encodeCompareData({ puzzleNum: puzzleNumber, guessCount: guesses.length, won });
+  return `📝 K-Dle #${puzzleNumber} Lyric-dle ${score}\n\n${squares}\n\nk-dle.vercel.app/lyric-dle?r=${r}`;
 }

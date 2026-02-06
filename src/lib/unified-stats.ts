@@ -79,3 +79,18 @@ export function recordGameResult(won: boolean, guessCount: number): UnifiedStats
   localStorage.setItem(UNIFIED_STATS_KEY, JSON.stringify(stats));
   return stats;
 }
+
+export function generateStatsShareText(stats: UnifiedStats): string {
+  const winRate = stats.gamesPlayed > 0
+    ? Math.round((stats.gamesWon / stats.gamesPlayed) * 100)
+    : 0;
+  const lines = [
+    "🏆 My K-dle Stats",
+    "",
+    `📊 ${stats.gamesPlayed} games played | ${winRate}% win rate`,
+    `🔥 ${stats.currentStreak}-day streak (best: ${stats.maxStreak})`,
+    "",
+    "k-dle.vercel.app",
+  ];
+  return lines.join("\n");
+}
