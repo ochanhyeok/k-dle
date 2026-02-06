@@ -4,6 +4,9 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description: "K-Dle privacy policy — how we handle your data.",
+  alternates: {
+    canonical: "https://k-dle.vercel.app/privacy",
+  },
 };
 
 export default function PrivacyPage() {

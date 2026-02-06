@@ -8,14 +8,13 @@ import {
   checkGuess,
   getAllDramaTitles,
   generateShareText,
-  loadStats,
-  saveStats,
   loadGameState,
   saveGameState,
-  type StoredStats,
 } from "@/lib/game";
+import { recordGameResult, loadUnifiedStats, type UnifiedStats } from "@/lib/unified-stats";
 import type { Drama } from "@/data/dramas";
 import { shareResult } from "@/lib/share";
+import CountdownTimer from "@/components/ui/CountdownTimer";
 import NextGameBanner from "@/components/ui/NextGameBanner";
 
 const MAX_GUESSES = 6;
@@ -28,10 +27,12 @@ export default function DramaDle() {
   const [status, setStatus] = useState<"playing" | "won" | "lost">("playing");
   const [showAutocomplete, setShowAutocomplete] = useState(false);
   const [shareStatus, setShareStatus] = useState<"shared" | "copied" | null>(null);
-  const [stats, setStats] = useState<StoredStats | null>(null);
+  const [stats, setStats] = useState<UnifiedStats | null>(null);
   const [shakeInput, setShakeInput] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
 
   const allTitles = getAllDramaTitles();
 
@@ -51,7 +52,7 @@ export default function DramaDle() {
     const num = getPuzzleNumber();
     setTarget(drama);
     setPuzzleNumber(num);
-    setStats(loadStats());
+    setStats(loadUnifiedStats());
 
     const saved = loadGameState(num);
     if (saved) {
@@ -107,31 +108,8 @@ export default function DramaDle() {
       saveGameState(puzzleNumber, newGuesses, newStatus);
 
       if (won || lost) {
-        const currentStats = loadStats();
-        const today = new Date().toISOString().split("T")[0];
-        const yesterday = new Date(Date.now() - 86400000)
-          .toISOString()
-          .split("T")[0];
-
-        currentStats.gamesPlayed += 1;
-        if (won) {
-          currentStats.gamesWon += 1;
-          currentStats.guessDistribution[newGuesses.length - 1] += 1;
-          currentStats.currentStreak =
-            currentStats.lastPlayedDate === yesterday
-              ? currentStats.currentStreak + 1
-              : 1;
-          currentStats.maxStreak = Math.max(
-            currentStats.maxStreak,
-            currentStats.currentStreak
-          );
-        } else {
-          currentStats.currentStreak = 0;
-        }
-        currentStats.lastPlayedDate = today;
-
-        saveStats(currentStats);
-        setStats(currentStats);
+        const newStats = recordGameResult(won, newGuesses.length);
+        setStats(newStats);
       }
     },
     [target, status, guesses, puzzleNumber, allTitles]
@@ -224,14 +202,29 @@ export default function DramaDle() {
               onChange={(e) => {
                 setInput(e.target.value);
                 setShowAutocomplete(true);
+                setSelectedIndex(-1);
               }}
               onFocus={() => setShowAutocomplete(true)}
               onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleGuess(input);
-                }
-                if (e.key === "Escape") {
+                if (e.key === "ArrowDown") {
+                  e.preventDefault();
+                  setSelectedIndex((prev) => Math.min(prev + 1, filteredTitles.length - 1));
+                } else if (e.key === "ArrowUp") {
+                  e.preventDefault();
+                  setSelectedIndex((prev) => Math.max(prev - 1, -1));
+                } else if (e.key === "Enter") {
+                  if (selectedIndex >= 0 && filteredTitles[selectedIndex]) {
+                    const selected = filteredTitles[selectedIndex].title;
+                    setInput(selected);
+                    setShowAutocomplete(false);
+                    setSelectedIndex(-1);
+                    handleGuess(selected);
+                  } else {
+                    handleGuess(input);
+                  }
+                } else if (e.key === "Escape") {
                   setShowAutocomplete(false);
+                  setSelectedIndex(-1);
                 }
               }}
               placeholder="Type a K-Drama title..."
@@ -241,16 +234,18 @@ export default function DramaDle() {
 
           {/* Autocomplete */}
           {showAutocomplete && filteredTitles.length > 0 && (
-            <div className="absolute z-10 w-full mt-1 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] shadow-xl overflow-hidden max-h-64 overflow-y-auto">
-              {filteredTitles.map((drama) => (
+            <div ref={listRef} className="absolute z-10 w-full mt-1 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] shadow-xl overflow-hidden max-h-64 overflow-y-auto">
+              {filteredTitles.map((drama, idx) => (
                 <button
                   key={drama.title}
+                  ref={(el) => { if (idx === selectedIndex && el) el.scrollIntoView({ block: "nearest" }); }}
                   onClick={() => {
                     setInput(drama.title);
                     setShowAutocomplete(false);
+                    setSelectedIndex(-1);
                     handleGuess(drama.title);
                   }}
-                  className="autocomplete-item w-full text-left px-4 py-2.5 text-sm hover:bg-[var(--color-card-hover)] border-b border-[var(--color-border)] last:border-0"
+                  className={`autocomplete-item w-full text-left px-4 py-2.5 text-sm border-b border-[var(--color-border)] last:border-0 ${idx === selectedIndex ? "bg-[var(--color-card-hover)]" : "hover:bg-[var(--color-card-hover)]"}`}
                 >
                   <span className="text-[var(--color-foreground)]">
                     {drama.title}
@@ -334,8 +329,9 @@ export default function DramaDle() {
             onClick={handleShare}
             className="cta-btn mt-2 w-full rounded-lg bg-[var(--color-success)] text-black font-semibold py-3 text-sm"
           >
-            {shareStatus === "copied" ? "Copied to clipboard! ✓" : shareStatus === "shared" ? "Shared! ✓" : "Share Result 📋"}
+            {shareStatus === "copied" ? "Copied! ✓" : shareStatus === "shared" ? "Shared! ✓" : "Share Result 📤"}
           </button>
+          <CountdownTimer />
         </div>
       )}
 

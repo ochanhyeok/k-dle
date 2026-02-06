@@ -10,6 +10,9 @@ import {
   generateSceneShareText,
 } from "@/lib/scene-game";
 import type { Scene } from "@/data/scenes";
+import { shareResult } from "@/lib/share";
+import { recordGameResult, loadUnifiedStats, type UnifiedStats } from "@/lib/unified-stats";
+import CountdownTimer from "@/components/ui/CountdownTimer";
 import NextGameBanner from "@/components/ui/NextGameBanner";
 
 const MAX_GUESSES = 6;
@@ -40,10 +43,13 @@ export default function SceneDle() {
   const [input, setInput] = useState("");
   const [status, setStatus] = useState<"playing" | "won" | "lost">("playing");
   const [showAutocomplete, setShowAutocomplete] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [shareStatus, setShareStatus] = useState<"shared" | "copied" | null>(null);
   const [shakeInput, setShakeInput] = useState(false);
+  const [stats, setStats] = useState<UnifiedStats | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
 
   const allTitles = getAllDramaTitlesForScene();
 
@@ -63,6 +69,7 @@ export default function SceneDle() {
     const num = getScenePuzzleNumber();
     setTarget(scene);
     setPuzzleNumber(num);
+    setStats(loadUnifiedStats());
 
     const saved = loadSceneState(num);
     if (saved) {
@@ -109,14 +116,19 @@ export default function SceneDle() {
     setStatus(newStatus);
 
     saveSceneState(puzzleNumber, newGuesses, newStatus);
+
+    if (won || lost) {
+      const newStats = recordGameResult(won, newGuesses.length);
+      setStats(newStats);
+    }
   };
 
   const handleShare = async () => {
     const text = generateSceneShareText(puzzleNumber, guesses, status === "won", MAX_GUESSES);
     try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      const result = await shareResult(text);
+      setShareStatus(result);
+      setTimeout(() => setShareStatus(null), 2000);
     } catch {}
   };
 
@@ -178,23 +190,42 @@ export default function SceneDle() {
               ref={inputRef}
               type="text"
               value={input}
-              onChange={(e) => { setInput(e.target.value); setShowAutocomplete(true); }}
+              onChange={(e) => { setInput(e.target.value); setShowAutocomplete(true); setSelectedIndex(-1); }}
               onFocus={() => setShowAutocomplete(true)}
               onKeyDown={(e) => {
-                if (e.key === "Enter") handleGuess(input);
-                if (e.key === "Escape") setShowAutocomplete(false);
+                if (e.key === "ArrowDown") {
+                  e.preventDefault();
+                  setSelectedIndex((prev) => Math.min(prev + 1, filteredTitles.length - 1));
+                } else if (e.key === "ArrowUp") {
+                  e.preventDefault();
+                  setSelectedIndex((prev) => Math.max(prev - 1, -1));
+                } else if (e.key === "Enter") {
+                  if (selectedIndex >= 0 && filteredTitles[selectedIndex]) {
+                    const selected = filteredTitles[selectedIndex].title;
+                    setInput(selected);
+                    setShowAutocomplete(false);
+                    setSelectedIndex(-1);
+                    handleGuess(selected);
+                  } else {
+                    handleGuess(input);
+                  }
+                } else if (e.key === "Escape") {
+                  setShowAutocomplete(false);
+                  setSelectedIndex(-1);
+                }
               }}
               placeholder="Type a K-Drama title..."
               className="input-focus w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] px-4 py-3 text-sm placeholder:text-[var(--color-muted)] focus:outline-none"
             />
           </div>
           {showAutocomplete && filteredTitles.length > 0 && (
-            <div className="absolute z-10 w-full mt-1 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] shadow-xl overflow-hidden max-h-64 overflow-y-auto">
-              {filteredTitles.map((drama) => (
+            <div ref={listRef} className="absolute z-10 w-full mt-1 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] shadow-xl overflow-hidden max-h-64 overflow-y-auto">
+              {filteredTitles.map((drama, idx) => (
                 <button
                   key={drama.title}
-                  onClick={() => { setInput(drama.title); setShowAutocomplete(false); handleGuess(drama.title); }}
-                  className="autocomplete-item w-full text-left px-4 py-2.5 text-sm hover:bg-[var(--color-card-hover)] border-b border-[var(--color-border)] last:border-0"
+                  ref={(el) => { if (idx === selectedIndex && el) el.scrollIntoView({ block: "nearest" }); }}
+                  onClick={() => { setInput(drama.title); setShowAutocomplete(false); setSelectedIndex(-1); handleGuess(drama.title); }}
+                  className={`autocomplete-item w-full text-left px-4 py-2.5 text-sm border-b border-[var(--color-border)] last:border-0 ${idx === selectedIndex ? "bg-[var(--color-card-hover)]" : "hover:bg-[var(--color-card-hover)]"}`}
                 >
                   <span>{drama.title}</span>
                   <span className="text-[var(--color-muted)] ml-2 text-xs">{drama.titleKo}</span>
@@ -226,9 +257,34 @@ export default function SceneDle() {
               </p>
             </>
           )}
-          <button onClick={handleShare} className="cta-btn mt-4 w-full rounded-lg bg-[var(--color-success)] text-black font-semibold py-3 text-sm">
-            {copied ? "Copied to clipboard! ✓" : "Share Result 📋"}
+          {/* Stats mini */}
+          {stats && (
+            <div className="flex justify-center gap-6 my-4 text-center">
+              <div>
+                <p className="text-xl font-bold">{stats.gamesPlayed}</p>
+                <p className="text-[10px] text-[var(--color-muted)] uppercase">Played</p>
+              </div>
+              <div>
+                <p className="text-xl font-bold">
+                  {stats.gamesPlayed > 0 ? Math.round((stats.gamesWon / stats.gamesPlayed) * 100) : 0}%
+                </p>
+                <p className="text-[10px] text-[var(--color-muted)] uppercase">Win Rate</p>
+              </div>
+              <div>
+                <p className="text-xl font-bold">🔥 {stats.currentStreak}</p>
+                <p className="text-[10px] text-[var(--color-muted)] uppercase">Streak</p>
+              </div>
+              <div>
+                <p className="text-xl font-bold">{stats.maxStreak}</p>
+                <p className="text-[10px] text-[var(--color-muted)] uppercase">Max</p>
+              </div>
+            </div>
+          )}
+
+          <button onClick={handleShare} className="cta-btn mt-2 w-full rounded-lg bg-[var(--color-success)] text-black font-semibold py-3 text-sm">
+            {shareStatus === "copied" ? "Copied! ✓" : shareStatus === "shared" ? "Shared! ✓" : "Share Result 📤"}
           </button>
+          <CountdownTimer />
         </div>
       )}
 

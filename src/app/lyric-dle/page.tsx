@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Lyric-dle — Name the K-Pop Song",
   description:
     "Can you name the K-Pop or K-Drama OST from translated lyrics? One new line revealed per guess. A new puzzle every day!",
+  alternates: {
+    canonical: "https://k-dle.vercel.app/lyric-dle",
+  },
   openGraph: {
     title: "Lyric-dle — Name the K-Pop Song | K-Dle",
     description: "Name the song from translated lyrics. New puzzle daily!",

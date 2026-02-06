@@ -114,7 +114,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <link rel="canonical" href={SITE_URL} />
         <meta name="google-site-verification" content="MrECvrjpt3wmdi56cllNejohfsaWjgcWO-xS15ZWp00" />
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-T8FPHCKHM4" />
         <script

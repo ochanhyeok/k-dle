@@ -1,5 +1,13 @@
 import { idols, type Idol } from "@/data/idols";
 
+/** Scramble index for mixed difficulty distribution */
+function mixIndex(num: number, len: number): number {
+  let x = num % len;
+  x = (x * 37 + 13) % len;
+  x = (x * 41 + 7) % len;
+  return x;
+}
+
 export type CompareResult = "correct" | "partial" | "wrong";
 
 export interface CompareRow {
@@ -21,7 +29,7 @@ export function getTodaysIdol(): Idol {
   const diff = now.getTime() - start.getTime();
   const puzzleNum = Math.floor(diff / (1000 * 60 * 60 * 24));
   // Offset so it's different from drama
-  const index = (puzzleNum + 17) % idols.length;
+  const index = mixIndex(puzzleNum + 17, idols.length);
   return idols[index];
 }
 
@@ -90,5 +98,5 @@ export function generateIdolShareText(
     })
     .join("\n");
 
-  return `🎤 K-Dle #${puzzleNumber} Idol-dle ${score}\n\n${grid}\n\n🔥 k-dle.com`;
+  return `🎤 K-Dle #${puzzleNumber} Idol-dle ${score}\n\n${grid}\n\nPlay at k-dle.vercel.app 🎮`;
 }

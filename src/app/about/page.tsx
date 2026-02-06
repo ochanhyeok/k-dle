@@ -5,6 +5,14 @@ export const metadata: Metadata = {
   title: "About K-Dle",
   description:
     "Learn about K-Dle, the daily K-Drama and K-Pop guessing game for fans worldwide.",
+  alternates: {
+    canonical: "https://k-dle.vercel.app/about",
+  },
+  openGraph: {
+    title: "About K-Dle | K-Dle",
+    description:
+      "Learn about K-Dle, the daily K-Drama and K-Pop guessing game for fans worldwide.",
+  },
 };
 
 export default function AboutPage() {

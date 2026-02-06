@@ -1,5 +1,13 @@
 import { dramas, type Drama } from "@/data/dramas";
 
+/** Scramble index for mixed difficulty distribution */
+function mixIndex(num: number, len: number): number {
+  let x = num % len;
+  x = (x * 37 + 13) % len;
+  x = (x * 41 + 7) % len;
+  return x;
+}
+
 export interface GameState {
   targetDrama: Drama;
   guesses: string[];
@@ -19,7 +27,7 @@ export function getPuzzleNumber(): number {
 /** Get today's drama deterministically */
 export function getTodaysDrama(): Drama {
   const puzzleNum = getPuzzleNumber();
-  const index = puzzleNum % dramas.length;
+  const index = mixIndex(puzzleNum, dramas.length);
   return dramas[index];
 }
 
@@ -61,7 +69,7 @@ export function generateShareText(
     .map((_, i) => (i === guesses.length - 1 && won ? "🟩" : "🟥"))
     .join("");
 
-  return `🎬 K-Dle #${puzzleNumber} Drama-dle ${score}\n\n${squares}\n\n🔥 k-dle.com`;
+  return `🎬 K-Dle #${puzzleNumber} Drama-dle ${score}\n\n${squares}\n\nPlay at k-dle.vercel.app 🎮`;
 }
 
 const STORAGE_KEY = "k-dle-state";
@@ -100,6 +108,35 @@ export function loadStats(): StoredStats {
 export function saveStats(stats: StoredStats): void {
   if (typeof window === "undefined") return;
   localStorage.setItem(STATS_KEY, JSON.stringify(stats));
+}
+
+/** Update stats after a game ends and persist to localStorage */
+export function updateStats(won: boolean, guessCount: number): StoredStats {
+  const currentStats = loadStats();
+  const today = new Date().toISOString().split("T")[0];
+  const yesterday = new Date(Date.now() - 86400000)
+    .toISOString()
+    .split("T")[0];
+
+  currentStats.gamesPlayed += 1;
+  if (won) {
+    currentStats.gamesWon += 1;
+    currentStats.guessDistribution[guessCount - 1] += 1;
+    currentStats.currentStreak =
+      currentStats.lastPlayedDate === yesterday
+        ? currentStats.currentStreak + 1
+        : 1;
+    currentStats.maxStreak = Math.max(
+      currentStats.maxStreak,
+      currentStats.currentStreak
+    );
+  } else {
+    currentStats.currentStreak = 0;
+  }
+  currentStats.lastPlayedDate = today;
+
+  saveStats(currentStats);
+  return currentStats;
 }
 
 export function loadGameState(puzzleNumber: number): {

@@ -11,6 +11,9 @@ import {
   type CompareRow,
 } from "@/lib/idol-game";
 import type { Idol } from "@/data/idols";
+import { shareResult } from "@/lib/share";
+import { recordGameResult, loadUnifiedStats, type UnifiedStats } from "@/lib/unified-stats";
+import CountdownTimer from "@/components/ui/CountdownTimer";
 import NextGameBanner from "@/components/ui/NextGameBanner";
 
 const MAX_GUESSES = 6;
@@ -59,10 +62,13 @@ export default function IdolDle() {
   const [input, setInput] = useState("");
   const [status, setStatus] = useState<"playing" | "won" | "lost">("playing");
   const [showAutocomplete, setShowAutocomplete] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [shareStatus, setShareStatus] = useState<"shared" | "copied" | null>(null);
   const [shakeInput, setShakeInput] = useState(false);
+  const [stats, setStats] = useState<UnifiedStats | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
 
   const allNames = getAllIdolNames();
 
@@ -82,6 +88,7 @@ export default function IdolDle() {
     const num = getIdolPuzzleNumber();
     setTarget(idol);
     setPuzzleNumber(num);
+    setStats(loadUnifiedStats());
 
     // Restore saved state
     const saved = loadIdolState(num);
@@ -136,14 +143,19 @@ export default function IdolDle() {
     setStatus(newStatus);
 
     saveIdolState(puzzleNumber, newRows.map((r) => r.guess.name), newStatus);
+
+    if (won || lost) {
+      const newStats = recordGameResult(won, newRows.length);
+      setStats(newStats);
+    }
   };
 
   const handleShare = async () => {
     const text = generateIdolShareText(puzzleNumber, rows, status === "won", MAX_GUESSES);
     try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      const result = await shareResult(text);
+      setShareStatus(result);
+      setTimeout(() => setShareStatus(null), 2000);
     } catch {}
   };
 
@@ -180,14 +192,27 @@ export default function IdolDle() {
                   <td className="py-1.5 px-1 font-medium whitespace-nowrap">{row.guess.name}</td>
                   {ATTRS.map((a) => {
                     const result = row.results[a.key];
-                    const value =
-                      a.key === "debutYear"
-                        ? `${row.guess.debutYear}${result === "higher" ? " ↑" : result === "lower" ? " ↓" : ""}`
-                        : row.guess[a.key];
+                    const value = row.guess[a.key];
+                    const indicator =
+                      result === "correct" ? " ✓"
+                      : result === "higher" ? " ▲"
+                      : result === "lower" ? " ▼"
+                      : result === "partial" ? " ~"
+                      : "";
+                    const ariaLabel =
+                      result === "correct" ? `${a.label}: ${value} (correct)`
+                      : result === "higher" ? `${a.label}: ${value} (too low, go higher)`
+                      : result === "lower" ? `${a.label}: ${value} (too high, go lower)`
+                      : result === "partial" ? `${a.label}: ${value} (partial match)`
+                      : `${a.label}: ${value} (wrong)`;
                     return (
                       <td key={a.key} className="py-1.5 px-1">
-                        <span className={`inline-block w-full text-center rounded px-1.5 py-1 border text-[10px] ${RESULT_COLOR[result]}`}>
-                          {value}
+                        <span
+                          className={`inline-block w-full text-center rounded px-1.5 py-1 border text-[10px] ${RESULT_COLOR[result]}`}
+                          aria-label={ariaLabel}
+                          role="cell"
+                        >
+                          {value}{indicator}
                         </span>
                       </td>
                     );
@@ -207,23 +232,42 @@ export default function IdolDle() {
               ref={inputRef}
               type="text"
               value={input}
-              onChange={(e) => { setInput(e.target.value); setShowAutocomplete(true); }}
+              onChange={(e) => { setInput(e.target.value); setShowAutocomplete(true); setSelectedIndex(-1); }}
               onFocus={() => setShowAutocomplete(true)}
               onKeyDown={(e) => {
-                if (e.key === "Enter") handleGuess(input);
-                if (e.key === "Escape") setShowAutocomplete(false);
+                if (e.key === "ArrowDown") {
+                  e.preventDefault();
+                  setSelectedIndex((prev) => Math.min(prev + 1, filteredNames.length - 1));
+                } else if (e.key === "ArrowUp") {
+                  e.preventDefault();
+                  setSelectedIndex((prev) => Math.max(prev - 1, -1));
+                } else if (e.key === "Enter") {
+                  if (selectedIndex >= 0 && filteredNames[selectedIndex]) {
+                    const selected = filteredNames[selectedIndex].name;
+                    setInput(selected);
+                    setShowAutocomplete(false);
+                    setSelectedIndex(-1);
+                    handleGuess(selected);
+                  } else {
+                    handleGuess(input);
+                  }
+                } else if (e.key === "Escape") {
+                  setShowAutocomplete(false);
+                  setSelectedIndex(-1);
+                }
               }}
               placeholder="Type an idol name..."
               className="input-focus w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] px-4 py-3 text-sm placeholder:text-[var(--color-muted)] focus:outline-none"
             />
           </div>
           {showAutocomplete && filteredNames.length > 0 && (
-            <div className="absolute z-10 w-full mt-1 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] shadow-xl overflow-hidden max-h-64 overflow-y-auto">
-              {filteredNames.map((idol) => (
+            <div ref={listRef} className="absolute z-10 w-full mt-1 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] shadow-xl overflow-hidden max-h-64 overflow-y-auto">
+              {filteredNames.map((idol, idx) => (
                 <button
                   key={idol.name}
-                  onClick={() => { setInput(idol.name); setShowAutocomplete(false); handleGuess(idol.name); }}
-                  className="autocomplete-item w-full text-left px-4 py-2.5 text-sm hover:bg-[var(--color-card-hover)] border-b border-[var(--color-border)] last:border-0"
+                  ref={(el) => { if (idx === selectedIndex && el) el.scrollIntoView({ block: "nearest" }); }}
+                  onClick={() => { setInput(idol.name); setShowAutocomplete(false); setSelectedIndex(-1); handleGuess(idol.name); }}
+                  className={`autocomplete-item w-full text-left px-4 py-2.5 text-sm border-b border-[var(--color-border)] last:border-0 ${idx === selectedIndex ? "bg-[var(--color-card-hover)]" : "hover:bg-[var(--color-card-hover)]"}`}
                 >
                   <span>{idol.name}</span>
                   <span className="text-[var(--color-muted)] ml-2 text-xs">{idol.group}</span>
@@ -255,9 +299,34 @@ export default function IdolDle() {
               </p>
             </>
           )}
-          <button onClick={handleShare} className="cta-btn mt-4 w-full rounded-lg bg-[var(--color-success)] text-black font-semibold py-3 text-sm">
-            {copied ? "Copied to clipboard! ✓" : "Share Result 📋"}
+          {/* Stats mini */}
+          {stats && (
+            <div className="flex justify-center gap-6 my-4 text-center">
+              <div>
+                <p className="text-xl font-bold">{stats.gamesPlayed}</p>
+                <p className="text-[10px] text-[var(--color-muted)] uppercase">Played</p>
+              </div>
+              <div>
+                <p className="text-xl font-bold">
+                  {stats.gamesPlayed > 0 ? Math.round((stats.gamesWon / stats.gamesPlayed) * 100) : 0}%
+                </p>
+                <p className="text-[10px] text-[var(--color-muted)] uppercase">Win Rate</p>
+              </div>
+              <div>
+                <p className="text-xl font-bold">🔥 {stats.currentStreak}</p>
+                <p className="text-[10px] text-[var(--color-muted)] uppercase">Streak</p>
+              </div>
+              <div>
+                <p className="text-xl font-bold">{stats.maxStreak}</p>
+                <p className="text-[10px] text-[var(--color-muted)] uppercase">Max</p>
+              </div>
+            </div>
+          )}
+
+          <button onClick={handleShare} className="cta-btn mt-2 w-full rounded-lg bg-[var(--color-success)] text-black font-semibold py-3 text-sm">
+            {shareStatus === "copied" ? "Copied! ✓" : shareStatus === "shared" ? "Shared! ✓" : "Share Result 📤"}
           </button>
+          <CountdownTimer />
         </div>
       )}
 

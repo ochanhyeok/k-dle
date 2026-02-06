@@ -4,6 +4,9 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Terms of Service",
   description: "K-Dle terms of service — rules for using our daily puzzle game.",
+  alternates: {
+    canonical: "https://k-dle.vercel.app/terms",
+  },
 };
 
 export default function TermsPage() {

@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Drama-dle — Guess the K-Drama",
   description:
     "Can you guess the K-Drama from progressive text clues? Genre, cast, quotes and more. A new puzzle every day!",
+  alternates: {
+    canonical: "https://k-dle.vercel.app/drama-dle",
+  },
   openGraph: {
     title: "Drama-dle — Guess the K-Drama | K-Dle",
     description: "Guess the K-Drama from progressive clues. New puzzle daily!",

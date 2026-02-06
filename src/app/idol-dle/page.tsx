@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Idol-dle — Guess the K-Pop Idol",
   description:
     "Identify the K-Pop idol by comparing attributes like group, position, nationality, and debut year. A new puzzle every day!",
+  alternates: {
+    canonical: "https://k-dle.vercel.app/idol-dle",
+  },
   openGraph: {
     title: "Idol-dle — Guess the K-Pop Idol | K-Dle",
     description: "Guess the K-Pop idol from attribute comparisons. New puzzle daily!",

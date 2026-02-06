@@ -1,6 +1,6 @@
 "use client";
 
-import { loadStats, type StoredStats } from "@/lib/game";
+import { loadUnifiedStats, type UnifiedStats } from "@/lib/unified-stats";
 import Modal from "./Modal";
 
 interface StatsModalProps {
@@ -18,7 +18,7 @@ function getStreakTitle(streak: number): { title: string; emoji: string } {
 }
 
 export default function StatsModal({ isOpen, onClose }: StatsModalProps) {
-  const stats: StoredStats = loadStats();
+  const stats: UnifiedStats = loadUnifiedStats();
   const winPct =
     stats.gamesPlayed > 0
       ? Math.round((stats.gamesWon / stats.gamesPlayed) * 100)

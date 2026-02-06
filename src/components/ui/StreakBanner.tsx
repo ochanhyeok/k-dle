@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { loadStats } from "@/lib/game";
+import { loadUnifiedStats } from "@/lib/unified-stats";
 
 function getStreakRank(streak: number): { emoji: string; title: string } {
   if (streak >= 365) return { emoji: "👑", title: "Hallyu Legend" };
@@ -17,7 +17,7 @@ export default function StreakBanner() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const stats = loadStats();
+    const stats = loadUnifiedStats();
     setStreak(stats.currentStreak);
     setMounted(true);
   }, []);
