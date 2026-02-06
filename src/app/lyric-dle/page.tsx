@@ -21,6 +21,12 @@ export default function LyricDlePage() {
       <GameHeader emoji="📝" title="Lyric-dle" subtitle="Name the Song from Lyrics" />
       <main className="flex-1">
         <LyricDle />
+        <section className="max-w-lg mx-auto px-4 py-8 text-center">
+          <h2 className="text-lg font-semibold mb-2">How to Play Lyric-dle</h2>
+          <p className="text-xs text-[var(--color-muted)] leading-relaxed max-w-md mx-auto">
+            Lyric-dle is a daily K-Pop and K-Drama OST guessing game. Translated song lyrics are revealed one line at a time with each guess. Can you name the song in 6 tries? Features popular K-Pop hits and beloved K-Drama soundtracks. Test your music knowledge daily!
+          </p>
+        </section>
       </main>
       <footer className="border-t border-[var(--color-border)] px-4 py-3">
         <div className="max-w-2xl mx-auto text-center">

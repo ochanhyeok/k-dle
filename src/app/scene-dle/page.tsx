@@ -21,6 +21,12 @@ export default function SceneDlePage() {
       <GameHeader emoji="🎭" title="Scene-dle" subtitle="Recognize the K-Drama Scene" />
       <main className="flex-1">
         <SceneDle />
+        <section className="max-w-lg mx-auto px-4 py-8 text-center">
+          <h2 className="text-lg font-semibold mb-2">How to Play Scene-dle</h2>
+          <p className="text-xs text-[var(--color-muted)] leading-relaxed max-w-md mx-auto">
+            Scene-dle is a daily K-Drama scene guessing game. Read text descriptions of iconic Korean drama scenes — each wrong guess reveals a more specific detail. Can you recognize the drama in 6 tries? From romantic moments to dramatic plot twists, test your K-Drama scene memory daily!
+          </p>
+        </section>
       </main>
       <footer className="border-t border-[var(--color-border)] px-4 py-3">
         <div className="max-w-2xl mx-auto text-center">

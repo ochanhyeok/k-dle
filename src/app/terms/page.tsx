@@ -99,7 +99,9 @@ export default function TermsPage() {
           <section className="mb-8">
             <h2 className="text-lg font-semibold mb-3">8. DMCA / Takedown Requests</h2>
             <p className="text-sm text-[var(--color-muted)] leading-relaxed">
-              If you believe that any content on K-Dle infringes upon your copyright, please send a written notice to pon07084@gmail.com with the following information: a description of the copyrighted work, the location of the infringing content, and your contact information. We will respond to all legitimate requests promptly.
+              If you believe that any content on K-Dle infringes upon your copyright, please send a written notice to{" "}
+              <a href="mailto:pon07084@gmail.com" className="text-[var(--color-accent)] hover:underline">pon07084@gmail.com</a>{" "}
+              with the following information: a description of the copyrighted work, the location of the infringing content, and your contact information. We will respond to all legitimate requests promptly.
             </p>
           </section>
 
@@ -113,7 +115,8 @@ export default function TermsPage() {
           <section>
             <h2 className="text-lg font-semibold mb-3">10. Contact</h2>
             <p className="text-sm text-[var(--color-muted)] leading-relaxed">
-              For questions about these Terms, please contact us at pon07084@gmail.com.
+              For questions about these Terms, please contact us at{" "}
+              <a href="mailto:pon07084@gmail.com" className="text-[var(--color-accent)] hover:underline">pon07084@gmail.com</a>.
             </p>
           </section>
         </article>

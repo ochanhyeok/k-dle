@@ -189,7 +189,8 @@ export default function IdolDle() {
 
       {/* Comparison Table */}
       {rows.length > 0 && (
-        <div className="overflow-x-auto mb-6">
+        <div className="relative overflow-x-auto mb-6">
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[var(--color-background)] to-transparent z-10 sm:hidden" />
           <table className="w-full text-xs">
             <thead>
               <tr>

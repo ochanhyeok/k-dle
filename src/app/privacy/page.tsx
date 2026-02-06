@@ -106,7 +106,8 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-lg font-semibold mb-3">9. Contact Us</h2>
             <p className="text-sm text-[var(--color-muted)] leading-relaxed">
-              If you have any questions about this Privacy Policy, please contact us at pon07084@gmail.com.
+              If you have any questions about this Privacy Policy, please contact us at{" "}
+              <a href="mailto:pon07084@gmail.com" className="text-[var(--color-accent)] hover:underline">pon07084@gmail.com</a>.
             </p>
           </section>
         </article>

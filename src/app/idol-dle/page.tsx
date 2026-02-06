@@ -21,6 +21,12 @@ export default function IdolDlePage() {
       <GameHeader emoji="🎤" title="Idol-dle" subtitle="Guess the K-Pop Idol" />
       <main className="flex-1">
         <IdolDle />
+        <section className="max-w-lg mx-auto px-4 py-8 text-center">
+          <h2 className="text-lg font-semibold mb-2">How to Play Idol-dle</h2>
+          <p className="text-xs text-[var(--color-muted)] leading-relaxed max-w-md mx-auto">
+            Idol-dle is a daily K-Pop idol guessing game. Guess the mystery idol in 6 tries by comparing attributes — gender, group, position, nationality, debut year, company, and generation. Green means correct, yellow means partial match or close, and red means wrong. A new idol puzzle every day!
+          </p>
+        </section>
       </main>
       <footer className="border-t border-[var(--color-border)] px-4 py-3">
         <div className="max-w-2xl mx-auto text-center">
