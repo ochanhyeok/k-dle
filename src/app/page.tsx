@@ -1,51 +1,53 @@
+"use client";
+
 import Link from "next/link";
 import HeaderButtons from "@/components/ui/HeaderButtons";
 import StreakBanner from "@/components/ui/StreakBanner";
+import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
+import { useTranslation } from "@/lib/i18n";
 
-const MODES = [
+const MODE_KEYS = [
   {
     id: "drama-dle",
     emoji: "🎬",
     title: "Drama-dle",
-    description: "Guess the K-Drama from progressive clues",
+    descKey: "mode.drama.desc" as const,
     color: "from-purple-500/20 to-purple-500/5",
     borderColor: "border-purple-500/30",
     hoverBorder: "hover:border-purple-500/60",
-    available: true,
   },
   {
     id: "idol-dle",
     emoji: "🎤",
     title: "Idol-dle",
-    description: "Identify the K-Pop idol from attributes",
+    descKey: "mode.idol.desc" as const,
     color: "from-pink-500/20 to-pink-500/5",
     borderColor: "border-pink-500/30",
     hoverBorder: "hover:border-pink-500/60",
-    available: true,
   },
   {
     id: "lyric-dle",
     emoji: "📝",
     title: "Lyric-dle",
-    description: "Name the song from translated lyrics",
+    descKey: "mode.lyric.desc" as const,
     color: "from-blue-500/20 to-blue-500/5",
     borderColor: "border-blue-500/30",
     hoverBorder: "hover:border-blue-500/60",
-    available: true,
   },
   {
     id: "scene-dle",
     emoji: "🎭",
     title: "Scene-dle",
-    description: "Recognize the drama from scene descriptions",
+    descKey: "mode.scene.desc" as const,
     color: "from-amber-500/20 to-amber-500/5",
     borderColor: "border-amber-500/30",
     hoverBorder: "hover:border-amber-500/60",
-    available: true,
   },
 ];
 
 export default function Home() {
+  const { t } = useTranslation();
+
   return (
     <div className="min-h-screen flex flex-col page-enter">
       {/* Header */}
@@ -55,7 +57,10 @@ export default function Home() {
             <span className="text-[var(--color-accent)]">K</span>-Dle
             <span className="sr-only"> — Daily K-Drama & K-Pop Guessing Game</span>
           </h1>
-          <HeaderButtons />
+          <div className="flex items-center gap-2">
+            <LanguageSwitcher />
+            <HeaderButtons />
+          </div>
         </div>
       </header>
 
@@ -66,17 +71,16 @@ export default function Home() {
           <div className="text-center mb-8 animate-stagger-in">
             <div className="text-5xl mb-3">🇰🇷</div>
             <h2 className="text-2xl font-bold mb-2">
-              Daily K-Drama & K-Pop Puzzles
+              {t("home.hero")}
             </h2>
-            <p className="text-[var(--color-muted)] text-sm max-w-md mx-auto">
-              Test your knowledge with daily challenges.
-              Guess dramas, idols, lyrics, and iconic scenes.
+            <p className="text-[var(--color-muted)] text-sm max-w-md mx-auto whitespace-pre-line">
+              {t("home.subtitle")}
             </p>
           </div>
 
           {/* Game Modes Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-            {MODES.map((mode, i) => (
+            {MODE_KEYS.map((mode, i) => (
               <Link
                 href={`/${mode.id}`}
                 key={mode.id}
@@ -102,7 +106,7 @@ export default function Home() {
                   </div>
                   <h3 className="font-semibold text-lg mb-1">{mode.title}</h3>
                   <p className="text-sm text-[var(--color-muted)]">
-                    {mode.description}
+                    {t(mode.descKey)}
                   </p>
                 </div>
               </Link>
@@ -121,19 +125,19 @@ export default function Home() {
         <div className="max-w-2xl mx-auto text-center">
           <div className="flex items-center justify-center gap-3 mb-2 text-xs">
             <Link href="/about" className="text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">
-              About
+              {t("home.about")}
             </Link>
             <span className="text-[var(--color-border)]">|</span>
             <Link href="/privacy" className="text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">
-              Privacy
+              {t("home.privacy")}
             </Link>
             <span className="text-[var(--color-border)]">|</span>
             <Link href="/terms" className="text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">
-              Terms
+              {t("home.terms")}
             </Link>
           </div>
           <p className="text-[10px] text-[var(--color-muted)]">
-            K-Dle is an unofficial fan project. All IP belongs to respective owners.
+            {t("home.footer")}
           </p>
         </div>
       </footer>

@@ -15,6 +15,7 @@ import { recordGameResult, loadUnifiedStats, type UnifiedStats } from "@/lib/uni
 import { recordDailyResult } from "@/lib/daily-stats";
 import type { Drama } from "@/data/dramas";
 import { shareResult } from "@/lib/share";
+import { useTranslation } from "@/lib/i18n";
 import CountdownTimer from "@/components/ui/CountdownTimer";
 import NextGameBanner from "@/components/ui/NextGameBanner";
 import DailyStatsCard from "@/components/ui/DailyStatsCard";
@@ -38,6 +39,7 @@ export default function DramaDle() {
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
 
   const allTitles = getAllDramaTitles();
 
@@ -145,7 +147,7 @@ export default function DramaDle() {
   if (!target) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-[var(--color-muted)]">Loading...</div>
+        <div className="text-[var(--color-muted)]">{t("game.loading")}</div>
       </div>
     );
   }
@@ -160,7 +162,7 @@ export default function DramaDle() {
           Drama-dle #{puzzleNumber}
         </p>
         <p className="text-sm text-[var(--color-muted)]">
-          Guess the K-Drama in {MAX_GUESSES} tries
+          {t("game.guessIn", { n: MAX_GUESSES })}
         </p>
       </div>
 
@@ -238,7 +240,7 @@ export default function DramaDle() {
                   setSelectedIndex(-1);
                 }
               }}
-              placeholder="Type a K-Drama title..."
+              placeholder={t("game.placeholder.drama")}
               className="input-focus w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] px-4 py-3 text-sm placeholder:text-[var(--color-muted)] focus:outline-none"
             />
           </div>
@@ -277,25 +279,21 @@ export default function DramaDle() {
           {status === "won" ? (
             <>
               <p className="text-2xl mb-2">🎉</p>
-              <p className="font-semibold text-lg mb-1">Brilliant!</p>
+              <p className="font-semibold text-lg mb-1">{t("result.brilliant")}</p>
               <p className="text-sm text-[var(--color-muted)] mb-1">
-                You guessed{" "}
-                <span className="text-[var(--color-foreground)] font-medium">
-                  {target.title}
-                </span>{" "}
-                in {guesses.length} {guesses.length === 1 ? "try" : "tries"}
+                {t("result.guessedIn", {
+                  title: target.title,
+                  n: guesses.length,
+                  tries: guesses.length === 1 ? t("result.try") : t("result.tries"),
+                })}
               </p>
             </>
           ) : (
             <>
               <p className="text-2xl mb-2">😔</p>
-              <p className="font-semibold text-lg mb-1">Better luck tomorrow!</p>
+              <p className="font-semibold text-lg mb-1">{t("result.betterLuck")}</p>
               <p className="text-sm text-[var(--color-muted)] mb-1">
-                The answer was{" "}
-                <span className="text-[var(--color-foreground)] font-medium">
-                  {target.title}
-                </span>{" "}
-                ({target.titleKo})
+                {t("result.answerWas", { title: target.title, titleKo: target.titleKo })}
               </p>
             </>
           )}
@@ -306,7 +304,7 @@ export default function DramaDle() {
               <div>
                 <p className="text-xl font-bold">{stats.gamesPlayed}</p>
                 <p className="text-[10px] text-[var(--color-muted)] uppercase">
-                  Played
+                  {t("stats.played")}
                 </p>
               </div>
               <div>
@@ -317,19 +315,19 @@ export default function DramaDle() {
                   %
                 </p>
                 <p className="text-[10px] text-[var(--color-muted)] uppercase">
-                  Win Rate
+                  {t("stats.winRate")}
                 </p>
               </div>
               <div>
                 <p className="text-xl font-bold">🔥 {stats.currentStreak}</p>
                 <p className="text-[10px] text-[var(--color-muted)] uppercase">
-                  Streak
+                  {t("stats.streak")}
                 </p>
               </div>
               <div>
                 <p className="text-xl font-bold">{stats.maxStreak}</p>
                 <p className="text-[10px] text-[var(--color-muted)] uppercase">
-                  Max
+                  {t("stats.max")}
                 </p>
               </div>
             </div>
@@ -340,22 +338,22 @@ export default function DramaDle() {
             onClick={handleShare}
             className="cta-btn mt-2 w-full rounded-lg bg-[var(--color-success)] text-black font-semibold py-3 text-sm"
           >
-            Share Result 📋
+            {t("result.shareResult")} 📋
           </button>
           {friendResult && friendResult.puzzleNum === puzzleNumber && (
             <div className="mt-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-4">
               <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-3 text-center">
-                👥 Compare
+                👥 {t("compare.title")}
               </p>
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-[var(--color-muted)]">Friend</span>
+                  <span className="text-[var(--color-muted)]">{t("compare.friend")}</span>
                   <span className={friendResult.won ? "text-[var(--color-success)] font-medium" : "text-[var(--color-error)] font-medium"}>
                     {friendResult.won ? `${friendResult.guessCount}/6 ✓` : "X/6"}
                   </span>
                 </div>
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-[var(--color-muted)]">You</span>
+                  <span className="text-[var(--color-muted)]">{t("compare.you")}</span>
                   <span className={status === "won" ? "text-[var(--color-success)] font-medium" : "text-[var(--color-error)] font-medium"}>
                     {status === "won" ? `${guesses.length}/6 ✓` : "X/6"}
                   </span>
@@ -386,7 +384,7 @@ export default function DramaDle() {
 
       {/* Next Game */}
       {status !== "playing" && <NextGameBanner currentMode="drama-dle" />}
-      <Toast message="Copied to clipboard! 📋" show={showToast} onClose={() => setShowToast(false)} />
+      <Toast message={`${t("toast.copied")} 📋`} show={showToast} onClose={() => setShowToast(false)} />
     </div>
   );
 }

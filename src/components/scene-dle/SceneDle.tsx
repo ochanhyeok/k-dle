@@ -14,6 +14,7 @@ import { shareResult } from "@/lib/share";
 import { recordGameResult, loadUnifiedStats, type UnifiedStats } from "@/lib/unified-stats";
 import { recordDailyResult } from "@/lib/daily-stats";
 import { decodeCompareData, type CompareData } from "@/lib/compare";
+import { useTranslation } from "@/lib/i18n";
 import CountdownTimer from "@/components/ui/CountdownTimer";
 import NextGameBanner from "@/components/ui/NextGameBanner";
 import DailyStatsCard from "@/components/ui/DailyStatsCard";
@@ -55,6 +56,7 @@ export default function SceneDle() {
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
 
   const allTitles = getAllDramaTitlesForScene();
 
@@ -148,7 +150,7 @@ export default function SceneDle() {
   if (!target) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-[var(--color-muted)]">Loading...</div>
+        <div className="text-[var(--color-muted)]">{t("game.loading")}</div>
       </div>
     );
   }
@@ -159,12 +161,12 @@ export default function SceneDle() {
     <div className="max-w-lg mx-auto px-4 py-6">
       <div className="text-center mb-6">
         <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-1">Scene-dle #{puzzleNumber}</p>
-        <p className="text-sm text-[var(--color-muted)]">Recognize the K-Drama from the scene description</p>
+        <p className="text-sm text-[var(--color-muted)]">{t("game.sceneGuessIn")}</p>
       </div>
 
       {/* Scene Description */}
       <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] p-5 mb-6">
-        <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-3">The Scene</p>
+        <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-3">{t("scene.theScene")}</p>
         <div className="space-y-3">
           {hints.map((desc, i) => (
             <div key={i} className="flex gap-3 animate-slide-up" style={{ animationDelay: `${i * 0.05}s` }}>
@@ -227,7 +229,7 @@ export default function SceneDle() {
                   setSelectedIndex(-1);
                 }
               }}
-              placeholder="Type a K-Drama title..."
+              placeholder={t("game.placeholder.scene")}
               className="input-focus w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] px-4 py-3 text-sm placeholder:text-[var(--color-muted)] focus:outline-none"
             />
           </div>
@@ -255,18 +257,21 @@ export default function SceneDle() {
           {status === "won" ? (
             <>
               <p className="text-2xl mb-2">🎭</p>
-              <p className="font-semibold text-lg mb-1">Scene master!</p>
+              <p className="font-semibold text-lg mb-1">{t("result.sceneMaster")}</p>
               <p className="text-sm text-[var(--color-muted)]">
-                <span className="text-[var(--color-foreground)] font-medium">{target.dramaTitle}</span>
-                {" "}in {guesses.length} {guesses.length === 1 ? "try" : "tries"}
+                {t("result.sceneGuessedIn", {
+                  title: target.dramaTitle,
+                  n: guesses.length,
+                  tries: guesses.length === 1 ? t("result.try") : t("result.tries"),
+                })}
               </p>
             </>
           ) : (
             <>
               <p className="text-2xl mb-2">😔</p>
-              <p className="font-semibold text-lg mb-1">Better luck tomorrow!</p>
+              <p className="font-semibold text-lg mb-1">{t("result.betterLuck")}</p>
               <p className="text-sm text-[var(--color-muted)]">
-                The answer was <span className="text-[var(--color-foreground)] font-medium">{target.dramaTitle}</span> ({target.dramaTitleKo})
+                {t("result.answerWas", { title: target.dramaTitle, titleKo: target.dramaTitleKo })}
               </p>
             </>
           )}
@@ -275,42 +280,42 @@ export default function SceneDle() {
             <div className="flex justify-center gap-6 my-4 text-center">
               <div>
                 <p className="text-xl font-bold">{stats.gamesPlayed}</p>
-                <p className="text-[10px] text-[var(--color-muted)] uppercase">Played</p>
+                <p className="text-[10px] text-[var(--color-muted)] uppercase">{t("stats.played")}</p>
               </div>
               <div>
                 <p className="text-xl font-bold">
                   {stats.gamesPlayed > 0 ? Math.round((stats.gamesWon / stats.gamesPlayed) * 100) : 0}%
                 </p>
-                <p className="text-[10px] text-[var(--color-muted)] uppercase">Win Rate</p>
+                <p className="text-[10px] text-[var(--color-muted)] uppercase">{t("stats.winRate")}</p>
               </div>
               <div>
                 <p className="text-xl font-bold">🔥 {stats.currentStreak}</p>
-                <p className="text-[10px] text-[var(--color-muted)] uppercase">Streak</p>
+                <p className="text-[10px] text-[var(--color-muted)] uppercase">{t("stats.streak")}</p>
               </div>
               <div>
                 <p className="text-xl font-bold">{stats.maxStreak}</p>
-                <p className="text-[10px] text-[var(--color-muted)] uppercase">Max</p>
+                <p className="text-[10px] text-[var(--color-muted)] uppercase">{t("stats.max")}</p>
               </div>
             </div>
           )}
 
           <button onClick={handleShare} className="cta-btn mt-2 w-full rounded-lg bg-[var(--color-success)] text-black font-semibold py-3 text-sm">
-            Share Result 📋
+            {t("result.shareResult")} 📋
           </button>
           {friendResult && friendResult.puzzleNum === puzzleNumber && (
             <div className="mt-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-4">
               <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-3 text-center">
-                👥 Compare
+                👥 {t("compare.title")}
               </p>
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-[var(--color-muted)]">Friend</span>
+                  <span className="text-[var(--color-muted)]">{t("compare.friend")}</span>
                   <span className={friendResult.won ? "text-[var(--color-success)] font-medium" : "text-[var(--color-error)] font-medium"}>
                     {friendResult.won ? `${friendResult.guessCount}/6 ✓` : "X/6"}
                   </span>
                 </div>
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-[var(--color-muted)]">You</span>
+                  <span className="text-[var(--color-muted)]">{t("compare.you")}</span>
                   <span className={status === "won" ? "text-[var(--color-success)] font-medium" : "text-[var(--color-error)] font-medium"}>
                     {status === "won" ? `${guesses.length}/6 ✓` : "X/6"}
                   </span>
@@ -332,7 +337,7 @@ export default function SceneDle() {
       </div>
 
       {status !== "playing" && <NextGameBanner currentMode="scene-dle" />}
-      <Toast message="Copied to clipboard! 📋" show={showToast} onClose={() => setShowToast(false)} />
+      <Toast message={`${t("toast.copied")} 📋`} show={showToast} onClose={() => setShowToast(false)} />
     </div>
   );
 }

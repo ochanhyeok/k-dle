@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslation } from "@/lib/i18n";
 
 const ALL_MODES = [
   { id: "drama-dle", emoji: "🎬", title: "Drama-dle" },
@@ -15,11 +16,12 @@ interface NextGameBannerProps {
 
 export default function NextGameBanner({ currentMode }: NextGameBannerProps) {
   const otherModes = ALL_MODES.filter((m) => m.id !== currentMode);
+  const { t } = useTranslation();
 
   return (
     <div className="mt-6 animate-slide-up" style={{ animationDelay: "0.15s" }}>
       <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider text-center mb-3">
-        Try another mode
+        {t("next.tryAnother")}
       </p>
       <div className="grid grid-cols-3 gap-2">
         {otherModes.map((mode) => (

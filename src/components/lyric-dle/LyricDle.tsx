@@ -14,6 +14,7 @@ import { shareResult } from "@/lib/share";
 import { recordGameResult, loadUnifiedStats, type UnifiedStats } from "@/lib/unified-stats";
 import { recordDailyResult } from "@/lib/daily-stats";
 import { decodeCompareData, type CompareData } from "@/lib/compare";
+import { useTranslation } from "@/lib/i18n";
 import CountdownTimer from "@/components/ui/CountdownTimer";
 import NextGameBanner from "@/components/ui/NextGameBanner";
 import DailyStatsCard from "@/components/ui/DailyStatsCard";
@@ -55,6 +56,7 @@ export default function LyricDle() {
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
 
   const allTitles = getAllSongTitles();
 
@@ -148,18 +150,19 @@ export default function LyricDle() {
   if (!target) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-[var(--color-muted)]">Loading...</div>
+        <div className="text-[var(--color-muted)]">{t("game.loading")}</div>
       </div>
     );
   }
 
   const hints = getLyricHints(target, guesses.length + (status === "playing" ? 1 : 0));
+  const remaining = 6 - hints.length;
 
   return (
     <div className="max-w-lg mx-auto px-4 py-6">
       <div className="text-center mb-6">
         <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-1">Lyric-dle #{puzzleNumber}</p>
-        <p className="text-sm text-[var(--color-muted)]">Name the song from translated lyrics</p>
+        <p className="text-sm text-[var(--color-muted)]">{t("game.lyricGuessIn")}</p>
       </div>
 
       {/* Lyrics */}
@@ -170,15 +173,15 @@ export default function LyricDle() {
               <p className="text-sm italic text-[var(--color-foreground)]">&ldquo;{line}&rdquo;</p>
             </div>
           ))}
-          {status === "playing" && hints.length < 6 && (
+          {status === "playing" && remaining > 0 && (
             <p className="text-xs text-[var(--color-muted)]">
-              {6 - hints.length} more line{6 - hints.length > 1 ? "s" : ""} remaining...
+              {t("lyric.remaining", { n: remaining, s: remaining > 1 ? "s" : "" })}
             </p>
           )}
         </div>
         {target.type === "OST" && guesses.length >= 2 && status === "playing" && (
           <p className="text-xs text-[var(--color-muted)] mt-3 pt-3 border-t border-[var(--color-border)]">
-            Hint: This is a K-Drama OST
+            {t("lyric.ostHint")}
           </p>
         )}
       </div>
@@ -235,7 +238,7 @@ export default function LyricDle() {
                   setSelectedIndex(-1);
                 }
               }}
-              placeholder="Type a song title..."
+              placeholder={t("game.placeholder.lyric")}
               className="input-focus w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] px-4 py-3 text-sm placeholder:text-[var(--color-muted)] focus:outline-none"
             />
           </div>
@@ -263,18 +266,22 @@ export default function LyricDle() {
           {status === "won" ? (
             <>
               <p className="text-2xl mb-2">🎶</p>
-              <p className="font-semibold text-lg mb-1">Perfect ear!</p>
+              <p className="font-semibold text-lg mb-1">{t("result.perfectEar")}</p>
               <p className="text-sm text-[var(--color-muted)]">
-                <span className="text-[var(--color-foreground)] font-medium">{target.title}</span>
-                {" "}by {target.artist} in {guesses.length} {guesses.length === 1 ? "try" : "tries"}
+                {t("result.lyricGuessedIn", {
+                  title: target.title,
+                  artist: target.artist,
+                  n: guesses.length,
+                  tries: guesses.length === 1 ? t("result.try") : t("result.tries"),
+                })}
               </p>
             </>
           ) : (
             <>
               <p className="text-2xl mb-2">😔</p>
-              <p className="font-semibold text-lg mb-1">Better luck tomorrow!</p>
+              <p className="font-semibold text-lg mb-1">{t("result.betterLuck")}</p>
               <p className="text-sm text-[var(--color-muted)]">
-                The answer was <span className="text-[var(--color-foreground)] font-medium">{target.title}</span> by {target.artist}
+                {t("result.answerWasLyric", { title: target.title, artist: target.artist })}
               </p>
             </>
           )}
@@ -283,42 +290,42 @@ export default function LyricDle() {
             <div className="flex justify-center gap-6 my-4 text-center">
               <div>
                 <p className="text-xl font-bold">{stats.gamesPlayed}</p>
-                <p className="text-[10px] text-[var(--color-muted)] uppercase">Played</p>
+                <p className="text-[10px] text-[var(--color-muted)] uppercase">{t("stats.played")}</p>
               </div>
               <div>
                 <p className="text-xl font-bold">
                   {stats.gamesPlayed > 0 ? Math.round((stats.gamesWon / stats.gamesPlayed) * 100) : 0}%
                 </p>
-                <p className="text-[10px] text-[var(--color-muted)] uppercase">Win Rate</p>
+                <p className="text-[10px] text-[var(--color-muted)] uppercase">{t("stats.winRate")}</p>
               </div>
               <div>
                 <p className="text-xl font-bold">🔥 {stats.currentStreak}</p>
-                <p className="text-[10px] text-[var(--color-muted)] uppercase">Streak</p>
+                <p className="text-[10px] text-[var(--color-muted)] uppercase">{t("stats.streak")}</p>
               </div>
               <div>
                 <p className="text-xl font-bold">{stats.maxStreak}</p>
-                <p className="text-[10px] text-[var(--color-muted)] uppercase">Max</p>
+                <p className="text-[10px] text-[var(--color-muted)] uppercase">{t("stats.max")}</p>
               </div>
             </div>
           )}
 
           <button onClick={handleShare} className="cta-btn mt-2 w-full rounded-lg bg-[var(--color-success)] text-black font-semibold py-3 text-sm">
-            Share Result 📋
+            {t("result.shareResult")} 📋
           </button>
           {friendResult && friendResult.puzzleNum === puzzleNumber && (
             <div className="mt-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-4">
               <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-3 text-center">
-                👥 Compare
+                👥 {t("compare.title")}
               </p>
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-[var(--color-muted)]">Friend</span>
+                  <span className="text-[var(--color-muted)]">{t("compare.friend")}</span>
                   <span className={friendResult.won ? "text-[var(--color-success)] font-medium" : "text-[var(--color-error)] font-medium"}>
                     {friendResult.won ? `${friendResult.guessCount}/6 ✓` : "X/6"}
                   </span>
                 </div>
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-[var(--color-muted)]">You</span>
+                  <span className="text-[var(--color-muted)]">{t("compare.you")}</span>
                   <span className={status === "won" ? "text-[var(--color-success)] font-medium" : "text-[var(--color-error)] font-medium"}>
                     {status === "won" ? `${guesses.length}/6 ✓` : "X/6"}
                   </span>
@@ -340,7 +347,7 @@ export default function LyricDle() {
       </div>
 
       {status !== "playing" && <NextGameBanner currentMode="lyric-dle" />}
-      <Toast message="Copied to clipboard! 📋" show={showToast} onClose={() => setShowToast(false)} />
+      <Toast message={`${t("toast.copied")} 📋`} show={showToast} onClose={() => setShowToast(false)} />
     </div>
   );
 }

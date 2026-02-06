@@ -14,6 +14,7 @@ import type { Idol } from "@/data/idols";
 import { shareResult } from "@/lib/share";
 import { recordGameResult, loadUnifiedStats, type UnifiedStats } from "@/lib/unified-stats";
 import { recordDailyResult } from "@/lib/daily-stats";
+import { useTranslation, type TranslationKey } from "@/lib/i18n";
 import CountdownTimer from "@/components/ui/CountdownTimer";
 import NextGameBanner from "@/components/ui/NextGameBanner";
 import DailyStatsCard from "@/components/ui/DailyStatsCard";
@@ -31,15 +32,15 @@ const RESULT_COLOR = {
   lower: "bg-[var(--color-warning)]/20 text-[var(--color-warning)] border-[var(--color-warning)]/30",
 };
 
-const ATTRS = [
-  { key: "gender", label: "Gender" },
-  { key: "group", label: "Group" },
-  { key: "position", label: "Position" },
-  { key: "nationality", label: "Nation" },
-  { key: "debutYear", label: "Debut" },
-  { key: "company", label: "Company" },
-  { key: "generation", label: "Gen" },
-] as const;
+const ATTR_KEYS: readonly { key: "gender" | "group" | "position" | "nationality" | "debutYear" | "company" | "generation"; labelKey: TranslationKey }[] = [
+  { key: "gender", labelKey: "idol.gender" },
+  { key: "group", labelKey: "idol.group" },
+  { key: "position", labelKey: "idol.position" },
+  { key: "nationality", labelKey: "idol.nationality" },
+  { key: "debutYear", labelKey: "idol.debut" },
+  { key: "company", labelKey: "idol.company" },
+  { key: "generation", labelKey: "idol.generation" },
+];
 
 function saveIdolState(puzzleNumber: number, guessNames: string[], status: string) {
   if (typeof window === "undefined") return;
@@ -74,6 +75,7 @@ export default function IdolDle() {
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
 
   const allNames = getAllIdolNames();
 
@@ -95,7 +97,6 @@ export default function IdolDle() {
     setPuzzleNumber(num);
     setStats(loadUnifiedStats());
 
-    // Restore saved state
     const saved = loadIdolState(num);
     if (saved && idol) {
       const restoredRows: CompareRow[] = [];
@@ -175,7 +176,7 @@ export default function IdolDle() {
   if (!target) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-[var(--color-muted)]">Loading...</div>
+        <div className="text-[var(--color-muted)]">{t("game.loading")}</div>
       </div>
     );
   }
@@ -184,7 +185,7 @@ export default function IdolDle() {
     <div className="max-w-2xl mx-auto px-4 py-6">
       <div className="text-center mb-6">
         <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-1">Idol-dle #{puzzleNumber}</p>
-        <p className="text-sm text-[var(--color-muted)]">Guess the K-Pop idol in {MAX_GUESSES} tries</p>
+        <p className="text-sm text-[var(--color-muted)]">{t("game.idolGuessIn", { n: MAX_GUESSES })}</p>
       </div>
 
       {/* Comparison Table */}
@@ -194,9 +195,9 @@ export default function IdolDle() {
           <table className="w-full text-xs">
             <thead>
               <tr>
-                <th className="text-left py-2 px-1 text-[var(--color-muted)] font-medium">Name</th>
-                {ATTRS.map((a) => (
-                  <th key={a.key} className="text-center py-2 px-1 text-[var(--color-muted)] font-medium">{a.label}</th>
+                <th className="text-left py-2 px-1 text-[var(--color-muted)] font-medium">{t("idol.name")}</th>
+                {ATTR_KEYS.map((a) => (
+                  <th key={a.key} className="text-center py-2 px-1 text-[var(--color-muted)] font-medium">{t(a.labelKey)}</th>
                 ))}
               </tr>
             </thead>
@@ -204,7 +205,7 @@ export default function IdolDle() {
               {rows.map((row, i) => (
                 <tr key={i} className="animate-slide-up" style={{ animationDelay: `${i * 0.05}s` }}>
                   <td className="py-1.5 px-1 font-medium whitespace-nowrap">{row.guess.name}</td>
-                  {ATTRS.map((a) => {
+                  {ATTR_KEYS.map((a) => {
                     const result = row.results[a.key];
                     const value = row.guess[a.key];
                     const indicator =
@@ -213,12 +214,13 @@ export default function IdolDle() {
                       : result === "lower" ? " ▼"
                       : result === "partial" ? " ~"
                       : "";
+                    const label = t(a.labelKey);
                     const ariaLabel =
-                      result === "correct" ? `${a.label}: ${value} (correct)`
-                      : result === "higher" ? `${a.label}: ${value} (too low, go higher)`
-                      : result === "lower" ? `${a.label}: ${value} (too high, go lower)`
-                      : result === "partial" ? `${a.label}: ${value} (partial match)`
-                      : `${a.label}: ${value} (wrong)`;
+                      result === "correct" ? `${label}: ${value} (correct)`
+                      : result === "higher" ? `${label}: ${value} (too low, go higher)`
+                      : result === "lower" ? `${label}: ${value} (too high, go lower)`
+                      : result === "partial" ? `${label}: ${value} (partial match)`
+                      : `${label}: ${value} (wrong)`;
                     return (
                       <td key={a.key} className="py-1.5 px-1">
                         <span
@@ -270,7 +272,7 @@ export default function IdolDle() {
                   setSelectedIndex(-1);
                 }
               }}
-              placeholder="Type an idol name..."
+              placeholder={t("game.placeholder.idol")}
               className="input-focus w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] px-4 py-3 text-sm placeholder:text-[var(--color-muted)] focus:outline-none"
             />
           </div>
@@ -298,18 +300,22 @@ export default function IdolDle() {
           {status === "won" ? (
             <>
               <p className="text-2xl mb-2">🎉</p>
-              <p className="font-semibold text-lg mb-1">You got it!</p>
+              <p className="font-semibold text-lg mb-1">{t("result.gotIt")}</p>
               <p className="text-sm text-[var(--color-muted)]">
-                <span className="text-[var(--color-foreground)] font-medium">{target.name}</span>
-                {" "}({target.group}) in {rows.length} {rows.length === 1 ? "try" : "tries"}
+                {t("result.idolGuessedIn", {
+                  name: target.name,
+                  group: target.group,
+                  n: rows.length,
+                  tries: rows.length === 1 ? t("result.try") : t("result.tries"),
+                })}
               </p>
             </>
           ) : (
             <>
               <p className="text-2xl mb-2">😔</p>
-              <p className="font-semibold text-lg mb-1">Better luck tomorrow!</p>
+              <p className="font-semibold text-lg mb-1">{t("result.betterLuck")}</p>
               <p className="text-sm text-[var(--color-muted)]">
-                The answer was <span className="text-[var(--color-foreground)] font-medium">{target.name}</span> ({target.group})
+                {t("result.answerWasIdol", { name: target.name, group: target.group })}
               </p>
             </>
           )}
@@ -318,42 +324,42 @@ export default function IdolDle() {
             <div className="flex justify-center gap-6 my-4 text-center">
               <div>
                 <p className="text-xl font-bold">{stats.gamesPlayed}</p>
-                <p className="text-[10px] text-[var(--color-muted)] uppercase">Played</p>
+                <p className="text-[10px] text-[var(--color-muted)] uppercase">{t("stats.played")}</p>
               </div>
               <div>
                 <p className="text-xl font-bold">
                   {stats.gamesPlayed > 0 ? Math.round((stats.gamesWon / stats.gamesPlayed) * 100) : 0}%
                 </p>
-                <p className="text-[10px] text-[var(--color-muted)] uppercase">Win Rate</p>
+                <p className="text-[10px] text-[var(--color-muted)] uppercase">{t("stats.winRate")}</p>
               </div>
               <div>
                 <p className="text-xl font-bold">🔥 {stats.currentStreak}</p>
-                <p className="text-[10px] text-[var(--color-muted)] uppercase">Streak</p>
+                <p className="text-[10px] text-[var(--color-muted)] uppercase">{t("stats.streak")}</p>
               </div>
               <div>
                 <p className="text-xl font-bold">{stats.maxStreak}</p>
-                <p className="text-[10px] text-[var(--color-muted)] uppercase">Max</p>
+                <p className="text-[10px] text-[var(--color-muted)] uppercase">{t("stats.max")}</p>
               </div>
             </div>
           )}
 
           <button onClick={handleShare} className="cta-btn mt-2 w-full rounded-lg bg-[var(--color-success)] text-black font-semibold py-3 text-sm">
-            Share Result 📋
+            {t("result.shareResult")} 📋
           </button>
           {friendResult && friendResult.puzzleNum === puzzleNumber && (
             <div className="mt-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-4">
               <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-3 text-center">
-                👥 Compare
+                👥 {t("compare.title")}
               </p>
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-[var(--color-muted)]">Friend</span>
+                  <span className="text-[var(--color-muted)]">{t("compare.friend")}</span>
                   <span className={friendResult.won ? "text-[var(--color-success)] font-medium" : "text-[var(--color-error)] font-medium"}>
                     {friendResult.won ? `${friendResult.guessCount}/6 ✓` : "X/6"}
                   </span>
                 </div>
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-[var(--color-muted)]">You</span>
+                  <span className="text-[var(--color-muted)]">{t("compare.you")}</span>
                   <span className={status === "won" ? "text-[var(--color-success)] font-medium" : "text-[var(--color-error)] font-medium"}>
                     {status === "won" ? `${rows.length}/6 ✓` : "X/6"}
                   </span>
@@ -375,7 +381,7 @@ export default function IdolDle() {
       </div>
 
       {status !== "playing" && <NextGameBanner currentMode="idol-dle" />}
-      <Toast message="Copied to clipboard! 📋" show={showToast} onClose={() => setShowToast(false)} />
+      <Toast message={`${t("toast.copied")} 📋`} show={showToast} onClose={() => setShowToast(false)} />
     </div>
   );
 }

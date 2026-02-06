@@ -2,6 +2,15 @@
 
 import Link from "next/link";
 import HeaderButtons from "./HeaderButtons";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useTranslation, type TranslationKey } from "@/lib/i18n";
+
+const SUBTITLE_KEYS: Record<string, TranslationKey> = {
+  "Drama-dle": "game.subtitle.drama",
+  "Idol-dle": "game.subtitle.idol",
+  "Lyric-dle": "game.subtitle.lyric",
+  "Scene-dle": "game.subtitle.scene",
+};
 
 interface GameHeaderProps {
   emoji: string;
@@ -10,6 +19,10 @@ interface GameHeaderProps {
 }
 
 export default function GameHeader({ emoji, title, subtitle }: GameHeaderProps) {
+  const { t } = useTranslation();
+  const subtitleKey = SUBTITLE_KEYS[title];
+  const displaySubtitle = subtitleKey ? t(subtitleKey) : subtitle;
+
   return (
     <header className="border-b border-[var(--color-border)] px-4 py-3">
       <div className="max-w-2xl mx-auto flex items-center justify-between">
@@ -17,7 +30,7 @@ export default function GameHeader({ emoji, title, subtitle }: GameHeaderProps) 
           <Link
             href="/"
             className="icon-btn p-2.5 -ml-2 rounded-xl"
-            aria-label="Back to home"
+            aria-label={t("aria.backHome")}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
               <path d="M19 12H5M12 19l-7-7 7-7" />
@@ -28,11 +41,14 @@ export default function GameHeader({ emoji, title, subtitle }: GameHeaderProps) 
               {emoji} {title}
             </h1>
             <p className="text-[10px] text-[var(--color-muted)] uppercase tracking-wider">
-              {subtitle}
+              {displaySubtitle}
             </p>
           </div>
         </div>
-        <HeaderButtons />
+        <div className="flex items-center gap-2">
+          <LanguageSwitcher />
+          <HeaderButtons />
+        </div>
       </div>
     </header>
   );

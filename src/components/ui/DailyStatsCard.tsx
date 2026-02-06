@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { fetchDailyStats, type GameMode, type DisplayStats } from "@/lib/daily-stats";
+import { useTranslation } from "@/lib/i18n";
 
 interface Props {
   mode: GameMode;
@@ -10,6 +11,7 @@ interface Props {
 export default function DailyStatsCard({ mode }: Props) {
   const [stats, setStats] = useState<DisplayStats | null>(null);
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchDailyStats(mode)
@@ -20,7 +22,7 @@ export default function DailyStatsCard({ mode }: Props) {
   if (loading) {
     return (
       <div className="mt-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-4">
-        <p className="text-xs text-[var(--color-muted)] text-center">Loading global stats...</p>
+        <p className="text-xs text-[var(--color-muted)] text-center">{t("daily.loading")}</p>
       </div>
     );
   }
@@ -32,28 +34,28 @@ export default function DailyStatsCard({ mode }: Props) {
   return (
     <div className="mt-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-4 animate-slide-up">
       <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-3 text-center">
-        Today&apos;s Global Stats
+        {t("daily.title")}
       </p>
 
       {/* Summary */}
       <div className="flex justify-center gap-6 mb-4 text-center">
         <div>
           <p className="text-lg font-bold">{stats.totalPlays.toLocaleString()}</p>
-          <p className="text-[10px] text-[var(--color-muted)] uppercase">Players</p>
+          <p className="text-[10px] text-[var(--color-muted)] uppercase">{t("daily.players")}</p>
         </div>
         <div>
           <p className="text-lg font-bold">{stats.winRate}%</p>
-          <p className="text-[10px] text-[var(--color-muted)] uppercase">Win Rate</p>
+          <p className="text-[10px] text-[var(--color-muted)] uppercase">{t("stats.winRate")}</p>
         </div>
         <div>
           <p className="text-lg font-bold">{stats.averageGuesses}</p>
-          <p className="text-[10px] text-[var(--color-muted)] uppercase">Avg Guesses</p>
+          <p className="text-[10px] text-[var(--color-muted)] uppercase">{t("daily.avgGuesses")}</p>
         </div>
       </div>
 
       {/* Guess Distribution */}
       <p className="text-[10px] text-[var(--color-muted)] uppercase tracking-wider mb-2">
-        Guess Distribution
+        {t("stats.guessDistribution")}
       </p>
       <div className="space-y-1">
         {stats.guessDistribution.map((count, i) => {
