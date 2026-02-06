@@ -115,6 +115,7 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <head>
         <link rel="canonical" href={SITE_URL} />
+        <meta name="google-site-verification" content="MrECvrjpt3wmdi56cllNejohfsaWjgcWO-xS15ZWp00" />
         <meta name="google-adsense-account" content="ca-pub-2403565022366483" />
         <script
           async
