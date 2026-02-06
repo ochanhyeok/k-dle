@@ -192,7 +192,7 @@ export default function LyricDle() {
                 if (e.key === "Escape") setShowAutocomplete(false);
               }}
               placeholder="Type a song title..."
-              className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] px-4 py-3 text-sm placeholder:text-[var(--color-muted)] focus:outline-none focus:border-[var(--color-accent)] transition-colors"
+              className="input-focus w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] px-4 py-3 text-sm placeholder:text-[var(--color-muted)] focus:outline-none"
             />
           </div>
           {showAutocomplete && filteredTitles.length > 0 && (
@@ -201,7 +201,7 @@ export default function LyricDle() {
                 <button
                   key={song.title}
                   onClick={() => { setInput(song.title); setShowAutocomplete(false); handleGuess(song.title); }}
-                  className="w-full text-left px-4 py-2.5 text-sm hover:bg-[var(--color-card-hover)] transition-colors border-b border-[var(--color-border)] last:border-0"
+                  className="autocomplete-item w-full text-left px-4 py-2.5 text-sm hover:bg-[var(--color-card-hover)] border-b border-[var(--color-border)] last:border-0"
                 >
                   <span>{song.title}</span>
                   <span className="text-[var(--color-muted)] ml-2 text-xs">{song.artist}</span>
@@ -233,7 +233,7 @@ export default function LyricDle() {
               </p>
             </>
           )}
-          <button onClick={handleShare} className="mt-4 w-full rounded-lg bg-[var(--color-success)] text-black font-semibold py-3 text-sm hover:opacity-90 transition-opacity">
+          <button onClick={handleShare} className="cta-btn mt-4 w-full rounded-lg bg-[var(--color-success)] text-black font-semibold py-3 text-sm">
             {copied ? "Copied to clipboard! ✓" : "Share Result 📋"}
           </button>
         </div>

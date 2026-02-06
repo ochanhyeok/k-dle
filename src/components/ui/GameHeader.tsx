@@ -16,7 +16,7 @@ export default function GameHeader({ emoji, title, subtitle }: GameHeaderProps) 
         <div className="flex items-center gap-3">
           <Link
             href="/"
-            className="p-2 -ml-2 rounded-lg hover:bg-[var(--color-card)] transition-colors"
+            className="icon-btn p-2.5 -ml-2 rounded-xl"
             aria-label="Back to home"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">

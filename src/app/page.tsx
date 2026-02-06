@@ -10,6 +10,7 @@ const MODES = [
     description: "Guess the K-Drama from progressive clues",
     color: "from-purple-500/20 to-purple-500/5",
     borderColor: "border-purple-500/30",
+    hoverBorder: "hover:border-purple-500/60",
     available: true,
   },
   {
@@ -19,6 +20,7 @@ const MODES = [
     description: "Identify the K-Pop idol from attributes",
     color: "from-pink-500/20 to-pink-500/5",
     borderColor: "border-pink-500/30",
+    hoverBorder: "hover:border-pink-500/60",
     available: true,
   },
   {
@@ -28,6 +30,7 @@ const MODES = [
     description: "Name the song from translated lyrics",
     color: "from-blue-500/20 to-blue-500/5",
     borderColor: "border-blue-500/30",
+    hoverBorder: "hover:border-blue-500/60",
     available: true,
   },
   {
@@ -37,13 +40,14 @@ const MODES = [
     description: "Recognize the drama from scene descriptions",
     color: "from-amber-500/20 to-amber-500/5",
     borderColor: "border-amber-500/30",
+    hoverBorder: "hover:border-amber-500/60",
     available: true,
   },
 ];
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col page-enter">
       {/* Header */}
       <header className="border-b border-[var(--color-border)] px-4 py-3">
         <div className="max-w-2xl mx-auto flex items-center justify-between">
@@ -58,8 +62,8 @@ export default function Home() {
       <main className="flex-1 px-4 py-8">
         <div className="max-w-2xl mx-auto">
           {/* Hero */}
-          <div className="text-center mb-10">
-            <div className="text-5xl mb-4">🎬</div>
+          <div className="text-center mb-10 animate-stagger-in">
+            <div className="text-5xl mb-4">🇰🇷</div>
             <h2 className="text-2xl font-bold mb-2">
               Daily K-Drama & K-Pop Puzzles
             </h2>
@@ -71,43 +75,43 @@ export default function Home() {
 
           {/* Game Modes Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
-            {MODES.map((mode) => {
-              const content = (
+            {MODES.map((mode, i) => (
+              <Link
+                href={`/${mode.id}`}
+                key={mode.id}
+                className="animate-stagger-in"
+                style={{ animationDelay: `${0.05 + i * 0.07}s` }}
+              >
                 <div
-                  key={mode.id}
-                  className={`relative rounded-xl border ${mode.borderColor} bg-gradient-to-b ${mode.color} p-5 transition-all ${
-                    mode.available
-                      ? "hover:scale-[1.02] cursor-pointer"
-                      : "opacity-50 cursor-not-allowed"
-                  }`}
+                  className={`game-card relative rounded-xl border ${mode.borderColor} ${mode.hoverBorder} bg-gradient-to-b ${mode.color} p-5 cursor-pointer group`}
                 >
                   <div className="flex items-start justify-between mb-3">
-                    <span className="text-3xl">{mode.emoji}</span>
-                    {!mode.available && (
-                      <span className="text-[10px] uppercase tracking-wider text-[var(--color-muted)] bg-[var(--color-card)] px-2 py-0.5 rounded-full">
-                        Coming Soon
-                      </span>
-                    )}
+                    <span className="text-3xl group-active:scale-110 transition-transform">{mode.emoji}</span>
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      className="text-[var(--color-muted)] opacity-0 group-hover:opacity-100 transition-opacity -translate-x-1 group-hover:translate-x-0 transition-transform mt-1"
+                    >
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
                   </div>
                   <h3 className="font-semibold text-lg mb-1">{mode.title}</h3>
                   <p className="text-sm text-[var(--color-muted)]">
                     {mode.description}
                   </p>
                 </div>
-              );
-
-              return mode.available ? (
-                <Link href={`/${mode.id}`} key={mode.id}>
-                  {content}
-                </Link>
-              ) : (
-                <div key={mode.id}>{content}</div>
-              );
-            })}
+              </Link>
+            ))}
           </div>
 
           {/* Daily Streak Banner */}
-          <StreakBanner />
+          <div className="animate-stagger-in" style={{ animationDelay: "0.35s" }}>
+            <StreakBanner />
+          </div>
         </div>
       </main>
 

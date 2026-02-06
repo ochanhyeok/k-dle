@@ -25,14 +25,14 @@ export default function StreakBanner() {
   const { emoji, title } = getStreakRank(streak);
 
   return (
-    <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] p-4 text-center">
-      <p className="text-sm text-[var(--color-muted)] mb-1">
+    <div className="rounded-xl border border-[var(--color-border)] bg-gradient-to-b from-[var(--color-card)] to-[var(--color-background)] p-5 text-center">
+      <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-2">
         Your Daily Streak
       </p>
-      <p className="text-3xl font-bold">
+      <p className="text-4xl font-bold mb-1">
         {mounted ? `${emoji} ${streak}` : "🔥 —"}
       </p>
-      <p className="text-xs text-[var(--color-muted)] mt-1">
+      <p className="text-xs text-[var(--color-muted)]">
         {!mounted
           ? ""
           : streak === 0

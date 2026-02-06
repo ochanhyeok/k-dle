@@ -10,10 +10,10 @@ export default function HeaderButtons() {
 
   return (
     <>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-1">
         <button
           onClick={() => setShowStats(true)}
-          className="p-2 rounded-lg hover:bg-[var(--color-card)] transition-colors"
+          className="icon-btn p-2.5 rounded-xl"
           aria-label="Statistics"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -22,7 +22,7 @@ export default function HeaderButtons() {
         </button>
         <button
           onClick={() => setShowHelp(true)}
-          className="p-2 rounded-lg hover:bg-[var(--color-card)] transition-colors"
+          className="icon-btn p-2.5 rounded-xl"
           aria-label="Help"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
