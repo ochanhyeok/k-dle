@@ -4,6 +4,7 @@ import Link from "next/link";
 import HeaderButtons from "@/components/ui/HeaderButtons";
 import StreakBanner from "@/components/ui/StreakBanner";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 import { useTranslation } from "@/lib/i18n";
 
 const MODE_KEYS = [
@@ -59,6 +60,7 @@ export default function Home() {
           </h1>
           <div className="flex items-center gap-2">
             <LanguageSwitcher />
+            <ThemeToggle />
             <HeaderButtons />
           </div>
         </div>

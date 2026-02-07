@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/lib/i18n";
+import { ThemeProvider } from "@/lib/theme";
+import ServiceWorkerRegister from "@/components/ui/ServiceWorkerRegister";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,7 +22,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   themeColor: "#0a0a0a",
-  colorScheme: "dark",
+  colorScheme: "dark light",
 };
 
 export const metadata: Metadata = {
@@ -113,8 +115,13 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem("k-dle-theme");if(t)document.documentElement.className=t;else if(matchMedia("(prefers-color-scheme:light)").matches)document.documentElement.className="light"}catch(e){}`,
+          }}
+        />
         <meta name="google-site-verification" content="MrECvrjpt3wmdi56cllNejohfsaWjgcWO-xS15ZWp00" />
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-T8FPHCKHM4" />
         <script
@@ -136,7 +143,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <LanguageProvider>{children}</LanguageProvider>
+        <LanguageProvider><ThemeProvider>{children}</ThemeProvider></LanguageProvider>
+        <ServiceWorkerRegister />
       </body>
     </html>
   );

@@ -15,6 +15,19 @@
   --font-mono: var(--font-geist-mono);
 }
 
+html.light {
+  --color-background: #fafafa;
+  --color-foreground: #171717;
+  --color-muted: #6b7280;
+  --color-border: #e5e7eb;
+  --color-card: #ffffff;
+  --color-card-hover: #f3f4f6;
+  --color-accent: #7c3aed;
+  --color-success: #16a34a;
+  --color-warning: #ca8a04;
+  --color-error: #dc2626;
+}
+
 body {
   background: var(--color-background);
   color: var(--color-foreground);
@@ -32,6 +45,9 @@ body {
 ::-webkit-scrollbar-thumb {
   background: #3f3f46;
   border-radius: 3px;
+}
+html.light ::-webkit-scrollbar-thumb {
+  background: #c4c4c4;
 }
 
 /* ===== Animations ===== */
@@ -106,6 +122,12 @@ body {
   transform: translateY(0) scale(0.97);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   transition-duration: 0.1s;
+}
+html.light .game-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+html.light .game-card:active {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 /* Icon button */

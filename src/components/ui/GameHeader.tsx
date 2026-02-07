@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import HeaderButtons from "./HeaderButtons";
+import ThemeToggle from "./ThemeToggle";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation, type TranslationKey } from "@/lib/i18n";
 
@@ -47,6 +48,7 @@ export default function GameHeader({ emoji, title, subtitle }: GameHeaderProps) 
         </div>
         <div className="flex items-center gap-2">
           <LanguageSwitcher />
+          <ThemeToggle />
           <HeaderButtons />
         </div>
       </div>
