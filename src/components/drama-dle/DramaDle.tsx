@@ -14,7 +14,8 @@ import {
 import { recordGameResult, loadUnifiedStats, type UnifiedStats } from "@/lib/unified-stats";
 import { recordDailyResult } from "@/lib/daily-stats";
 import type { Drama } from "@/data/dramas";
-import { shareResult } from "@/lib/share";
+import { shareResult, shareWithImage } from "@/lib/share";
+import { generateShareCard, type CellResult } from "@/lib/share-image";
 import { useTranslation } from "@/lib/i18n";
 import CountdownTimer from "@/components/ui/CountdownTimer";
 import NextGameBanner from "@/components/ui/NextGameBanner";
@@ -134,14 +135,33 @@ export default function DramaDle() {
   );
 
   const handleShare = async () => {
-    const text = generateShareText(
-      puzzleNumber,
-      guesses,
-      status === "won",
-      MAX_GUESSES
-    );
-    await shareResult(text);
-    setShowToast(true);
+    const text = generateShareText(puzzleNumber, guesses, status === "won", MAX_GUESSES);
+    try {
+      const grid: CellResult[][] = [
+        guesses.map((_, i): CellResult =>
+          i === guesses.length - 1 && status === "won" ? "correct" : "wrong"
+        ),
+      ];
+      const blob = await generateShareCard({
+        mode: "drama",
+        puzzleNumber,
+        score: status === "won" ? `${guesses.length}/${MAX_GUESSES}` : `X/${MAX_GUESSES}`,
+        won: status === "won",
+        grid,
+        stats: stats
+          ? {
+              played: stats.gamesPlayed,
+              winRate: stats.gamesPlayed > 0 ? Math.round((stats.gamesWon / stats.gamesPlayed) * 100) : 0,
+              streak: stats.currentStreak,
+            }
+          : undefined,
+      });
+      const result = await shareWithImage(blob, text);
+      if (result !== "shared") setShowToast(true);
+    } catch {
+      await shareResult(text);
+      setShowToast(true);
+    }
   };
 
   if (!target) {

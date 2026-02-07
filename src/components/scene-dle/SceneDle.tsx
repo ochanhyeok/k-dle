@@ -10,7 +10,8 @@ import {
   generateSceneShareText,
 } from "@/lib/scene-game";
 import type { Scene } from "@/data/scenes";
-import { shareResult } from "@/lib/share";
+import { shareResult, shareWithImage } from "@/lib/share";
+import { generateShareCard, type CellResult } from "@/lib/share-image";
 import { recordGameResult, loadUnifiedStats, type UnifiedStats } from "@/lib/unified-stats";
 import { recordDailyResult } from "@/lib/daily-stats";
 import { decodeCompareData, type CompareData } from "@/lib/compare";
@@ -143,8 +144,32 @@ export default function SceneDle() {
 
   const handleShare = async () => {
     const text = generateSceneShareText(puzzleNumber, guesses, status === "won", MAX_GUESSES);
-    await shareResult(text);
-    setShowToast(true);
+    try {
+      const grid: CellResult[][] = [
+        guesses.map((_, i): CellResult =>
+          i === guesses.length - 1 && status === "won" ? "correct" : "wrong"
+        ),
+      ];
+      const blob = await generateShareCard({
+        mode: "scene",
+        puzzleNumber,
+        score: status === "won" ? `${guesses.length}/${MAX_GUESSES}` : `X/${MAX_GUESSES}`,
+        won: status === "won",
+        grid,
+        stats: stats
+          ? {
+              played: stats.gamesPlayed,
+              winRate: stats.gamesPlayed > 0 ? Math.round((stats.gamesWon / stats.gamesPlayed) * 100) : 0,
+              streak: stats.currentStreak,
+            }
+          : undefined,
+      });
+      const result = await shareWithImage(blob, text);
+      if (result !== "shared") setShowToast(true);
+    } catch {
+      await shareResult(text);
+      setShowToast(true);
+    }
   };
 
   if (!target) {

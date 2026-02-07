@@ -11,7 +11,8 @@ import {
   type CompareRow,
 } from "@/lib/idol-game";
 import type { Idol } from "@/data/idols";
-import { shareResult } from "@/lib/share";
+import { shareResult, shareWithImage } from "@/lib/share";
+import { generateShareCard, type CellResult } from "@/lib/share-image";
 import { recordGameResult, loadUnifiedStats, type UnifiedStats } from "@/lib/unified-stats";
 import { recordDailyResult } from "@/lib/daily-stats";
 import { useTranslation, type TranslationKey } from "@/lib/i18n";
@@ -169,8 +170,41 @@ export default function IdolDle() {
 
   const handleShare = async () => {
     const text = generateIdolShareText(puzzleNumber, rows, status === "won", MAX_GUESSES);
-    await shareResult(text);
-    setShowToast(true);
+    try {
+      const mapCell = (v: string): CellResult =>
+        v === "correct" ? "correct" : v === "partial" ? "partial" : "wrong";
+      const grid: CellResult[][] = rows.map((r) => {
+        const res = r.results;
+        return [
+          mapCell(res.gender),
+          mapCell(res.group),
+          mapCell(res.position),
+          mapCell(res.nationality),
+          mapCell(res.debutYear === "correct" ? "correct" : "wrong"),
+          mapCell(res.company),
+          mapCell(res.generation),
+        ];
+      });
+      const blob = await generateShareCard({
+        mode: "idol",
+        puzzleNumber,
+        score: status === "won" ? `${rows.length}/${MAX_GUESSES}` : `X/${MAX_GUESSES}`,
+        won: status === "won",
+        grid,
+        stats: stats
+          ? {
+              played: stats.gamesPlayed,
+              winRate: stats.gamesPlayed > 0 ? Math.round((stats.gamesWon / stats.gamesPlayed) * 100) : 0,
+              streak: stats.currentStreak,
+            }
+          : undefined,
+      });
+      const result = await shareWithImage(blob, text);
+      if (result !== "shared") setShowToast(true);
+    } catch {
+      await shareResult(text);
+      setShowToast(true);
+    }
   };
 
   if (!target) {
