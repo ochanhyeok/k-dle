@@ -994,9 +994,3 @@ export function useTranslation() {
   if (!ctx) throw new Error("useTranslation must be used within LanguageProvider");
   return ctx;
 }
-
-export const LOCALE_LABELS: Record<Locale, string> = {
-  en: "EN",
-  es: "ES",
-  ko: "KO",
-};
