@@ -1,11 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { useTranslation } from "@/lib/i18n";
 import GameFooter from "@/components/ui/GameFooter";
+import ContactModal from "@/components/ui/ContactModal";
 
 export default function AboutPage() {
   const { t } = useTranslation();
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -153,15 +156,16 @@ export default function AboutPage() {
             <h3 className="text-lg font-semibold mb-3">{t("about.contact")}</h3>
             <p className="text-sm text-[var(--color-muted)] leading-relaxed">
               {t("about.contactText")}{" "}
-              <a href="mailto:pon07084@gmail.com" className="text-[var(--color-accent)] hover:underline">
+              <button onClick={() => setShowModal(true)} className="text-[var(--color-accent)] hover:underline">
                 pon07084@gmail.com
-              </a>
+              </button>
             </p>
           </section>
         </div>
       </main>
 
       <GameFooter />
+      <ContactModal show={showModal} onClose={() => setShowModal(false)} />
     </div>
   );
 }

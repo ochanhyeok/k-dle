@@ -4,10 +4,11 @@ import Link from "next/link";
 import { useState } from "react";
 import { useTranslation } from "@/lib/i18n";
 import GameFooter from "@/components/ui/GameFooter";
+import ContactModal from "@/components/ui/ContactModal";
 
 export default function ContactPage() {
   const { t } = useTranslation();
-  const [sent, setSent] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -36,68 +37,22 @@ export default function ContactPage() {
             </p>
           </div>
 
-          {sent ? (
-            <div className="rounded-xl border border-[var(--color-success)]/30 bg-[var(--color-success)]/10 p-6 text-center mb-8">
-              <p className="text-sm text-[var(--color-success)] font-medium">{t("contact.sent")}</p>
-            </div>
-          ) : (
-            <form
-              className="space-y-4 mb-8"
-              onSubmit={(e) => {
-                e.preventDefault();
-                const form = e.target as HTMLFormElement;
-                const data = new FormData(form);
-                const mailto = `mailto:pon07084@gmail.com?subject=K-Dle Feedback from ${data.get("name")}&body=${encodeURIComponent(String(data.get("message")))}%0A%0AFrom: ${data.get("email")}`;
-                window.location.href = mailto;
-                setSent(true);
-              }}
+          <div className="text-center mb-8">
+            <button
+              onClick={() => setShowModal(true)}
+              className="cta-btn rounded-lg bg-[var(--color-accent)] text-white font-semibold px-8 py-3 text-sm"
             >
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-1">{t("contact.nameLabel")}</label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  placeholder={t("contact.namePlaceholder")}
-                  className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] px-4 py-3 text-sm placeholder:text-[var(--color-muted)] focus:outline-none input-focus"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-1">{t("contact.emailLabel")}</label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  placeholder={t("contact.emailPlaceholder")}
-                  className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] px-4 py-3 text-sm placeholder:text-[var(--color-muted)] focus:outline-none input-focus"
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-1">{t("contact.messageLabel")}</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  required
-                  rows={5}
-                  placeholder={t("contact.messagePlaceholder")}
-                  className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] px-4 py-3 text-sm placeholder:text-[var(--color-muted)] focus:outline-none input-focus resize-none"
-                />
-              </div>
-              <button type="submit" className="cta-btn w-full rounded-lg bg-[var(--color-accent)] text-white font-semibold py-3 text-sm">
-                {t("contact.send")}
-              </button>
-            </form>
-          )}
+              {t("contact.send")}
+            </button>
+          </div>
 
           <section className="mb-8">
             <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-5">
               <p className="text-sm text-[var(--color-muted)] mb-2">
                 {t("contact.orEmail")}{" "}
-                <a href="mailto:pon07084@gmail.com" className="text-[var(--color-accent)] hover:underline">
+                <button onClick={() => setShowModal(true)} className="text-[var(--color-accent)] hover:underline">
                   pon07084@gmail.com
-                </a>
+                </button>
               </p>
               <p className="text-xs text-[var(--color-muted)]">{t("contact.responseTime")}</p>
             </div>
@@ -113,6 +68,7 @@ export default function ContactPage() {
       </main>
 
       <GameFooter />
+      <ContactModal show={showModal} onClose={() => setShowModal(false)} />
     </div>
   );
 }

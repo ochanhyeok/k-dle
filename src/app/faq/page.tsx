@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useTranslation, type TranslationKey } from "@/lib/i18n";
 import GameFooter from "@/components/ui/GameFooter";
+import ContactModal from "@/components/ui/ContactModal";
 
 const FAQ_ITEMS: { q: TranslationKey; a: TranslationKey }[] = [
   { q: "faq.q1", a: "faq.a1" },
@@ -26,6 +27,7 @@ const FAQ_ITEMS: { q: TranslationKey; a: TranslationKey }[] = [
 export default function FaqPage() {
   const { t } = useTranslation();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -83,15 +85,16 @@ export default function FaqPage() {
           <div className="mt-8 text-center">
             <p className="text-sm text-[var(--color-muted)] mb-2">
               {t("about.contactText")}{" "}
-              <a href="mailto:pon07084@gmail.com" className="text-[var(--color-accent)] hover:underline">
+              <button onClick={() => setShowModal(true)} className="text-[var(--color-accent)] hover:underline">
                 pon07084@gmail.com
-              </a>
+              </button>
             </p>
           </div>
         </div>
       </main>
 
       <GameFooter />
+      <ContactModal show={showModal} onClose={() => setShowModal(false)} />
     </div>
   );
 }
