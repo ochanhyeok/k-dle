@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import CopyText from "@/components/ui/CopyText";
 import { useTranslation } from "@/lib/i18n";
 import GameFooter from "@/components/ui/GameFooter";
 
@@ -49,22 +48,46 @@ export default function AboutPage() {
             </p>
           </section>
 
+          {/* Why We Built K-Dle */}
+          <section className="mb-8">
+            <h3 className="text-lg font-semibold mb-3">{t("about.whyTitle")}</h3>
+            <p className="text-sm text-[var(--color-muted)] leading-relaxed mb-3">
+              {t("about.whyP1")}
+            </p>
+            <p className="text-sm text-[var(--color-muted)] leading-relaxed">
+              {t("about.whyP2")}
+            </p>
+          </section>
+
           {/* Game Modes */}
           <section className="mb-8">
             <h3 className="text-lg font-semibold mb-4">{t("about.gameModes")}</h3>
             <div className="space-y-3">
-              {[
+              {([
                 { emoji: "🎬", title: "Drama-dle", descKey: "about.drama" as const },
                 { emoji: "🎤", title: "Idol-dle", descKey: "about.idol" as const },
                 { emoji: "📝", title: "Lyric-dle", descKey: "about.lyric" as const },
                 { emoji: "🎭", title: "Scene-dle", descKey: "about.scene" as const },
-              ].map((mode) => (
+              ]).map((mode) => (
                 <div key={mode.title} className="rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-4">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-xl">{mode.emoji}</span>
                     <h4 className="font-semibold text-sm">{mode.title}</h4>
                   </div>
                   <p className="text-xs text-[var(--color-muted)] leading-relaxed">{t(mode.descKey)}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Features */}
+          <section className="mb-8">
+            <h3 className="text-lg font-semibold mb-3">{t("about.featuresTitle")}</h3>
+            <div className="space-y-2">
+              {(["about.feature1", "about.feature2", "about.feature3", "about.feature4", "about.feature5", "about.feature6"] as const).map((key, i) => (
+                <div key={key} className="flex items-start gap-3 text-sm text-[var(--color-muted)]">
+                  <span className="text-[var(--color-accent)] mt-0.5">✓</span>
+                  <p>{t(key)}</p>
                 </div>
               ))}
             </div>
@@ -81,6 +104,22 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
+          </section>
+
+          {/* Community */}
+          <section className="mb-8">
+            <h3 className="text-lg font-semibold mb-3">{t("about.communityTitle")}</h3>
+            <p className="text-sm text-[var(--color-muted)] leading-relaxed">
+              {t("about.communityText")}
+            </p>
+          </section>
+
+          {/* Built With Care */}
+          <section className="mb-8">
+            <h3 className="text-lg font-semibold mb-3">{t("about.techTitle")}</h3>
+            <p className="text-sm text-[var(--color-muted)] leading-relaxed">
+              {t("about.techText")}
+            </p>
           </section>
 
           {/* Disclaimer */}
@@ -103,6 +142,9 @@ export default function AboutPage() {
               <Link href="/terms" className="text-[var(--color-accent)] hover:underline">
                 {t("about.termsOfService")}
               </Link>
+              <Link href="/faq" className="text-[var(--color-accent)] hover:underline">
+                {t("faq.title")}
+              </Link>
             </div>
           </section>
 
@@ -111,7 +153,9 @@ export default function AboutPage() {
             <h3 className="text-lg font-semibold mb-3">{t("about.contact")}</h3>
             <p className="text-sm text-[var(--color-muted)] leading-relaxed">
               {t("about.contactText")}{" "}
-              <CopyText text="pon07084@gmail.com" className="text-[var(--color-accent)] hover:underline cursor-pointer" />
+              <a href="mailto:pon07084@gmail.com" className="text-[var(--color-accent)] hover:underline">
+                pon07084@gmail.com
+              </a>
             </p>
           </section>
         </div>

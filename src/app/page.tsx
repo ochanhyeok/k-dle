@@ -117,6 +117,39 @@ export default function Home() {
           <div className="animate-stagger-in" style={{ animationDelay: "0.35s" }}>
             <StreakBanner />
           </div>
+
+          {/* SEO Content - What is K-Dle */}
+          <section className="mt-10 mb-8">
+            <h3 className="text-lg font-semibold mb-3">{t("home.whatIsTitle")}</h3>
+            <p className="text-sm text-[var(--color-muted)] leading-relaxed">
+              {t("home.whatIsText")}
+            </p>
+          </section>
+
+          {/* Why fans love K-Dle */}
+          <section className="mb-8">
+            <h3 className="text-lg font-semibold mb-3">{t("home.whyTitle")}</h3>
+            <p className="text-sm text-[var(--color-muted)] leading-relaxed mb-3">
+              {t("home.whyP1")}
+            </p>
+            <p className="text-sm text-[var(--color-muted)] leading-relaxed">
+              {t("home.whyP2")}
+            </p>
+          </section>
+
+          {/* How to Play */}
+          <section className="mb-8">
+            <h3 className="text-lg font-semibold mb-3">{t("home.howPlayTitle")}</h3>
+            <p className="text-sm text-[var(--color-muted)] leading-relaxed">
+              {t("home.howPlayText")}
+            </p>
+          </section>
+
+          <div className="text-center mb-4">
+            <Link href="/about" className="text-sm text-[var(--color-accent)] hover:underline">
+              {t("home.moreAbout")} →
+            </Link>
+          </div>
         </div>
       </main>
 
@@ -126,6 +159,14 @@ export default function Home() {
           <div className="flex items-center justify-center gap-3 mb-2 text-xs">
             <Link href="/about" className="text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">
               {t("home.about")}
+            </Link>
+            <span className="text-[var(--color-border)]">|</span>
+            <Link href="/faq" className="text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">
+              FAQ
+            </Link>
+            <span className="text-[var(--color-border)]">|</span>
+            <Link href="/contact" className="text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">
+              {t("contact.title")}
             </Link>
             <span className="text-[var(--color-border)]">|</span>
             <Link href="/privacy" className="text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">
