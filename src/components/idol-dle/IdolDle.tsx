@@ -131,7 +131,6 @@ export default function IdolDle() {
               n.nameKo.includes(input) ||
               n.group.toLowerCase().includes(input.toLowerCase())
           )
-          .slice(0, 20)
       : [];
 
   const handleGuess = (guessName: string) => {

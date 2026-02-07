@@ -83,7 +83,7 @@ export default function DramaDle() {
         (d) =>
           d.title.toLowerCase().includes(input.toLowerCase()) ||
           d.titleKo.includes(input)
-      ).slice(0, 20)
+      )
     : [];
 
   const handleGuess = useCallback(

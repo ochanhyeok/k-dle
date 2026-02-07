@@ -101,7 +101,7 @@ export default function LyricDle() {
           s.title.toLowerCase().includes(input.toLowerCase()) ||
           s.titleKo.includes(input) ||
           s.artist.toLowerCase().includes(input.toLowerCase())
-        ).slice(0, 20)
+        )
       : [];
 
   const handleGuess = (guessTitle: string) => {
