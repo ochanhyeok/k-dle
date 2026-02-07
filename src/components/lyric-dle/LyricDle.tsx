@@ -155,7 +155,7 @@ export default function LyricDle() {
     );
   }
 
-  const hints = getLyricHints(target, guesses.length + (status === "playing" ? 1 : 0), locale);
+  const hints = getLyricHints(target, guesses.length + (status === "playing" ? 1 : 0));
   const remaining = 6 - hints.length;
 
   return (
@@ -280,9 +280,11 @@ export default function LyricDle() {
             <>
               <p className="text-2xl mb-2">😔</p>
               <p className="font-semibold text-lg mb-1">{t("result.betterLuck")}</p>
-              <p className="text-sm text-[var(--color-muted)]">
-                {t("result.answerWasLyric", { title: target.title, artist: target.artist })}
-              </p>
+              <div className="my-3 rounded-lg border-2 border-[var(--color-accent)]/40 bg-[var(--color-accent)]/10 px-4 py-3">
+                <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-1">{t("result.answerLabel")}</p>
+                <p className="text-lg font-bold text-[var(--color-accent)]">{target.title}</p>
+                <p className="text-sm text-[var(--color-muted)]">{target.artist}</p>
+              </div>
             </>
           )}
           {/* Stats mini */}

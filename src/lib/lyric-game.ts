@@ -26,9 +26,14 @@ export function getLyricPuzzleNumber(): number {
   return Math.round((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
 }
 
-export function getLyricHints(song: LyricSong, revealedCount: number, locale?: string): string[] {
-  const lines = getLocalizedLyrics(song.id, locale ?? "en") ?? song.lyrics;
-  return lines.slice(0, revealedCount);
+export function getLyricHints(song: LyricSong, revealedCount: number): string[] {
+  // Show lyrics in the song's original language (English for eng songs, Korean for the rest)
+  if (song.lang === "en") {
+    return song.lyrics.slice(0, revealedCount);
+  }
+  // Korean originals: use Korean paraphrases
+  const koLines = getLocalizedLyrics(song.id, "ko");
+  return (koLines ?? song.lyrics).slice(0, revealedCount);
 }
 
 export function checkLyricGuess(guess: string, target: LyricSong): boolean {

@@ -6,6 +6,7 @@ export interface LyricSong {
   lyrics: string[]; // 6 translated/paraphrased lyric lines as progressive hints
   type: "K-Pop" | "OST";
   difficulty: "easy" | "medium" | "hard";
+  lang?: "en"; // set only for songs originally in English; default is Korean
 }
 
 export const lyrics: LyricSong[] = [
@@ -25,6 +26,7 @@ export const lyrics: LyricSong[] = [
     ],
     type: "K-Pop",
     difficulty: "easy",
+    lang: "en",
   },
   {
     id: "how-you-like-that",
@@ -63,6 +65,7 @@ export const lyrics: LyricSong[] = [
     title: "Boy With Luv",
     titleKo: "작은 것들을 위한 시",
     artist: "BTS ft. Halsey",
+    lang: "en",
     lyrics: [
       "I want something stronger than a moment, a coffee, a song",
       "Your every little gesture, your every little expression",
@@ -201,6 +204,7 @@ export const lyrics: LyricSong[] = [
     ],
     type: "K-Pop",
     difficulty: "easy",
+    lang: "en",
   },
   {
     id: "ddu-du-ddu-du",
@@ -266,6 +270,7 @@ export const lyrics: LyricSong[] = [
     ],
     type: "K-Pop",
     difficulty: "easy",
+    lang: "en",
   },
   {
     id: "supernova",
@@ -314,6 +319,7 @@ export const lyrics: LyricSong[] = [
     ],
     type: "K-Pop",
     difficulty: "easy",
+    lang: "en",
   },
   {
     id: "lucifer",

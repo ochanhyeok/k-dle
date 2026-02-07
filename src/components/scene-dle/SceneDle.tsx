@@ -270,9 +270,11 @@ export default function SceneDle() {
             <>
               <p className="text-2xl mb-2">😔</p>
               <p className="font-semibold text-lg mb-1">{t("result.betterLuck")}</p>
-              <p className="text-sm text-[var(--color-muted)]">
-                {t("result.answerWas", { title: target.dramaTitle, titleKo: target.dramaTitleKo })}
-              </p>
+              <div className="my-3 rounded-lg border-2 border-[var(--color-accent)]/40 bg-[var(--color-accent)]/10 px-4 py-3">
+                <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-1">{t("result.answerLabel")}</p>
+                <p className="text-lg font-bold text-[var(--color-accent)]">{target.dramaTitle}</p>
+                <p className="text-sm text-[var(--color-muted)]">{target.dramaTitleKo}</p>
+              </div>
             </>
           )}
           {/* Stats mini */}

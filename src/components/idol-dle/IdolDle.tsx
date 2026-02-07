@@ -319,9 +319,11 @@ export default function IdolDle() {
             <>
               <p className="text-2xl mb-2">😔</p>
               <p className="font-semibold text-lg mb-1">{t("result.betterLuck")}</p>
-              <p className="text-sm text-[var(--color-muted)]">
-                {t("result.answerWasIdol", { name: target.name, group: target.group })}
-              </p>
+              <div className="my-3 rounded-lg border-2 border-[var(--color-accent)]/40 bg-[var(--color-accent)]/10 px-4 py-3">
+                <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-1">{t("result.answerLabel")}</p>
+                <p className="text-lg font-bold text-[var(--color-accent)]">{target.name}</p>
+                <p className="text-sm text-[var(--color-muted)]">{target.group}</p>
+              </div>
             </>
           )}
           {/* Stats mini */}
