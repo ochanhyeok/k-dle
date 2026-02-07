@@ -59,5 +59,5 @@ export function generateLyricShareText(
     .map((_, i) => (i === guesses.length - 1 && won ? "🟩" : "🟥"))
     .join("");
   const r = encodeCompareData({ puzzleNum: puzzleNumber, guessCount: guesses.length, won });
-  return `📝 K-Dle #${puzzleNumber} Lyric-dle ${score}\n\n${squares}\n\nk-dle.vercel.app/lyric-dle?r=${r}`;
+  return `📝 K-Dle #${puzzleNumber} Lyric-dle ${score}\n\n${squares}\n\nhttps://k-dle.vercel.app/lyric-dle?r=${r}`;
 }

@@ -59,8 +59,7 @@ export async function generateShareCard(data: ShareCardData): Promise<Blob> {
   H += gridH;    // grid
   H += 28;       // after grid
   if (data.stats) H += 52;
-  H += 40;       // url
-  H += 24;       // bottom padding
+  H += 32;       // bottom padding
 
   const canvas = document.createElement("canvas");
   canvas.width = W * DPR;
@@ -140,11 +139,6 @@ export async function generateShareCard(data: ShareCardData): Promise<Blob> {
     );
     y += 34;
   }
-
-  // URL
-  ctx.fillStyle = meta.accent;
-  ctx.font = `600 13px ${FONT}`;
-  ctx.fillText("k-dle.vercel.app", W / 2, y + 16);
 
   ctx.restore();
 

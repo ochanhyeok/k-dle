@@ -100,5 +100,5 @@ export function generateIdolShareText(
     .join("\n");
 
   const r = encodeCompareData({ puzzleNum: puzzleNumber, guessCount: rows.length, won });
-  return `🎤 K-Dle #${puzzleNumber} Idol-dle ${score}\n\n${grid}\n\nk-dle.vercel.app/idol-dle?r=${r}`;
+  return `🎤 K-Dle #${puzzleNumber} Idol-dle ${score}\n\n${grid}\n\nhttps://k-dle.vercel.app/idol-dle?r=${r}`;
 }

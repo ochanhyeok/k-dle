@@ -90,7 +90,7 @@ export function generateStatsShareText(stats: UnifiedStats): string {
     `📊 ${stats.gamesPlayed} games played | ${winRate}% win rate`,
     `🔥 ${stats.currentStreak}-day streak (best: ${stats.maxStreak})`,
     "",
-    "k-dle.vercel.app",
+    "https://k-dle.vercel.app",
   ];
   return lines.join("\n");
 }

@@ -83,7 +83,7 @@ export function generateShareText(
     .join("");
 
   const r = encodeCompareData({ puzzleNum: puzzleNumber, guessCount: guesses.length, won });
-  return `🎬 K-Dle #${puzzleNumber} Drama-dle ${score}\n\n${squares}\n\nk-dle.vercel.app/drama-dle?r=${r}`;
+  return `🎬 K-Dle #${puzzleNumber} Drama-dle ${score}\n\n${squares}\n\nhttps://k-dle.vercel.app/drama-dle?r=${r}`;
 }
 
 const STORAGE_KEY = "k-dle-state";

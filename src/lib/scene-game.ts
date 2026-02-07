@@ -55,5 +55,5 @@ export function generateSceneShareText(
     .map((_, i) => (i === guesses.length - 1 && won ? "🟩" : "🟥"))
     .join("");
   const r = encodeCompareData({ puzzleNum: puzzleNumber, guessCount: guesses.length, won });
-  return `🎭 K-Dle #${puzzleNumber} Scene-dle ${score}\n\n${squares}\n\nk-dle.vercel.app/scene-dle?r=${r}`;
+  return `🎭 K-Dle #${puzzleNumber} Scene-dle ${score}\n\n${squares}\n\nhttps://k-dle.vercel.app/scene-dle?r=${r}`;
 }
