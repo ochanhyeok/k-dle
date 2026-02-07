@@ -40,6 +40,12 @@ export function getIdolPuzzleNumber(): number {
   return Math.round((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
 }
 
+/** Get idol for a specific puzzle number (used by archive) */
+export function getIdolByPuzzleNumber(puzzleNum: number): Idol {
+  const index = mixIndex(puzzleNum + 17, idols.length);
+  return idols[index];
+}
+
 export function compareIdols(guess: Idol, target: Idol): CompareRow["results"] {
   return {
     gender: guess.gender === target.gender ? "correct" : "wrong",
@@ -101,4 +107,49 @@ export function generateIdolShareText(
 
   const r = encodeCompareData({ puzzleNum: puzzleNumber, guessCount: rows.length, won });
   return `🎤 K-Dle #${puzzleNumber} Idol-dle ${score}\n\n${grid}\n\nhttps://k-dle.vercel.app/idol-dle?r=${r}`;
+}
+
+// Archive state management
+const ARCHIVE_KEY = "k-dle-archive-idol";
+
+export function loadIdolArchiveState(puzzleNum: number): {
+  guessNames: string[];
+  status: "playing" | "won" | "lost";
+} | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem(ARCHIVE_KEY);
+    if (!raw) return null;
+    const map = JSON.parse(raw);
+    const entry = map[puzzleNum];
+    if (!entry) return null;
+    return { guessNames: entry.guessNames, status: entry.status };
+  } catch {
+    return null;
+  }
+}
+
+export function saveIdolArchiveState(
+  puzzleNum: number,
+  guessNames: string[],
+  status: "playing" | "won" | "lost"
+): void {
+  if (typeof window === "undefined") return;
+  let map: Record<number, { guessNames: string[]; status: string }> = {};
+  try {
+    const raw = localStorage.getItem(ARCHIVE_KEY);
+    if (raw) map = JSON.parse(raw);
+  } catch { /* ignore */ }
+  map[puzzleNum] = { guessNames, status };
+  localStorage.setItem(ARCHIVE_KEY, JSON.stringify(map));
+}
+
+export function loadAllIdolArchiveStates(): Record<number, { guessNames: string[]; status: string }> {
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = localStorage.getItem(ARCHIVE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
 }

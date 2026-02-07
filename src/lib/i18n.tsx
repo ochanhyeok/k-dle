@@ -317,6 +317,16 @@ const translations = {
     "about.communityText": "Share your daily results with friends and see who knows K-Drama and K-Pop best. Build your streak, earn fan ranks, and become a Hallyu Legend. New puzzles every day at midnight — don't miss your streak!",
     "about.techTitle": "Built With Care",
     "about.techText": "K-Dle is built with modern web technologies for a fast, smooth experience on any device. No downloads required — just visit and play. Your progress is saved automatically in your browser.",
+
+    // Archive
+    "archive.title": "Archive",
+    "archive.subtitle": "Play past puzzles",
+    "archive.backToArchive": "Back to Archive",
+    "archive.played": "Played",
+    "archive.notPlayed": "Not played yet",
+    "archive.today": "Today's Puzzle",
+    "archive.archiveMode": "Archive",
+    "archive.noPastPuzzles": "No past puzzles yet. Come back tomorrow!",
   },
 
   es: {
@@ -629,6 +639,16 @@ const translations = {
     "about.communityText": "Comparte tus resultados diarios con amigos y descubre quien sabe mas de K-Drama y K-Pop. Construye tu racha, gana rangos de fan y conviertete en una Leyenda Hallyu. Nuevos puzzles cada dia a medianoche.",
     "about.techTitle": "Hecho con Cuidado",
     "about.techText": "K-Dle esta construido con tecnologias web modernas para una experiencia rapida y fluida en cualquier dispositivo. Sin descargas necesarias — solo visita y juega. Tu progreso se guarda automaticamente en tu navegador.",
+
+    // Archive
+    "archive.title": "Archivo",
+    "archive.subtitle": "Juega puzzles anteriores",
+    "archive.backToArchive": "Volver al Archivo",
+    "archive.played": "Jugado",
+    "archive.notPlayed": "Aun no jugado",
+    "archive.today": "Puzzle de Hoy",
+    "archive.archiveMode": "Archivo",
+    "archive.noPastPuzzles": "No hay puzzles anteriores todavia. Vuelve manana!",
   },
 
   ko: {
@@ -941,6 +961,16 @@ const translations = {
     "about.communityText": "일일 결과를 친구들과 공유하고 누가 K-드라마와 K-Pop을 가장 잘 아는지 겨뤄보세요. 연속 기록을 쌓고, 팬 랭크를 획득하고, 한류 레전드가 되세요. 매일 자정에 새로운 퍼즐 — 연속 기록을 놓치지 마세요!",
     "about.techTitle": "정성을 담아 만들었습니다",
     "about.techText": "K-Dle은 모든 기기에서 빠르고 부드러운 경험을 위해 최신 웹 기술로 제작되었습니다. 다운로드 없이 방문하면 바로 플레이할 수 있습니다. 진행 상황은 브라우저에 자동 저장됩니다.",
+
+    // Archive
+    "archive.title": "아카이브",
+    "archive.subtitle": "과거 퍼즐 다시 풀기",
+    "archive.backToArchive": "아카이브로 돌아가기",
+    "archive.played": "플레이 완료",
+    "archive.notPlayed": "아직 안 풀었어요",
+    "archive.today": "오늘의 퍼즐",
+    "archive.archiveMode": "아카이브",
+    "archive.noPastPuzzles": "아직 과거 퍼즐이 없습니다. 내일 다시 오세요!",
   },
 } as const;
 

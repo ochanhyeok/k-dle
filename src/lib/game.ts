@@ -33,6 +33,12 @@ export function getTodaysDrama(): Drama {
   return dramas[index];
 }
 
+/** Get drama for a specific puzzle number (used by archive) */
+export function getDramaByPuzzleNumber(puzzleNum: number): Drama {
+  const index = mixIndex(puzzleNum, dramas.length);
+  return dramas[index];
+}
+
 /** Generate hints for a drama based on attempt number (0-indexed) */
 export function getHints(
   drama: Drama,
@@ -179,4 +185,49 @@ export function saveGameState(
     STORAGE_KEY,
     JSON.stringify({ puzzleNumber, guesses, status })
   );
+}
+
+// Archive state management
+const ARCHIVE_KEY = "k-dle-archive-drama";
+
+export function loadArchiveState(puzzleNum: number): {
+  guesses: string[];
+  status: "playing" | "won" | "lost";
+} | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem(ARCHIVE_KEY);
+    if (!raw) return null;
+    const map = JSON.parse(raw);
+    const entry = map[puzzleNum];
+    if (!entry) return null;
+    return { guesses: entry.guesses, status: entry.status };
+  } catch {
+    return null;
+  }
+}
+
+export function saveArchiveState(
+  puzzleNum: number,
+  guesses: string[],
+  status: "playing" | "won" | "lost"
+): void {
+  if (typeof window === "undefined") return;
+  let map: Record<number, { guesses: string[]; status: string }> = {};
+  try {
+    const raw = localStorage.getItem(ARCHIVE_KEY);
+    if (raw) map = JSON.parse(raw);
+  } catch { /* ignore */ }
+  map[puzzleNum] = { guesses, status };
+  localStorage.setItem(ARCHIVE_KEY, JSON.stringify(map));
+}
+
+export function loadAllArchiveStates(): Record<number, { guesses: string[]; status: string }> {
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = localStorage.getItem(ARCHIVE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
 }

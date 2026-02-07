@@ -19,6 +19,12 @@ export function getTodaysLyric(): LyricSong {
   return lyrics[index];
 }
 
+/** Get lyric for a specific puzzle number (used by archive) */
+export function getLyricByPuzzleNumber(puzzleNum: number): LyricSong {
+  const index = mixIndex(puzzleNum + 31, lyrics.length);
+  return lyrics[index];
+}
+
 export function getLyricPuzzleNumber(): number {
   const now = new Date();
   const start = new Date(2026, 1, 6);
@@ -60,4 +66,49 @@ export function generateLyricShareText(
     .join("");
   const r = encodeCompareData({ puzzleNum: puzzleNumber, guessCount: guesses.length, won });
   return `📝 K-Dle #${puzzleNumber} Lyric-dle ${score}\n\n${squares}\n\nhttps://k-dle.vercel.app/lyric-dle?r=${r}`;
+}
+
+// Archive state management
+const ARCHIVE_KEY = "k-dle-archive-lyric";
+
+export function loadLyricArchiveState(puzzleNum: number): {
+  guesses: string[];
+  status: "playing" | "won" | "lost";
+} | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem(ARCHIVE_KEY);
+    if (!raw) return null;
+    const map = JSON.parse(raw);
+    const entry = map[puzzleNum];
+    if (!entry) return null;
+    return { guesses: entry.guesses, status: entry.status };
+  } catch {
+    return null;
+  }
+}
+
+export function saveLyricArchiveState(
+  puzzleNum: number,
+  guesses: string[],
+  status: "playing" | "won" | "lost"
+): void {
+  if (typeof window === "undefined") return;
+  let map: Record<number, { guesses: string[]; status: string }> = {};
+  try {
+    const raw = localStorage.getItem(ARCHIVE_KEY);
+    if (raw) map = JSON.parse(raw);
+  } catch { /* ignore */ }
+  map[puzzleNum] = { guesses, status };
+  localStorage.setItem(ARCHIVE_KEY, JSON.stringify(map));
+}
+
+export function loadAllLyricArchiveStates(): Record<number, { guesses: string[]; status: string }> {
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = localStorage.getItem(ARCHIVE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
 }

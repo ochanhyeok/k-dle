@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import {
   getTodaysDrama,
+  getDramaByPuzzleNumber,
   getPuzzleNumber,
   getHints,
   checkGuess,
@@ -10,7 +11,10 @@ import {
   generateShareText,
   loadGameState,
   saveGameState,
+  loadArchiveState,
+  saveArchiveState,
 } from "@/lib/game";
+import Link from "next/link";
 import { recordGameResult, loadUnifiedStats, type UnifiedStats } from "@/lib/unified-stats";
 import { recordDailyResult } from "@/lib/daily-stats";
 import type { Drama } from "@/data/dramas";
@@ -25,7 +29,12 @@ import { decodeCompareData, type CompareData } from "@/lib/compare";
 
 const MAX_GUESSES = 6;
 
-export default function DramaDle() {
+interface DramaDleProps {
+  archivePuzzleNumber?: number;
+}
+
+export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
+  const isArchive = archivePuzzleNumber !== undefined;
   const [target, setTarget] = useState<Drama | null>(null);
   const [puzzleNumber, setPuzzleNumber] = useState(0);
   const [guesses, setGuesses] = useState<string[]>([]);
@@ -57,18 +66,28 @@ export default function DramaDle() {
   }, []);
 
   useEffect(() => {
-    const drama = getTodaysDrama();
-    const num = getPuzzleNumber();
-    setTarget(drama);
-    setPuzzleNumber(num);
-    setStats(loadUnifiedStats());
-
-    const saved = loadGameState(num);
-    if (saved) {
-      setGuesses(saved.guesses);
-      setStatus(saved.status);
+    if (isArchive) {
+      const drama = getDramaByPuzzleNumber(archivePuzzleNumber);
+      setTarget(drama);
+      setPuzzleNumber(archivePuzzleNumber);
+      const saved = loadArchiveState(archivePuzzleNumber);
+      if (saved) {
+        setGuesses(saved.guesses);
+        setStatus(saved.status);
+      }
+    } else {
+      const drama = getTodaysDrama();
+      const num = getPuzzleNumber();
+      setTarget(drama);
+      setPuzzleNumber(num);
+      setStats(loadUnifiedStats());
+      const saved = loadGameState(num);
+      if (saved) {
+        setGuesses(saved.guesses);
+        setStatus(saved.status);
+      }
     }
-  }, []);
+  }, [isArchive, archivePuzzleNumber]);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -124,19 +143,23 @@ export default function DramaDle() {
       const newStatus = won ? "won" : lost ? "lost" : "playing";
       setStatus(newStatus);
 
-      saveGameState(puzzleNumber, newGuesses, newStatus);
-
-      if (won || lost) {
-        const newStats = recordGameResult(won, newGuesses.length);
-        setStats(newStats);
-        recordDailyResult("drama", won, newGuesses.length);
+      if (isArchive) {
+        saveArchiveState(puzzleNumber, newGuesses, newStatus);
+      } else {
+        saveGameState(puzzleNumber, newGuesses, newStatus);
+        if (won || lost) {
+          const newStats = recordGameResult(won, newGuesses.length);
+          setStats(newStats);
+          recordDailyResult("drama", won, newGuesses.length);
+        }
       }
     },
-    [target, status, guesses, puzzleNumber, allTitles]
+    [target, status, guesses, puzzleNumber, allTitles, isArchive]
   );
 
   const handleShare = async () => {
-    const text = generateShareText(puzzleNumber, guesses, status === "won", MAX_GUESSES);
+    let text = generateShareText(puzzleNumber, guesses, status === "won", MAX_GUESSES);
+    if (isArchive) text = text.replace("Drama-dle", "Drama-dle (Archive)");
     try {
       const grid: CellResult[][] = [
         guesses.map((_, i): CellResult =>
@@ -193,6 +216,11 @@ export default function DramaDle() {
       <div className="text-center mb-6">
         <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-1">
           Drama-dle #{puzzleNumber}
+          {isArchive && (
+            <span className="ml-2 inline-block rounded bg-[var(--color-accent)]/20 text-[var(--color-accent)] px-1.5 py-0.5 text-[10px] font-semibold">
+              {t("archive.archiveMode")}
+            </span>
+          )}
         </p>
         <p className="text-sm text-[var(--color-muted)]">
           {t("game.guessIn", { n: MAX_GUESSES })}
@@ -333,8 +361,8 @@ export default function DramaDle() {
             </>
           )}
 
-          {/* Stats mini */}
-          {stats && (
+          {/* Stats mini — hidden in archive mode */}
+          {!isArchive && stats && (
             <div className="flex justify-center gap-6 my-4 text-center">
               <div>
                 <p className="text-xl font-bold">{stats.gamesPlayed}</p>
@@ -375,7 +403,7 @@ export default function DramaDle() {
           >
             {t("result.shareResult")} 📋
           </button>
-          {friendResult && friendResult.puzzleNum === puzzleNumber && (
+          {!isArchive && friendResult && friendResult.puzzleNum === puzzleNumber && (
             <div className="mt-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-4">
               <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-3 text-center">
                 👥 {t("compare.title")}
@@ -396,8 +424,19 @@ export default function DramaDle() {
               </div>
             </div>
           )}
-          <DailyStatsCard mode="drama" />
-          <CountdownTimer />
+          {isArchive ? (
+            <Link
+              href="/drama-dle/archive"
+              className="mt-4 inline-block w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] py-3 text-sm font-medium text-center hover:border-[var(--color-accent)]/50 transition-colors"
+            >
+              {t("archive.backToArchive")}
+            </Link>
+          ) : (
+            <>
+              <DailyStatsCard mode="drama" />
+              <CountdownTimer />
+            </>
+          )}
         </div>
       )}
 
@@ -418,7 +457,7 @@ export default function DramaDle() {
       </div>
 
       {/* Next Game */}
-      {status !== "playing" && <NextGameBanner currentMode="drama-dle" />}
+      {!isArchive && status !== "playing" && <NextGameBanner currentMode="drama-dle" />}
       <Toast message={toastMsg} show={showToast} onClose={() => setShowToast(false)} />
     </div>
   );

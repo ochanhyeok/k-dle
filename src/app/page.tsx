@@ -115,6 +115,30 @@ export default function Home() {
             ))}
           </div>
 
+          {/* Archive Link */}
+          <div className="animate-stagger-in mb-6" style={{ animationDelay: "0.33s" }}>
+            <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] p-4">
+              <div className="flex items-center gap-3 mb-3">
+                <span className="text-xl">📚</span>
+                <div>
+                  <h3 className="font-semibold text-sm">{t("archive.title")}</h3>
+                  <p className="text-xs text-[var(--color-muted)]">{t("archive.subtitle")}</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                {MODE_KEYS.map((mode) => (
+                  <Link
+                    key={mode.id}
+                    href={`/${mode.id}/archive`}
+                    className="rounded-lg border border-[var(--color-border)] px-3 py-2 text-center text-xs font-medium hover:border-[var(--color-accent)]/50 transition-colors"
+                  >
+                    {mode.emoji} {mode.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
           {/* Daily Streak Banner */}
           <div className="animate-stagger-in" style={{ animationDelay: "0.35s" }}>
             <StreakBanner />

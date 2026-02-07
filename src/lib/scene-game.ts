@@ -20,6 +20,12 @@ export function getTodaysScene(): Scene {
   return scenes[index];
 }
 
+/** Get scene for a specific puzzle number (used by archive) */
+export function getSceneByPuzzleNumber(puzzleNum: number): Scene {
+  const index = mixIndex(puzzleNum + 7, scenes.length);
+  return scenes[index];
+}
+
 export function getScenePuzzleNumber(): number {
   const now = new Date();
   const start = new Date(2026, 1, 6);
@@ -56,4 +62,49 @@ export function generateSceneShareText(
     .join("");
   const r = encodeCompareData({ puzzleNum: puzzleNumber, guessCount: guesses.length, won });
   return `🎭 K-Dle #${puzzleNumber} Scene-dle ${score}\n\n${squares}\n\nhttps://k-dle.vercel.app/scene-dle?r=${r}`;
+}
+
+// Archive state management
+const ARCHIVE_KEY = "k-dle-archive-scene";
+
+export function loadSceneArchiveState(puzzleNum: number): {
+  guesses: string[];
+  status: "playing" | "won" | "lost";
+} | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem(ARCHIVE_KEY);
+    if (!raw) return null;
+    const map = JSON.parse(raw);
+    const entry = map[puzzleNum];
+    if (!entry) return null;
+    return { guesses: entry.guesses, status: entry.status };
+  } catch {
+    return null;
+  }
+}
+
+export function saveSceneArchiveState(
+  puzzleNum: number,
+  guesses: string[],
+  status: "playing" | "won" | "lost"
+): void {
+  if (typeof window === "undefined") return;
+  let map: Record<number, { guesses: string[]; status: string }> = {};
+  try {
+    const raw = localStorage.getItem(ARCHIVE_KEY);
+    if (raw) map = JSON.parse(raw);
+  } catch { /* ignore */ }
+  map[puzzleNum] = { guesses, status };
+  localStorage.setItem(ARCHIVE_KEY, JSON.stringify(map));
+}
+
+export function loadAllSceneArchiveStates(): Record<number, { guesses: string[]; status: string }> {
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = localStorage.getItem(ARCHIVE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
 }
