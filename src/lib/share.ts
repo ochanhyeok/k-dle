@@ -13,7 +13,7 @@ export async function shareResult(text: string): Promise<void> {
 export async function shareWithImage(
   imageBlob: Blob,
   fallbackText: string,
-): Promise<"shared" | "copied"> {
+): Promise<"shared" | "copied" | "cancelled"> {
   const file = new File([imageBlob], "k-dle-result.png", { type: "image/png" });
 
   // Try Web Share API with file (mobile)
@@ -22,21 +22,26 @@ export async function shareWithImage(
       const shareData = { files: [file], text: fallbackText };
       if (!navigator.canShare || navigator.canShare(shareData)) {
         await navigator.share(shareData);
+        // Copy link to clipboard — KakaoTalk etc. only show the image
+        try { await navigator.clipboard.writeText(fallbackText); } catch {}
         return "shared";
       }
-    } catch {
-      // cancelled or unsupported — fall through
+    } catch (e) {
+      // User dismissed share sheet
+      if (e instanceof DOMException && e.name === "AbortError") {
+        return "cancelled";
+      }
+      // Other error — fall through to clipboard
     }
   }
 
-  // Try copying image to clipboard (desktop)
+  // Desktop fallback: copy image to clipboard
   try {
     await navigator.clipboard.write([
       new ClipboardItem({ "image/png": imageBlob }),
     ]);
     return "copied";
   } catch {
-    // Image clipboard not supported — copy text
     await navigator.clipboard.writeText(fallbackText);
     return "copied";
   }

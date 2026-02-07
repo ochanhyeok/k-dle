@@ -70,6 +70,7 @@ export default function IdolDle() {
   const [status, setStatus] = useState<"playing" | "won" | "lost">("playing");
   const [showAutocomplete, setShowAutocomplete] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [toastMsg, setToastMsg] = useState("");
   const [shakeInput, setShakeInput] = useState(false);
   const [stats, setStats] = useState<UnifiedStats | null>(null);
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -200,9 +201,16 @@ export default function IdolDle() {
           : undefined,
       });
       const result = await shareWithImage(blob, text);
-      if (result !== "shared") setShowToast(true);
+      if (result === "shared") {
+        setToastMsg(t("toast.linkCopied"));
+        setShowToast(true);
+      } else if (result === "copied") {
+        setToastMsg(`${t("toast.copied")} 📋`);
+        setShowToast(true);
+      }
     } catch {
       await shareResult(text);
+      setToastMsg(`${t("toast.copied")} 📋`);
       setShowToast(true);
     }
   };
@@ -421,7 +429,7 @@ export default function IdolDle() {
       </div>
 
       {status !== "playing" && <NextGameBanner currentMode="idol-dle" />}
-      <Toast message={`${t("toast.copied")} 📋`} show={showToast} onClose={() => setShowToast(false)} />
+      <Toast message={toastMsg} show={showToast} onClose={() => setShowToast(false)} />
     </div>
   );
 }

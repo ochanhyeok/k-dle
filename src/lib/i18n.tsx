@@ -118,6 +118,7 @@ const translations = {
 
     // Toast
     "toast.copied": "Copied to clipboard!",
+    "toast.linkCopied": "Link copied! Paste in chat to share",
 
     // Idol attrs
     "idol.name": "Name",
@@ -429,6 +430,7 @@ const translations = {
 
     // Toast
     "toast.copied": "Copiado al portapapeles!",
+    "toast.linkCopied": "¡Enlace copiado! Pega en el chat para compartir",
 
     // Idol attrs
     "idol.name": "Nombre",
@@ -740,6 +742,7 @@ const translations = {
 
     // Toast
     "toast.copied": "클립보드에 복사했습니다!",
+    "toast.linkCopied": "링크 복사됨! 채팅에 붙여넣기 하세요",
 
     // Idol attrs
     "idol.name": "이름",
