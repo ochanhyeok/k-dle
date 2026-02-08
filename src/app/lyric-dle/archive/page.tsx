@@ -7,6 +7,11 @@ export const metadata: Metadata = {
   title: "Lyric-dle Archive — Past Puzzles",
   description: "Browse and play past Lyric-dle puzzles. Revisit previous K-Pop lyrics guessing challenges.",
   alternates: { canonical: "https://k-dle.vercel.app/lyric-dle/archive" },
+  openGraph: {
+    title: "Lyric-dle Archive | K-Dle",
+    description: "Browse and play past Lyric-dle puzzles.",
+    url: "https://k-dle.vercel.app/lyric-dle/archive",
+  },
 };
 
 export default function LyricDleArchivePage() {

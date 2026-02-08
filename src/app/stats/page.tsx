@@ -2,9 +2,14 @@ import type { Metadata } from "next";
 import GlobalStatsContent from "@/components/stats/GlobalStatsContent";
 
 export const metadata: Metadata = {
-  title: "Today's Global Stats — K-Dle",
+  title: "Today's Global Stats",
   description: "See how players around the world performed on today's K-Dle puzzles. Compare win rates, guess distributions, and more across all four game modes.",
   alternates: { canonical: "https://k-dle.vercel.app/stats" },
+  openGraph: {
+    title: "Today's Global Stats | K-Dle",
+    description: "See how players worldwide performed on today's K-Dle puzzles.",
+    url: "https://k-dle.vercel.app/stats",
+  },
 };
 
 export default function Page() {

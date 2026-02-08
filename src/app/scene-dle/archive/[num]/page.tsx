@@ -1,47 +1,23 @@
-"use client";
+import type { Metadata } from "next";
+import ArchiveGame from "./ArchiveGame";
 
-import { use } from "react";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import GameHeader from "@/components/ui/GameHeader";
-import SceneDle from "@/components/scene-dle/SceneDle";
-import GameFooter from "@/components/ui/GameFooter";
-import { getScenePuzzleNumber } from "@/lib/scene-game";
+const SITE_URL = "https://k-dle.vercel.app";
 
-export default function SceneDleArchiveGamePage({ params }: { params: Promise<{ num: string }> }) {
-  const { num: numStr } = use(params);
-  const router = useRouter();
-  const [valid, setValid] = useState<boolean | null>(null);
-  const puzzleNum = parseInt(numStr, 10);
+export async function generateMetadata({ params }: { params: Promise<{ num: string }> }): Promise<Metadata> {
+  const { num } = await params;
+  return {
+    title: `Scene-dle Archive #${num}`,
+    description: `Play past Scene-dle puzzle #${num}. Can you recognize the K-Drama from the scene description?`,
+    alternates: { canonical: `${SITE_URL}/scene-dle/archive/${num}` },
+    openGraph: {
+      title: `Scene-dle Archive #${num} | K-Dle`,
+      description: `Play past Scene-dle puzzle #${num}. Recognize the K-Drama scene!`,
+      url: `${SITE_URL}/scene-dle/archive/${num}`,
+    },
+  };
+}
 
-  useEffect(() => {
-    const today = getScenePuzzleNumber();
-    if (isNaN(puzzleNum) || puzzleNum < 0 || puzzleNum >= today) {
-      router.replace("/scene-dle/archive");
-    } else {
-      setValid(true);
-    }
-  }, [puzzleNum, router]);
-
-  if (valid === null) {
-    return (
-      <div className="min-h-screen flex flex-col">
-        <GameHeader emoji="🎭" title="Scene-dle" subtitle="Archive" />
-        <main className="flex-1 flex items-center justify-center">
-          <div className="text-[var(--color-muted)]">Loading...</div>
-        </main>
-        <GameFooter />
-      </div>
-    );
-  }
-
-  return (
-    <div className="min-h-screen flex flex-col">
-      <GameHeader emoji="🎭" title="Scene-dle" subtitle={`Archive #${puzzleNum}`} />
-      <main className="flex-1">
-        <SceneDle archivePuzzleNumber={puzzleNum} />
-      </main>
-      <GameFooter />
-    </div>
-  );
+export default async function Page({ params }: { params: Promise<{ num: string }> }) {
+  const { num } = await params;
+  return <ArchiveGame num={num} />;
 }

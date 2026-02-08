@@ -7,6 +7,11 @@ export const metadata: Metadata = {
   title: "Idol-dle Archive — Past Puzzles",
   description: "Browse and play past Idol-dle puzzles. Revisit previous K-Pop idol guessing challenges.",
   alternates: { canonical: "https://k-dle.vercel.app/idol-dle/archive" },
+  openGraph: {
+    title: "Idol-dle Archive | K-Dle",
+    description: "Browse and play past Idol-dle puzzles.",
+    url: "https://k-dle.vercel.app/idol-dle/archive",
+  },
 };
 
 export default function IdolDleArchivePage() {

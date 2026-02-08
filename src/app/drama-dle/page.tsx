@@ -14,6 +14,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Drama-dle — Guess the K-Drama | K-Dle",
     description: "Guess the K-Drama from progressive clues. New puzzle daily!",
+    url: "https://k-dle.vercel.app/drama-dle",
+  },
+  twitter: {
+    title: "Drama-dle — Guess the K-Drama | K-Dle",
+    description: "Guess the K-Drama from progressive clues. New puzzle daily!",
   },
 };
 

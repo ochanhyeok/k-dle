@@ -14,6 +14,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Idol-dle — Guess the K-Pop Idol | K-Dle",
     description: "Guess the K-Pop idol from attribute comparisons. New puzzle daily!",
+    url: "https://k-dle.vercel.app/idol-dle",
+  },
+  twitter: {
+    title: "Idol-dle — Guess the K-Pop Idol | K-Dle",
+    description: "Guess the K-Pop idol from attribute comparisons. New puzzle daily!",
   },
 };
 

@@ -7,6 +7,11 @@ export const metadata: Metadata = {
   title: "Scene-dle Archive — Past Puzzles",
   description: "Browse and play past Scene-dle puzzles. Revisit previous K-Drama scene recognition challenges.",
   alternates: { canonical: "https://k-dle.vercel.app/scene-dle/archive" },
+  openGraph: {
+    title: "Scene-dle Archive | K-Dle",
+    description: "Browse and play past Scene-dle puzzles.",
+    url: "https://k-dle.vercel.app/scene-dle/archive",
+  },
 };
 
 export default function SceneDleArchivePage() {

@@ -14,6 +14,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Lyric-dle — Name the K-Pop Song | K-Dle",
     description: "Name the song from translated lyrics. New puzzle daily!",
+    url: "https://k-dle.vercel.app/lyric-dle",
+  },
+  twitter: {
+    title: "Lyric-dle — Name the K-Pop Song | K-Dle",
+    description: "Name the song from translated lyrics. New puzzle daily!",
   },
 };
 
