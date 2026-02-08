@@ -369,6 +369,19 @@ const translations = {
     "party.waitingForPlayers": "Waiting for players to finish...",
     "party.autoRefresh": "Results refresh automatically",
 
+    // Global Stats
+    "globalStats.title": "Today's Global Stats",
+    "globalStats.subtitle": "Live stats from players worldwide",
+    "globalStats.description": "See how players around the world are doing on today's puzzles.",
+    "globalStats.overall": "Overall Today",
+    "globalStats.totalPlays": "Total Plays",
+    "globalStats.activeModes": "Active Modes",
+    "globalStats.noData": "No stats yet today. Be the first to play!",
+    "globalStats.noPlaysYet": "No one has played this mode yet today.",
+    "globalStats.playNow": "Play now",
+    "globalStats.refreshNote": "Stats update in real-time as players complete puzzles.",
+    "globalStats.homeDesc": "See how the world is playing today",
+
     // Archive
     "archive.title": "Archive",
     "archive.subtitle": "Play past puzzles",
@@ -742,6 +755,19 @@ const translations = {
     "party.waitingForPlayers": "Esperando a que los jugadores terminen...",
     "party.autoRefresh": "Los resultados se actualizan automaticamente",
 
+    // Global Stats
+    "globalStats.title": "Estadisticas Globales de Hoy",
+    "globalStats.subtitle": "Estadisticas en vivo de jugadores de todo el mundo",
+    "globalStats.description": "Mira como les va a los jugadores de todo el mundo en los puzzles de hoy.",
+    "globalStats.overall": "Resumen de Hoy",
+    "globalStats.totalPlays": "Partidas Totales",
+    "globalStats.activeModes": "Modos Activos",
+    "globalStats.noData": "Aun no hay estadisticas hoy. Se el primero en jugar!",
+    "globalStats.noPlaysYet": "Nadie ha jugado este modo hoy todavia.",
+    "globalStats.playNow": "Jugar ahora",
+    "globalStats.refreshNote": "Las estadisticas se actualizan en tiempo real.",
+    "globalStats.homeDesc": "Mira como juega el mundo hoy",
+
     // Archive
     "archive.title": "Archivo",
     "archive.subtitle": "Juega puzzles anteriores",
@@ -1114,6 +1140,19 @@ const translations = {
     "party.hostedBy": "{name}님이 만든 방",
     "party.waitingForPlayers": "플레이어들이 끝내기를 기다리는 중...",
     "party.autoRefresh": "결과는 자동으로 새로고침됩니다",
+
+    // Global Stats
+    "globalStats.title": "오늘의 글로벌 통계",
+    "globalStats.subtitle": "전 세계 플레이어 실시간 통계",
+    "globalStats.description": "오늘 전 세계 플레이어들의 퍼즐 결과를 확인하세요.",
+    "globalStats.overall": "오늘의 종합",
+    "globalStats.totalPlays": "총 플레이",
+    "globalStats.activeModes": "활성 모드",
+    "globalStats.noData": "오늘 아직 통계가 없어요. 첫 번째 플레이어가 되어보세요!",
+    "globalStats.noPlaysYet": "아직 아무도 이 모드를 플레이하지 않았어요.",
+    "globalStats.playNow": "지금 플레이",
+    "globalStats.refreshNote": "통계는 플레이어가 퍼즐을 완료할 때 실시간으로 업데이트됩니다.",
+    "globalStats.homeDesc": "오늘 전 세계가 어떻게 플레이하고 있는지 확인",
 
     // Archive
     "archive.title": "아카이브",

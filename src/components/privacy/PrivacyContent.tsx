@@ -1,8 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { useTranslation, type TranslationKey } from "@/lib/i18n";
 import GameFooter from "@/components/ui/GameFooter";
+import ContactModal from "@/components/ui/ContactModal";
+
+const EMAIL = "pon07084@gmail.com";
 
 const SECTIONS: { titleKey: TranslationKey; textKey: TranslationKey }[] = [
   { titleKey: "privacy.s1Title", textKey: "privacy.s1Text" },
@@ -16,8 +20,23 @@ const SECTIONS: { titleKey: TranslationKey; textKey: TranslationKey }[] = [
   { titleKey: "privacy.s9Title", textKey: "privacy.s9Text" },
 ];
 
+function renderWithEmailLink(text: string, onClick: () => void) {
+  if (!text.includes(EMAIL)) return text;
+  const parts = text.split(EMAIL);
+  return (
+    <>
+      {parts[0]}
+      <button onClick={onClick} className="text-[var(--color-accent)] hover:underline">
+        {EMAIL}
+      </button>
+      {parts[1]}
+    </>
+  );
+}
+
 export default function PrivacyContent() {
   const { t } = useTranslation();
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -46,7 +65,7 @@ export default function PrivacyContent() {
             <section key={s.titleKey} className="mb-8">
               <h2 className="text-lg font-semibold mb-3">{t(s.titleKey)}</h2>
               <p className="text-sm text-[var(--color-muted)] leading-relaxed">
-                {t(s.textKey)}
+                {renderWithEmailLink(t(s.textKey), () => setShowModal(true))}
               </p>
             </section>
           ))}
@@ -54,6 +73,7 @@ export default function PrivacyContent() {
       </main>
 
       <GameFooter />
+      <ContactModal show={showModal} onClose={() => setShowModal(false)} />
     </div>
   );
 }

@@ -162,8 +162,31 @@ export default function HomeContent() {
             </div>
           </div>
 
+          {/* Global Stats Link */}
+          <div className="animate-stagger-in mb-3" style={{ animationDelay: "0.35s" }}>
+            <Link
+              href="/stats"
+              className="block rounded-xl border border-emerald-500/30 hover:border-emerald-500/60 bg-gradient-to-b from-emerald-500/10 to-emerald-500/5 p-4 group"
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">📊</span>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-sm">{t("globalStats.title")}</h3>
+                  <p className="text-xs text-[var(--color-muted)]">{t("globalStats.homeDesc")}</p>
+                </div>
+                <svg
+                  width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" strokeWidth="2"
+                  className="text-[var(--color-muted)] opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </div>
+            </Link>
+          </div>
+
           {/* Daily Streak Banner */}
-          <div className="animate-stagger-in" style={{ animationDelay: "0.35s" }}>
+          <div className="animate-stagger-in" style={{ animationDelay: "0.37s" }}>
             <StreakBanner />
           </div>
 
