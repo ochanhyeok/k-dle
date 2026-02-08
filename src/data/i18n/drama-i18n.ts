@@ -29,11 +29,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
       synopsisKeywords: ["좀비", "고등학교", "갇힌"],
       famousQuote: "이런 세상에서, 우리를 인간으로 만드는 건 뭘까?",
     },
-    "my-love-from-the-star": {
-      genre: ["로맨스", "코미디", "판타지"],
-      synopsisKeywords: ["외계인", "여배우", "400년"],
-      famousQuote: "세상에서 가장 무서운 게 뭔지 알아? 그리움이 점점 길어지는 거야.",
-    },
     "extraordinary-attorney-woo": {
       genre: ["드라마", "코미디", "법정"],
       synopsisKeywords: ["자폐", "변호사", "고래"],
@@ -53,11 +48,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
       genre: ["로맨스", "코미디"],
       synopsisKeywords: ["소개팅", "사장", "가짜 신분"],
       famousQuote: "제가 반하게 만들 테니까 각오하세요.",
-    },
-    "reply-1988": {
-      genre: ["코미디", "드라마", "로맨스"],
-      synopsisKeywords: ["동네", "1980년대", "우정"],
-      famousQuote: "잘 가, 나의 청춘. 잘 가, 쌍문동.",
     },
     "the-glory": {
       genre: ["스릴러", "드라마", "복수"],
@@ -188,11 +178,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
     },
 
     // ===== HARD (15) - For enthusiasts =====
-    "misaeng": {
-      genre: ["드라마", "인생"],
-      synopsisKeywords: ["직장 생활", "바둑", "인턴"],
-      famousQuote: "미완성된 삶도 여전히 살 가치가 있는 삶이다.",
-    },
     "my-liberation-notes": {
       genre: ["드라마", "로맨스", "인생"],
       synopsisKeywords: ["통근", "시골 생활", "해방"],
@@ -282,11 +267,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
       synopsisKeywords: ["군인", "의사", "전쟁터"],
       famousQuote: "내가 사는 이유는 당신 때문이야. 당신이 나의 전부야.",
     },
-    "boys-over-flowers": {
-      genre: ["로맨스", "코미디", "드라마"],
-      synopsisKeywords: ["부잣집 아들들", "가난한 소녀", "F4"],
-      famousQuote: "사랑하는 사람을 빼앗기는 기분이 어떤 건지 알아?",
-    },
     "marry-my-husband": {
       genre: ["로맨스", "판타지", "복수"],
       synopsisKeywords: ["시간 역행", "배신", "재혼 복수"],
@@ -309,16 +289,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
     },
 
     // --- MEDIUM (9) ---
-    "secret-garden": {
-      genre: ["로맨스", "코미디", "판타지"],
-      synopsisKeywords: ["영혼 교환", "스턴트우먼", "백화점 대표"],
-      famousQuote: "이게 최선이야? 그럼 내가 갈게.",
-    },
-    "the-heirs": {
-      genre: ["로맨스", "드라마"],
-      synopsisKeywords: ["재벌 후계자", "계급 차이", "고등학교"],
-      famousQuote: "너를 좋아하는 건지, 잃기 싫은 건지, 이제 모르겠어.",
-    },
     "king-the-land": {
       genre: ["로맨스", "코미디"],
       synopsisKeywords: ["호텔", "미소 여왕", "재벌 후계자"],
@@ -344,11 +314,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
       synopsisKeywords: ["소꿉친구", "인생 리셋", "엄마들의 우정"],
       famousQuote: "다 잊은 줄 알았는데, 내 마음은 한 번도 떠난 적이 없었어.",
     },
-    "city-hunter": {
-      genre: ["액션", "로맨스", "스릴러"],
-      synopsisKeywords: ["복수", "청와대", "이중 정체"],
-      famousQuote: "영웅이 되고 싶은 게 아니야. 진실만 원해.",
-    },
     "twinkling-watermelon": {
       genre: ["코미디", "드라마", "판타지"],
       synopsisKeywords: ["시간 여행", "코다", "밴드"],
@@ -356,11 +321,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
     },
 
     // --- HARD (8) ---
-    "healer": {
-      genre: ["액션", "로맨스", "스릴러"],
-      synopsisKeywords: ["야간 배달부", "기자", "해적 방송"],
-      famousQuote: "좋은 사람이 되고 싶은 게 아니야. 그냥 널 지키고 싶어.",
-    },
     "a-shop-for-killers": {
       genre: ["액션", "드라마", "미스터리"],
       synopsisKeywords: ["무기 상점", "암살자 삼촌", "생존"],
@@ -385,11 +345,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
       genre: ["스릴러", "코미디", "범죄"],
       synopsisKeywords: ["가면 스트리머", "외모 집착", "정체성"],
       famousQuote: "가면 뒤에서 그녀는 드디어 자유로웠다. 하지만 자유에는 대가가 따랐다.",
-    },
-    "coffee-prince": {
-      genre: ["로맨스", "코미디", "드라마"],
-      synopsisKeywords: ["성별 위장", "커피숍", "금지된 감정"],
-      famousQuote: "남자든 외계인이든 상관없어. 그냥 너랑 함께하고 싶어.",
     },
     "vagabond": {
       genre: ["액션", "스릴러", "미스터리"],
@@ -740,16 +695,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
       synopsisKeywords: ["대학교", "미스터리한 선배", "조종"],
       famousQuote: "세상에 보여주는 미소가 항상 마음속 미소와 같지는 않아.",
     },
-    "dream-high": {
-      genre: ["로맨스", "코미디", "음악"],
-      synopsisKeywords: ["예술 학교", "K-팝 꿈", "라이벌"],
-      famousQuote: "세상이 작게 꿈꾸라고 해도, 높이 꿈꿔.",
-    },
-    "reply-1997": {
-      genre: ["코미디", "로맨스", "드라마"],
-      synopsisKeywords: ["팬걸", "H.O.T.", "부산"],
-      famousQuote: "첫사랑은 절대 완전히 죽지 않아. 형태만 바뀔 뿐이야.",
-    },
     "river-where-the-moon-rises": {
       genre: ["로맨스", "사극", "액션"],
       synopsisKeywords: ["고구려", "공주 전사", "정치적 음모"],
@@ -800,35 +745,15 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
       synopsisKeywords: ["부활 구슬", "새 외모", "살인 사건"],
       famousQuote: "죽었다가 다시 살아나니 아름다움은 겉껍데기일 뿐이라는 걸 깨달았어.",
     },
-    "kill-me-heal-me": {
-      genre: ["로맨스", "코미디", "드라마"],
-      synopsisKeywords: ["다중 인격", "재벌 후계자", "정신과 의사"],
-      famousQuote: "나는 일곱 명이지만, 전부 당신을 사랑해.",
-    },
     "my-id-is-gangnam-beauty": {
       genre: ["로맨스", "코미디", "드라마"],
       synopsisKeywords: ["성형수술", "대학 생활", "자기 수용"],
       famousQuote: "아름다움은 사라지지만, 맞추려 했던 상처는 영원히 남아.",
     },
-    "oh-my-ghost": {
-      genre: ["로맨스", "코미디", "판타지"],
-      synopsisKeywords: ["귀신 빙의", "소심한 셰프", "처녀 귀신"],
-      famousQuote: "사랑에 빠진 건 귀신이 아니라 나였어, 처음부터.",
-    },
     "lovers-of-the-red-sky": {
       genre: ["로맨스", "사극", "판타지"],
       synopsisKeywords: ["맹인 화가", "봉인된 마왕 왕자", "조선 미술"],
       famousQuote: "눈이 보이지 않아도, 붉은 하늘 아래 내 마음은 오직 당신만 봐.",
-    },
-    "pinocchio": {
-      genre: ["로맨스", "드라마", "코미디"],
-      synopsisKeywords: ["저널리즘", "거짓말하면 딸꾹질", "언론의 진실"],
-      famousQuote: "거짓 없는 세상은 이상적이지만, 진실이 얼마나 고통스러운지 깨닫게 돼.",
-    },
-    "i-hear-your-voice": {
-      genre: ["로맨스", "법정", "판타지"],
-      synopsisKeywords: ["독심술", "국선 변호사", "증인 보호"],
-      famousQuote: "너의 목소리가 들려, 하지만 네 마음은 더 크게 말해.",
     },
     "you-are-my-spring": {
       genre: ["로맨스", "미스터리", "드라마"],
@@ -897,36 +822,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
       synopsisKeywords: ["퇴마", "무당", "빙의된 형사"],
       famousQuote: "악은 노크하지 않아. 이미 안에 들어와서 기다리고 있어.",
     },
-    "white-christmas": {
-      genre: ["스릴러", "미스터리", "드라마"],
-      synopsisKeywords: ["고립된 학교", "익명 편지", "인간 본성"],
-      famousQuote: "괴물은 태어나는 건가, 만들어지는 건가? 그 질문이 겨울 내내 우리를 괴롭혔어.",
-    },
-    "chuno": {
-      genre: ["사극", "액션", "드라마"],
-      synopsisKeywords: ["추노꾼", "조선", "도망 노비"],
-      famousQuote: "자유는 주어지는 게 아니야. 피 묻은 손으로 쟁취해야 해.",
-    },
-    "the-smile-on-my-face": {
-      genre: ["드라마", "범죄", "사극"],
-      synopsisKeywords: ["광주 항쟁", "검사", "조폭"],
-      famousQuote: "역사는 모래처럼 흐른다 — 멈출 수 없고 우리의 고통에 무관심하게.",
-    },
-    "damo": {
-      genre: ["사극", "액션", "로맨스"],
-      synopsisKeywords: ["여형사", "위조 화폐", "조선"],
-      famousQuote: "남자들이 지배하는 세상에서, 그녀는 검을 뽑아 자기만의 운명을 썼다.",
-    },
-    "cruel-city": {
-      genre: ["범죄", "스릴러", "드라마"],
-      synopsisKeywords: ["잠입", "마약왕", "이중 스파이"],
-      famousQuote: "이 무정한 도시에서 신뢰가 가장 비싼 화폐야.",
-    },
-    "bad-guys": {
-      genre: ["액션", "범죄", "스릴러"],
-      synopsisKeywords: ["범죄자 팀", "형사", "자경단"],
-      famousQuote: "최악을 잡으려면 가장 나쁜 녀석들이 네 편에 있어야 해.",
-    },
     "the-fiery-priest": {
       genre: ["액션", "코미디", "범죄"],
       synopsisKeywords: ["열혈 신부", "부패", "정의를 위한 싸움"],
@@ -946,16 +841,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
       genre: ["스릴러", "미스터리", "법정"],
       synopsisKeywords: ["사교계 살인", "변호사", "상류층 범죄"],
       famousQuote: "부자는 감옥에 가지 않아. 진실을 사라지게 만드는 변호사를 고용하지.",
-    },
-    "god-of-war": {
-      genre: ["스릴러", "미스터리", "판타지"],
-      synopsisKeywords: ["14일 타임루프", "딸의 살해", "시간과의 경주"],
-      famousQuote: "신이 14일을 줬어. 매 초를 그녀를 구하는 데 쓸 거야.",
-    },
-    "remembered": {
-      genre: ["법정", "드라마", "스릴러"],
-      synopsisKeywords: ["완전 기억 능력", "억울한 유죄", "알츠하이머"],
-      famousQuote: "나는 전부 기억해 — 모든 세부사항, 모든 불의를. 그리고 그들에게 대가를 치르게 할 거야.",
     },
     "just-between-lovers": {
       genre: ["로맨스", "드라마"],
@@ -997,16 +882,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
       synopsisKeywords: ["무당 저주", "IT 회사", "초자연 복수"],
       famousQuote: "기술은 발전하지만, 저주는 예나 지금이나 치명적이야.",
     },
-    "iris": {
-      genre: ["액션", "스릴러", "로맨스"],
-      synopsisKeywords: ["비밀 요원", "남북 긴장", "배신"],
-      famousQuote: "첩보의 세계에서, 사랑이 가장 위험한 무기야.",
-    },
-    "bridal-mask": {
-      genre: ["액션", "사극", "드라마"],
-      synopsisKeywords: ["일제 강점기", "가면 영웅", "독립 투사"],
-      famousQuote: "가면 뒤에 나는 죽기를 거부하는 민족의 분노다.",
-    },
     "good-manager": {
       genre: ["코미디", "드라마", "비즈니스"],
       synopsisKeywords: ["회계사", "기업 부패", "내부 고발자"],
@@ -1032,11 +907,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
       synopsisKeywords: ["사생아", "재벌 복수", "장기 계획"],
       famousQuote: "돈은 꽃처럼 피지만, 그 뿌리는 항상 어둠 속에 묻혀 있어.",
     },
-    "secret-love-affair": {
-      genre: ["로맨스", "드라마", "음악"],
-      synopsisKeywords: ["피아노 천재", "연상 여자", "예술 재단 스캔들"],
-      famousQuote: "음악이 우리를 만나게 했어. 사회가 우리를 갈라놓으려 했고.",
-    },
   },
 
   es: {
@@ -1061,11 +931,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
       synopsisKeywords: ["zombi", "instituto", "atrapados"],
       famousQuote: "En un mundo como este, ?que nos hace humanos?",
     },
-    "my-love-from-the-star": {
-      genre: ["Romance", "Comedia", "Fantasia"],
-      synopsisKeywords: ["alienigena", "actriz", "400 anos"],
-      famousQuote: "?Sabes que es lo mas aterrador del mundo? Es cuando esos momentos de extranar a alguien se hacen mas largos.",
-    },
     "extraordinary-attorney-woo": {
       genre: ["Drama", "Comedia", "Legal"],
       synopsisKeywords: ["autismo", "abogada", "ballenas"],
@@ -1085,11 +950,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
       genre: ["Romance", "Comedia"],
       synopsisKeywords: ["cita a ciegas", "jefe", "identidad falsa"],
       famousQuote: "Hare que te enamores de mi, asi que preparate.",
-    },
-    "reply-1988": {
-      genre: ["Comedia", "Drama", "Romance"],
-      synopsisKeywords: ["vecindario", "anos 80", "amistad"],
-      famousQuote: "Adios, mi juventud. Adios, Ssangmundong.",
     },
     "the-glory": {
       genre: ["Thriller", "Drama", "Venganza"],
@@ -1220,11 +1080,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
     },
 
     // ===== HARD (15) - For enthusiasts =====
-    "misaeng": {
-      genre: ["Drama", "Vida"],
-      synopsisKeywords: ["vida de oficina", "baduk", "pasante"],
-      famousQuote: "Una vida incompleta sigue siendo una vida que vale la pena vivir.",
-    },
     "my-liberation-notes": {
       genre: ["Drama", "Romance", "Vida"],
       synopsisKeywords: ["viaje al trabajo", "vida rural", "liberacion"],
@@ -1314,11 +1169,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
       synopsisKeywords: ["soldado", "doctora", "zona de guerra"],
       famousQuote: "La razon por la que vivo eres tu. Tu eres mi todo.",
     },
-    "boys-over-flowers": {
-      genre: ["Romance", "Comedia", "Drama"],
-      synopsisKeywords: ["chicos ricos", "chica pobre", "F4"],
-      famousQuote: "?Sabes lo que se siente cuando te arrebatan a la persona que amas?",
-    },
     "marry-my-husband": {
       genre: ["Romance", "Fantasia", "Venganza"],
       synopsisKeywords: ["retroceso en el tiempo", "traicion", "venganza de nueva boda"],
@@ -1341,16 +1191,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
     },
 
     // --- MEDIUM (9) ---
-    "secret-garden": {
-      genre: ["Romance", "Comedia", "Fantasia"],
-      synopsisKeywords: ["intercambio de cuerpos", "doble de accion", "CEO de grandes almacenes"],
-      famousQuote: "?Es lo mejor que puedes hacer? Entonces ire yo hacia ti.",
-    },
-    "the-heirs": {
-      genre: ["Romance", "Drama"],
-      synopsisKeywords: ["heredero chaebol", "division de clases", "instituto"],
-      famousQuote: "?Me gustas? ?O no quiero perderte? Ya no lo se.",
-    },
     "king-the-land": {
       genre: ["Romance", "Comedia"],
       synopsisKeywords: ["hotel", "reina de las sonrisas", "heredero chaebol"],
@@ -1376,11 +1216,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
       synopsisKeywords: ["amigos de la infancia", "reinicio de vida", "amistad de madres"],
       famousQuote: "Pense que habia seguido adelante, pero mi corazon nunca se fue de casa.",
     },
-    "city-hunter": {
-      genre: ["Accion", "Romance", "Thriller"],
-      synopsisKeywords: ["venganza", "Casa Azul", "doble identidad"],
-      famousQuote: "No quiero ser un heroe. Solo quiero la verdad.",
-    },
     "twinkling-watermelon": {
       genre: ["Comedia", "Drama", "Fantasia"],
       synopsisKeywords: ["viaje en el tiempo", "CODA", "banda"],
@@ -1388,11 +1223,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
     },
 
     // --- HARD (8) ---
-    "healer": {
-      genre: ["Accion", "Romance", "Thriller"],
-      synopsisKeywords: ["mensajero nocturno", "periodista", "radio pirata"],
-      famousQuote: "No quiero ser una buena persona. Solo quiero protegerte.",
-    },
     "a-shop-for-killers": {
       genre: ["Accion", "Drama", "Misterio"],
       synopsisKeywords: ["tienda de armas", "tio asesino", "supervivencia"],
@@ -1417,11 +1247,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
       genre: ["Thriller", "Comedia", "Crimen"],
       synopsisKeywords: ["streamer enmascarada", "obsesion con la apariencia", "identidad"],
       famousQuote: "Detras de la mascara, finalmente era libre. Pero la libertad tenia un precio.",
-    },
-    "coffee-prince": {
-      genre: ["Romance", "Comedia", "Drama"],
-      synopsisKeywords: ["disfraz de genero", "cafeteria", "sentimientos prohibidos"],
-      famousQuote: "No me importa si eres hombre o alienigena. Solo quiero estar contigo.",
     },
     "vagabond": {
       genre: ["Accion", "Thriller", "Misterio"],
@@ -1772,16 +1597,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
       synopsisKeywords: ["universidad", "senior misterioso", "manipulacion"],
       famousQuote: "La sonrisa que muestras al mundo no siempre es la que llevas por dentro.",
     },
-    "dream-high": {
-      genre: ["Romance", "Comedia", "Musical"],
-      synopsisKeywords: ["escuela de artes", "sueno de K-pop", "rivalidad"],
-      famousQuote: "Suena en grande, incluso cuando el mundo te dice que suenes en pequeno.",
-    },
-    "reply-1997": {
-      genre: ["Comedia", "Romance", "Drama"],
-      synopsisKeywords: ["fangirl", "H.O.T.", "Busan"],
-      famousQuote: "El primer amor nunca muere realmente. Solo cambia de forma.",
-    },
     "river-where-the-moon-rises": {
       genre: ["Romance", "Historico", "Accion"],
       synopsisKeywords: ["Goguryeo", "princesa guerrera", "intriga politica"],
@@ -1832,35 +1647,15 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
       synopsisKeywords: ["esfera de resurreccion", "nueva apariencia", "caso de asesinato"],
       famousQuote: "Morir y volver me enseno que la belleza es solo superficial.",
     },
-    "kill-me-heal-me": {
-      genre: ["Romance", "Comedia", "Drama"],
-      synopsisKeywords: ["personalidades multiples", "heredero chaebol", "psiquiatra"],
-      famousQuote: "Somos siete, pero todos te amamos.",
-    },
     "my-id-is-gangnam-beauty": {
       genre: ["Romance", "Comedia", "Drama"],
       synopsisKeywords: ["cirugia plastica", "vida universitaria", "autoaceptacion"],
       famousQuote: "La belleza se desvanece, pero las cicatrices de intentar encajar duran para siempre.",
     },
-    "oh-my-ghost": {
-      genre: ["Romance", "Comedia", "Fantasia"],
-      synopsisKeywords: ["posesion fantasmal", "chef timida", "fantasma virgen"],
-      famousQuote: "No fue el fantasma quien se enamoro. Fui yo desde el principio.",
-    },
     "lovers-of-the-red-sky": {
       genre: ["Romance", "Historico", "Fantasia"],
       synopsisKeywords: ["pintora ciega", "principe con demonio sellado", "arte de Joseon"],
       famousQuote: "Incluso ciega, mi corazon solo te ve bajo el cielo rojo.",
-    },
-    "pinocchio": {
-      genre: ["Romance", "Drama", "Comedia"],
-      synopsisKeywords: ["periodismo", "hipo al mentir", "verdad mediatica"],
-      famousQuote: "Un mundo sin mentiras suena ideal, hasta que te das cuenta de lo dolorosa que puede ser la verdad.",
-    },
-    "i-hear-your-voice": {
-      genre: ["Romance", "Legal", "Fantasia"],
-      synopsisKeywords: ["lectura de mentes", "defensora publica", "proteccion de testigos"],
-      famousQuote: "Puedo escuchar tu voz, pero tu corazon habla aun mas fuerte.",
     },
     "you-are-my-spring": {
       genre: ["Romance", "Misterio", "Drama"],
@@ -1929,36 +1724,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
       synopsisKeywords: ["exorcismo", "chaman", "detective poseido"],
       famousQuote: "El mal no toca la puerta. Ya esta dentro, esperando.",
     },
-    "white-christmas": {
-      genre: ["Thriller", "Misterio", "Drama"],
-      synopsisKeywords: ["escuela aislada", "cartas anonimas", "naturaleza humana"],
-      famousQuote: "?Los monstruos nacen o se hacen? Esa pregunta nos atormento todo el invierno.",
-    },
-    "chuno": {
-      genre: ["Historico", "Accion", "Drama"],
-      synopsisKeywords: ["cazador de esclavos", "Joseon", "esclavos fugitivos"],
-      famousQuote: "La libertad no se da. Debe tomarse con manos ensangrentadas.",
-    },
-    "the-smile-on-my-face": {
-      genre: ["Drama", "Crimen", "Historico"],
-      synopsisKeywords: ["Levantamiento de Gwangju", "fiscal", "gangster"],
-      famousQuote: "La historia fluye como la arena — imparable e indiferente a nuestro dolor.",
-    },
-    "damo": {
-      genre: ["Historico", "Accion", "Romance"],
-      synopsisKeywords: ["detective femenina", "monedas falsas", "Joseon"],
-      famousQuote: "En un mundo gobernado por hombres, ella desenvaino su espada y escribio su propio destino.",
-    },
-    "cruel-city": {
-      genre: ["Crimen", "Thriller", "Drama"],
-      synopsisKeywords: ["encubierto", "senor de las drogas", "doble agente"],
-      famousQuote: "En esta ciudad cruel, la confianza es la moneda mas cara.",
-    },
-    "bad-guys": {
-      genre: ["Accion", "Crimen", "Thriller"],
-      synopsisKeywords: ["equipo de criminales", "detective", "justicia vigilante"],
-      famousQuote: "Para atrapar a los peores, necesitas a los mas malos de tu lado.",
-    },
     "the-fiery-priest": {
       genre: ["Accion", "Comedia", "Crimen"],
       synopsisKeywords: ["sacerdote furioso", "corrupcion", "lucha por la justicia"],
@@ -1978,16 +1743,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
       genre: ["Thriller", "Misterio", "Legal"],
       synopsisKeywords: ["asesinato de socialite", "abogada", "crimenes de elite"],
       famousQuote: "Los ricos no van a prision. Contratan abogados que hacen desaparecer la verdad.",
-    },
-    "god-of-war": {
-      genre: ["Thriller", "Misterio", "Fantasia"],
-      synopsisKeywords: ["bucle de 14 dias", "asesinato de la hija", "carrera contra el tiempo"],
-      famousQuote: "Dios me dio 14 dias. Usare cada segundo para salvarla.",
-    },
-    "remembered": {
-      genre: ["Legal", "Drama", "Thriller"],
-      synopsisKeywords: ["memoria eidetica", "condena injusta", "Alzheimer"],
-      famousQuote: "Recuerdo todo — cada detalle, cada injusticia. Y les hare pagar.",
     },
     "just-between-lovers": {
       genre: ["Romance", "Drama"],
@@ -2029,16 +1784,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
       synopsisKeywords: ["maldicion chamanica", "empresa de tecnologia", "venganza sobrenatural"],
       famousQuote: "La tecnologia avanza, pero las maldiciones siguen siendo tan antiguas y mortales como siempre.",
     },
-    "iris": {
-      genre: ["Accion", "Thriller", "Romance"],
-      synopsisKeywords: ["agentes secretos", "tension Norte-Sur", "traicion"],
-      famousQuote: "En el mundo del espionaje, el amor es el arma mas peligrosa.",
-    },
-    "bridal-mask": {
-      genre: ["Accion", "Historico", "Drama"],
-      synopsisKeywords: ["ocupacion japonesa", "heroe enmascarado", "luchador de la resistencia"],
-      famousQuote: "Detras de la mascara, soy la furia de una nacion que se niega a morir.",
-    },
     "good-manager": {
       genre: ["Comedia", "Drama", "Negocios"],
       synopsisKeywords: ["contador", "corrupcion corporativa", "denunciante"],
@@ -2063,11 +1808,6 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
       genre: ["Drama", "Thriller", "Romance"],
       synopsisKeywords: ["hijo ilegitimo", "venganza contra chaebol", "plan a largo plazo"],
       famousQuote: "El dinero florece como una flor, pero sus raices siempre estan enterradas en la oscuridad.",
-    },
-    "secret-love-affair": {
-      genre: ["Romance", "Drama", "Musical"],
-      synopsisKeywords: ["prodigio del piano", "mujer mayor", "escandalo de fundacion artistica"],
-      famousQuote: "La musica nos unio. La sociedad intento separarnos.",
     },
   },
 };

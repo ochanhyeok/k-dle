@@ -19,6 +19,7 @@ import { generateShareCard, type CellResult } from "@/lib/share-image";
 import { recordGameResult, loadUnifiedStats, type UnifiedStats } from "@/lib/unified-stats";
 import { recordDailyResult } from "@/lib/daily-stats";
 import { decodeCompareData, type CompareData } from "@/lib/compare";
+import { submitPartyResult } from "@/lib/party";
 import { useTranslation } from "@/lib/i18n";
 import CountdownTimer from "@/components/ui/CountdownTimer";
 import NextGameBanner from "@/components/ui/NextGameBanner";
@@ -68,6 +69,7 @@ export default function LyricDle({ archivePuzzleNumber }: { archivePuzzleNumber?
   const [stats, setStats] = useState<UnifiedStats | null>(null);
   const [friendResult, setFriendResult] = useState<CompareData | null>(null);
   const [newBadges, setNewBadges] = useState<string[]>([]);
+  const [partyCode, setPartyCode] = useState<string | null>(null);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -103,16 +105,21 @@ export default function LyricDle({ archivePuzzleNumber }: { archivePuzzleNumber?
       setTarget(song);
       setPuzzleNumber(num);
       setStats(loadUnifiedStats());
-      const saved = loadLyricState(num);
-      if (saved) {
-        setGuesses(saved.guesses);
-        setStatus(saved.status);
+      const isParty = !!new URLSearchParams(window.location.search).get("party");
+      if (!isParty) {
+        const saved = loadLyricState(num);
+        if (saved) {
+          setGuesses(saved.guesses);
+          setStatus(saved.status);
+        }
       }
     }
   }, [isArchive, archivePuzzleNumber]);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
+    const party = params.get("party");
+    if (party) setPartyCode(party);
     const r = params.get("r");
     if (r) {
       const data = decodeCompareData(r);
@@ -160,6 +167,11 @@ export default function LyricDle({ archivePuzzleNumber }: { archivePuzzleNumber?
 
     if (isArchive) {
       saveLyricArchiveState(puzzleNumber, newGuesses, newStatus);
+    } else if (partyCode) {
+      if (won || lost) {
+        const name = sessionStorage.getItem("k-dle-party-name") || "Player";
+        submitPartyResult(partyCode, name, won, newGuesses.length);
+      }
     } else {
       saveLyricState(puzzleNumber, newGuesses, newStatus);
       if (won || lost) {

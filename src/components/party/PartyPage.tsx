@@ -241,7 +241,10 @@ export default function PartyPage() {
               {/* Link to play */}
               {party && (
                 <a
-                  href={`/${party.mode}`}
+                  href={`/${party.mode}?party=${partyCode}`}
+                  onClick={() => {
+                    sessionStorage.setItem("k-dle-party-name", hostName || "Player");
+                  }}
                   className="block w-full rounded-lg bg-[var(--color-success)] text-black font-semibold py-3 text-sm text-center"
                 >
                   {t("party.playNow")} →

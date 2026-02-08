@@ -31,6 +31,7 @@ import FandomSelector from "@/components/ui/FandomSelector";
 import FandomLeaderboard from "@/components/ui/FandomLeaderboard";
 import { decodeCompareData, type CompareData } from "@/lib/compare";
 import { getSelectedFandom, recordFandomResult } from "@/lib/fandom";
+import { submitPartyResult } from "@/lib/party";
 import { checkAndAwardBadges } from "@/lib/achievements";
 import AchievementToast from "@/components/ui/AchievementToast";
 import BadgeCollection from "@/components/ui/BadgeCollection";
@@ -56,6 +57,7 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [friendResult, setFriendResult] = useState<CompareData | null>(null);
   const [newBadges, setNewBadges] = useState<string[]>([]);
+  const [partyCode, setPartyCode] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
@@ -90,16 +92,21 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
       setTarget(drama);
       setPuzzleNumber(num);
       setStats(loadUnifiedStats());
-      const saved = loadGameState(num);
-      if (saved) {
-        setGuesses(saved.guesses);
-        setStatus(saved.status);
+      const isParty = !!new URLSearchParams(window.location.search).get("party");
+      if (!isParty) {
+        const saved = loadGameState(num);
+        if (saved) {
+          setGuesses(saved.guesses);
+          setStatus(saved.status);
+        }
       }
     }
   }, [isArchive, archivePuzzleNumber]);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
+    const party = params.get("party");
+    if (party) setPartyCode(party);
     const r = params.get("r");
     if (r) {
       const data = decodeCompareData(r);
@@ -154,6 +161,11 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
 
       if (isArchive) {
         saveArchiveState(puzzleNumber, newGuesses, newStatus);
+      } else if (partyCode) {
+        if (won || lost) {
+          const name = sessionStorage.getItem("k-dle-party-name") || "Player";
+          submitPartyResult(partyCode, name, won, newGuesses.length);
+        }
       } else {
         saveGameState(puzzleNumber, newGuesses, newStatus);
         if (won || lost) {
@@ -167,7 +179,7 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
         }
       }
     },
-    [target, status, guesses, puzzleNumber, allTitles, isArchive]
+    [target, status, guesses, puzzleNumber, allTitles, isArchive, partyCode]
   );
 
   const handleShare = async () => {

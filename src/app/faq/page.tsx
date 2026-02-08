@@ -52,7 +52,7 @@ const FAQ_SCHEMA = {
       name: "How many dramas and songs are in the game?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "K-Dle features 75 K-Dramas across all difficulty levels, 75 K-Pop songs and OSTs, 75 idol profiles, and 75 iconic scene descriptions.",
+        text: "K-Dle features 200 K-Dramas across all difficulty levels, 200 K-Pop songs and OSTs, 200 idol profiles, and 200 iconic scene descriptions.",
       },
     },
     {

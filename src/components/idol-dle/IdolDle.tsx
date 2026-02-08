@@ -31,6 +31,7 @@ import FandomSelector from "@/components/ui/FandomSelector";
 import FandomLeaderboard from "@/components/ui/FandomLeaderboard";
 import { decodeCompareData, type CompareData } from "@/lib/compare";
 import { getSelectedFandom, recordFandomResult } from "@/lib/fandom";
+import { submitPartyResult } from "@/lib/party";
 import { checkAndAwardBadges } from "@/lib/achievements";
 import AchievementToast from "@/components/ui/AchievementToast";
 import BadgeCollection from "@/components/ui/BadgeCollection";
@@ -89,6 +90,7 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [friendResult, setFriendResult] = useState<CompareData | null>(null);
   const [newBadges, setNewBadges] = useState<string[]>([]);
+  const [partyCode, setPartyCode] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
@@ -131,23 +133,28 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
       setTarget(idol);
       setPuzzleNumber(num);
       setStats(loadUnifiedStats());
-      const saved = loadIdolState(num);
-      if (saved && idol) {
-        const restoredRows: CompareRow[] = [];
-        for (const name of saved.guessNames) {
-          const guessIdol = findIdolByName(name);
-          if (guessIdol) {
-            restoredRows.push({ guess: guessIdol, results: compareIdols(guessIdol, idol) });
+      const isParty = !!new URLSearchParams(window.location.search).get("party");
+      if (!isParty) {
+        const saved = loadIdolState(num);
+        if (saved && idol) {
+          const restoredRows: CompareRow[] = [];
+          for (const name of saved.guessNames) {
+            const guessIdol = findIdolByName(name);
+            if (guessIdol) {
+              restoredRows.push({ guess: guessIdol, results: compareIdols(guessIdol, idol) });
+            }
           }
+          setRows(restoredRows);
+          setStatus(saved.status);
         }
-        setRows(restoredRows);
-        setStatus(saved.status);
       }
     }
   }, [isArchive, archivePuzzleNumber]);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
+    const party = params.get("party");
+    if (party) setPartyCode(party);
     const r = params.get("r");
     if (r) {
       const data = decodeCompareData(r);
@@ -194,6 +201,11 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
 
     if (isArchive) {
       saveIdolArchiveState(puzzleNumber, newRows.map((r) => r.guess.name), newStatus);
+    } else if (partyCode) {
+      if (won || lost) {
+        const name = sessionStorage.getItem("k-dle-party-name") || "Player";
+        submitPartyResult(partyCode, name, won, newRows.length);
+      }
     } else {
       saveIdolState(puzzleNumber, newRows.map((r) => r.guess.name), newStatus);
       if (won || lost) {

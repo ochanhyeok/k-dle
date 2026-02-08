@@ -31,14 +31,6 @@ const esData: Record<string, string[]> = {
     "Un experimento fallido de un profesor de ciencias ha convertido a los estudiantes en zombis, y los sobrevivientes están atrapados en los pisos superiores.",
     "Los estudiantes del Instituto Hyosan luchan por sobrevivir a un brote zombi que comenzó en el laboratorio de ciencias de la escuela.",
   ],
-  "my-love-from-the-star-scene": [
-    "Una mujer está sentada junto a la ventana viendo caer la nieve, con antojo de un bocadillo nocturno.",
-    "Declara apasionadamente que una combinación específica de comida es perfecta para el clima nevado.",
-    "La escena tiene lugar en un lujoso apartamento en Gangnam, Seúl.",
-    "La mujer es una famosa actriz de primer nivel conocida por su personalidad dramática.",
-    "Pide pollo frito y cerveza, llamándola la combinación definitiva para un día de nieve.",
-    "La icónica escena del 'chimaek' donde la mayor estrella Hallyu de Corea insiste en comer pollo frito con cerveza mientras contempla la nieve.",
-  ],
   "extraordinary-attorney-woo-scene": [
     "Una joven se detiene nerviosa frente a una puerta giratoria de vidrio, sin poder atravesarla.",
     "Un hombre amable nota su dificultad y le ofrece pasar juntos por la puerta giratoria.",
@@ -70,14 +62,6 @@ const esData: Record<string, string[]> = {
     "La mujer está disfrazada como su mejor amiga adinerada para sabotear la cita.",
     "Resulta que su cita es el CEO de la empresa donde ella realmente trabaja.",
     "Shin Ha-ri va a una cita a ciegas disfrazada de su amiga, solo para descubrir que su cita es su jefe, Kang Tae-mu.",
-  ],
-  "reply-1988-scene": [
-    "Cinco familias comparten comidas y conversaciones a través de las puertas abiertas de un callejón estrecho.",
-    "Los niños corren entre las casas mientras los padres pasan platos de acompañamiento por encima de las paredes.",
-    "El escenario es un callejón de un vecindario muy unido llamado Ssangmundong en Seúl, a finales de los años 80.",
-    "Un chico tímido y callado que es un genio en un juego de mesa observa a una chica alegre desde su ventana.",
-    "Los chicos del vecindario se reúnen en una habitación para ver la televisión, compartir bocadillos y burlarse unos de otros por sus enamoramientos.",
-    "Las cinco familias de Ssangmundong comparten su vida cotidiana en el Seúl de 1988, donde Taek observa en silencio a Deok-sun desde el otro lado del callejón.",
   ],
   "the-glory-scene": [
     "Una chica es sujetada por un grupo mientras algo ardiente es presionado contra su piel.",
@@ -279,14 +263,6 @@ const esData: Record<string, string[]> = {
     "La mujer es una viajera del tiempo de la era moderna, y el príncipe es el temido cuarto príncipe con el rostro marcado.",
     "Hae Soo se arrodilla bajo la lluvia para salvar a la Dama de la Corte Oh, y Wang So, el enmascarado cuarto príncipe, la protege con su capa — el momento en que ella le abre su corazón.",
   ],
-  "misaeng-scene": [
-    "Un joven se sienta solo en su escritorio de oficina a altas horas de la noche, mirando un juego de mesa en sus manos.",
-    "Coloca el juego en su armario y se gira hacia su computadora, eligiendo un nuevo camino.",
-    "El escenario es la oficina de una gran empresa comercial en el distrito financiero de Seúl.",
-    "El joven es un pasante no remunerado que fracasó en convertirse en jugador profesional de un juego de mesa.",
-    "Usa el pensamiento estratégico de sus años estudiando baduk (Go) para navegar el despiadado mundo corporativo.",
-    "Jang Geu-rae, un exaspirante profesional de baduk, guarda su tablero de Go y se compromete a sobrevivir como pasante en la empresa comercial One International.",
-  ],
   "my-liberation-notes-scene": [
     "Una mujer callada se sienta frente a un hombre misterioso y le hace una petición inusual.",
     "Le pide que no la ame, sino que haga algo mucho más poco convencional por ella.",
@@ -423,14 +399,6 @@ const esData: Record<string, string[]> = {
     "Deben navegar un campo minado para salvar a civiles heridos atrapados más allá de la zona de peligro.",
     "El capitán Yoo Si-jin y la doctora Kang Mo-yeon trabajan juntos para despejar minas y rescatar sobrevivientes del terremoto en Uruk.",
   ],
-  "boys-over-flowers-scene": [
-    "Una chica es arrastrada hacia un cuerpo de agua por un grupo de estudiantes como un cruel castigo.",
-    "Emerge jadeando, mientras un chico adinerado observa desde arriba con una expresión conflictiva.",
-    "El escenario es el lujoso campus de un exclusivo instituto privado para los ultraricos.",
-    "La chica es una estudiante becada de familia pobre que se atrevió a enfrentarse a la camarilla más poderosa de la escuela.",
-    "El chico que observa es el líder de un grupo de cuatro herederos imposiblemente ricos y apuestos conocidos por un nombre con temática floral.",
-    "Geum Jan-di es lanzada a la piscina por los seguidores de Gu Jun-pyo en el Instituto Shinhwa, pero su rebeldía captura la atención del líder de los F4.",
-  ],
   "doctor-slump-scene": [
     "Dos adultos exhaustos se sientan en una azotea de noche, compartiendo bebidas y confesando lo perdidos que se sienten en la vida.",
     "Descubren que fueron feroces rivales académicos en la adolescencia, pero ahora ambos están en el punto más bajo.",
@@ -495,14 +463,6 @@ const esData: Record<string, string[]> = {
     "Se estableció en el mundo humano para esperar la reencarnación de la mujer que amó y perdió hace mil años.",
     "Lee Yeon, un zorro de nueve colas convertido en habitante de la ciudad, finalmente se encuentra con Nam Ji-ah, la reencarnación de su amor perdido Ah-eum, mientras su vengativo medio hermano Lee Rang los amenaza a ambos.",
   ],
-  "misaeng-rooftop-scene": [
-    "Un grupo de jóvenes trabajadores exhaustos se encuentra en una azotea, mirando en silencio el horizonte de la ciudad tras otro día aplastante.",
-    "Uno de ellos finalmente rompe el silencio, preguntándose si toda esta lucha vale la pena.",
-    "El escenario es la azotea de un gran edificio de una empresa comercial en el distrito financiero de Yeouido, Seúl.",
-    "Todos son trabajadores temporales y pasantes luchando por conseguir un puesto permanente en la empresa.",
-    "Su solidario jefe de sección es el único superior que los trata como seres humanos en lugar de mano de obra desechable.",
-    "Jang Geu-rae, Ahn Young-yi, Jang Baek-ki y Han Seok-yul comparten su desesperación en la azotea de One International, unidos por las imposibles probabilidades de sobrevivir en la Corea corporativa.",
-  ],
   "chicago-typewriter-scene": [
     "Un famoso escritor se sienta frente a una máquina de escribir antigua y de repente es inundado por recuerdos que no son suyos.",
     "Las visiones lo transportan a un escondite de la resistencia lleno de humo en los años 30, en un país extranjero.",
@@ -510,14 +470,6 @@ const esData: Record<string, string[]> = {
     "El escritor descubre que es la reencarnación de un luchador por la independencia coreana de la ocupación japonesa.",
     "Su editor y una misteriosa fan también son reencarnaciones de sus camaradas de sus vidas pasadas en la resistencia de los años 30.",
     "Han Se-ju descubre que su máquina de escribir antigua lo conecta con su vida pasada como el luchador por la independencia Seo Hwi-young, reuniéndolo con Jeon Seol y Yoo Jin-oh a través de dos vidas.",
-  ],
-  "healer-scene": [
-    "Una figura enmascarada salta entre azoteas de noche, moviéndose con la agilidad de un luchador entrenado.",
-    "Aterriza silenciosamente cerca de un edificio y comienza a vigilar a un objetivo a través de una ventana, guiado por una voz en su auricular.",
-    "El escenario es el paisaje de azoteas iluminadas por neón de Seúl de noche.",
-    "El hombre es un misterioso mensajero nocturno que acepta trabajos peligrosos por dinero, sin revelar jamás su identidad.",
-    "Su última misión lo lleva a una joven reportera que investiga un encubrimiento de hace décadas que involucra a cinco amigos de una emisora de radio pirata.",
-    "Seo Jung-hoo, con nombre clave 'Healer', es un mensajero nocturno del mercado negro que se enamora de la periodista Chae Young-shin mientras descubre la verdad sobre la participación de sus padres en el incidente de la radio pirata de 1992.",
   ],
   "the-smile-has-left-your-eyes-scene": [
     "Un hombre con ojos vacíos se sienta solo en un bar, girando su bebida, irradiando tanto encanto como peligro.",
@@ -550,14 +502,6 @@ const esData: Record<string, string[]> = {
     "Los tres son activistas coreanos por la independencia que usan la escritura como su arma contra el imperio.",
     "Uno de ellos trabaja secretamente como agente doble, y la traición resonará a través de las vidas.",
     "El escritor Seo Hwi-young, la francotiradora Ryu Soo-hyun y el escritor fantasma Shin Yul descubren la traición dentro de su célula de resistencia en la Corea colonial de los años 30, un trauma que perdura en sus vidas reencarnadas.",
-  ],
-  "healer-identity-scene": [
-    "Una mujer presiona su mano contra el rostro de un hombre, desprendiendo una capa de silicona para revelar a alguien completamente diferente debajo.",
-    "Queda sin aliento al reconocer el verdadero rostro oculto bajo el disfraz — es alguien que ya conoce.",
-    "El escenario es una habitación tenuemente iluminada en un pequeño apartamento de Seúl.",
-    "El hombre había estado viviendo una doble vida: un reportero apacible de día y un mensajero enmascarado de noche.",
-    "La mujer es una periodista investigativa cuyos propios padres fueron víctimas de una conspiración política que el hombre ha estado desentrañando.",
-    "Chae Young-shin descubre que su torpe colega Park Bong-soo es en realidad Healer, el legendario mensajero nocturno Seo Jung-hoo, quien la había estado protegiendo en secreto todo el tiempo.",
   ],
   "the-smile-has-left-your-eyes-ending-scene": [
     "Una pareja camina de la mano por una calle tranquila, saboreando un momento de frágil paz.",
@@ -967,14 +911,6 @@ const esData: Record<string, string[]> = {
     "La mujer es una cirujana que juró que nunca se enamoraría de un soldado porque no podría soportar la incertidumbre.",
     "La doctora Kang Mo-yeon besa al capitán Yoo Si-jin en Uruk antes de su peligrosa misión, rompiendo su propia regla de nunca enamorarse de un militar en uno de los momentos románticos más icónicos del K-drama.",
   ],
-  "boys-over-flowers-staircase-scene": [
-    "Un chico adinerado se encuentra en lo alto de una gran escalera, señalando a una chica y declarándole la guerra.",
-    "Pega una tarjeta roja en su casillero, marcándola como el objetivo del acoso de toda la escuela.",
-    "El escenario es el opulento pasillo del Instituto Shinhwa, una escuela para los ultrarricos.",
-    "El chico es el arrogante heredero del mayor conglomerado de Corea, acostumbrado a conseguir todo lo que quiere.",
-    "La chica es la hija de un trabajador de lavandería pobre que se atrevió a enfrentarse a él cuando acosaba a su amigo.",
-    "Gu Jun-pyo emite una tarjeta roja a Geum Jan-di en el Instituto Shinhwa, declarándola objetivo de los F4, pero su negativa a ser intimidada comienza a cautivar al arrogante heredero del chaebol.",
-  ],
   "hellbound-decree-scene": [
     "El rostro de un hombre se contorsiona de terror mientras una aparición fantasmal se materializa ante él, anunciando su hora exacta de muerte.",
     "Una figura resplandeciente y angelical pronuncia el decreto con una voz inexpresiva y luego se desvanece en el aire.",
@@ -1046,22 +982,6 @@ const esData: Record<string, string[]> = {
     "El hombre es un especialista de cine cuyo sobrino murió en un sospechoso accidente aéreo que el gobierno intenta encubrir.",
     "Su investigación en solitario revela una conspiración masiva que involucra traficantes de armas, la agencia de inteligencia y políticos corruptos.",
     "Cha Dal-geon persigue al presunto terrorista por las calles de Tánger, impulsado por la muerte de su sobrino en el accidente del vuelo B357 y una conspiración que alcanza los niveles más altos del gobierno coreano.",
-  ],
-  "secret-garden-scene": [
-    "Un hombre y una mujer se miran horrorizados al darse cuenta de que están atrapados en el cuerpo del otro.",
-    "Él mira sus propias manos — ahora ásperas y callosas — y grita ante el reflejo desconocido en el espejo.",
-    "El escenario es un misterioso restaurante con jardín donde una tormenta mágica hizo que sus almas se intercambiaran.",
-    "El hombre es un arrogante CEO de grandes almacenes horrorizado de estar en el cuerpo de alguien que considera inferior.",
-    "La mujer es una dura especialista de cine igualmente horrorizada de estar atrapada en el cuerpo de un rico vanidoso y pomposo.",
-    "Kim Joo-won y Gil Ra-im descubren que sus cuerpos han sido intercambiados por la lluvia mágica en Secret Garden, el arrogante heredero del chaebol y la intrépida especialista obligados a vivir la vida del otro.",
-  ],
-  "reply-1997-scene": [
-    "Una adolescente grita y llora fuera de un local de conciertos, aferrándose a una pancarta hecha a mano para su grupo de ídolos favorito.",
-    "Su amigo de la infancia está a su lado, completamente desconcertado por la intensidad de su devoción hacia una boy band.",
-    "El escenario son las calles de Busan en 1997, durante la primera generación del fandom de ídolos del K-pop en Corea.",
-    "La chica es la presidenta del club de fans local y ha gastado toda su paga en entradas para conciertos y merchandising.",
-    "El chico junto a ella ha estado enamorado de ella desde la infancia, pero es invisible para ella porque solo tiene ojos para su ídolo.",
-    "Sung Shi-won acampa fuera de un concierto de H.O.T. en el Busan de 1997, gritando por Tony Ahn, mientras su amigo de la infancia Yoon Yoon-jae oculta su amor no correspondido por la chica que solo lo ve como un amigo.",
   ],
   "scarlet-heart-ryeo-rain-scene": [
     "Una mujer aplica maquillaje cuidadosamente en el rostro cicatrizado de un hombre mientras él permanece perfectamente inmóvil, sin apenas respirar.",
@@ -1431,14 +1351,6 @@ const esData: Record<string, string[]> = {
     "A medida que avanza la investigación, la pregunta pasa de '¿lo hizo?' a '¿acaso importa en un sistema diseñado para condenar?'.",
     "Kim Hyun-soo despierta junto a una mujer asesinada sin recuerdo de la noche, y la única persona que lo defenderá es Shin Joong-han, un abogado en apuros cuya investigación revela cómo el sistema de justicia está diseñado en contra del acusado.",
   ],
-  "hello-monster-scene": [
-    "Un perfilador criminal estudia una escena del crimen con una habilidad sobrenatural para reconstruir exactamente lo que sucedió, hasta el estado emocional del asesino.",
-    "Un hombre misterioso lo observa desde detrás de la cinta policial, su expresión una mezcla de admiración y algo más oscuro.",
-    "El escenario es una escena del crimen suburbana donde la policía está desconcertada por un asesinato meticulosamente escenificado.",
-    "El genio del perfilador proviene de una infancia traumática: su padre era un criminólogo que fue asesinado, y su hermano menor desapareció.",
-    "El misterioso observador podría ser su hermano perdido, ahora posiblemente un asesino en serie él mismo.",
-    "Lee Hyun, un genio del perfil criminal, regresa a Corea para encontrar a su hermano desaparecido Min, solo para descubrir que el hombre que acecha en sus escenas del crimen podría ser el hermano perdido, y posiblemente el asesino imitador que está cazando en Hello, Monster.",
-  ],
   "memorist-scene": [
     "Un detective toca la mano de un sospechoso y es inmediatamente inundado con los recuerdos del sospechoso en una cascada desorientadora de imágenes.",
     "Se tambalea hacia atrás, abrumado, pero ahora sabe exactamente qué estaba haciendo el sospechoso en el momento del asesinato.",
@@ -1486,14 +1398,6 @@ const esData: Record<string, string[]> = {
     "El pitcher renunció a un contrato con un equipo de béisbol estadounidense de las grandes ligas para proteger a su hermana de una agresión.",
     "Por un breve momento en el improvisado diamante, los reclusos olvidan que son prisioneros y se convierten en un equipo.",
     "Kim Je-hyeok lanza en el partido de béisbol del patio de la prisión, su lanzamiento rápido de ligas mayores un agridulce recordatorio de la carrera que sacrificó, mientras sus compañeros de prisión experimentan un raro momento de alegría y camaradería.",
-  ],
-  "angry-mom-scene": [
-    "Una mujer de mediana edad con uniforme escolar camina por el pasillo de un instituto, intentando desesperadamente mezclarse con los adolescentes.",
-    "Los estudiantes la miran fijamente: es claramente décadas mayor, pero ella mantiene su cara de póker y marcha hacia la clase.",
-    "El escenario es un instituto donde la corrupción y el acoso han pasado desapercibidos durante años.",
-    "La mujer se matriculó en la escuela de su hija porque la escuela ignoró las quejas de acoso de su hija.",
-    "Fue una legendaria peleadora callejera en su juventud, y los acosadores no tienen idea de a lo que se van a enfrentar.",
-    "Jo Kang-ja, una exlíder de banda, se matricula como estudiante en el instituto de su hija para luchar contra la corrupción y el acoso que la administración se niega a abordar, sus legendarias habilidades de lucha ahora desplegadas contra matones adolescentes en Angry Mom.",
   ],
   "circle-scene": [
     "Un universitario descubre un artefacto alienígena azul en los archivos de investigación secretos de su hermano gemelo.",
