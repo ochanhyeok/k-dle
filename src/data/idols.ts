@@ -1105,4 +1105,381 @@ export const idols: Idol[] = [
     generation: "5th Gen",
     difficulty: "hard",
   },
+
+  // ==========================================================
+  // ===== ADDITIONAL — International Fan Favorites =====
+  // ==========================================================
+
+  // --- EASY (7) ---
+
+  // BLACKPINK (1 more)
+  {
+    id: "jisoo",
+    name: "Jisoo",
+    nameKo: "지수",
+    group: "BLACKPINK",
+    gender: "Female",
+    position: "Lead Vocalist",
+    nationality: "Korean",
+    debutYear: 2016,
+    company: "YG",
+    generation: "3rd Gen",
+    difficulty: "easy",
+  },
+
+  // Stray Kids (1 more)
+  {
+    id: "hyunjin",
+    name: "Hyunjin",
+    nameKo: "현진",
+    group: "Stray Kids",
+    gender: "Male",
+    position: "Main Dancer",
+    nationality: "Korean",
+    debutYear: 2018,
+    company: "JYP",
+    generation: "4th Gen",
+    difficulty: "easy",
+  },
+
+  // Solo
+  {
+    id: "psy",
+    name: "PSY",
+    nameKo: "싸이",
+    group: "Solo",
+    gender: "Male",
+    position: "Main Rapper",
+    nationality: "Korean",
+    debutYear: 2001,
+    company: "P Nation",
+    generation: "2nd Gen",
+    difficulty: "easy",
+  },
+
+  // EXO (1 more)
+  {
+    id: "chanyeol",
+    name: "Chanyeol",
+    nameKo: "찬열",
+    group: "EXO",
+    gender: "Male",
+    position: "Main Rapper",
+    nationality: "Korean",
+    debutYear: 2012,
+    company: "SM",
+    generation: "3rd Gen",
+    difficulty: "easy",
+  },
+
+  // TXT (1 more)
+  {
+    id: "beomgyu",
+    name: "Beomgyu",
+    nameKo: "범규",
+    group: "TXT",
+    gender: "Male",
+    position: "Lead Dancer",
+    nationality: "Korean",
+    debutYear: 2019,
+    company: "HYBE",
+    generation: "4th Gen",
+    difficulty: "easy",
+  },
+
+  // NewJeans (1 more)
+  {
+    id: "danielle",
+    name: "Danielle",
+    nameKo: "다니엘",
+    group: "NewJeans",
+    gender: "Female",
+    position: "Sub Vocalist",
+    nationality: "Australian-Korean",
+    debutYear: 2022,
+    company: "ADOR",
+    generation: "4th Gen",
+    difficulty: "easy",
+  },
+
+  // SEVENTEEN (1 more)
+  {
+    id: "woozi",
+    name: "Woozi",
+    nameKo: "우지",
+    group: "SEVENTEEN",
+    gender: "Male",
+    position: "Lead Vocalist",
+    nationality: "Korean",
+    debutYear: 2015,
+    company: "Pledis",
+    generation: "3rd Gen",
+    difficulty: "easy",
+  },
+
+  // --- MEDIUM (11) ---
+
+  // ATEEZ (1 more)
+  {
+    id: "san",
+    name: "San",
+    nameKo: "산",
+    group: "ATEEZ",
+    gender: "Male",
+    position: "Main Dancer",
+    nationality: "Korean",
+    debutYear: 2018,
+    company: "KQ",
+    generation: "4th Gen",
+    difficulty: "medium",
+  },
+
+  // RIIZE (1 more)
+  {
+    id: "wonbin",
+    name: "Wonbin",
+    nameKo: "원빈",
+    group: "RIIZE",
+    gender: "Male",
+    position: "Visual",
+    nationality: "Korean",
+    debutYear: 2023,
+    company: "SM",
+    generation: "5th Gen",
+    difficulty: "medium",
+  },
+
+  // TXT (1 more)
+  {
+    id: "hueningkai",
+    name: "HueningKai",
+    nameKo: "휴닝카이",
+    group: "TXT",
+    gender: "Male",
+    position: "Sub Vocalist",
+    nationality: "Korean-American",
+    debutYear: 2019,
+    company: "HYBE",
+    generation: "4th Gen",
+    difficulty: "medium",
+  },
+
+  // aespa (2 more)
+  {
+    id: "ningning",
+    name: "Ningning",
+    nameKo: "닝닝",
+    group: "aespa",
+    gender: "Female",
+    position: "Main Vocalist",
+    nationality: "Chinese",
+    debutYear: 2020,
+    company: "SM",
+    generation: "4th Gen",
+    difficulty: "medium",
+  },
+  {
+    id: "giselle",
+    name: "Giselle",
+    nameKo: "지젤",
+    group: "aespa",
+    gender: "Female",
+    position: "Main Rapper",
+    nationality: "Japanese-Korean",
+    debutYear: 2020,
+    company: "SM",
+    generation: "4th Gen",
+    difficulty: "medium",
+  },
+
+  // EXO (2 more)
+  {
+    id: "sehun",
+    name: "Sehun",
+    nameKo: "세훈",
+    group: "EXO",
+    gender: "Male",
+    position: "Lead Dancer",
+    nationality: "Korean",
+    debutYear: 2012,
+    company: "SM",
+    generation: "3rd Gen",
+    difficulty: "medium",
+  },
+  {
+    id: "do",
+    name: "D.O.",
+    nameKo: "디오",
+    group: "EXO",
+    gender: "Male",
+    position: "Main Vocalist",
+    nationality: "Korean",
+    debutYear: 2012,
+    company: "SM",
+    generation: "3rd Gen",
+    difficulty: "medium",
+  },
+
+  // NewJeans (1 more)
+  {
+    id: "haerin",
+    name: "Haerin",
+    nameKo: "해린",
+    group: "NewJeans",
+    gender: "Female",
+    position: "Sub Vocalist",
+    nationality: "Korean",
+    debutYear: 2022,
+    company: "ADOR",
+    generation: "4th Gen",
+    difficulty: "medium",
+  },
+
+  // SEVENTEEN (1 more)
+  {
+    id: "mingyu",
+    name: "Mingyu",
+    nameKo: "민규",
+    group: "SEVENTEEN",
+    gender: "Male",
+    position: "Lead Rapper",
+    nationality: "Korean",
+    debutYear: 2015,
+    company: "Pledis",
+    generation: "3rd Gen",
+    difficulty: "medium",
+  },
+
+  // IVE (1 more)
+  {
+    id: "yujin",
+    name: "Yujin",
+    nameKo: "유진",
+    group: "IVE",
+    gender: "Female",
+    position: "Leader",
+    nationality: "Korean",
+    debutYear: 2021,
+    company: "Starship",
+    generation: "4th Gen",
+    difficulty: "medium",
+  },
+
+  // Stray Kids (1 more)
+  {
+    id: "leeknow",
+    name: "Lee Know",
+    nameKo: "리노",
+    group: "Stray Kids",
+    gender: "Male",
+    position: "Main Dancer",
+    nationality: "Korean",
+    debutYear: 2018,
+    company: "JYP",
+    generation: "4th Gen",
+    difficulty: "medium",
+  },
+
+  // --- HARD (7) ---
+
+  // ATEEZ (3 more)
+  {
+    id: "seonghwa",
+    name: "Seonghwa",
+    nameKo: "성화",
+    group: "ATEEZ",
+    gender: "Male",
+    position: "Lead Dancer",
+    nationality: "Korean",
+    debutYear: 2018,
+    company: "KQ",
+    generation: "4th Gen",
+    difficulty: "hard",
+  },
+  {
+    id: "wooyoung",
+    name: "Wooyoung",
+    nameKo: "우영",
+    group: "ATEEZ",
+    gender: "Male",
+    position: "Main Dancer",
+    nationality: "Korean",
+    debutYear: 2018,
+    company: "KQ",
+    generation: "4th Gen",
+    difficulty: "hard",
+  },
+  {
+    id: "jongho",
+    name: "Jongho",
+    nameKo: "종호",
+    group: "ATEEZ",
+    gender: "Male",
+    position: "Main Vocalist",
+    nationality: "Korean",
+    debutYear: 2018,
+    company: "KQ",
+    generation: "4th Gen",
+    difficulty: "hard",
+  },
+
+  // RIIZE (1 more)
+  {
+    id: "eunseok",
+    name: "Eunseok",
+    nameKo: "은석",
+    group: "RIIZE",
+    gender: "Male",
+    position: "Sub Vocalist",
+    nationality: "Korean",
+    debutYear: 2023,
+    company: "SM",
+    generation: "5th Gen",
+    difficulty: "hard",
+  },
+
+  // MAMAMOO (1 more)
+  {
+    id: "moonbyul",
+    name: "Moonbyul",
+    nameKo: "문별",
+    group: "MAMAMOO",
+    gender: "Female",
+    position: "Main Rapper",
+    nationality: "Korean",
+    debutYear: 2014,
+    company: "RBW",
+    generation: "3rd Gen",
+    difficulty: "hard",
+  },
+
+  // TXT (1 more)
+  {
+    id: "taehyun",
+    name: "Taehyun",
+    nameKo: "태현",
+    group: "TXT",
+    gender: "Male",
+    position: "Sub Vocalist",
+    nationality: "Korean",
+    debutYear: 2019,
+    company: "HYBE",
+    generation: "4th Gen",
+    difficulty: "hard",
+  },
+
+  // Stray Kids (1 more)
+  {
+    id: "han",
+    name: "Han",
+    nameKo: "한",
+    group: "Stray Kids",
+    gender: "Male",
+    position: "Main Rapper",
+    nationality: "Korean",
+    debutYear: 2018,
+    company: "JYP",
+    generation: "4th Gen",
+    difficulty: "hard",
+  },
 ];
