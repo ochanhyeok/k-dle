@@ -40,12 +40,17 @@ export function getLocalVote(mode: string): EmojiReaction | null {
   return localStorage.getItem(getVotedKey(mode)) as EmojiReaction | null;
 }
 
+const VALID_MODES = ["drama", "idol", "lyric", "scene"];
+const VALID_REACTIONS: EmojiReaction[] = ["fire", "hard", "perfect", "skull", "shocked"];
+
 export async function submitEmojiVote(
   mode: string,
   reaction: EmojiReaction
 ): Promise<void> {
   try {
     if (typeof window === "undefined") return;
+    if (!VALID_MODES.includes(mode)) return;
+    if (!VALID_REACTIONS.includes(reaction)) return;
     if (localStorage.getItem(getVotedKey(mode))) return;
 
     const docRef = doc(db, "emoji-votes", getDocId(mode));

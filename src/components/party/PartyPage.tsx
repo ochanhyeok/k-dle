@@ -47,7 +47,7 @@ export default function PartyPage() {
   };
 
   const handleJoin = async () => {
-    if (joinCode.length !== 4) {
+    if (!/^[A-Z0-9]{6}$/.test(joinCode)) {
       setError(t("party.invalidCode"));
       return;
     }
@@ -72,12 +72,13 @@ export default function PartyPage() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const code = params.get("code");
-    if (code && code.length === 4) {
-      setJoinCode(code);
-      getParty(code).then((data) => {
+    if (code && /^[A-Z0-9]{6}$/.test(code.toUpperCase())) {
+      const upperCode = code.toUpperCase();
+      setJoinCode(upperCode);
+      getParty(upperCode).then((data) => {
         if (data) {
           setParty(data);
-          setPartyCode(code);
+          setPartyCode(upperCode);
           setView("room");
         }
       });
@@ -197,16 +198,16 @@ export default function PartyPage() {
                   <input
                     type="text"
                     value={joinCode}
-                    onChange={(e) => { setJoinCode(e.target.value.replace(/\D/g, "").slice(0, 4)); setError(""); }}
-                    placeholder="0000"
-                    maxLength={4}
+                    onChange={(e) => { setJoinCode(e.target.value.replace(/[^A-Za-z0-9]/g, "").toUpperCase().slice(0, 6)); setError(""); }}
+                    placeholder="ABC123"
+                    maxLength={6}
                     className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] px-4 py-3 text-2xl text-center font-mono tracking-[0.5em] placeholder:text-[var(--color-muted)] focus:outline-none focus:border-[var(--color-accent)]"
                   />
                 </div>
 
                 <button
                   onClick={handleJoin}
-                  disabled={joinCode.length !== 4}
+                  disabled={joinCode.length !== 6}
                   className="w-full rounded-lg bg-[var(--color-accent)] text-black font-semibold py-3 text-sm disabled:opacity-50"
                 >
                   {t("party.joinButton")}

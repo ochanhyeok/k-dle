@@ -1,0 +1,65 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // daily-stats: 문서 ID = YYYY-MM-DD_mode
+    match /daily-stats/{docId} {
+      allow read: if true;
+      allow write: if
+        docId.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}_(drama|idol|lyric|scene)$')
+        && request.resource.data.keys().hasOnly(['plays','wins','g1','g2','g3','g4','g5','g6'])
+        && ((!('plays' in request.resource.data)) || request.resource.data.plays is int)
+        && ((!('wins' in request.resource.data)) || request.resource.data.wins is int)
+        && ((!('g1' in request.resource.data)) || request.resource.data.g1 is int)
+        && ((!('g2' in request.resource.data)) || request.resource.data.g2 is int)
+        && ((!('g3' in request.resource.data)) || request.resource.data.g3 is int)
+        && ((!('g4' in request.resource.data)) || request.resource.data.g4 is int)
+        && ((!('g5' in request.resource.data)) || request.resource.data.g5 is int)
+        && ((!('g6' in request.resource.data)) || request.resource.data.g6 is int);
+    }
+
+    // emoji-votes: 문서 ID = YYYY-MM-DD_mode
+    match /emoji-votes/{docId} {
+      allow read: if true;
+      allow write: if
+        docId.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}_(drama|idol|lyric|scene)$')
+        && request.resource.data.keys().hasOnly(['fire','hard','perfect','skull','shocked'])
+        && ((!('fire' in request.resource.data)) || request.resource.data.fire is int)
+        && ((!('hard' in request.resource.data)) || request.resource.data.hard is int)
+        && ((!('perfect' in request.resource.data)) || request.resource.data.perfect is int)
+        && ((!('skull' in request.resource.data)) || request.resource.data.skull is int)
+        && ((!('shocked' in request.resource.data)) || request.resource.data.shocked is int);
+    }
+
+    // fandom-stats: 문서 ID = YYYY-MM-DD_mode
+    match /fandom-stats/{docId} {
+      allow read: if true;
+      allow write: if
+        docId.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}_(drama|idol|lyric|scene)$')
+        && request.resource.data.keys().size() <= 42;
+    }
+
+    // parties: 문서 ID = 6자리 영숫자 대문자
+    match /parties/{code} {
+      allow read: if true;
+      allow create: if
+        code.matches('^[A-Z0-9]{6}$')
+        && request.resource.data.keys().hasAll(['code','mode','puzzleNumber','hostName','createdAt','players'])
+        && request.resource.data.mode in ['drama-dle','idol-dle','lyric-dle','scene-dle']
+        && request.resource.data.hostName is string
+        && request.resource.data.hostName.size() >= 1
+        && request.resource.data.hostName.size() <= 20
+        && request.resource.data.puzzleNumber is int
+        && request.resource.data.createdAt is int;
+      allow update: if
+        code.matches('^[A-Z0-9]{6}$')
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['players'])
+        && request.resource.data.players.keys().size() <= 20;
+    }
+
+    // 나머지 경로 모두 차단
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

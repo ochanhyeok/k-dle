@@ -37,6 +37,8 @@ function getSubmittedKey(mode: GameMode): string {
   return `k-dle-submitted-${mode}-${getTodayKey()}`;
 }
 
+const VALID_MODES: GameMode[] = ["drama", "idol", "lyric", "scene"];
+
 export async function recordDailyResult(
   mode: GameMode,
   won: boolean,
@@ -44,6 +46,8 @@ export async function recordDailyResult(
 ): Promise<void> {
   try {
     if (typeof window === "undefined") return;
+    if (!VALID_MODES.includes(mode)) return;
+    if (!Number.isInteger(guessCount) || guessCount < 1 || guessCount > 6) return;
     if (localStorage.getItem(getSubmittedKey(mode))) return;
 
     const docRef = doc(db, "daily-stats", getDocId(mode));
@@ -53,9 +57,7 @@ export async function recordDailyResult(
     if (won) {
       data.wins = increment(1);
       const guessKey = `g${guessCount}` as keyof DailyStatsData;
-      if (guessCount >= 1 && guessCount <= 6) {
-        data[guessKey] = increment(1);
-      }
+      data[guessKey] = increment(1);
     }
 
     await setDoc(docRef, data, { merge: true });

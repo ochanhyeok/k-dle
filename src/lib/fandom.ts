@@ -60,6 +60,9 @@ function getSubmittedKey(mode: string): string {
   return `k-dle-fandom-submitted-${mode}-${getTodayKey()}`;
 }
 
+const VALID_MODES = ["drama", "idol", "lyric", "scene"];
+const VALID_FANDOM_IDS = FANDOMS.map(f => f.id);
+
 export async function recordFandomResult(
   mode: string,
   fandomId: FandomId,
@@ -68,6 +71,9 @@ export async function recordFandomResult(
 ): Promise<void> {
   try {
     if (typeof window === "undefined") return;
+    if (!VALID_MODES.includes(mode)) return;
+    if (!VALID_FANDOM_IDS.includes(fandomId)) return;
+    if (!Number.isInteger(guessCount) || guessCount < 1 || guessCount > 6) return;
     if (localStorage.getItem(getSubmittedKey(mode))) return;
 
     const docRef = doc(db, "fandom-stats", `${getTodayKey()}_${mode}`);

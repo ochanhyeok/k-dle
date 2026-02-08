@@ -20,9 +20,15 @@ export interface Party {
 }
 
 const PARTY_ID_KEY = "k-dle-party-id";
+const VALID_PARTY_MODES: PartyMode[] = ["drama-dle", "idol-dle", "lyric-dle", "scene-dle"];
+const CODE_CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // I/O/0/1 제외 (혼동 방지)
+const CODE_LENGTH = 6;
+const CODE_REGEX = /^[A-Z0-9]{6}$/;
 
 function generateCode(): string {
-  return String(Math.floor(1000 + Math.random() * 9000));
+  const values = new Uint8Array(CODE_LENGTH);
+  crypto.getRandomValues(values);
+  return Array.from(values, v => CODE_CHARS[v % CODE_CHARS.length]).join("");
 }
 
 function getPlayerId(): string {
@@ -40,12 +46,16 @@ export async function createParty(
   puzzleNumber: number,
   hostName: string
 ): Promise<string> {
+  const trimmed = hostName.trim();
+  if (!VALID_PARTY_MODES.includes(mode)) throw new Error("Invalid mode");
+  if (!trimmed || trimmed.length > 20) throw new Error("Invalid host name");
+
   const code = generateCode();
   const party: Party = {
     code,
     mode,
     puzzleNumber,
-    hostName,
+    hostName: trimmed,
     createdAt: Date.now(),
     players: {},
   };
@@ -71,9 +81,14 @@ export async function submitPartyResult(
   guessCount: number
 ): Promise<void> {
   try {
+    if (!CODE_REGEX.test(code)) return;
+    const trimmedName = playerName.trim();
+    if (!trimmedName || trimmedName.length > 20) return;
+    if (!Number.isInteger(guessCount) || guessCount < 1 || guessCount > 6) return;
+
     const playerId = getPlayerId();
     const playerData: PartyPlayer = {
-      name: playerName,
+      name: trimmedName,
       guessCount,
       won,
       completedAt: Date.now(),
