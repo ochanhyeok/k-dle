@@ -73,6 +73,7 @@ export const metadata: Metadata = {
       "Test your K-Drama and K-Pop knowledge with daily puzzles. Guess dramas, idols, lyrics, and scenes. Share your results!",
     type: "website",
     locale: "en_US",
+    alternateLocale: ["ko_KR", "es_ES"],
     siteName: "K-Dle",
     url: SITE_URL,
   },
@@ -85,6 +86,12 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: SITE_URL,
+    languages: {
+      "en": SITE_URL,
+      "ko": SITE_URL,
+      "es": SITE_URL,
+      "x-default": SITE_URL,
+    },
   },
   category: "games",
 };
@@ -103,6 +110,7 @@ export default function RootLayout({
       "Daily K-Drama and K-Pop guessing game with multiple game modes.",
     applicationCategory: "GameApplication",
     operatingSystem: "Any",
+    inLanguage: ["en", "ko", "es"],
     offers: {
       "@type": "Offer",
       price: "0",
@@ -112,6 +120,18 @@ export default function RootLayout({
       "@type": "Organization",
       name: "K-Dle",
     },
+  };
+
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "K-Dle", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Drama-dle", item: `${SITE_URL}/drama-dle` },
+      { "@type": "ListItem", position: 3, name: "Idol-dle", item: `${SITE_URL}/idol-dle` },
+      { "@type": "ListItem", position: 4, name: "Lyric-dle", item: `${SITE_URL}/lyric-dle` },
+      { "@type": "ListItem", position: 5, name: "Scene-dle", item: `${SITE_URL}/scene-dle` },
+    ],
   };
 
   return (
@@ -138,6 +158,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
         />
       </head>
       <body

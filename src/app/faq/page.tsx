@@ -1,100 +1,111 @@
-"use client";
+import type { Metadata } from "next";
+import FaqContent from "@/components/faq/FaqContent";
 
-import Link from "next/link";
-import { useState } from "react";
-import { useTranslation, type TranslationKey } from "@/lib/i18n";
-import GameFooter from "@/components/ui/GameFooter";
-import ContactModal from "@/components/ui/ContactModal";
+export const metadata: Metadata = {
+  title: "FAQ — Frequently Asked Questions",
+  description: "Find answers to common questions about K-Dle. Learn about game modes, streak system, sharing results, language support, and more.",
+  alternates: { canonical: "https://k-dle.vercel.app/faq" },
+  openGraph: {
+    title: "FAQ | K-Dle",
+    description: "Frequently asked questions about K-Dle, the daily K-Drama & K-Pop guessing game.",
+  },
+};
 
-const FAQ_ITEMS: { q: TranslationKey; a: TranslationKey }[] = [
-  { q: "faq.q1", a: "faq.a1" },
-  { q: "faq.q2", a: "faq.a2" },
-  { q: "faq.q3", a: "faq.a3" },
-  { q: "faq.q4", a: "faq.a4" },
-  { q: "faq.q5", a: "faq.a5" },
-  { q: "faq.q6", a: "faq.a6" },
-  { q: "faq.q7", a: "faq.a7" },
-  { q: "faq.q8", a: "faq.a8" },
-  { q: "faq.q9", a: "faq.a9" },
-  { q: "faq.q10", a: "faq.a10" },
-  { q: "faq.q11", a: "faq.a11" },
-  { q: "faq.q12", a: "faq.a12" },
-  { q: "faq.q13", a: "faq.a13" },
-  { q: "faq.q14", a: "faq.a14" },
-  { q: "faq.q15", a: "faq.a15" },
-];
+const FAQ_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What is K-Dle?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "K-Dle is a free daily puzzle game inspired by Wordle, designed for fans of Korean entertainment. It features four game modes: Drama-dle (guess K-Dramas from clues), Idol-dle (identify K-Pop idols by attributes), Lyric-dle (name songs from translated lyrics), and Scene-dle (recognize dramas from scene descriptions).",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How many tries do I get?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "You get 6 tries for each game mode. Each wrong guess reveals additional clues to help you narrow down the answer.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "When do new puzzles appear?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "New puzzles are available every day at midnight in your local time zone. All four game modes refresh simultaneously.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is K-Dle free to play?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, K-Dle is completely free. No account registration is required. Just visit the website and start playing!",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How many dramas and songs are in the game?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "K-Dle features 75 K-Dramas across all difficulty levels, 75 K-Pop songs and OSTs, 75 idol profiles, and 75 iconic scene descriptions.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can I play in different languages?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes! K-Dle supports English, Spanish, and Korean. You can switch languages using the language selector in the top right corner.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How does the streak system work?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Your daily streak increases each day you play at least one game mode. Play consistently to earn fan ranks: Newcomer, Trainee, Debut, Rising Star, All-Kill, and Hallyu Legend.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can I share my results?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes! After completing a puzzle, click the Share Result button. Your results are shared as emoji grids without revealing the answer.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is my data stored online?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "No. All your game progress, statistics, and streak data are stored locally on your device using browser localStorage. Nothing is sent to any server.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Does K-Dle work on mobile?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, K-Dle is fully responsive and works great on smartphones, tablets, and desktop browsers. You can also add it to your home screen for an app-like experience.",
+      },
+    },
+  ],
+};
 
 export default function FaqPage() {
-  const { t } = useTranslation();
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const [showModal, setShowModal] = useState(false);
-
   return (
-    <div className="min-h-screen flex flex-col">
-      <header className="border-b border-[var(--color-border)] px-4 py-3">
-        <div className="max-w-2xl mx-auto flex items-center gap-3">
-          <Link
-            href="/"
-            className="p-2 -ml-2 rounded-lg hover:bg-[var(--color-card)] transition-colors"
-            aria-label={t("aria.backHome")}
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-              <path d="M19 12H5M12 19l-7-7 7-7" />
-            </svg>
-          </Link>
-          <h1 className="text-lg font-bold tracking-tight">{t("faq.title")}</h1>
-        </div>
-      </header>
-
-      <main className="flex-1 px-4 py-8">
-        <div className="max-w-2xl mx-auto">
-          <div className="text-center mb-10">
-            <div className="text-5xl mb-4">❓</div>
-            <h2 className="text-2xl font-bold mb-3">{t("faq.title")}</h2>
-          </div>
-
-          <div className="space-y-2">
-            {FAQ_ITEMS.map((item, i) => (
-              <div key={i} className="rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] overflow-hidden">
-                <button
-                  onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                  className="w-full text-left px-5 py-4 flex items-center justify-between gap-3 hover:bg-[var(--color-card-hover)] transition-colors"
-                >
-                  <span className="text-sm font-medium">{t(item.q)}</span>
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    className={`shrink-0 text-[var(--color-muted)] transition-transform ${openIndex === i ? "rotate-180" : ""}`}
-                  >
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                </button>
-                {openIndex === i && (
-                  <div className="px-5 pb-4 text-sm text-[var(--color-muted)] leading-relaxed border-t border-[var(--color-border)] pt-3">
-                    {t(item.a)}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-8 text-center">
-            <p className="text-sm text-[var(--color-muted)] mb-2">
-              {t("about.contactText")}{" "}
-              <button onClick={() => setShowModal(true)} className="text-[var(--color-accent)] hover:underline">
-                pon07084@gmail.com
-              </button>
-            </p>
-          </div>
-        </div>
-      </main>
-
-      <GameFooter />
-      <ContactModal show={showModal} onClose={() => setShowModal(false)} />
-    </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_SCHEMA) }}
+      />
+      <FaqContent />
+    </>
   );
 }
