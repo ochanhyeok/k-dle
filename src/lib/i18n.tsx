@@ -105,7 +105,9 @@ const translations = {
     // How to Play
     "help.title": "How to Play",
     "help.intro": "Test your K-Drama & K-Pop knowledge with daily puzzles.",
-    "help.rule1": "You have <strong>6 tries</strong> to guess each puzzle",
+    "help.rule1_pre": "You have ",
+    "help.rule1_bold": "6 tries",
+    "help.rule1_post": " to guess each puzzle",
     "help.rule2": "New puzzles every day at midnight UTC",
     "help.rule3": "Share your results without spoilers",
     "help.rule4": "Build your streak — earn fan ranks!",
@@ -541,7 +543,9 @@ const translations = {
     // How to Play
     "help.title": "Como Jugar",
     "help.intro": "Pon a prueba tu conocimiento de K-Drama y K-Pop con puzzles diarios.",
-    "help.rule1": "Tienes <strong>6 intentos</strong> para adivinar cada puzzle",
+    "help.rule1_pre": "Tienes ",
+    "help.rule1_bold": "6 intentos",
+    "help.rule1_post": " para adivinar cada puzzle",
     "help.rule2": "Nuevos puzzles cada dia a medianoche UTC",
     "help.rule3": "Comparte tus resultados sin spoilers",
     "help.rule4": "Construye tu racha — gana rangos de fan!",
@@ -977,7 +981,9 @@ const translations = {
     // How to Play
     "help.title": "게임 방법",
     "help.intro": "매일 새로운 K-드라마 & K-Pop 퍼즐에 도전하세요.",
-    "help.rule1": "각 퍼즐마다 <strong>6번</strong>의 기회가 있습니다",
+    "help.rule1_pre": "각 퍼즐마다 ",
+    "help.rule1_bold": "6번",
+    "help.rule1_post": "의 기회가 있습니다",
     "help.rule2": "매일 자정(UTC)에 새로운 퍼즐이 나옵니다",
     "help.rule3": "스포일러 없이 결과를 공유하세요",
     "help.rule4": "연속 기록을 쌓아 팬 랭크를 올리세요!",

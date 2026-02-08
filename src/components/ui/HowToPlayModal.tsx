@@ -49,7 +49,7 @@ export default function HowToPlayModal({
         </p>
         <div className="flex items-center gap-3 text-sm">
           <span className="text-[var(--color-success)]">✓</span>
-          <span dangerouslySetInnerHTML={{ __html: t("help.rule1") }} />
+          <span>{t("help.rule1_pre")}<strong>{t("help.rule1_bold")}</strong>{t("help.rule1_post")}</span>
         </div>
         <div className="flex items-center gap-3 text-sm">
           <span className="text-[var(--color-success)]">✓</span>

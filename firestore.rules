@@ -36,7 +36,23 @@ service cloud.firestore {
       allow read: if true;
       allow write: if
         docId.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}_(drama|idol|lyric|scene)$')
-        && request.resource.data.keys().size() <= 42;
+        && request.resource.data.keys().size() <= 42
+        && request.resource.data.keys().hasOnly([
+          'army_plays','army_wins','army_guesses',
+          'blink_plays','blink_wins','blink_guesses',
+          'once_plays','once_wins','once_guesses',
+          'stay_plays','stay_wins','stay_guesses',
+          'carat_plays','carat_wins','carat_guesses',
+          'engene_plays','engene_wins','engene_guesses',
+          'moa_plays','moa_wins','moa_guesses',
+          'atiny_plays','atiny_wins','atiny_guesses',
+          'nctzen_plays','nctzen_wins','nctzen_guesses',
+          'midzy_plays','midzy_wins','midzy_guesses',
+          'fearnot_plays','fearnot_wins','fearnot_guesses',
+          'nswer_plays','nswer_wins','nswer_guesses',
+          'kdrama_plays','kdrama_wins','kdrama_guesses',
+          'casual_plays','casual_wins','casual_guesses'
+        ]);
     }
 
     // parties: 문서 ID = 6자리 영숫자 대문자
