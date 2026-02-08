@@ -31,6 +31,7 @@ export default function ChallengeButton({ mode, puzzleNumber, guessCount, won }:
     }
     await navigator.clipboard.writeText(shareText);
     setCopied(true);
+    localStorage.setItem("k-dle-challenge-shared", "1");
     setTimeout(() => setCopied(false), 2000);
   };
 

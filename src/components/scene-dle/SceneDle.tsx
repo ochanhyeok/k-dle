@@ -29,6 +29,9 @@ import ChallengeButton from "@/components/ui/ChallengeButton";
 import FandomSelector from "@/components/ui/FandomSelector";
 import FandomLeaderboard from "@/components/ui/FandomLeaderboard";
 import { getSelectedFandom, recordFandomResult } from "@/lib/fandom";
+import { checkAndAwardBadges } from "@/lib/achievements";
+import AchievementToast from "@/components/ui/AchievementToast";
+import BadgeCollection from "@/components/ui/BadgeCollection";
 
 const MAX_GUESSES = 6;
 const STORAGE_KEY = "k-dle-scene-state";
@@ -64,6 +67,7 @@ export default function SceneDle({ archivePuzzleNumber }: { archivePuzzleNumber?
   const [shakeInput, setShakeInput] = useState(false);
   const [stats, setStats] = useState<UnifiedStats | null>(null);
   const [friendResult, setFriendResult] = useState<CompareData | null>(null);
+  const [newBadges, setNewBadges] = useState<string[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -164,6 +168,8 @@ export default function SceneDle({ archivePuzzleNumber }: { archivePuzzleNumber?
         recordDailyResult("scene", won, newGuesses.length);
         const fandom = getSelectedFandom();
         if (fandom) recordFandomResult("scene", fandom, won, newGuesses.length);
+          const badges = checkAndAwardBadges();
+          if (badges.length > 0) setNewBadges(badges);
       }
     }
   };
@@ -409,6 +415,7 @@ export default function SceneDle({ archivePuzzleNumber }: { archivePuzzleNumber?
           {!isArchive && <EmojiVoting mode="scene" />}
           {!isArchive && <FandomSelector />}
           {!isArchive && <FandomLeaderboard mode="scene" />}
+          {!isArchive && <BadgeCollection inline />}
           {isArchive ? (
             <Link
               href="/scene-dle/archive"
@@ -435,6 +442,9 @@ export default function SceneDle({ archivePuzzleNumber }: { archivePuzzleNumber?
 
       {!isArchive && status !== "playing" && <NextGameBanner currentMode="scene-dle" />}
       <Toast message={toastMsg} show={showToast} onClose={() => setShowToast(false)} />
+      {newBadges.length > 0 && (
+        <AchievementToast badgeIds={newBadges} onDone={() => setNewBadges([])} />
+      )}
     </div>
   );
 }

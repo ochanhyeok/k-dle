@@ -31,6 +31,9 @@ import FandomSelector from "@/components/ui/FandomSelector";
 import FandomLeaderboard from "@/components/ui/FandomLeaderboard";
 import { decodeCompareData, type CompareData } from "@/lib/compare";
 import { getSelectedFandom, recordFandomResult } from "@/lib/fandom";
+import { checkAndAwardBadges } from "@/lib/achievements";
+import AchievementToast from "@/components/ui/AchievementToast";
+import BadgeCollection from "@/components/ui/BadgeCollection";
 
 const MAX_GUESSES = 6;
 
@@ -52,6 +55,7 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
   const [shakeInput, setShakeInput] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [friendResult, setFriendResult] = useState<CompareData | null>(null);
+  const [newBadges, setNewBadges] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
@@ -158,6 +162,8 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
           recordDailyResult("drama", won, newGuesses.length);
           const fandom = getSelectedFandom();
           if (fandom) recordFandomResult("drama", fandom, won, newGuesses.length);
+          const badges = checkAndAwardBadges();
+          if (badges.length > 0) setNewBadges(badges);
         }
       }
     },
@@ -449,6 +455,7 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
           {!isArchive && <EmojiVoting mode="drama" />}
           {!isArchive && <FandomSelector />}
           {!isArchive && <FandomLeaderboard mode="drama" />}
+          {!isArchive && <BadgeCollection inline />}
           {isArchive ? (
             <Link
               href="/drama-dle/archive"
@@ -484,6 +491,9 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
       {/* Next Game */}
       {!isArchive && status !== "playing" && <NextGameBanner currentMode="drama-dle" />}
       <Toast message={toastMsg} show={showToast} onClose={() => setShowToast(false)} />
+      {newBadges.length > 0 && (
+        <AchievementToast badgeIds={newBadges} onDone={() => setNewBadges([])} />
+      )}
     </div>
   );
 }

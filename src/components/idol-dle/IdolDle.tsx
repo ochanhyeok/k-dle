@@ -31,6 +31,9 @@ import FandomSelector from "@/components/ui/FandomSelector";
 import FandomLeaderboard from "@/components/ui/FandomLeaderboard";
 import { decodeCompareData, type CompareData } from "@/lib/compare";
 import { getSelectedFandom, recordFandomResult } from "@/lib/fandom";
+import { checkAndAwardBadges } from "@/lib/achievements";
+import AchievementToast from "@/components/ui/AchievementToast";
+import BadgeCollection from "@/components/ui/BadgeCollection";
 
 const MAX_GUESSES = 6;
 const STORAGE_KEY = "k-dle-idol-state";
@@ -85,6 +88,7 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
   const [stats, setStats] = useState<UnifiedStats | null>(null);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [friendResult, setFriendResult] = useState<CompareData | null>(null);
+  const [newBadges, setNewBadges] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
@@ -198,6 +202,8 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
         recordDailyResult("idol", won, newRows.length);
         const fandom = getSelectedFandom();
         if (fandom) recordFandomResult("idol", fandom, won, newRows.length);
+          const badges = checkAndAwardBadges();
+          if (badges.length > 0) setNewBadges(badges);
       }
     }
   };
@@ -474,6 +480,7 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
           {!isArchive && <EmojiVoting mode="idol" />}
           {!isArchive && <FandomSelector />}
           {!isArchive && <FandomLeaderboard mode="idol" />}
+          {!isArchive && <BadgeCollection inline />}
           {isArchive ? (
             <Link
               href="/idol-dle/archive"
@@ -500,6 +507,9 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
 
       {!isArchive && status !== "playing" && <NextGameBanner currentMode="idol-dle" />}
       <Toast message={toastMsg} show={showToast} onClose={() => setShowToast(false)} />
+      {newBadges.length > 0 && (
+        <AchievementToast badgeIds={newBadges} onDone={() => setNewBadges([])} />
+      )}
     </div>
   );
 }
