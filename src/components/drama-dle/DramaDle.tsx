@@ -25,7 +25,12 @@ import CountdownTimer from "@/components/ui/CountdownTimer";
 import NextGameBanner from "@/components/ui/NextGameBanner";
 import DailyStatsCard from "@/components/ui/DailyStatsCard";
 import Toast from "@/components/ui/Toast";
+import EmojiVoting from "@/components/ui/EmojiVoting";
+import ChallengeButton from "@/components/ui/ChallengeButton";
+import FandomSelector from "@/components/ui/FandomSelector";
+import FandomLeaderboard from "@/components/ui/FandomLeaderboard";
 import { decodeCompareData, type CompareData } from "@/lib/compare";
+import { getSelectedFandom, recordFandomResult } from "@/lib/fandom";
 
 const MAX_GUESSES = 6;
 
@@ -151,6 +156,8 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
           const newStats = recordGameResult(won, newGuesses.length);
           setStats(newStats);
           recordDailyResult("drama", won, newGuesses.length);
+          const fandom = getSelectedFandom();
+          if (fandom) recordFandomResult("drama", fandom, won, newGuesses.length);
         }
       }
     },
@@ -212,6 +219,18 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
 
   return (
     <div className="max-w-lg mx-auto px-4 py-6">
+      {/* Challenge Banner */}
+      {friendResult && status === "playing" && (
+        <div className="mb-4 rounded-lg border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/10 px-4 py-3 text-center animate-slide-up">
+          <p className="text-sm font-medium text-[var(--color-accent)]">
+            {t("challenge.banner")}
+          </p>
+          <p className="text-xs text-[var(--color-muted)] mt-1">
+            {friendResult.won ? t("challenge.friendSolved", { n: friendResult.guessCount }) : t("challenge.friendFailed")}
+          </p>
+        </div>
+      )}
+
       {/* Puzzle Info */}
       <div className="text-center mb-6">
         <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-1">
@@ -403,6 +422,9 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
           >
             {t("result.shareResult")} 📋
           </button>
+          {!isArchive && (
+            <ChallengeButton mode="drama-dle" puzzleNumber={puzzleNumber} guessCount={guesses.length} won={status === "won"} />
+          )}
           {!isArchive && friendResult && friendResult.puzzleNum === puzzleNumber && (
             <div className="mt-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-4">
               <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-3 text-center">
@@ -424,6 +446,9 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
               </div>
             </div>
           )}
+          {!isArchive && <EmojiVoting mode="drama" />}
+          {!isArchive && <FandomSelector />}
+          {!isArchive && <FandomLeaderboard mode="drama" />}
           {isArchive ? (
             <Link
               href="/drama-dle/archive"
@@ -433,7 +458,7 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
             </Link>
           ) : (
             <>
-              <DailyStatsCard mode="drama" />
+              <DailyStatsCard mode="drama" userGuessCount={guesses.length} userWon={status === "won"} />
               <CountdownTimer />
             </>
           )}

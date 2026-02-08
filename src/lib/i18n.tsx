@@ -318,6 +318,57 @@ const translations = {
     "about.techTitle": "Built With Care",
     "about.techText": "K-Dle is built with modern web technologies for a fast, smooth experience on any device. No downloads required — just visit and play. Your progress is saved automatically in your browser.",
 
+    // Emoji Voting
+    "emoji.title": "How was this puzzle?",
+    "emoji.totalVotes": "{n} votes",
+
+    // Challenge
+    "challenge.button": "Challenge a Friend",
+    "challenge.banner": "A friend challenged you!",
+    "challenge.friendSolved": "They solved it in {n} tries. Can you beat them?",
+    "challenge.friendFailed": "They couldn't solve it. Can you?",
+    "challenge.message": "I challenge you to {mode} #{n}! Can you beat my score?",
+
+    // Daily Stats Percentile
+    "daily.percentile": "You solved it faster than {n}% of players!",
+
+    // Fandom
+    "fandom.yourFandom": "Your fandom",
+    "fandom.change": "Change",
+    "fandom.selectPrompt": "Select your fandom to join Fandom Battle!",
+    "fandom.selectTitle": "Choose Your Fandom",
+    "fandom.loading": "Loading fandom stats...",
+    "fandom.leaderboardTitle": "Fandom Battle — Today's Ranking",
+    "fandom.plays": "plays",
+
+    // Party Mode
+    "party.title": "Party Mode",
+    "party.subtitle": "Play with friends",
+    "party.homeDesc": "Create a room and compete with friends in real-time",
+    "party.description": "Create a party room, share the code with friends, and compete to see who knows K-Drama & K-Pop best!",
+    "party.createRoom": "Create a Room",
+    "party.createDesc": "Pick a game mode and invite your friends",
+    "party.joinRoom": "Join a Room",
+    "party.joinDesc": "Enter a 4-digit code from your friend",
+    "party.back": "Back",
+    "party.yourName": "Your Name",
+    "party.namePlaceholder": "Enter your name...",
+    "party.selectMode": "Game Mode",
+    "party.createButton": "Create Party",
+    "party.createError": "Failed to create party. Please try again.",
+    "party.enterCode": "Room Code",
+    "party.invalidCode": "Please enter a 4-digit code",
+    "party.joinButton": "Join Party",
+    "party.notFound": "Party not found. Check the code and try again.",
+    "party.roomCode": "Room Code",
+    "party.shareCode": "Share Invite Link",
+    "party.inviteText": "Join my K-Dle party! Room code: {code}",
+    "party.playNow": "Play Now",
+    "party.room": "Party Room",
+    "party.hostedBy": "Hosted by {name}",
+    "party.waitingForPlayers": "Waiting for players to finish...",
+    "party.autoRefresh": "Results refresh automatically",
+
     // Archive
     "archive.title": "Archive",
     "archive.subtitle": "Play past puzzles",
@@ -640,6 +691,57 @@ const translations = {
     "about.techTitle": "Hecho con Cuidado",
     "about.techText": "K-Dle esta construido con tecnologias web modernas para una experiencia rapida y fluida en cualquier dispositivo. Sin descargas necesarias — solo visita y juega. Tu progreso se guarda automaticamente en tu navegador.",
 
+    // Emoji Voting
+    "emoji.title": "Que te parecio este puzzle?",
+    "emoji.totalVotes": "{n} votos",
+
+    // Challenge
+    "challenge.button": "Desafiar a un Amigo",
+    "challenge.banner": "Un amigo te desafio!",
+    "challenge.friendSolved": "Lo resolvio en {n} intentos. Puedes ganarle?",
+    "challenge.friendFailed": "No pudo resolverlo. Puedes tu?",
+    "challenge.message": "Te desafio en {mode} #{n}! Puedes superar mi puntaje?",
+
+    // Daily Stats Percentile
+    "daily.percentile": "Lo resolviste mas rapido que el {n}% de los jugadores!",
+
+    // Fandom
+    "fandom.yourFandom": "Tu fandom",
+    "fandom.change": "Cambiar",
+    "fandom.selectPrompt": "Selecciona tu fandom para la Batalla de Fandoms!",
+    "fandom.selectTitle": "Elige Tu Fandom",
+    "fandom.loading": "Cargando estadisticas de fandom...",
+    "fandom.leaderboardTitle": "Batalla de Fandoms — Ranking de Hoy",
+    "fandom.plays": "jugadas",
+
+    // Party Mode
+    "party.title": "Modo Fiesta",
+    "party.subtitle": "Juega con amigos",
+    "party.homeDesc": "Crea una sala y compite con amigos en tiempo real",
+    "party.description": "Crea una sala de fiesta, comparte el codigo con amigos y compite para ver quien sabe mas de K-Drama y K-Pop!",
+    "party.createRoom": "Crear Sala",
+    "party.createDesc": "Elige un modo de juego e invita a tus amigos",
+    "party.joinRoom": "Unirse a Sala",
+    "party.joinDesc": "Ingresa el codigo de 4 digitos de tu amigo",
+    "party.back": "Atras",
+    "party.yourName": "Tu Nombre",
+    "party.namePlaceholder": "Ingresa tu nombre...",
+    "party.selectMode": "Modo de Juego",
+    "party.createButton": "Crear Fiesta",
+    "party.createError": "Error al crear la fiesta. Intentalo de nuevo.",
+    "party.enterCode": "Codigo de Sala",
+    "party.invalidCode": "Ingresa un codigo de 4 digitos",
+    "party.joinButton": "Unirse",
+    "party.notFound": "Fiesta no encontrada. Verifica el codigo e intentalo de nuevo.",
+    "party.roomCode": "Codigo de Sala",
+    "party.shareCode": "Compartir Enlace de Invitacion",
+    "party.inviteText": "Unete a mi fiesta K-Dle! Codigo: {code}",
+    "party.playNow": "Jugar Ahora",
+    "party.room": "Sala de Fiesta",
+    "party.hostedBy": "Creada por {name}",
+    "party.waitingForPlayers": "Esperando a que los jugadores terminen...",
+    "party.autoRefresh": "Los resultados se actualizan automaticamente",
+
     // Archive
     "archive.title": "Archivo",
     "archive.subtitle": "Juega puzzles anteriores",
@@ -961,6 +1063,57 @@ const translations = {
     "about.communityText": "일일 결과를 친구들과 공유하고 누가 K-드라마와 K-Pop을 가장 잘 아는지 겨뤄보세요. 연속 기록을 쌓고, 팬 랭크를 획득하고, 한류 레전드가 되세요. 매일 자정에 새로운 퍼즐 — 연속 기록을 놓치지 마세요!",
     "about.techTitle": "정성을 담아 만들었습니다",
     "about.techText": "K-Dle은 모든 기기에서 빠르고 부드러운 경험을 위해 최신 웹 기술로 제작되었습니다. 다운로드 없이 방문하면 바로 플레이할 수 있습니다. 진행 상황은 브라우저에 자동 저장됩니다.",
+
+    // Emoji Voting
+    "emoji.title": "이 퍼즐 어땠나요?",
+    "emoji.totalVotes": "{n}표",
+
+    // Challenge
+    "challenge.button": "친구에게 도전장 보내기",
+    "challenge.banner": "친구가 도전장을 보냈어요!",
+    "challenge.friendSolved": "친구는 {n}번 만에 맞혔어요. 이길 수 있나요?",
+    "challenge.friendFailed": "친구는 못 맞혔어요. 당신은 맞힐 수 있나요?",
+    "challenge.message": "{mode} #{n}에 도전해보세요! 내 점수를 이길 수 있나요?",
+
+    // Daily Stats Percentile
+    "daily.percentile": "플레이어의 {n}%보다 빠르게 맞혔어요!",
+
+    // Fandom
+    "fandom.yourFandom": "내 팬덤",
+    "fandom.change": "변경",
+    "fandom.selectPrompt": "팬덤을 선택하고 팬덤 대결에 참여하세요!",
+    "fandom.selectTitle": "팬덤 선택",
+    "fandom.loading": "팬덤 통계 로딩 중...",
+    "fandom.leaderboardTitle": "팬덤 대결 — 오늘의 순위",
+    "fandom.plays": "참여",
+
+    // Party Mode
+    "party.title": "파티 모드",
+    "party.subtitle": "친구와 함께 플레이",
+    "party.homeDesc": "방을 만들고 친구들과 실시간으로 경쟁하세요",
+    "party.description": "파티 방을 만들고, 코드를 친구에게 공유하고, 누가 K-드라마 & K-Pop을 가장 잘 아는지 겨뤄보세요!",
+    "party.createRoom": "방 만들기",
+    "party.createDesc": "게임 모드를 선택하고 친구를 초대하세요",
+    "party.joinRoom": "방 참가하기",
+    "party.joinDesc": "친구에게 받은 4자리 코드를 입력하세요",
+    "party.back": "뒤로",
+    "party.yourName": "이름",
+    "party.namePlaceholder": "이름을 입력하세요...",
+    "party.selectMode": "게임 모드",
+    "party.createButton": "파티 만들기",
+    "party.createError": "파티 생성에 실패했습니다. 다시 시도해주세요.",
+    "party.enterCode": "방 코드",
+    "party.invalidCode": "4자리 코드를 입력해주세요",
+    "party.joinButton": "참가하기",
+    "party.notFound": "파티를 찾을 수 없습니다. 코드를 확인하고 다시 시도해주세요.",
+    "party.roomCode": "방 코드",
+    "party.shareCode": "초대 링크 공유",
+    "party.inviteText": "K-Dle 파티에 참여하세요! 방 코드: {code}",
+    "party.playNow": "지금 플레이",
+    "party.room": "파티 방",
+    "party.hostedBy": "{name}님이 만든 방",
+    "party.waitingForPlayers": "플레이어들이 끝내기를 기다리는 중...",
+    "party.autoRefresh": "결과는 자동으로 새로고침됩니다",
 
     // Archive
     "archive.title": "아카이브",

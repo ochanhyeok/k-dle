@@ -24,6 +24,11 @@ import CountdownTimer from "@/components/ui/CountdownTimer";
 import NextGameBanner from "@/components/ui/NextGameBanner";
 import DailyStatsCard from "@/components/ui/DailyStatsCard";
 import Toast from "@/components/ui/Toast";
+import EmojiVoting from "@/components/ui/EmojiVoting";
+import ChallengeButton from "@/components/ui/ChallengeButton";
+import FandomSelector from "@/components/ui/FandomSelector";
+import FandomLeaderboard from "@/components/ui/FandomLeaderboard";
+import { getSelectedFandom, recordFandomResult } from "@/lib/fandom";
 
 const MAX_GUESSES = 6;
 const STORAGE_KEY = "k-dle-lyric-state";
@@ -157,6 +162,8 @@ export default function LyricDle({ archivePuzzleNumber }: { archivePuzzleNumber?
         const newStats = recordGameResult(won, newGuesses.length);
         setStats(newStats);
         recordDailyResult("lyric", won, newGuesses.length);
+        const fandom = getSelectedFandom();
+        if (fandom) recordFandomResult("lyric", fandom, won, newGuesses.length);
       }
     }
   };
@@ -212,6 +219,18 @@ export default function LyricDle({ archivePuzzleNumber }: { archivePuzzleNumber?
 
   return (
     <div className="max-w-lg mx-auto px-4 py-6">
+      {/* Challenge Banner */}
+      {friendResult && status === "playing" && (
+        <div className="mb-4 rounded-lg border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/10 px-4 py-3 text-center animate-slide-up">
+          <p className="text-sm font-medium text-[var(--color-accent)]">
+            {t("challenge.banner")}
+          </p>
+          <p className="text-xs text-[var(--color-muted)] mt-1">
+            {friendResult.won ? t("challenge.friendSolved", { n: friendResult.guessCount }) : t("challenge.friendFailed")}
+          </p>
+        </div>
+      )}
+
       <div className="text-center mb-6">
         <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-1">
           Lyric-dle #{puzzleNumber}
@@ -373,6 +392,9 @@ export default function LyricDle({ archivePuzzleNumber }: { archivePuzzleNumber?
           <button onClick={handleShare} className="cta-btn mt-2 w-full rounded-lg bg-[var(--color-success)] text-black font-semibold py-3 text-sm">
             {t("result.shareResult")} 📋
           </button>
+          {!isArchive && (
+            <ChallengeButton mode="lyric-dle" puzzleNumber={puzzleNumber} guessCount={guesses.length} won={status === "won"} />
+          )}
           {!isArchive && friendResult && friendResult.puzzleNum === puzzleNumber && (
             <div className="mt-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-4">
               <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-3 text-center">
@@ -394,6 +416,9 @@ export default function LyricDle({ archivePuzzleNumber }: { archivePuzzleNumber?
               </div>
             </div>
           )}
+          {!isArchive && <EmojiVoting mode="lyric" />}
+          {!isArchive && <FandomSelector />}
+          {!isArchive && <FandomLeaderboard mode="lyric" />}
           {isArchive ? (
             <Link
               href="/lyric-dle/archive"
@@ -403,7 +428,7 @@ export default function LyricDle({ archivePuzzleNumber }: { archivePuzzleNumber?
             </Link>
           ) : (
             <>
-              <DailyStatsCard mode="lyric" />
+              <DailyStatsCard mode="lyric" userGuessCount={guesses.length} userWon={status === "won"} />
               <CountdownTimer />
             </>
           )}
