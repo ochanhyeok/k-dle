@@ -45,6 +45,7 @@ export const lyrics: LyricSong[] = [
     ],
     type: "K-Pop",
     difficulty: "easy",
+    youtubeId: "ioNng23DkIM",
   },
   {
     id: "lovesick-girls",
@@ -61,6 +62,7 @@ export const lyrics: LyricSong[] = [
     ],
     type: "K-Pop",
     difficulty: "easy",
+    youtubeId: "dyRsYk0LyA8",
   },
   {
     id: "boy-with-luv",
@@ -78,6 +80,7 @@ export const lyrics: LyricSong[] = [
     ],
     type: "K-Pop",
     difficulty: "easy",
+    youtubeId: "XsX3ATc3FbA",
   },
   {
     id: "kill-this-love",
@@ -94,6 +97,7 @@ export const lyrics: LyricSong[] = [
     ],
     type: "K-Pop",
     difficulty: "easy",
+    youtubeId: "2S24-y0Ij3Y",
   },
   {
     id: "spring-day",
@@ -110,6 +114,7 @@ export const lyrics: LyricSong[] = [
     ],
     type: "K-Pop",
     difficulty: "easy",
+    youtubeId: "xEeFrLSkMm8",
   },
   {
     id: "cheer-up",
@@ -126,6 +131,7 @@ export const lyrics: LyricSong[] = [
     ],
     type: "K-Pop",
     difficulty: "easy",
+    youtubeId: "c7rCyll5AeY",
   },
   {
     id: "love-scenario",
@@ -142,6 +148,7 @@ export const lyrics: LyricSong[] = [
     ],
     type: "K-Pop",
     difficulty: "easy",
+    youtubeId: "vecSVX1QYbQ",
   },
   {
     id: "stay-with-me",
@@ -158,6 +165,7 @@ export const lyrics: LyricSong[] = [
     ],
     type: "OST",
     difficulty: "easy",
+    youtubeId: "pcKR0LPwoYs",
   },
   {
     id: "on-bts",
@@ -174,6 +182,7 @@ export const lyrics: LyricSong[] = [
     ],
     type: "K-Pop",
     difficulty: "easy",
+    youtubeId: "gwMa6gpoE9I",
   },
   {
     id: "tt",
@@ -190,6 +199,7 @@ export const lyrics: LyricSong[] = [
     ],
     type: "K-Pop",
     difficulty: "easy",
+    youtubeId: "ePpPVE-GGJw",
   },
   {
     id: "butter",
@@ -207,6 +217,7 @@ export const lyrics: LyricSong[] = [
     type: "K-Pop",
     difficulty: "easy",
     lang: "en",
+    youtubeId: "WMweEpGlu_U",
   },
   {
     id: "ddu-du-ddu-du",
@@ -223,6 +234,7 @@ export const lyrics: LyricSong[] = [
     ],
     type: "K-Pop",
     difficulty: "easy",
+    youtubeId: "IHNzOHi8sJs",
   },
   {
     id: "idol",
@@ -239,6 +251,7 @@ export const lyrics: LyricSong[] = [
     ],
     type: "K-Pop",
     difficulty: "easy",
+    youtubeId: "pBuZEGYXA6E",
   },
   {
     id: "think-of-you-ha-sungwoon",

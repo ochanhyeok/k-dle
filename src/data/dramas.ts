@@ -41,6 +41,7 @@ export const dramas: Drama[] = [
     synopsisKeywords: ["paragliding", "North Korea", "forbidden love"],
     famousQuote: "Sometimes the wrong train takes you to the right destination.",
     difficulty: "easy",
+    youtubeId: "eXMjTIlMYSc",
   },
   {
     id: "goblin",
@@ -54,6 +55,7 @@ export const dramas: Drama[] = [
     synopsisKeywords: ["immortal", "bride", "goblin's sword"],
     famousQuote: "Every moment I spent with you shined. Because the weather was good, because the weather was bad, because the weather was good enough.",
     difficulty: "easy",
+    youtubeId: "8AcNEVUzV4o",
   },
   {
     id: "all-of-us-are-dead",
@@ -67,6 +69,7 @@ export const dramas: Drama[] = [
     synopsisKeywords: ["zombie", "high school", "trapped"],
     famousQuote: "In a world like this, what makes us human?",
     difficulty: "easy",
+    youtubeId: "IN5TD4VRcSM",
   },
   {
     id: "king-the-eternal-monarch",
@@ -93,6 +96,7 @@ export const dramas: Drama[] = [
     synopsisKeywords: ["autism", "lawyer", "whales"],
     famousQuote: "Woo to the Young to the Woo. You can read it straight or flipped, it's still Woo Young Woo.",
     difficulty: "easy",
+    youtubeId: "PGcjNT5cjIc",
   },
   {
     id: "vincenzo",
@@ -106,6 +110,7 @@ export const dramas: Drama[] = [
     synopsisKeywords: ["mafia", "gold", "justice"],
     famousQuote: "I'm going to show you what a real villain looks like.",
     difficulty: "easy",
+    youtubeId: "SkAP2g5RDSI",
   },
   {
     id: "itaewon-class",
@@ -119,6 +124,7 @@ export const dramas: Drama[] = [
     synopsisKeywords: ["bar", "revenge", "ex-convict"],
     famousQuote: "My problem is that I don't compromise. So what? That's just who I am.",
     difficulty: "easy",
+    youtubeId: "NrS9vHqzFTY",
   },
   {
     id: "business-proposal",
@@ -132,6 +138,7 @@ export const dramas: Drama[] = [
     synopsisKeywords: ["blind date", "boss", "fake identity"],
     famousQuote: "I'll make you fall for me, so be prepared.",
     difficulty: "easy",
+    youtubeId: "Yb5YK3GOKN0",
   },
   {
     id: "eve",
@@ -158,6 +165,7 @@ export const dramas: Drama[] = [
     synopsisKeywords: ["bullying", "revenge", "patience"],
     famousQuote: "I'm not doing this because I want to be happy. I want to take everything away from you.",
     difficulty: "easy",
+    youtubeId: "gKMaR1OZg_M",
   },
   {
     id: "moving",
@@ -171,6 +179,7 @@ export const dramas: Drama[] = [
     synopsisKeywords: ["superpowers", "parents", "espionage"],
     famousQuote: "Parents will do anything to protect their children. That's their superpower.",
     difficulty: "easy",
+    youtubeId: "tMfHQx_yijQ",
   },
   {
     id: "alchemy-of-souls",
@@ -184,6 +193,7 @@ export const dramas: Drama[] = [
     synopsisKeywords: ["soul shift", "mages", "ancient kingdom"],
     famousQuote: "Even if my soul changes, my heart will remember you.",
     difficulty: "easy",
+    youtubeId: "XPgGjUSEuys",
   },
   {
     id: "sweet-home",
@@ -197,6 +207,7 @@ export const dramas: Drama[] = [
     synopsisKeywords: ["monsters", "apartment", "desire"],
     famousQuote: "Monsters aren't born. They're made from the desires you can't let go of.",
     difficulty: "easy",
+    youtubeId: "7rI56NmD33Y",
   },
   {
     id: "kingdom",
@@ -210,6 +221,7 @@ export const dramas: Drama[] = [
     synopsisKeywords: ["zombie", "Joseon", "plague"],
     famousQuote: "The problem is not the living dead, but the living who act as though they are dead.",
     difficulty: "easy",
+    youtubeId: "4l-yByZpaaM",
   },
 
   // ===== MEDIUM (20) - Popular among K-Drama fans =====
