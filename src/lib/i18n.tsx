@@ -443,6 +443,11 @@ const translations = {
     "archive.today": "Today's Puzzle",
     "archive.archiveMode": "Archive",
     "archive.noPastPuzzles": "No past puzzles yet. Come back tomorrow!",
+
+    // Welcome Puzzle
+    "welcome.banner": "Welcome to K-dle! Try this starter puzzle",
+    "welcome.greatJob": "Great job! Ready for today's daily puzzle?",
+    "welcome.tryDaily": "Play Today's Puzzle",
   },
 
   es: {
@@ -881,6 +886,11 @@ const translations = {
     "archive.today": "Puzzle de Hoy",
     "archive.archiveMode": "Archivo",
     "archive.noPastPuzzles": "No hay puzzles anteriores todavia. Vuelve manana!",
+
+    // Welcome Puzzle
+    "welcome.banner": "Bienvenido a K-dle! Prueba este puzzle de inicio",
+    "welcome.greatJob": "Buen trabajo! Listo para el puzzle diario de hoy?",
+    "welcome.tryDaily": "Jugar el Puzzle de Hoy",
   },
 
   ko: {
@@ -1319,6 +1329,11 @@ const translations = {
     "archive.today": "오늘의 퍼즐",
     "archive.archiveMode": "아카이브",
     "archive.noPastPuzzles": "아직 과거 퍼즐이 없습니다. 내일 다시 오세요!",
+
+    // Welcome Puzzle
+    "welcome.banner": "K-dle에 오신 걸 환영합니다! 연습 퍼즐을 풀어보세요",
+    "welcome.greatJob": "잘했어요! 오늘의 퍼즐에 도전할 준비가 됐나요?",
+    "welcome.tryDaily": "오늘의 퍼즐 도전하기",
   },
 } as const;
 

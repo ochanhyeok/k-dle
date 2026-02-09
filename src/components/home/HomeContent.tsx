@@ -260,6 +260,10 @@ export default function HomeContent() {
               FAQ
             </Link>
             <span className="text-[var(--color-border)]">|</span>
+            <Link href="/blog" className="text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">
+              Blog
+            </Link>
+            <span className="text-[var(--color-border)]">|</span>
             <Link href="/contact" className="text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">
               {t("contact.title")}
             </Link>

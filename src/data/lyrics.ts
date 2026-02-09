@@ -7,6 +7,7 @@ export interface LyricSong {
   type: "K-Pop" | "OST";
   difficulty: "easy" | "medium" | "hard";
   lang?: "en"; // set only for songs originally in English; default is Korean
+  youtubeId?: string;
 }
 
 export const lyrics: LyricSong[] = [
@@ -27,6 +28,7 @@ export const lyrics: LyricSong[] = [
     type: "K-Pop",
     difficulty: "easy",
     lang: "en",
+    youtubeId: "gdZLi9oWNZg",
   },
   {
     id: "how-you-like-that",

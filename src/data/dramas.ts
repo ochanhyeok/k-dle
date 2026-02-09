@@ -10,6 +10,7 @@ export interface Drama {
   synopsisKeywords: string[];
   famousQuote: string;
   difficulty: "easy" | "medium" | "hard";
+  youtubeId?: string;
 }
 
 export const dramas: Drama[] = [
@@ -26,6 +27,7 @@ export const dramas: Drama[] = [
     synopsisKeywords: ["childhood games", "debt", "survival"],
     famousQuote: "We are not horses. We are humans.",
     difficulty: "easy",
+    youtubeId: "oqxAGLFQ8Jw",
   },
   {
     id: "crash-landing-on-you",

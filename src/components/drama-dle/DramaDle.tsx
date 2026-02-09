@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import {
   getTodaysDrama,
+  getWelcomeDrama,
   getDramaByPuzzleNumber,
   getPuzzleNumber,
   getHints,
@@ -35,6 +36,7 @@ import { submitPartyResult } from "@/lib/party";
 import { checkAndAwardBadges } from "@/lib/achievements";
 import AchievementToast from "@/components/ui/AchievementToast";
 import BadgeCollection from "@/components/ui/BadgeCollection";
+import YouTubeEmbed from "@/components/ui/YouTubeEmbed";
 
 const MAX_GUESSES = 6;
 
@@ -58,6 +60,7 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
   const [friendResult, setFriendResult] = useState<CompareData | null>(null);
   const [newBadges, setNewBadges] = useState<string[]>([]);
   const [partyCode, setPartyCode] = useState<string | null>(null);
+  const [isWelcome, setIsWelcome] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
@@ -87,17 +90,27 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
         setStatus(saved.status);
       }
     } else {
-      const drama = getTodaysDrama();
-      const num = getPuzzleNumber();
-      setTarget(drama);
-      setPuzzleNumber(num);
-      setStats(loadUnifiedStats());
+      const uStats = loadUnifiedStats();
+      setStats(uStats);
+      const welcomeDone = localStorage.getItem("k-dle-welcome-done");
+      const isNewUser = uStats.gamesPlayed === 0 && !welcomeDone;
       const isParty = !!new URLSearchParams(window.location.search).get("party");
-      if (!isParty) {
-        const saved = loadGameState(num);
-        if (saved) {
-          setGuesses(saved.guesses);
-          setStatus(saved.status);
+
+      if (!isParty && isNewUser) {
+        setTarget(getWelcomeDrama());
+        setPuzzleNumber(0);
+        setIsWelcome(true);
+      } else {
+        const drama = getTodaysDrama();
+        const num = getPuzzleNumber();
+        setTarget(drama);
+        setPuzzleNumber(num);
+        if (!isParty) {
+          const saved = loadGameState(num);
+          if (saved) {
+            setGuesses(saved.guesses);
+            setStatus(saved.status);
+          }
         }
       }
     }
@@ -159,7 +172,11 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
       const newStatus = won ? "won" : lost ? "lost" : "playing";
       setStatus(newStatus);
 
-      if (isArchive) {
+      if (isWelcome) {
+        if (won || lost) {
+          localStorage.setItem("k-dle-welcome-done", "1");
+        }
+      } else if (isArchive) {
         saveArchiveState(puzzleNumber, newGuesses, newStatus);
       } else if (partyCode) {
         if (won || lost) {
@@ -179,7 +196,7 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
         }
       }
     },
-    [target, status, guesses, puzzleNumber, allTitles, isArchive, partyCode]
+    [target, status, guesses, puzzleNumber, allTitles, isArchive, isWelcome, partyCode]
   );
 
   const handleShare = async () => {
@@ -249,10 +266,19 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
         </div>
       )}
 
+      {/* Welcome Banner */}
+      {isWelcome && status === "playing" && (
+        <div className="mb-4 rounded-lg border border-[var(--color-success)]/30 bg-[var(--color-success)]/10 px-4 py-3 text-center animate-slide-up">
+          <p className="text-sm font-medium text-[var(--color-success)]">
+            {t("welcome.banner")}
+          </p>
+        </div>
+      )}
+
       {/* Puzzle Info */}
       <div className="text-center mb-6">
         <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-1">
-          Drama-dle #{puzzleNumber}
+          {isWelcome ? "Drama-dle" : `Drama-dle #${puzzleNumber}`}
           {isArchive && (
             <span className="ml-2 inline-block rounded bg-[var(--color-accent)]/20 text-[var(--color-accent)] px-1.5 py-0.5 text-[10px] font-semibold">
               {t("archive.archiveMode")}
@@ -398,8 +424,35 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
             </>
           )}
 
-          {/* Stats mini — hidden in archive mode */}
-          {!isArchive && stats && (
+          {/* Welcome complete — transition to daily puzzle */}
+          {isWelcome && (
+            <div className="mt-4 rounded-lg bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/30 p-4 text-center">
+              <p className="text-sm font-medium mb-2">{t("welcome.greatJob")}</p>
+              <button
+                onClick={() => {
+                  setIsWelcome(false);
+                  setGuesses([]);
+                  setStatus("playing");
+                  setInput("");
+                  const drama = getTodaysDrama();
+                  const num = getPuzzleNumber();
+                  setTarget(drama);
+                  setPuzzleNumber(num);
+                  const saved = loadGameState(num);
+                  if (saved) {
+                    setGuesses(saved.guesses);
+                    setStatus(saved.status);
+                  }
+                }}
+                className="cta-btn w-full rounded-lg bg-[var(--color-accent)] text-white font-semibold py-3 text-sm"
+              >
+                {t("welcome.tryDaily")} →
+              </button>
+            </div>
+          )}
+
+          {/* Stats mini — hidden in archive/welcome mode */}
+          {!isArchive && !isWelcome && stats && (
             <div className="flex justify-center gap-6 my-4 text-center">
               <div>
                 <p className="text-xl font-bold">{stats.gamesPlayed}</p>
@@ -433,17 +486,21 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
             </div>
           )}
 
-          {/* Share Button */}
-          <button
-            onClick={handleShare}
-            className="cta-btn mt-2 w-full rounded-lg bg-[var(--color-success)] text-black font-semibold py-3 text-sm"
-          >
-            {t("result.shareResult")} 📋
-          </button>
-          {!isArchive && (
-            <ChallengeButton mode="drama-dle" puzzleNumber={puzzleNumber} guessCount={guesses.length} won={status === "won"} />
+          {/* Share Button — hidden in welcome mode */}
+          {!isWelcome && (
+            <>
+              <button
+                onClick={handleShare}
+                className="cta-btn mt-2 w-full rounded-lg bg-[var(--color-success)] text-black font-semibold py-3 text-sm"
+              >
+                {t("result.shareResult")} 📋
+              </button>
+              {!isArchive && (
+                <ChallengeButton mode="drama-dle" puzzleNumber={puzzleNumber} guessCount={guesses.length} won={status === "won"} />
+              )}
+            </>
           )}
-          {!isArchive && friendResult && friendResult.puzzleNum === puzzleNumber && (
+          {!isArchive && !isWelcome && friendResult && friendResult.puzzleNum === puzzleNumber && (
             <div className="mt-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-4">
               <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-3 text-center">
                 👥 {t("compare.title")}
@@ -464,10 +521,13 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
               </div>
             </div>
           )}
-          {!isArchive && <EmojiVoting mode="drama" />}
-          {!isArchive && <FandomSelector />}
-          {!isArchive && <FandomLeaderboard mode="drama" />}
-          {!isArchive && <BadgeCollection inline />}
+          {target.youtubeId && (
+            <YouTubeEmbed videoId={target.youtubeId} title={`${target.title} Trailer`} />
+          )}
+          {!isArchive && !isWelcome && <EmojiVoting mode="drama" />}
+          {!isArchive && !isWelcome && <FandomSelector />}
+          {!isArchive && !isWelcome && <FandomLeaderboard mode="drama" />}
+          {!isArchive && !isWelcome && <BadgeCollection inline />}
           {isArchive ? (
             <Link
               href="/drama-dle/archive"
@@ -475,12 +535,12 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
             >
               {t("archive.backToArchive")}
             </Link>
-          ) : (
+          ) : !isWelcome ? (
             <>
               <DailyStatsCard mode="drama" userGuessCount={guesses.length} userWon={status === "won"} />
               <CountdownTimer />
             </>
-          )}
+          ) : null}
         </div>
       )}
 

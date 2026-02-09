@@ -26,6 +26,11 @@ export function getPuzzleNumber(): number {
   return Math.round((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
 }
 
+/** Get a globally famous drama for new user onboarding */
+export function getWelcomeDrama(): Drama {
+  return dramas.find((d) => d.id === "squid-game")!;
+}
+
 /** Get today's drama deterministically */
 export function getTodaysDrama(): Drama {
   const puzzleNum = getPuzzleNumber();

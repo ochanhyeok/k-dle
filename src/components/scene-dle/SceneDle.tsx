@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import {
   getTodaysScene,
+  getWelcomeScene,
   getScenePuzzleNumber,
   getSceneByPuzzleNumber,
   getSceneHints,
@@ -70,6 +71,7 @@ export default function SceneDle({ archivePuzzleNumber }: { archivePuzzleNumber?
   const [friendResult, setFriendResult] = useState<CompareData | null>(null);
   const [newBadges, setNewBadges] = useState<string[]>([]);
   const [partyCode, setPartyCode] = useState<string | null>(null);
+  const [isWelcome, setIsWelcome] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -100,17 +102,27 @@ export default function SceneDle({ archivePuzzleNumber }: { archivePuzzleNumber?
         setStatus(saved.status);
       }
     } else {
-      const scene = getTodaysScene();
-      const num = getScenePuzzleNumber();
-      setTarget(scene);
-      setPuzzleNumber(num);
-      setStats(loadUnifiedStats());
+      const uStats = loadUnifiedStats();
+      setStats(uStats);
+      const welcomeDone = localStorage.getItem("k-dle-welcome-done");
+      const isNewUser = uStats.gamesPlayed === 0 && !welcomeDone;
       const isParty = !!new URLSearchParams(window.location.search).get("party");
-      if (!isParty) {
-        const saved = loadSceneState(num);
-        if (saved) {
-          setGuesses(saved.guesses);
-          setStatus(saved.status);
+
+      if (!isParty && isNewUser) {
+        setTarget(getWelcomeScene());
+        setPuzzleNumber(0);
+        setIsWelcome(true);
+      } else {
+        const scene = getTodaysScene();
+        const num = getScenePuzzleNumber();
+        setTarget(scene);
+        setPuzzleNumber(num);
+        if (!isParty) {
+          const saved = loadSceneState(num);
+          if (saved) {
+            setGuesses(saved.guesses);
+            setStatus(saved.status);
+          }
         }
       }
     }
@@ -165,7 +177,11 @@ export default function SceneDle({ archivePuzzleNumber }: { archivePuzzleNumber?
     const newStatus = won ? "won" : lost ? "lost" : "playing";
     setStatus(newStatus);
 
-    if (isArchive) {
+    if (isWelcome) {
+      if (won || lost) {
+        localStorage.setItem("k-dle-welcome-done", "1");
+      }
+    } else if (isArchive) {
       saveSceneArchiveState(puzzleNumber, newGuesses, newStatus);
     } else if (partyCode) {
       if (won || lost) {
@@ -248,9 +264,18 @@ export default function SceneDle({ archivePuzzleNumber }: { archivePuzzleNumber?
         </div>
       )}
 
+      {/* Welcome Banner */}
+      {isWelcome && status === "playing" && (
+        <div className="mb-4 rounded-lg border border-[var(--color-success)]/30 bg-[var(--color-success)]/10 px-4 py-3 text-center animate-slide-up">
+          <p className="text-sm font-medium text-[var(--color-success)]">
+            {t("welcome.banner")}
+          </p>
+        </div>
+      )}
+
       <div className="text-center mb-6">
         <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-1">
-          Scene-dle #{puzzleNumber}
+          {isWelcome ? "Scene-dle" : `Scene-dle #${puzzleNumber}`}
           {isArchive && (
             <span className="ml-2 inline-block rounded bg-[var(--color-accent)]/20 text-[var(--color-accent)] px-1.5 py-0.5 text-[10px] font-semibold">
               {t("archive.archiveMode")}
@@ -373,8 +398,35 @@ export default function SceneDle({ archivePuzzleNumber }: { archivePuzzleNumber?
               </div>
             </>
           )}
+          {/* Welcome complete — transition to daily puzzle */}
+          {isWelcome && (
+            <div className="mt-4 rounded-lg bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/30 p-4 text-center">
+              <p className="text-sm font-medium mb-2">{t("welcome.greatJob")}</p>
+              <button
+                onClick={() => {
+                  setIsWelcome(false);
+                  setGuesses([]);
+                  setStatus("playing");
+                  setInput("");
+                  const scene = getTodaysScene();
+                  const num = getScenePuzzleNumber();
+                  setTarget(scene);
+                  setPuzzleNumber(num);
+                  const saved = loadSceneState(num);
+                  if (saved) {
+                    setGuesses(saved.guesses);
+                    setStatus(saved.status);
+                  }
+                }}
+                className="cta-btn w-full rounded-lg bg-[var(--color-accent)] text-white font-semibold py-3 text-sm"
+              >
+                {t("welcome.tryDaily")} →
+              </button>
+            </div>
+          )}
+
           {/* Stats mini */}
-          {!isArchive && stats && (
+          {!isArchive && !isWelcome && stats && (
             <div className="flex justify-center gap-6 my-4 text-center">
               <div>
                 <p className="text-xl font-bold">{stats.gamesPlayed}</p>
@@ -397,13 +449,17 @@ export default function SceneDle({ archivePuzzleNumber }: { archivePuzzleNumber?
             </div>
           )}
 
-          <button onClick={handleShare} className="cta-btn mt-2 w-full rounded-lg bg-[var(--color-success)] text-black font-semibold py-3 text-sm">
-            {t("result.shareResult")} 📋
-          </button>
-          {!isArchive && (
-            <ChallengeButton mode="scene-dle" puzzleNumber={puzzleNumber} guessCount={guesses.length} won={status === "won"} />
+          {!isWelcome && (
+            <>
+              <button onClick={handleShare} className="cta-btn mt-2 w-full rounded-lg bg-[var(--color-success)] text-black font-semibold py-3 text-sm">
+                {t("result.shareResult")} 📋
+              </button>
+              {!isArchive && (
+                <ChallengeButton mode="scene-dle" puzzleNumber={puzzleNumber} guessCount={guesses.length} won={status === "won"} />
+              )}
+            </>
           )}
-          {!isArchive && friendResult && friendResult.puzzleNum === puzzleNumber && (
+          {!isArchive && !isWelcome && friendResult && friendResult.puzzleNum === puzzleNumber && (
             <div className="mt-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-4">
               <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-3 text-center">
                 👥 {t("compare.title")}
@@ -424,10 +480,10 @@ export default function SceneDle({ archivePuzzleNumber }: { archivePuzzleNumber?
               </div>
             </div>
           )}
-          {!isArchive && <EmojiVoting mode="scene" />}
-          {!isArchive && <FandomSelector />}
-          {!isArchive && <FandomLeaderboard mode="scene" />}
-          {!isArchive && <BadgeCollection inline />}
+          {!isArchive && !isWelcome && <EmojiVoting mode="scene" />}
+          {!isArchive && !isWelcome && <FandomSelector />}
+          {!isArchive && !isWelcome && <FandomLeaderboard mode="scene" />}
+          {!isArchive && !isWelcome && <BadgeCollection inline />}
           {isArchive ? (
             <Link
               href="/scene-dle/archive"
@@ -435,12 +491,12 @@ export default function SceneDle({ archivePuzzleNumber }: { archivePuzzleNumber?
             >
               {t("archive.backToArchive")}
             </Link>
-          ) : (
+          ) : !isWelcome ? (
             <>
               <DailyStatsCard mode="scene" userGuessCount={guesses.length} userWon={status === "won"} />
               <CountdownTimer />
             </>
-          )}
+          ) : null}
         </div>
       )}
 

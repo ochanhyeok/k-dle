@@ -10,6 +10,11 @@ function mixIndex(num: number, len: number): number {
   return x;
 }
 
+/** Get a globally famous song for new user onboarding */
+export function getWelcomeLyric(): LyricSong {
+  return lyrics.find((l) => l.id === "dynamite")!;
+}
+
 export function getTodaysLyric(): LyricSong {
   const now = new Date();
   const start = new Date(2026, 1, 6);

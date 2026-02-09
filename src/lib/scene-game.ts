@@ -11,6 +11,11 @@ function mixIndex(num: number, len: number): number {
   return x;
 }
 
+/** Get a globally famous scene for new user onboarding */
+export function getWelcomeScene(): Scene {
+  return scenes.find((s) => s.id === "squid-game-scene")!;
+}
+
 export function getTodaysScene(): Scene {
   const now = new Date();
   const start = new Date(2026, 1, 6);

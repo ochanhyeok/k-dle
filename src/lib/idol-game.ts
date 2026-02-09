@@ -24,6 +24,11 @@ export interface CompareRow {
   };
 }
 
+/** Get a globally famous idol for new user onboarding */
+export function getWelcomeIdol(): Idol {
+  return idols.find((i) => i.id === "jungkook")!;
+}
+
 export function getTodaysIdol(): Idol {
   const now = new Date();
   const start = new Date(2026, 1, 6);

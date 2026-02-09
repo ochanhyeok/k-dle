@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import {
   getTodaysIdol,
+  getWelcomeIdol,
   getIdolPuzzleNumber,
   getIdolByPuzzleNumber,
   loadIdolArchiveState,
@@ -91,6 +92,7 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
   const [friendResult, setFriendResult] = useState<CompareData | null>(null);
   const [newBadges, setNewBadges] = useState<string[]>([]);
   const [partyCode, setPartyCode] = useState<string | null>(null);
+  const [isWelcome, setIsWelcome] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
@@ -128,24 +130,34 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
         setStatus(saved.status);
       }
     } else {
-      const idol = getTodaysIdol();
-      const num = getIdolPuzzleNumber();
-      setTarget(idol);
-      setPuzzleNumber(num);
-      setStats(loadUnifiedStats());
+      const uStats = loadUnifiedStats();
+      setStats(uStats);
+      const welcomeDone = localStorage.getItem("k-dle-welcome-done");
+      const isNewUser = uStats.gamesPlayed === 0 && !welcomeDone;
       const isParty = !!new URLSearchParams(window.location.search).get("party");
-      if (!isParty) {
-        const saved = loadIdolState(num);
-        if (saved && idol) {
-          const restoredRows: CompareRow[] = [];
-          for (const name of saved.guessNames) {
-            const guessIdol = findIdolByName(name);
-            if (guessIdol) {
-              restoredRows.push({ guess: guessIdol, results: compareIdols(guessIdol, idol) });
+
+      if (!isParty && isNewUser) {
+        setTarget(getWelcomeIdol());
+        setPuzzleNumber(0);
+        setIsWelcome(true);
+      } else {
+        const idol = getTodaysIdol();
+        const num = getIdolPuzzleNumber();
+        setTarget(idol);
+        setPuzzleNumber(num);
+        if (!isParty) {
+          const saved = loadIdolState(num);
+          if (saved && idol) {
+            const restoredRows: CompareRow[] = [];
+            for (const name of saved.guessNames) {
+              const guessIdol = findIdolByName(name);
+              if (guessIdol) {
+                restoredRows.push({ guess: guessIdol, results: compareIdols(guessIdol, idol) });
+              }
             }
+            setRows(restoredRows);
+            setStatus(saved.status);
           }
-          setRows(restoredRows);
-          setStatus(saved.status);
         }
       }
     }
@@ -199,7 +211,11 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
     const newStatus = won ? "won" : lost ? "lost" : "playing";
     setStatus(newStatus);
 
-    if (isArchive) {
+    if (isWelcome) {
+      if (won || lost) {
+        localStorage.setItem("k-dle-welcome-done", "1");
+      }
+    } else if (isArchive) {
       saveIdolArchiveState(puzzleNumber, newRows.map((r) => r.guess.name), newStatus);
     } else if (partyCode) {
       if (won || lost) {
@@ -289,9 +305,18 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
         </div>
       )}
 
+      {/* Welcome Banner */}
+      {isWelcome && status === "playing" && (
+        <div className="mb-4 rounded-lg border border-[var(--color-success)]/30 bg-[var(--color-success)]/10 px-4 py-3 text-center animate-slide-up">
+          <p className="text-sm font-medium text-[var(--color-success)]">
+            {t("welcome.banner")}
+          </p>
+        </div>
+      )}
+
       <div className="text-center mb-6">
         <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-1">
-          Idol-dle #{puzzleNumber}
+          {isWelcome ? "Idol-dle" : `Idol-dle #${puzzleNumber}`}
           {isArchive && (
             <span className="ml-2 inline-block rounded bg-[var(--color-accent)]/20 text-[var(--color-accent)] px-1.5 py-0.5 text-[10px] font-semibold">
               {t("archive.archiveMode")}
@@ -438,8 +463,42 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
               </div>
             </>
           )}
+          {/* Welcome complete — transition to daily puzzle */}
+          {isWelcome && (
+            <div className="mt-4 rounded-lg bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/30 p-4 text-center">
+              <p className="text-sm font-medium mb-2">{t("welcome.greatJob")}</p>
+              <button
+                onClick={() => {
+                  setIsWelcome(false);
+                  setRows([]);
+                  setStatus("playing");
+                  setInput("");
+                  const idol = getTodaysIdol();
+                  const num = getIdolPuzzleNumber();
+                  setTarget(idol);
+                  setPuzzleNumber(num);
+                  const saved = loadIdolState(num);
+                  if (saved && idol) {
+                    const restoredRows: CompareRow[] = [];
+                    for (const name of saved.guessNames) {
+                      const guessIdol = findIdolByName(name);
+                      if (guessIdol) {
+                        restoredRows.push({ guess: guessIdol, results: compareIdols(guessIdol, idol) });
+                      }
+                    }
+                    setRows(restoredRows);
+                    setStatus(saved.status);
+                  }
+                }}
+                className="cta-btn w-full rounded-lg bg-[var(--color-accent)] text-white font-semibold py-3 text-sm"
+              >
+                {t("welcome.tryDaily")} →
+              </button>
+            </div>
+          )}
+
           {/* Stats mini */}
-          {!isArchive && stats && (
+          {!isArchive && !isWelcome && stats && (
             <div className="flex justify-center gap-6 my-4 text-center">
               <div>
                 <p className="text-xl font-bold">{stats.gamesPlayed}</p>
@@ -462,13 +521,17 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
             </div>
           )}
 
-          <button onClick={handleShare} className="cta-btn mt-2 w-full rounded-lg bg-[var(--color-success)] text-black font-semibold py-3 text-sm">
-            {t("result.shareResult")} 📋
-          </button>
-          {!isArchive && (
-            <ChallengeButton mode="idol-dle" puzzleNumber={puzzleNumber} guessCount={rows.length} won={status === "won"} />
+          {!isWelcome && (
+            <>
+              <button onClick={handleShare} className="cta-btn mt-2 w-full rounded-lg bg-[var(--color-success)] text-black font-semibold py-3 text-sm">
+                {t("result.shareResult")} 📋
+              </button>
+              {!isArchive && (
+                <ChallengeButton mode="idol-dle" puzzleNumber={puzzleNumber} guessCount={rows.length} won={status === "won"} />
+              )}
+            </>
           )}
-          {!isArchive && friendResult && friendResult.puzzleNum === puzzleNumber && (
+          {!isArchive && !isWelcome && friendResult && friendResult.puzzleNum === puzzleNumber && (
             <div className="mt-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-4">
               <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-3 text-center">
                 👥 {t("compare.title")}
@@ -489,10 +552,10 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
               </div>
             </div>
           )}
-          {!isArchive && <EmojiVoting mode="idol" />}
-          {!isArchive && <FandomSelector />}
-          {!isArchive && <FandomLeaderboard mode="idol" />}
-          {!isArchive && <BadgeCollection inline />}
+          {!isArchive && !isWelcome && <EmojiVoting mode="idol" />}
+          {!isArchive && !isWelcome && <FandomSelector />}
+          {!isArchive && !isWelcome && <FandomLeaderboard mode="idol" />}
+          {!isArchive && !isWelcome && <BadgeCollection inline />}
           {isArchive ? (
             <Link
               href="/idol-dle/archive"
@@ -500,12 +563,12 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
             >
               {t("archive.backToArchive")}
             </Link>
-          ) : (
+          ) : !isWelcome ? (
             <>
               <DailyStatsCard mode="idol" userGuessCount={rows.length} userWon={status === "won"} />
               <CountdownTimer />
             </>
-          )}
+          ) : null}
         </div>
       )}
 
