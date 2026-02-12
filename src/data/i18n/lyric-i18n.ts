@@ -602,7 +602,7 @@ const data: Record<Locale, Record<string, string[]>> = {
       "밤새도록 춤추고 놀 거야",
       "붐바야 — 붐붐바 붐붐바야, 파티 시작!",
     ],
-    "panorama-ive": [
+    "accendio-ive": [
       "주문을 외우면 세상이 변해",
       "나를 막던 벽이 하나씩 무너져",
       "마법 같은 힘이 내 안에서 깨어나",
@@ -682,7 +682,7 @@ const data: Record<Locale, Record<string, string[]>> = {
       "새 하루가 시작되고 모든 건 달라져",
       "제로시 — 자정이 지나면 모든 게 새로워질 거야",
     ],
-    "gods-menu-thunderous": [
+    "thunderous-skz": [
       "한국의 소리로 세상을 흔들 거야",
       "북소리가 울려 퍼지면 모두 일어나",
       "전통과 현대가 만나 새로운 걸 만들어",
@@ -698,7 +698,7 @@ const data: Record<Locale, Record<string, string[]>> = {
       "이 사랑은 끝나지 않아 영원히 계속될 거야",
       "디스 러브 — 아프지만 이 사랑을 놓을 수 없어",
     ],
-    "celebrity-iu-ost": [
+    "love-poem-iu": [
       "멀리 있는 너에게 마음을 전하고 싶어",
       "말로는 부족하니 시 한 편을 보내",
       "외롭지 않기를, 행복하기를 바라",
@@ -706,7 +706,7 @@ const data: Record<Locale, Record<string, string[]>> = {
       "힘들 때면 이 멜로디를 떠올려줘",
       "러브 포엠 — 너를 위한 사랑의 시를 보낼게",
     ],
-    "ment-alarm": [
+    "my-universe-bts-coldplay": [
       "너는 나의 우주이고 널 가장 먼저 생각해",
       "다른 세계에서 왔기에 함께할 수 없다 했지만",
       "내가 사랑하는 걸 사랑하는 건 아무도 못 막아",
@@ -772,7 +772,7 @@ const data: Record<Locale, Record<string, string[]>> = {
       "용서를 구하지 않아 이게 나니까",
       "언포기븐 — 용서받지 못해도 후회는 없어",
     ],
-    "O-O-new-jeans": [
+    "omg-newjeans": [
       "네 모습에 놀라서 멍하니 바라봤어",
       "이런 감정은 처음이라 당황스러워",
       "심장이 요동치고 말이 안 나와",
@@ -932,7 +932,7 @@ const data: Record<Locale, Record<string, string[]>> = {
       "이 순간이 지나면 또 그리워지겠지",
       "만약 네가 돌아온다면 이번엔 놓지 않을게",
     ],
-    "crash-landing-ost-photo": [
+    "flower-yoon-mirae": [
       "전쟁의 땅에서 피어난 한 송이 꽃처럼",
       "불가능한 사랑이라 해도 아름다울 수 있어",
       "국경을 넘어도 마음은 하나인 것을",
@@ -2158,7 +2158,7 @@ const data: Record<Locale, Record<string, string[]>> = {
       "Bailaremos y nos divertiremos toda la noche",
       "Boombayah — boom boom ba boom boom bayah, empieza la fiesta!",
     ],
-    "panorama-ive": [
+    "accendio-ive": [
       "Cuando digo el hechizo el mundo cambia",
       "Los muros que me frenaban se derrumban uno a uno",
       "Un poder magico despierta dentro de mi",
@@ -2238,7 +2238,7 @@ const data: Record<Locale, Record<string, string[]>> = {
       "Un nuevo dia comienza y todo cambia",
       "Cero horas — cuando llegue manana todo sera feliz, punto de inflexion",
     ],
-    "gods-menu-thunderous": [
+    "thunderous-skz": [
       "Vamos a sacudir el mundo con los sonidos de Corea",
       "Cuando suenen los tambores todos se levantaran",
       "La tradicion y lo moderno se unen para crear algo nuevo",
@@ -2254,7 +2254,7 @@ const data: Record<Locale, Record<string, string[]>> = {
       "Este amor no termina, continuara para siempre",
       "Este amor — duele pero no puedo soltar este amor",
     ],
-    "celebrity-iu-ost": [
+    "love-poem-iu": [
       "Quiero enviar mi corazon a ti que estas lejos",
       "Las palabras no bastan asi que te envio un poema",
       "Deseo que no estes solo, que seas feliz",
@@ -2262,7 +2262,7 @@ const data: Record<Locale, Record<string, string[]>> = {
       "Cuando sea dificil recuerda esta melodia",
       "Poema de amor — te enviare un poema de amor para ti",
     ],
-    "ment-alarm": [
+    "my-universe-bts-coldplay": [
       "Tu eres mi universo y quiero ponerte primero",
       "Dijeron que no podiamos estar juntos porque venimos de mundos diferentes",
       "Pero nada va a impedirme amar lo que amo",
@@ -2328,7 +2328,7 @@ const data: Record<Locale, Record<string, string[]>> = {
       "No pido perdon porque asi soy yo",
       "Imperdonable — aunque no me perdonen no tengo arrepentimientos",
     ],
-    "O-O-new-jeans": [
+    "omg-newjeans": [
       "Me quede mirando aturdida al verte",
       "Este sentimiento es nuevo para mi y me desconcierta",
       "Mi corazon se acelera y no me salen las palabras",
@@ -2488,7 +2488,7 @@ const data: Record<Locale, Record<string, string[]>> = {
       "Cuando este momento pase seguramente te extranare",
       "Si volvieras esta vez no te dejaria ir",
     ],
-    "crash-landing-ost-photo": [
+    "flower-yoon-mirae": [
       "Como una flor que nace en tierra de guerra",
       "Aunque sea un amor imposible puede ser hermoso",
       "Aunque crucemos fronteras nuestros corazones son uno",

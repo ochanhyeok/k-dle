@@ -1919,7 +1919,7 @@ export const lyrics: LyricSong[] = [
     difficulty: "easy",
   },
   {
-    id: "panorama-ive",
+    id: "accendio-ive",
     title: "Accendio",
     titleKo: "아센디오",
     artist: "IVE",
@@ -2080,7 +2080,7 @@ export const lyrics: LyricSong[] = [
     difficulty: "easy",
   },
   {
-    id: "gods-menu-thunderous",
+    id: "thunderous-skz",
     title: "Thunderous",
     titleKo: "소리꾼",
     artist: "Stray Kids",
@@ -2112,7 +2112,7 @@ export const lyrics: LyricSong[] = [
     difficulty: "easy",
   },
   {
-    id: "celebrity-iu-ost",
+    id: "love-poem-iu",
     title: "Love Poem",
     titleKo: "러브 포엠",
     artist: "IU",
@@ -2128,7 +2128,7 @@ export const lyrics: LyricSong[] = [
     difficulty: "easy",
   },
   {
-    id: "ment-alarm",
+    id: "my-universe-bts-coldplay",
     title: "My Universe",
     titleKo: "마이 유니버스",
     artist: "Coldplay X BTS",
@@ -2259,7 +2259,7 @@ export const lyrics: LyricSong[] = [
     difficulty: "medium",
   },
   {
-    id: "O-O-new-jeans",
+    id: "omg-newjeans",
     title: "OMG",
     titleKo: "오엠지",
     artist: "NewJeans",
@@ -2548,7 +2548,7 @@ export const lyrics: LyricSong[] = [
   },
   {
     id: "our-beloved-summer-ost",
-    title: "Christmas Tree (Our Beloved Summer)",
+    title: "Would We Have Loved (Our Beloved Summer OST)",
     titleKo: "우리 사랑했을까",
     artist: "김민석 (그 해 우리는 OST)",
     lyrics: [
@@ -2579,7 +2579,7 @@ export const lyrics: LyricSong[] = [
     difficulty: "medium",
   },
   {
-    id: "crash-landing-ost-photo",
+    id: "flower-yoon-mirae",
     title: "Flower",
     titleKo: "꽃",
     artist: "윤미래 (사랑의 불시착 OST)",
@@ -3158,7 +3158,7 @@ export const lyrics: LyricSong[] = [
   },
   {
     id: "moon-lovers-ost",
-    title: "For You",
+    title: "For You (Moon Lovers OST)",
     titleKo: "사랑이 아직 끝나지 않았다면",
     artist: "백아연 (달의 연인 OST)",
     lyrics: [

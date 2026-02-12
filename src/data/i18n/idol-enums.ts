@@ -16,6 +16,8 @@ const positionMap: Record<Locale, Record<string, string>> = {
     "Lead Rapper": "리드 래퍼",
     Leader: "리더",
     Visual: "비주얼",
+    Vocalist: "보컬",
+    Center: "센터",
   },
   es: {
     "Main Vocalist": "Vocalista Principal",
@@ -27,6 +29,8 @@ const positionMap: Record<Locale, Record<string, string>> = {
     "Lead Rapper": "Rapero Líder",
     Leader: "Líder",
     Visual: "Visual",
+    Vocalist: "Vocalista",
+    Center: "Centro",
   },
 };
 
@@ -42,6 +46,12 @@ const nationalityMap: Record<Locale, Record<string, string>> = {
     Chinese: "중국",
     "Korean-American": "한국계 미국",
     American: "미국",
+    "Australian-Korean": "호주-한국",
+    "Japanese-Korean": "일본-한국",
+    "Korean-Canadian": "한국-캐나다",
+    Taiwanese: "대만",
+    "Taiwanese-American": "대만-미국",
+    Vietnamese: "베트남",
   },
   es: {
     Korean: "Coreano/a",
@@ -54,6 +64,12 @@ const nationalityMap: Record<Locale, Record<string, string>> = {
     Chinese: "Chino/a",
     "Korean-American": "Coreano/a-Americano/a",
     American: "Americano/a",
+    "Australian-Korean": "Australiano-Coreana",
+    "Japanese-Korean": "Japonesa-Coreana",
+    "Korean-Canadian": "Coreano-Canadiense",
+    Taiwanese: "Taiwanesa",
+    "Taiwanese-American": "Taiwanesa-Americana",
+    Vietnamese: "Vietnamita",
   },
 };
 

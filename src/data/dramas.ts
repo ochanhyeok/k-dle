@@ -793,7 +793,7 @@ export const dramas: Drama[] = [
 
   // --- MEDIUM (9) - Popular Among K-Drama Fans ---
   {
-    id: "red-cuff-of-the-sleeve",
+    id: "captivating-the-king",
     title: "Captivating the King",
     titleKo: "세작, 매혹된 자들",
     year: 2024,
@@ -2641,7 +2641,7 @@ export const dramas: Drama[] = [
     cast: ["Im Si-wan", "Lee Dong-wook", "Lee Jung-eun", "Lee Hyun-wook"],
     synopsisKeywords: ["goshiwon", "creepy residents", "isolation"],
     famousQuote: "Hell isn't a place. It's the people living next door.",
-    difficulty: "medium",
+    difficulty: "hard",
   },
   {
     id: "death-game",

@@ -51,7 +51,7 @@ export function checkLyricGuess(guess: string, target: LyricSong): boolean {
   const g = guess.toLowerCase().trim();
   return (
     g === target.title.toLowerCase().trim() ||
-    g === target.titleKo.trim()
+    g === target.titleKo.toLowerCase().trim()
   );
 }
 

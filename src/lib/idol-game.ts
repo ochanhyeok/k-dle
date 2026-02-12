@@ -74,6 +74,10 @@ export function compareIdols(guess: Idol, target: Idol): CompareRow["results"] {
   };
 }
 
+export function findIdolById(id: string): Idol | undefined {
+  return idols.find((i) => i.id === id);
+}
+
 export function findIdolByName(name: string): Idol | undefined {
   return idols.find(
     (i) =>
@@ -81,8 +85,13 @@ export function findIdolByName(name: string): Idol | undefined {
   );
 }
 
-export function getAllIdolNames(): { name: string; nameKo: string; group: string }[] {
-  return idols.map((i) => ({ name: i.name, nameKo: i.nameKo, group: i.group }));
+/** Find idol by ID first, then fallback to name (backward compat) */
+export function findIdol(idOrName: string): Idol | undefined {
+  return findIdolById(idOrName) ?? findIdolByName(idOrName);
+}
+
+export function getAllIdolNames(): { id: string; name: string; nameKo: string; group: string }[] {
+  return idols.map((i) => ({ id: i.id, name: i.name, nameKo: i.nameKo, group: i.group }));
 }
 
 export function generateIdolShareText(

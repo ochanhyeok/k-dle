@@ -10,7 +10,7 @@ import {
   loadIdolArchiveState,
   saveIdolArchiveState,
   compareIdols,
-  findIdolByName,
+  findIdol,
   getAllIdolNames,
   generateIdolShareText,
   type CompareRow,
@@ -121,7 +121,7 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
       if (saved && idol) {
         const restoredRows: CompareRow[] = [];
         for (const name of saved.guessNames) {
-          const guessIdol = findIdolByName(name);
+          const guessIdol = findIdol(name);
           if (guessIdol) {
             restoredRows.push({ guess: guessIdol, results: compareIdols(guessIdol, idol) });
           }
@@ -150,7 +150,7 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
           if (saved && idol) {
             const restoredRows: CompareRow[] = [];
             for (const name of saved.guessNames) {
-              const guessIdol = findIdolByName(name);
+              const guessIdol = findIdol(name);
               if (guessIdol) {
                 restoredRows.push({ guess: guessIdol, results: compareIdols(guessIdol, idol) });
               }
@@ -186,9 +186,9 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
           )
       : [];
 
-  const handleGuess = (guessName: string) => {
+  const handleGuess = (idOrName: string) => {
     if (!target || status !== "playing") return;
-    const idol = findIdolByName(guessName);
+    const idol = findIdol(idOrName);
     if (!idol) {
       setShakeInput(true);
       setTimeout(() => setShakeInput(false), 400);
@@ -216,14 +216,14 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
         localStorage.setItem("k-dle-welcome-done", "1");
       }
     } else if (isArchive) {
-      saveIdolArchiveState(puzzleNumber, newRows.map((r) => r.guess.name), newStatus);
+      saveIdolArchiveState(puzzleNumber, newRows.map((r) => r.guess.id), newStatus);
     } else if (partyCode) {
       if (won || lost) {
         const name = sessionStorage.getItem("k-dle-party-name") || "Player";
         submitPartyResult(partyCode, name, won, newRows.length);
       }
     } else {
-      saveIdolState(puzzleNumber, newRows.map((r) => r.guess.name), newStatus);
+      saveIdolState(puzzleNumber, newRows.map((r) => r.guess.id), newStatus);
       if (won || lost) {
         const newStats = recordGameResult(won, newRows.length);
         setStats(newStats);
@@ -401,11 +401,16 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
                   setSelectedIndex((prev) => Math.max(prev - 1, -1));
                 } else if (e.key === "Enter") {
                   if (selectedIndex >= 0 && filteredNames[selectedIndex]) {
-                    const selected = filteredNames[selectedIndex].name;
-                    setInput(selected);
+                    const selected = filteredNames[selectedIndex];
+                    setInput(selected.name);
                     setShowAutocomplete(false);
                     setSelectedIndex(-1);
-                    handleGuess(selected);
+                    handleGuess(selected.id);
+                  } else if (filteredNames.length === 1) {
+                    setInput(filteredNames[0].name);
+                    setShowAutocomplete(false);
+                    setSelectedIndex(-1);
+                    handleGuess(filteredNames[0].id);
                   } else {
                     handleGuess(input);
                   }
@@ -422,9 +427,9 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
             <div ref={listRef} className="absolute z-10 w-full mt-1 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] shadow-xl overflow-hidden max-h-64 overflow-y-auto">
               {filteredNames.map((idol, idx) => (
                 <button
-                  key={idol.name}
+                  key={idol.id}
                   ref={(el) => { if (idx === selectedIndex && el) el.scrollIntoView({ block: "nearest" }); }}
-                  onClick={() => { setInput(idol.name); setShowAutocomplete(false); setSelectedIndex(-1); handleGuess(idol.name); }}
+                  onClick={() => { setInput(idol.name); setShowAutocomplete(false); setSelectedIndex(-1); handleGuess(idol.id); }}
                   className={`autocomplete-item w-full text-left px-4 py-2.5 text-sm border-b border-[var(--color-border)] last:border-0 ${idx === selectedIndex ? "bg-[var(--color-card-hover)]" : "hover:bg-[var(--color-card-hover)]"}`}
                 >
                   <span>{idol.name}</span>
@@ -481,7 +486,7 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
                   if (saved && idol) {
                     const restoredRows: CompareRow[] = [];
                     for (const name of saved.guessNames) {
-                      const guessIdol = findIdolByName(name);
+                      const guessIdol = findIdol(name);
                       if (guessIdol) {
                         restoredRows.push({ guess: guessIdol, results: compareIdols(guessIdol, idol) });
                       }
