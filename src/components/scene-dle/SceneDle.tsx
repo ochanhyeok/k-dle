@@ -104,7 +104,7 @@ export default function SceneDle({ archivePuzzleNumber }: { archivePuzzleNumber?
     } else {
       const uStats = loadUnifiedStats();
       setStats(uStats);
-      const welcomeDone = localStorage.getItem("k-dle-welcome-done");
+      const welcomeDone = localStorage.getItem("k-dle-welcome-done-scene");
       const isNewUser = uStats.gamesPlayed === 0 && !welcomeDone;
       const isParty = !!new URLSearchParams(window.location.search).get("party");
 
@@ -179,7 +179,7 @@ export default function SceneDle({ archivePuzzleNumber }: { archivePuzzleNumber?
 
     if (isWelcome) {
       if (won || lost) {
-        localStorage.setItem("k-dle-welcome-done", "1");
+        localStorage.setItem("k-dle-welcome-done-scene", "1");
       }
     } else if (isArchive) {
       saveSceneArchiveState(puzzleNumber, newGuesses, newStatus);

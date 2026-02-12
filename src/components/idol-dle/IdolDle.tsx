@@ -132,7 +132,7 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
     } else {
       const uStats = loadUnifiedStats();
       setStats(uStats);
-      const welcomeDone = localStorage.getItem("k-dle-welcome-done");
+      const welcomeDone = localStorage.getItem("k-dle-welcome-done-idol");
       const isNewUser = uStats.gamesPlayed === 0 && !welcomeDone;
       const isParty = !!new URLSearchParams(window.location.search).get("party");
 
@@ -213,7 +213,7 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
 
     if (isWelcome) {
       if (won || lost) {
-        localStorage.setItem("k-dle-welcome-done", "1");
+        localStorage.setItem("k-dle-welcome-done-idol", "1");
       }
     } else if (isArchive) {
       saveIdolArchiveState(puzzleNumber, newRows.map((r) => r.guess.id), newStatus);

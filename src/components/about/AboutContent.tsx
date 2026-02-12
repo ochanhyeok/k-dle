@@ -87,7 +87,7 @@ export default function AboutContent() {
           <section className="mb-8">
             <h3 className="text-lg font-semibold mb-3">{t("about.featuresTitle")}</h3>
             <div className="space-y-2">
-              {(["about.feature1", "about.feature2", "about.feature3", "about.feature4", "about.feature5", "about.feature6"] as const).map((key, i) => (
+              {(["about.feature1", "about.feature2", "about.feature3", "about.feature4", "about.feature5", "about.feature6"] as const).map((key) => (
                 <div key={key} className="flex items-start gap-3 text-sm text-[var(--color-muted)]">
                   <span className="text-[var(--color-accent)] mt-0.5">✓</span>
                   <p>{t(key)}</p>

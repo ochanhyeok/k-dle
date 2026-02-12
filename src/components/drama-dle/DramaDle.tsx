@@ -92,7 +92,7 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
     } else {
       const uStats = loadUnifiedStats();
       setStats(uStats);
-      const welcomeDone = localStorage.getItem("k-dle-welcome-done");
+      const welcomeDone = localStorage.getItem("k-dle-welcome-done-drama");
       const isNewUser = uStats.gamesPlayed === 0 && !welcomeDone;
       const isParty = !!new URLSearchParams(window.location.search).get("party");
 
@@ -174,7 +174,7 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
 
       if (isWelcome) {
         if (won || lost) {
-          localStorage.setItem("k-dle-welcome-done", "1");
+          localStorage.setItem("k-dle-welcome-done-drama", "1");
         }
       } else if (isArchive) {
         saveArchiveState(puzzleNumber, newGuesses, newStatus);

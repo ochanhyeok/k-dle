@@ -77,7 +77,7 @@ export default function LyricDle({ archivePuzzleNumber }: { archivePuzzleNumber?
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
-  const { t, locale } = useTranslation();
+  const { t } = useTranslation();
 
   const allTitles = getAllSongTitles();
 
@@ -105,7 +105,7 @@ export default function LyricDle({ archivePuzzleNumber }: { archivePuzzleNumber?
     } else {
       const uStats = loadUnifiedStats();
       setStats(uStats);
-      const welcomeDone = localStorage.getItem("k-dle-welcome-done");
+      const welcomeDone = localStorage.getItem("k-dle-welcome-done-lyric");
       const isNewUser = uStats.gamesPlayed === 0 && !welcomeDone;
       const isParty = !!new URLSearchParams(window.location.search).get("party");
 
@@ -180,7 +180,7 @@ export default function LyricDle({ archivePuzzleNumber }: { archivePuzzleNumber?
 
     if (isWelcome) {
       if (won || lost) {
-        localStorage.setItem("k-dle-welcome-done", "1");
+        localStorage.setItem("k-dle-welcome-done-lyric", "1");
       }
     } else if (isArchive) {
       saveLyricArchiveState(puzzleNumber, newGuesses, newStatus);
