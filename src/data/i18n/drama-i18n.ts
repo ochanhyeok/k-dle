@@ -907,6 +907,136 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
       synopsisKeywords: ["사생아", "재벌 복수", "장기 계획"],
       famousQuote: "돈은 꽃처럼 피지만, 그 뿌리는 항상 어둠 속에 묻혀 있어.",
     },
+    "king-the-eternal-monarch": {
+      genre: ["로맨스", "판타지", "드라마"],
+      synopsisKeywords: ["평행 우주", "황제", "시간의 문"],
+      famousQuote: "널 찾아낼 거야. 네가 어떤 우주에 있든.",
+    },
+    "eve": {
+      genre: ["로맨스", "스릴러", "드라마"],
+      synopsisKeywords: ["복수 이혼", "재벌 스캔들", "유혹"],
+      famousQuote: "복수는 2조 원짜리 이혼 합의금으로 차갑게 내미는 거야.",
+    },
+    "the-spy-who-loved-me": {
+      genre: ["로맨스", "코미디", "첩보"],
+      synopsisKeywords: ["스파이 전남편", "재혼", "비밀 임무"],
+      famousQuote: "내 가장 큰 임무는 세상을 구하는 게 아니었어. 널 보내주는 거였어.",
+    },
+    "agency": {
+      genre: ["드라마", "비즈니스"],
+      synopsisKeywords: ["광고 대행사", "유리천장", "사내 정치"],
+      famousQuote: "이 업계에서 브랜드가 아니면 존재하지 않는 거야.",
+    },
+    "captivating-the-king": {
+      genre: ["로맨스", "사극", "드라마"],
+      synopsisKeywords: ["조선 왕", "첩자 후궁", "금지된 사랑"],
+      famousQuote: "널 무너뜨리려고 보내졌는데, 네가 내 마음을 사로잡았어.",
+    },
+    "hierarchy": {
+      genre: ["스릴러", "미스터리", "드라마"],
+      synopsisKeywords: ["엘리트 학교", "장학생", "계급 전쟁"],
+      famousQuote: "이 학교에서는 돈이 누가 살고 누가 사라지는지 결정해.",
+    },
+    "flex-x-cop": {
+      genre: ["액션", "코미디", "범죄"],
+      synopsisKeywords: ["재벌 형사", "강력반", "어울리지 않는 콤비"],
+      famousQuote: "돈으로 살 수 있는 건 많지만, 범인을 잡으려면 배짱이 필요해.",
+    },
+    "the-killing-vote": {
+      genre: ["스릴러", "범죄", "드라마"],
+      synopsisKeywords: ["국민 투표", "가면 쓴 해커", "사형 앱"],
+      famousQuote: "국민이 투표했다. 이제 정의는 그들의 손에 달렸다.",
+    },
+    "the-escape-of-the-seven": {
+      genre: ["스릴러", "미스터리", "드라마"],
+      synopsisKeywords: ["일곱 죄인", "부활 복수", "상류층 비밀"],
+      famousQuote: "그들은 자신들의 죄를 묻었다고 생각했다. 하지만 죽은 자들이 돌아와 대가를 요구했다.",
+    },
+    "wedding-impossible": {
+      genre: ["로맨스", "코미디"],
+      synopsisKeywords: ["가짜 결혼", "형의 약혼녀", "계약 관계"],
+      famousQuote: "이 결혼은 사기여야 했는데, 진짜로 빠질 줄은 몰랐어.",
+    },
+    "miss-night-and-day": {
+      genre: ["로맨스", "코미디", "판타지"],
+      synopsisKeywords: ["나이 변환", "취준생", "검사"],
+      famousQuote: "낮에는 오십, 밤에는 스물다섯. 어느 쪽도 다 알아낸 건 아니야.",
+    },
+    "my-perfect-stranger": {
+      genre: ["로맨스", "미스터리", "판타지"],
+      synopsisKeywords: ["시간 여행", "1987년", "살인 방지"],
+      famousQuote: "다른 사람의 운명을 바꾸려고 과거로 갔다가, 널 만났어.",
+    },
+    "wonderful-world": {
+      genre: ["스릴러", "미스터리", "드라마"],
+      synopsisKeywords: ["어머니의 복수", "아들의 죽음", "진실 추적"],
+      famousQuote: "어머니의 슬픔은 그녀를 파괴하거나, 막을 수 없는 존재로 만들어.",
+    },
+    "frankly-speaking": {
+      genre: ["로맨스", "코미디"],
+      synopsisKeywords: ["뉴스 앵커", "강박적 솔직함", "최면 사고"],
+      famousQuote: "더 이상 거짓말을 할 수 없어. 진실이 어떤 대본보다 웃기더라.",
+    },
+    "king-of-pigs": {
+      genre: ["스릴러", "범죄", "드라마"],
+      synopsisKeywords: ["학교폭력 후유증", "복수의 순환", "계급 불평등"],
+      famousQuote: "괴롭힘 당하던 자가 괴롭히는 자가 되었고, 그 순환은 끝나지 않았다.",
+    },
+    "grid": {
+      genre: ["SF", "스릴러", "미스터리"],
+      synopsisKeywords: ["태양 플레어 방패", "시간 여행자", "음모"],
+      famousQuote: "그리드는 한때 인류를 구했다. 이제 누군가 그것을 무너뜨리려 한다.",
+    },
+    "daily-dose-of-sunshine": {
+      genre: ["드라마", "의학", "일상"],
+      synopsisKeywords: ["정신병동", "간호사", "정신 건강"],
+      famousQuote: "가장 어두운 병동에도 아침은 항상 온다.",
+    },
+    "the-impossible-heir": {
+      genre: ["스릴러", "드라마", "미스터리"],
+      synopsisKeywords: ["재벌 상속", "형사", "권력 다툼"],
+      famousQuote: "피가 가족을 만들지만, 권력이 진짜 가족을 만든다.",
+    },
+    "trolley": {
+      genre: ["드라마", "스릴러", "정치"],
+      synopsisKeywords: ["정치인의 아내", "숨겨진 과거", "도덕적 딜레마"],
+      famousQuote: "트롤리 문제는 네 인생이 선로 위에 올려졌을 때 더 이상 이론이 아니야.",
+    },
+    "behind-every-star": {
+      genre: ["코미디", "드라마"],
+      synopsisKeywords: ["연예 기획사", "셀럽 매니저", "무대 뒤"],
+      famousQuote: "스타는 무대에서 빛나지만, 우리는 커튼 뒤에서 불태운다.",
+    },
+    "inspector-koo": {
+      genre: ["스릴러", "코미디", "미스터리"],
+      synopsisKeywords: ["전직 경찰", "보험 조사관", "여성 연쇄 살인범"],
+      famousQuote: "경찰을 그만뒀지만, 진실을 쫓는 건 멈추지 않았어.",
+    },
+    "shadow-beauty": {
+      genre: ["스릴러", "드라마", "학원"],
+      synopsisKeywords: ["온라인 페르소나", "뷰티 필터", "사이버 불링"],
+      famousQuote: "필터 뒤에서 그녀는 온라인에서 가장 인기 있는 소녀였고, 학교에서 가장 외로운 소녀였다.",
+    },
+    "uncle-samsik": {
+      genre: ["드라마", "정치", "사극"],
+      synopsisKeywords: ["정치 해결사", "전후 한국", "야망"],
+      famousQuote: "무너진 나라에서 문제를 해결하는 자가 가장 위험한 사람이 된다.",
+    },
+    "duty-after-school": {
+      genre: ["액션", "SF", "스릴러"],
+      synopsisKeywords: ["외계인 침공", "고등학생", "군사 훈련"],
+      famousQuote: "방과 후에 우리는 집에 가지 않아. 전쟁터로 가.",
+    },
+    "pig-butcher": {
+      genre: ["호러", "스릴러", "미스터리"],
+      synopsisKeywords: ["악귀", "빙의", "저주받은 유물"],
+      famousQuote: "죽음을 초월하는 빚이 있다. 악귀는 항상 빚을 받으러 온다.",
+    },
+    "death-game": {
+      genre: ["판타지", "드라마", "스릴러"],
+      synopsisKeywords: ["열두 번의 죽음", "환생 벌", "삶의 교훈"],
+      famousQuote: "죽음이 내게 열두 번의 삶을 주었고, 그 하나하나에서 비로소 사는 법을 배웠다.",
+    },
   },
 
   es: {
@@ -1808,6 +1938,136 @@ const data: Record<Locale, Record<string, DramaLocalized>> = {
       genre: ["Drama", "Thriller", "Romance"],
       synopsisKeywords: ["hijo ilegitimo", "venganza contra chaebol", "plan a largo plazo"],
       famousQuote: "El dinero florece como una flor, pero sus raices siempre estan enterradas en la oscuridad.",
+    },
+    "king-the-eternal-monarch": {
+      genre: ["Romance", "Fantasia", "Drama"],
+      synopsisKeywords: ["universo paralelo", "emperador", "puerta del tiempo"],
+      famousQuote: "Te encontrare. No importa en que universo estes.",
+    },
+    "eve": {
+      genre: ["Romance", "Thriller", "Drama"],
+      synopsisKeywords: ["divorcio vengativo", "escandalo chaebol", "seduccion"],
+      famousQuote: "La venganza se sirve mejor en un acuerdo de divorcio de 2 billones de dolares.",
+    },
+    "the-spy-who-loved-me": {
+      genre: ["Romance", "Comedia", "Espionaje"],
+      synopsisKeywords: ["ex esposo espia", "segundo matrimonio", "misiones secretas"],
+      famousQuote: "Mi mayor mision no fue salvar el mundo. Fue dejarte ir.",
+    },
+    "agency": {
+      genre: ["Drama", "Negocios"],
+      synopsisKeywords: ["agencia de publicidad", "techo de cristal", "politica corporativa"],
+      famousQuote: "En esta industria, si no eres la marca, eres invisible.",
+    },
+    "captivating-the-king": {
+      genre: ["Romance", "Historico", "Drama"],
+      synopsisKeywords: ["rey Joseon", "concubina espia", "amor prohibido"],
+      famousQuote: "Me enviaron a destruirte, pero capturaste mi corazon.",
+    },
+    "hierarchy": {
+      genre: ["Thriller", "Misterio", "Drama"],
+      synopsisKeywords: ["escuela de elite", "estudiante becado", "guerra de clases"],
+      famousQuote: "En esta escuela, el dinero decide quien vive y quien desaparece.",
+    },
+    "flex-x-cop": {
+      genre: ["Accion", "Comedia", "Crimen"],
+      synopsisKeywords: ["detective chaebol", "unidad de crimenes violentos", "pareja dispareja"],
+      famousQuote: "El dinero puede comprar muchas cosas, pero se necesitan agallas para atrapar a un criminal.",
+    },
+    "the-killing-vote": {
+      genre: ["Thriller", "Crimen", "Drama"],
+      synopsisKeywords: ["voto publico", "hacker enmascarado", "app de pena de muerte"],
+      famousQuote: "El pueblo ha votado. La justicia ahora esta en sus manos.",
+    },
+    "the-escape-of-the-seven": {
+      genre: ["Thriller", "Misterio", "Drama"],
+      synopsisKeywords: ["siete pecadores", "venganza resucitada", "secretos de la elite"],
+      famousQuote: "Pensaron que enterraron sus pecados. Pero los muertos volvieron a cobrar.",
+    },
+    "wedding-impossible": {
+      genre: ["Romance", "Comedia"],
+      synopsisKeywords: ["boda falsa", "prometida del hermano", "relacion por contrato"],
+      famousQuote: "Esta boda debia ser una estafa. No planee enamorarme de verdad.",
+    },
+    "miss-night-and-day": {
+      genre: ["Romance", "Comedia", "Fantasia"],
+      synopsisKeywords: ["transformacion de edad", "buscadora de empleo", "fiscal"],
+      famousQuote: "De dia tengo cincuenta, de noche veinticinco. Ninguna version lo tiene resuelto.",
+    },
+    "my-perfect-stranger": {
+      genre: ["Romance", "Misterio", "Fantasia"],
+      synopsisKeywords: ["viaje en el tiempo", "1987", "prevenir un asesinato"],
+      famousQuote: "Viaje al pasado para cambiar el destino de alguien, y te encontre a ti.",
+    },
+    "wonderful-world": {
+      genre: ["Thriller", "Misterio", "Drama"],
+      synopsisKeywords: ["venganza de madre", "muerte del hijo", "busqueda de la verdad"],
+      famousQuote: "El dolor de una madre puede destruirla o convertirla en algo imparable.",
+    },
+    "frankly-speaking": {
+      genre: ["Romance", "Comedia"],
+      synopsisKeywords: ["presentador de noticias", "honestidad compulsiva", "accidente de hipnosis"],
+      famousQuote: "Ya no puedo mentir. Resulta que la verdad es mas graciosa que cualquier guion.",
+    },
+    "king-of-pigs": {
+      genre: ["Thriller", "Crimen", "Drama"],
+      synopsisKeywords: ["secuelas de violencia escolar", "ciclo de venganza", "desigualdad de clases"],
+      famousQuote: "El acosado se convirtio en acosador, y el ciclo nunca termino.",
+    },
+    "grid": {
+      genre: ["Ciencia ficcion", "Thriller", "Misterio"],
+      synopsisKeywords: ["escudo contra llamaradas solares", "viajero del tiempo", "conspiracion"],
+      famousQuote: "El grid salvo a la humanidad una vez. Ahora alguien quiere derribarlo.",
+    },
+    "daily-dose-of-sunshine": {
+      genre: ["Drama", "Medico", "Vida"],
+      synopsisKeywords: ["sala psiquiatrica", "enfermera", "salud mental"],
+      famousQuote: "Incluso en la sala mas oscura, la manana siempre llega.",
+    },
+    "the-impossible-heir": {
+      genre: ["Thriller", "Drama", "Misterio"],
+      synopsisKeywords: ["herencia chaebol", "detective", "lucha de poder"],
+      famousQuote: "La sangre te hace pariente, pero el poder te hace familia.",
+    },
+    "trolley": {
+      genre: ["Drama", "Thriller", "Politico"],
+      synopsisKeywords: ["esposa de politico", "pasado oculto", "dilema moral"],
+      famousQuote: "El dilema del tranvia ya no es teorico cuando tu vida esta en las vias.",
+    },
+    "behind-every-star": {
+      genre: ["Comedia", "Drama"],
+      synopsisKeywords: ["agencia de talentos", "managers de celebridades", "detras de escena"],
+      famousQuote: "Las estrellas brillan en el escenario, pero nosotros ardemos detras del telon.",
+    },
+    "inspector-koo": {
+      genre: ["Thriller", "Comedia", "Misterio"],
+      synopsisKeywords: ["ex policia", "investigadora de seguros", "asesina en serie"],
+      famousQuote: "Deje de ser policia, pero nunca deje de perseguir la verdad.",
+    },
+    "shadow-beauty": {
+      genre: ["Thriller", "Drama", "Escolar"],
+      synopsisKeywords: ["persona en linea", "filtro de belleza", "ciberacoso"],
+      famousQuote: "Detras del filtro, era la chica mas popular en linea y la mas solitaria en la escuela.",
+    },
+    "uncle-samsik": {
+      genre: ["Drama", "Politico", "Historico"],
+      synopsisKeywords: ["arreglador politico", "Corea de posguerra", "ambicion"],
+      famousQuote: "En un pais roto, el hombre que arregla las cosas se convierte en el mas peligroso de todos.",
+    },
+    "duty-after-school": {
+      genre: ["Accion", "Ciencia ficcion", "Thriller"],
+      synopsisKeywords: ["invasion alienigena", "estudiantes de secundaria", "deber militar"],
+      famousQuote: "Despues de clase, no vamos a casa. Vamos a la guerra.",
+    },
+    "pig-butcher": {
+      genre: ["Terror", "Thriller", "Misterio"],
+      synopsisKeywords: ["espiritu maligno", "posesion", "artefacto maldito"],
+      famousQuote: "Algunas deudas trascienden la muerte. El espiritu vengador siempre viene a cobrar.",
+    },
+    "death-game": {
+      genre: ["Fantasia", "Drama", "Thriller"],
+      synopsisKeywords: ["doce muertes", "castigo de reencarnacion", "lecciones de vida"],
+      famousQuote: "La muerte me dio doce vidas, y en cada una finalmente aprendi a vivir.",
     },
   },
 };
