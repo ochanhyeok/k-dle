@@ -857,7 +857,7 @@ export const scenes: Scene[] = [
   },
   {
     id: "penthouse-scene",
-    dramaTitle: "Penthouse",
+    dramaTitle: "The Penthouse: War in Life",
     dramaTitleKo: "펜트하우스",
     year: 2020,
     descriptions: [
@@ -934,7 +934,7 @@ export const scenes: Scene[] = [
   },
   {
     id: "tale-of-the-nine-tailed-scene",
-    dramaTitle: "Tale of the Nine Tailed",
+    dramaTitle: "Tale of the Nine-Tailed",
     dramaTitleKo: "구미호뎐",
     year: 2020,
     descriptions: [
@@ -1743,7 +1743,7 @@ export const scenes: Scene[] = [
   },
   {
     id: "penthouse-wine-scene",
-    dramaTitle: "Penthouse",
+    dramaTitle: "The Penthouse: War in Life",
     dramaTitleKo: "펜트하우스",
     year: 2020,
     descriptions: [
@@ -2240,7 +2240,7 @@ export const scenes: Scene[] = [
   },
   {
     id: "at-a-distance-spring-is-green-scene",
-    dramaTitle: "At a Distance, Spring is Green",
+    dramaTitle: "At a Distance, Spring Is Green",
     dramaTitleKo: "멀리서 보면 푸른 봄",
     year: 2021,
     descriptions: [

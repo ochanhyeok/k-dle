@@ -52,7 +52,19 @@ export function checkSceneGuess(guess: string, target: Scene): boolean {
 }
 
 export function getAllDramaTitlesForScene(): { title: string; titleKo: string }[] {
-  return dramas.map((d) => ({ title: d.title, titleKo: d.titleKo }));
+  // Merge drama titles from both dramas.ts AND scenes.ts
+  // so every possible answer is searchable in autocomplete
+  const fromDramas = dramas.map((d) => ({ title: d.title, titleKo: d.titleKo }));
+  const fromScenes = scenes.map((s) => ({ title: s.dramaTitle, titleKo: s.dramaTitleKo }));
+  const seen = new Set<string>();
+  const merged: { title: string; titleKo: string }[] = [];
+  for (const item of [...fromDramas, ...fromScenes]) {
+    if (!seen.has(item.title)) {
+      seen.add(item.title);
+      merged.push(item);
+    }
+  }
+  return merged;
 }
 
 export function generateSceneShareText(
