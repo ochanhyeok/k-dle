@@ -30,6 +30,7 @@ npm run build    # 프로덕션 빌드
 
 ### 데이터 (src/data/)
 - `dramas.ts`, `idols.ts`, `lyrics.ts`, `scenes.ts` — 각 200개 항목
+- `blog-posts.ts` — 블로그 글 20편 (각 1000-1500 words, sitemap 자동 포함)
 - `i18n/` — 드라마, 가사, 장면, 아이돌 속성 번역 (ko, es)
 - 퍼즐 셔플: `mixIndex()` LCG 함수 (각 모드별 다른 오프셋)
 
@@ -54,9 +55,11 @@ npm run build    # 프로덕션 빌드
 - `ui/` — 공통 UI (Toast, Timer, Header, Modal 등)
 
 ### 페이지 (src/app/)
-- `/` — 메인 페이지
-- `/{mode}` — 각 게임 모드
+- `/` — 메인 페이지 (+ SEO 소개 섹션)
+- `/{mode}` — 각 게임 모드 (+ 서버 렌더링 교육적 SEO 섹션)
 - `/{mode}/archive` — 과거 퍼즐 아카이브
+- `/blog` — 블로그 목록 (20편)
+- `/blog/[slug]` — 개별 블로그 글
 - `/party` — 파티 모드
 - `/stats` — 글로벌 통계
 - `/badges` — 뱃지 컬렉션
@@ -68,3 +71,5 @@ npm run build    # 프로덕션 빌드
 - 일일 게임 상태는 localStorage에 저장
 - 파티 모드는 `?party=CODE` 쿼리 파라미터로 동작 (localStorage 저장 스킵)
 - 아카이브 모드는 `archivePuzzleNumber` prop으로 구분
+- 게임 페이지에 서버 렌더링 SEO 콘텐츠 (`GameHowToPlay` 아래, `GameFooter` 위 `<section>`)
+- 홈페이지에 서버 렌더링 SEO 소개 섹션 (`HomeContent` 아래)
