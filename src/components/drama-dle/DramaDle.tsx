@@ -201,7 +201,10 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
 
   const handleShare = async () => {
     let text = generateShareText(puzzleNumber, guesses, status === "won", MAX_GUESSES);
-    if (isArchive) text = text.replace("Drama-dle", "Drama-dle (Archive)");
+    if (isArchive) {
+      text = text.replace("Drama-dle", "Drama-dle (Archive)");
+      text = text.replace(/\/drama-dle\?r=\S+/, `/drama-dle/archive/${puzzleNumber}`);
+    }
     try {
       const grid: CellResult[][] = [
         guesses.map((_, i): CellResult =>
@@ -213,6 +216,7 @@ export default function DramaDle({ archivePuzzleNumber }: DramaDleProps) {
         puzzleNumber,
         score: status === "won" ? `${guesses.length}/${MAX_GUESSES}` : `X/${MAX_GUESSES}`,
         won: status === "won",
+        isArchive,
         grid,
         stats: stats
           ? {

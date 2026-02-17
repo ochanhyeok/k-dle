@@ -19,7 +19,7 @@ export function getTodaysLyric(): LyricSong {
   const now = new Date();
   const start = new Date(2026, 1, 6);
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const puzzleNum = Math.round((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+  const puzzleNum = Math.max(0, Math.round((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)));
   const index = mixIndex(puzzleNum + 31, lyrics.length);
   return lyrics[index];
 }
@@ -34,7 +34,7 @@ export function getLyricPuzzleNumber(): number {
   const now = new Date();
   const start = new Date(2026, 1, 6);
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  return Math.round((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+  return Math.max(0, Math.round((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)));
 }
 
 export function getLyricHints(song: LyricSong, revealedCount: number): string[] {

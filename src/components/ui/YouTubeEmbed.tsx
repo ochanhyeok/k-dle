@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslation } from "@/lib/i18n";
 
 interface YouTubeEmbedProps {
   videoId: string;
@@ -9,6 +10,7 @@ interface YouTubeEmbedProps {
 
 export default function YouTubeEmbed({ videoId, title }: YouTubeEmbedProps) {
   const [loaded, setLoaded] = useState(false);
+  const { t } = useTranslation();
   const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
 
   if (!loaded) {
@@ -32,7 +34,7 @@ export default function YouTubeEmbed({ videoId, title }: YouTubeEmbedProps) {
           </div>
         </div>
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3">
-          <p className="text-xs text-white/80 text-left">Watch on YouTube</p>
+          <p className="text-xs text-white/80 text-left">{t("youtube.watch")}</p>
         </div>
       </button>
     );

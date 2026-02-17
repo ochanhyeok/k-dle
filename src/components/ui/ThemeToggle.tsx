@@ -1,15 +1,17 @@
 "use client";
 
 import { useTheme } from "@/lib/theme";
+import { useTranslation } from "@/lib/i18n";
 
 export default function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
+  const { t } = useTranslation();
 
   return (
     <button
       onClick={toggleTheme}
       className="icon-btn p-2.5 rounded-xl"
-      aria-label="Toggle theme"
+      aria-label={t("aria.toggleTheme")}
     >
       {theme === "dark" ? (
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

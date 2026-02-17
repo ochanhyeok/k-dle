@@ -204,7 +204,10 @@ export default function SceneDle({ archivePuzzleNumber }: { archivePuzzleNumber?
 
   const handleShare = async () => {
     let text = generateSceneShareText(puzzleNumber, guesses, status === "won", MAX_GUESSES);
-    if (isArchive) text = text.replace("Scene-dle", "Scene-dle (Archive)");
+    if (isArchive) {
+      text = text.replace("Scene-dle", "Scene-dle (Archive)");
+      text = text.replace(/\/scene-dle\?r=\S+/, `/scene-dle/archive/${puzzleNumber}`);
+    }
     try {
       const grid: CellResult[][] = [
         guesses.map((_, i): CellResult =>
@@ -216,6 +219,7 @@ export default function SceneDle({ archivePuzzleNumber }: { archivePuzzleNumber?
         puzzleNumber,
         score: status === "won" ? `${guesses.length}/${MAX_GUESSES}` : `X/${MAX_GUESSES}`,
         won: status === "won",
+        isArchive,
         grid,
         stats: stats
           ? {

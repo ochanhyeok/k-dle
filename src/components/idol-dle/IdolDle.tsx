@@ -238,7 +238,10 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
 
   const handleShare = async () => {
     let text = generateIdolShareText(puzzleNumber, rows, status === "won", MAX_GUESSES);
-    if (isArchive) text = text.replace("Idol-dle", "Idol-dle (Archive)");
+    if (isArchive) {
+      text = text.replace("Idol-dle", "Idol-dle (Archive)");
+      text = text.replace(/\/idol-dle\?r=\S+/, `/idol-dle/archive/${puzzleNumber}`);
+    }
     try {
       const mapCell = (v: string): CellResult =>
         v === "correct" ? "correct" : v === "partial" ? "partial" : "wrong";
@@ -259,6 +262,7 @@ export default function IdolDle({ archivePuzzleNumber }: { archivePuzzleNumber?:
         puzzleNumber,
         score: status === "won" ? `${rows.length}/${MAX_GUESSES}` : `X/${MAX_GUESSES}`,
         won: status === "won",
+        isArchive,
         grid,
         stats: stats
           ? {

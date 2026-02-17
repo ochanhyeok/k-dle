@@ -56,6 +56,7 @@ export default function EmojiVoting({ mode }: Props) {
               key={key}
               onClick={() => handleVote(key)}
               disabled={!!voted}
+              aria-label={`React with ${key}`}
               className={`relative flex flex-col items-center gap-1 rounded-lg px-3 py-2 text-sm transition-all ${
                 isSelected
                   ? "bg-[var(--color-accent)]/20 border border-[var(--color-accent)]/50 scale-110"

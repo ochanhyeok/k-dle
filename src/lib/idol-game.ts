@@ -33,7 +33,7 @@ export function getTodaysIdol(): Idol {
   const now = new Date();
   const start = new Date(2026, 1, 6);
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const puzzleNum = Math.round((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+  const puzzleNum = Math.max(0, Math.round((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)));
   const index = mixIndex(puzzleNum + 17, idols.length);
   return idols[index];
 }
@@ -42,7 +42,7 @@ export function getIdolPuzzleNumber(): number {
   const now = new Date();
   const start = new Date(2026, 1, 6);
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  return Math.round((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+  return Math.max(0, Math.round((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)));
 }
 
 /** Get idol for a specific puzzle number (used by archive) */

@@ -9,6 +9,14 @@ export interface UnifiedStats {
   lastWinDate: string;
 }
 
+/** Get local date string (YYYY-MM-DD) to match puzzleNumber timezone */
+function getLocalDateStr(date: Date = new Date()): string {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
+}
+
 function getDefaultStats(): UnifiedStats {
   return {
     gamesPlayed: 0,
@@ -27,8 +35,8 @@ export function loadUnifiedStats(): UnifiedStats {
     if (raw) {
       const stats: UnifiedStats = JSON.parse(raw);
       if (stats.lastWinDate && stats.currentStreak > 0) {
-        const today = new Date().toISOString().split("T")[0];
-        const yesterday = new Date(Date.now() - 86400000).toISOString().split("T")[0];
+        const today = getLocalDateStr();
+        const yesterday = getLocalDateStr(new Date(Date.now() - 86400000));
         if (stats.lastWinDate !== today && stats.lastWinDate !== yesterday) {
           stats.currentStreak = 0;
           localStorage.setItem(UNIFIED_STATS_KEY, JSON.stringify(stats));
@@ -59,8 +67,8 @@ export function loadUnifiedStats(): UnifiedStats {
 
 export function recordGameResult(won: boolean, guessCount: number): UnifiedStats {
   const stats = loadUnifiedStats();
-  const today = new Date().toISOString().split("T")[0];
-  const yesterday = new Date(Date.now() - 86400000).toISOString().split("T")[0];
+  const today = getLocalDateStr();
+  const yesterday = getLocalDateStr(new Date(Date.now() - 86400000));
 
   stats.gamesPlayed += 1;
 

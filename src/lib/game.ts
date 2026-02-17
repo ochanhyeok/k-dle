@@ -23,7 +23,7 @@ export function getPuzzleNumber(): number {
   const now = new Date();
   const start = new Date(2026, 1, 6); // local midnight Feb 6, 2026
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  return Math.round((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+  return Math.max(0, Math.round((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)));
 }
 
 /** Get a globally famous drama for new user onboarding */

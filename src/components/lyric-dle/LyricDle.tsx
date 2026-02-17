@@ -205,7 +205,10 @@ export default function LyricDle({ archivePuzzleNumber }: { archivePuzzleNumber?
 
   const handleShare = async () => {
     let text = generateLyricShareText(puzzleNumber, guesses, status === "won", MAX_GUESSES);
-    if (isArchive) text = text.replace("Lyric-dle", "Lyric-dle (Archive)");
+    if (isArchive) {
+      text = text.replace("Lyric-dle", "Lyric-dle (Archive)");
+      text = text.replace(/\/lyric-dle\?r=\S+/, `/lyric-dle/archive/${puzzleNumber}`);
+    }
     try {
       const grid: CellResult[][] = [
         guesses.map((_, i): CellResult =>
@@ -217,6 +220,7 @@ export default function LyricDle({ archivePuzzleNumber }: { archivePuzzleNumber?
         puzzleNumber,
         score: status === "won" ? `${guesses.length}/${MAX_GUESSES}` : `X/${MAX_GUESSES}`,
         won: status === "won",
+        isArchive,
         grid,
         stats: stats
           ? {

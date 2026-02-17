@@ -148,6 +148,10 @@ const translations = {
     "aria.backHome": "Back to home",
     "aria.statistics": "Statistics",
     "aria.help": "Help",
+    "aria.close": "Close",
+    "aria.toggleTheme": "Toggle theme",
+    "youtube.watch": "Watch on YouTube",
+    "contact.error": "Something went wrong. Please try again.",
 
     // Drama hint labels
     "hint.genre": "Genre",
@@ -591,6 +595,10 @@ const translations = {
     "aria.backHome": "Volver al inicio",
     "aria.statistics": "Estadisticas",
     "aria.help": "Ayuda",
+    "aria.close": "Cerrar",
+    "aria.toggleTheme": "Cambiar tema",
+    "youtube.watch": "Ver en YouTube",
+    "contact.error": "Algo salio mal. Intentalo de nuevo.",
 
     // Drama hint labels
     "hint.genre": "Genero",
@@ -1034,6 +1042,10 @@ const translations = {
     "aria.backHome": "홈으로 돌아가기",
     "aria.statistics": "통계",
     "aria.help": "도움말",
+    "aria.close": "닫기",
+    "aria.toggleTheme": "테마 전환",
+    "youtube.watch": "YouTube에서 보기",
+    "contact.error": "오류가 발생했습니다. 다시 시도해 주세요.",
 
     // Drama hint labels
     "hint.genre": "장르",
@@ -1352,16 +1364,20 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>("en");
 
   useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY) as Locale | null;
-    if (saved && (saved === "en" || saved === "es" || saved === "ko")) {
-      setLocaleState(saved);
-      document.documentElement.lang = saved;
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY) as Locale | null;
+      if (saved && (saved === "en" || saved === "es" || saved === "ko")) {
+        setLocaleState(saved);
+        document.documentElement.lang = saved;
+      }
+    } catch {
+      // localStorage unavailable (private browsing)
     }
   }, []);
 
   const setLocale = useCallback((newLocale: Locale) => {
     setLocaleState(newLocale);
-    localStorage.setItem(STORAGE_KEY, newLocale);
+    try { localStorage.setItem(STORAGE_KEY, newLocale); } catch { /* quota exceeded */ }
     document.documentElement.lang = newLocale;
   }, []);
 

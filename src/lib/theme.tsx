@@ -18,13 +18,17 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>("dark");
 
   useEffect(() => {
-    const stored = localStorage.getItem("k-dle-theme") as Theme | null;
-    if (stored) {
-      setTheme(stored);
-      document.documentElement.className = stored;
-    } else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
-      setTheme("light");
-      document.documentElement.className = "light";
+    try {
+      const stored = localStorage.getItem("k-dle-theme") as Theme | null;
+      if (stored) {
+        setTheme(stored);
+        document.documentElement.className = stored;
+      } else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+        setTheme("light");
+        document.documentElement.className = "light";
+      }
+    } catch {
+      // localStorage unavailable (private browsing)
     }
   }, []);
 
@@ -32,7 +36,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const next: Theme = theme === "dark" ? "light" : "dark";
     setTheme(next);
     document.documentElement.className = next;
-    localStorage.setItem("k-dle-theme", next);
+    try { localStorage.setItem("k-dle-theme", next); } catch { /* quota exceeded */ }
   };
 
   return (

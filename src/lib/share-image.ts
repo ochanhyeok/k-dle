@@ -6,6 +6,7 @@ export interface ShareCardData {
   score: string;
   won: boolean;
   grid: CellResult[][];
+  isArchive?: boolean;
   stats?: { played: number; winRate: number; streak: number };
 }
 
@@ -98,7 +99,8 @@ export async function generateShareCard(data: ShareCardData): Promise<Blob> {
   // Title
   ctx.fillStyle = "#ffffff";
   ctx.font = `700 22px ${FONT}`;
-  ctx.fillText(`${meta.emoji}  ${meta.title}  #${data.puzzleNumber}`, W / 2, y + 28);
+  const titleSuffix = data.isArchive ? " (Archive)" : "";
+  ctx.fillText(`${meta.emoji}  ${meta.title}${titleSuffix}  #${data.puzzleNumber}`, W / 2, y + 28);
   y += 44;
 
   // Score

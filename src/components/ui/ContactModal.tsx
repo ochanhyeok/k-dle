@@ -56,11 +56,11 @@ export default function ContactModal({ show, onClose }: Props) {
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm px-4"
       onClick={(e) => { if (e.target === backdropRef.current) onClose(); }}
     >
-      <div className="w-full max-w-md rounded-xl border border-[var(--color-border)] bg-[var(--color-background)] shadow-2xl animate-slide-up">
+      <div role="dialog" aria-modal="true" aria-label={t("contact.title")} className="w-full max-w-md rounded-xl border border-[var(--color-border)] bg-[var(--color-background)] shadow-2xl animate-slide-up">
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-[var(--color-border)]">
           <h3 className="font-semibold text-lg">{t("contact.title")}</h3>
-          <button onClick={onClose} className="p-1 rounded-lg hover:bg-[var(--color-card)] transition-colors">
+          <button onClick={onClose} className="p-1 rounded-lg hover:bg-[var(--color-card)] transition-colors" aria-label={t("aria.close")}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M18 6L6 18M6 6l12 12" />
             </svg>
@@ -116,7 +116,7 @@ export default function ContactModal({ show, onClose }: Props) {
                 />
               </div>
               {status === "error" && (
-                <p className="text-xs text-[var(--color-error)]">Something went wrong. Please try again.</p>
+                <p className="text-xs text-[var(--color-error)]">{t("contact.error")}</p>
               )}
               <button
                 type="submit"

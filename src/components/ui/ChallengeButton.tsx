@@ -29,9 +29,9 @@ export default function ChallengeButton({ mode, puzzleNumber, guessCount, won }:
         // fall through
       }
     }
-    await navigator.clipboard.writeText(shareText);
+    try { await navigator.clipboard.writeText(shareText); } catch { /* clipboard unavailable */ }
     setCopied(true);
-    localStorage.setItem("k-dle-challenge-shared", "1");
+    try { localStorage.setItem("k-dle-challenge-shared", "1"); } catch { /* storage full */ }
     setTimeout(() => setCopied(false), 2000);
   };
 

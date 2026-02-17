@@ -20,7 +20,7 @@ export function getTodaysScene(): Scene {
   const now = new Date();
   const start = new Date(2026, 1, 6);
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const puzzleNum = Math.round((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+  const puzzleNum = Math.max(0, Math.round((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)));
   const index = mixIndex(puzzleNum + 7, scenes.length);
   return scenes[index];
 }
@@ -35,7 +35,7 @@ export function getScenePuzzleNumber(): number {
   const now = new Date();
   const start = new Date(2026, 1, 6);
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  return Math.round((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+  return Math.max(0, Math.round((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)));
 }
 
 export function getSceneHints(scene: Scene, revealedCount: number, locale?: string): string[] {
