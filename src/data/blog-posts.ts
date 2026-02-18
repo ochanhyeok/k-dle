@@ -2,6 +2,8 @@ export interface BlogPost {
   slug: string;
   title: string;
   description: string;
+  titleI18n?: { ko?: string; es?: string };
+  descriptionI18n?: { ko?: string; es?: string };
   date: string;
   tags: string[];
   content: string;
@@ -12,6 +14,8 @@ export const blogPosts: BlogPost[] = [
     slug: "top-10-kdramas-international-fans",
     title: "Top 10 K-Dramas Every International Fan Should Watch",
     description: "A curated list of must-watch Korean dramas that have captivated audiences worldwide, from thriller masterpieces to heartwarming romances.",
+    titleI18n: { ko: "해외 팬이라면 꼭 봐야 할 K-드라마 TOP 10", es: "Top 10 K-Dramas que Todo Fan Internacional Debe Ver" },
+    descriptionI18n: { ko: "전 세계 시청자를 사로잡은 필수 한국 드라마 목록, 스릴러 명작부터 따뜻한 로맨스까지.", es: "Una lista curada de K-Dramas imprescindibles que han cautivado audiencias en todo el mundo." },
     date: "2026-01-15",
     tags: ["K-Drama", "Recommendations", "Guide"],
     content: `Korean dramas have taken the world by storm, and if you're new to the scene or looking for your next binge, this list is for you. These ten K-Dramas have transcended cultural boundaries and earned millions of fans globally.
@@ -64,6 +68,8 @@ Think you know these dramas well? Test your knowledge in [Drama-dle](/drama-dle)
     slug: "beginners-guide-kpop-groups-fandoms",
     title: "Beginner's Guide to K-Pop Groups and Fandoms",
     description: "Everything you need to know about the biggest K-Pop groups, their fandoms, and what makes the K-Pop industry unique.",
+    titleI18n: { ko: "K-Pop 그룹과 팬덤 입문 가이드", es: "Guía para Principiantes de Grupos y Fandoms de K-Pop" },
+    descriptionI18n: { ko: "가장 큰 K-Pop 그룹, 팬덤, 그리고 K-Pop 산업의 특별함에 대한 모든 것.", es: "Todo lo que necesitas saber sobre los grupos de K-Pop más grandes, sus fandoms y qué hace única a la industria." },
     date: "2026-01-22",
     tags: ["K-Pop", "Guide", "Fandoms"],
     content: `K-Pop isn't just music — it's a global cultural movement. If you're just getting into K-Pop or want to understand the culture better, this guide covers the essentials.
@@ -120,6 +126,8 @@ Ready to test your K-Pop knowledge? Try [Idol-dle](/idol-dle) and see if you can
     slug: "kdrama-osts-music-behind-scenes",
     title: "K-Drama OSTs: The Music Behind the Scenes",
     description: "Discover how K-Drama original soundtracks became a genre of their own, featuring iconic songs that fans love worldwide.",
+    titleI18n: { ko: "K-드라마 OST: 장면 뒤의 음악", es: "OSTs de K-Drama: La Música Detrás de las Escenas" },
+    descriptionI18n: { ko: "K-드라마 OST가 어떻게 하나의 장르가 되었는지, 팬들이 사랑하는 명곡들을 소개합니다.", es: "Descubre cómo las bandas sonoras de K-Drama se convirtieron en un género propio." },
     date: "2026-01-29",
     tags: ["K-Drama", "OST", "Music"],
     content: `If you've ever watched a K-Drama, you know that the music is just as memorable as the story itself. K-Drama OSTs (Original Soundtracks) have become a genre of their own, with songs that can make you cry, smile, or fall in love all over again.
@@ -169,6 +177,8 @@ Think you can recognize K-Pop and K-Drama songs from their lyrics? Challenge you
     slug: "how-to-play-kdle-complete-guide",
     title: "How to Play K-dle: Complete Guide for All 4 Game Modes",
     description: "Master every K-dle game mode with tips, strategies, and everything you need to know to improve your scores.",
+    titleI18n: { ko: "K-dle 플레이 방법: 4개 게임 모드 완벽 가이드", es: "Cómo Jugar K-dle: Guía Completa para los 4 Modos de Juego" },
+    descriptionI18n: { ko: "모든 K-dle 게임 모드를 마스터하기 위한 팁, 전략, 그리고 점수 향상에 필요한 모든 것.", es: "Domina todos los modos de juego de K-dle con consejos, estrategias y todo lo que necesitas." },
     date: "2026-02-05",
     tags: ["Guide", "K-dle", "Tips"],
     content: `Welcome to K-dle, the daily puzzle game for K-Drama and K-Pop fans! Whether you're a first-time player or looking to improve your scores, this complete guide covers all four game modes and shares strategies to help you win.
@@ -247,6 +257,8 @@ Ready to play? Head to the [homepage](/) and pick your first game mode!`,
     slug: "kdrama-vs-western-tv-differences",
     title: "K-Drama vs Western TV: What Makes Korean Dramas Different?",
     description: "Explore the key differences between Korean dramas and Western television, from storytelling format to production style.",
+    titleI18n: { ko: "K-드라마 vs 서양 TV: 한국 드라마의 차이점은?", es: "K-Drama vs TV Occidental: ¿Qué Hace Diferentes a los Dramas Coreanos?" },
+    descriptionI18n: { ko: "스토리텔링 형식부터 제작 방식까지 한국 드라마와 서양 TV의 핵심 차이점을 탐구합니다.", es: "Explora las diferencias clave entre los dramas coreanos y la televisión occidental." },
     date: "2026-02-12",
     tags: ["K-Drama", "Analysis", "Culture"],
     content: `If you've watched both Korean dramas and Western TV shows, you've probably noticed they feel fundamentally different. Beyond language and cultural setting, K-Dramas have a unique production philosophy that sets them apart. Here's what makes them special.
@@ -301,6 +313,8 @@ How well do you know the world of K-Dramas? Test yourself in [Drama-dle](/drama-
     slug: "rise-of-hallyu-korean-entertainment-conquered-world",
     title: "The Rise of Hallyu: How Korean Entertainment Conquered the World",
     description: "From a regional curiosity to a global cultural force, the Hallyu wave has reshaped music, film, fashion, and food on every continent. Here's how it happened.",
+    titleI18n: { ko: "한류의 부상: 한국 엔터테인먼트가 세계를 정복한 방법", es: "El Auge del Hallyu: Cómo el Entretenimiento Coreano Conquistó el Mundo" },
+    descriptionI18n: { ko: "지역 문화에서 글로벌 문화적 힘으로, 한류가 음악, 영화, 패션, 음식에 미친 영향.", es: "De curiosidad regional a fuerza cultural global, la ola Hallyu ha transformado la música, el cine y la moda." },
     date: "2026-01-08",
     tags: ["Hallyu", "Culture", "History"],
     content: `Few cultural phenomena in modern history have spread as rapidly or as deeply as the Korean Wave — known in Korean as **Hallyu (한류)**. In the span of roughly three decades, Korean entertainment went from being virtually unknown outside Asia to dominating global charts, winning Academy Awards, and influencing everything from fashion runways to language classrooms.
@@ -355,6 +369,8 @@ Want to test how well you know Korean entertainment? Try [Drama-dle](/drama-dle)
     slug: "kpop-dance-covers-fan-culture",
     title: "K-Pop Dance Covers: How Fans Keep the Culture Alive",
     description: "K-Pop dance covers have exploded on YouTube and TikTok, creating a global community of dancers who connect through choreography. Here's the story behind the phenomenon.",
+    titleI18n: { ko: "K-Pop 댄스 커버: 팬들이 문화를 이어가는 방법", es: "Covers de Baile K-Pop: Cómo los Fans Mantienen Viva la Cultura" },
+    descriptionI18n: { ko: "YouTube와 TikTok에서 폭발적으로 성장한 K-Pop 댄스 커버 현상과 글로벌 댄서 커뮤니티.", es: "Los covers de baile K-Pop han explotado en YouTube y TikTok, creando una comunidad global de bailarines." },
     date: "2026-01-18",
     tags: ["K-Pop", "Dance", "Fan Culture"],
     content: `Walk into any major city in the world on a Saturday afternoon — Seoul, Los Angeles, Paris, São Paulo, Manila — and you might encounter the same scene: a group of young people in matching outfits running through synchronized choreography in a public square, phone tripods set up at precise angles, filming themselves perform the latest K-Pop comeback routine. This is the K-Pop dance cover community, one of fandom's most remarkable and underreported phenomena.
@@ -423,6 +439,8 @@ Impressed by K-Pop choreography? Test your knowledge of the idols behind those i
     slug: "understanding-kdrama-genres-complete-guide",
     title: "Understanding K-Drama Genres: From Romantic Comedy to Thriller",
     description: "New to K-Dramas and not sure where to start? This genre breakdown will help you find exactly the kind of show you're looking for.",
+    titleI18n: { ko: "K-드라마 장르 이해하기: 로맨틱 코미디부터 스릴러까지", es: "Entendiendo los Géneros de K-Drama: De la Comedia Romántica al Thriller" },
+    descriptionI18n: { ko: "K-드라마가 처음이라면? 이 장르 분석이 원하는 드라마를 찾는 데 도움이 됩니다.", es: "¿Nuevo en los K-Dramas? Este desglose de géneros te ayudará a encontrar exactamente lo que buscas." },
     date: "2026-01-25",
     tags: ["K-Drama", "Guide", "Genres"],
     content: `Korean dramas span an enormous range of genres — from frothy romantic comedies to grim psychological thrillers, from sweeping historical epics to high-concept science fiction. The genre labels used in Korean entertainment have their own logic and conventions that differ from Western categories, and understanding them will help you pick your next drama with confidence.
@@ -510,6 +528,8 @@ Now that you know your genres, put your drama knowledge to the test in [Drama-dl
     slug: "kpop-trainee-system-how-idols-are-made",
     title: "The Trainee System: How K-Pop Idols Are Made",
     description: "Behind every polished K-Pop performance is years of rigorous training. Here's an inside look at how Korea's entertainment companies turn trainees into idols.",
+    titleI18n: { ko: "연습생 시스템: K-Pop 아이돌이 만들어지는 과정", es: "El Sistema de Trainees: Cómo Se Hacen los Idols de K-Pop" },
+    descriptionI18n: { ko: "완벽한 K-Pop 무대 뒤에는 수년간의 엄격한 훈련이 있습니다. 연습생 시스템의 내부를 들여다봅니다.", es: "Detrás de cada actuación pulida de K-Pop hay años de entrenamiento riguroso. Una mirada al sistema de trainees." },
     date: "2026-02-01",
     tags: ["K-Pop", "Industry", "Guide"],
     content: `When BTS performed at the Grammy Awards, when BLACKPINK headlined Coachella, or when aespa broke records with their comeback — what you witnessed was the end result of a system unique in the global entertainment industry. The Korean idol trainee system is extraordinarily demanding, carefully engineered, and deeply controversial. It is also, by most measures, extraordinarily effective.
@@ -588,6 +608,8 @@ Think you know your K-Pop idols and groups well? Put your knowledge to the test 
     slug: "iconic-kdrama-filming-locations-you-can-visit",
     title: "Iconic K-Drama Filming Locations You Can Actually Visit",
     description: "From Jeju Island to the palaces of Seoul, these real-world locations from beloved K-Dramas are waiting for your visit.",
+    titleI18n: { ko: "실제로 방문할 수 있는 K-드라마 명촬영지", es: "Locaciones Icónicas de Filmación de K-Drama que Puedes Visitar" },
+    descriptionI18n: { ko: "제주도부터 서울의 궁궐까지, 사랑하는 K-드라마의 실제 촬영지를 방문해보세요.", es: "Desde la isla de Jeju hasta los palacios de Seúl, estas locaciones de K-Dramas te esperan." },
     date: "2026-02-08",
     tags: ["K-Drama", "Travel", "Filming Locations"],
     content: `One of the lasting effects of K-Drama tourism is the transformation of ordinary places into pilgrimage sites for fans worldwide. Hotels report guests specifically requesting rooms with particular views, café owners display drama screenshots at the door, and local tourism boards have learned to leverage filming location fame for significant economic benefit. Here are ten real-world locations from iconic K-Dramas that you can actually visit.
@@ -658,6 +680,8 @@ Recognized some of these locations from K-Dramas you've watched? Test your drama
     slug: "kpop-lightstick-guide-every-major-group",
     title: "K-Pop Lightstick Guide: Every Major Group's Official Lightstick",
     description: "K-Pop lightsticks are more than concert accessories — they're pieces of fan identity. Here's the complete guide to the most iconic official lightsticks and what makes each one special.",
+    titleI18n: { ko: "K-Pop 응원봉 가이드: 주요 그룹별 공식 응원봉", es: "Guía de Lightsticks de K-Pop: El Lightstick Oficial de Cada Grupo Principal" },
+    descriptionI18n: { ko: "K-Pop 응원봉은 콘서트 소품 이상 — 팬 정체성의 상징입니다. 가장 상징적인 응원봉 가이드.", es: "Los lightsticks de K-Pop son más que accesorios de concierto — son piezas de identidad fan." },
     date: "2026-02-15",
     tags: ["K-Pop", "Merchandise", "Fan Culture"],
     content: `If you've watched footage of a K-Pop concert from above — the sea of synchronized light blooming and shifting across thousands of fans — you've witnessed one of live music's most visually spectacular phenomena. The instrument behind that spectacle is the **official lightstick**, or in Korean, 응원봉 (eungjongbong, literally "cheering stick").
@@ -746,6 +770,8 @@ Now that you know your lightsticks, see how well you know the K-Pop groups behin
     slug: "daily-puzzle-games-language-learning-kdle",
     title: "Why Daily Puzzle Games Like K-dle Are Perfect for Language Learning",
     description: "Research on spaced repetition, curiosity-driven learning, and cultural context all point in the same direction: daily puzzle games might be one of the most effective casual methods for picking up a new language.",
+    titleI18n: { ko: "K-dle 같은 데일리 퍼즐 게임이 언어 학습에 완벽한 이유", es: "Por Qué los Juegos de Puzzles Diarios Como K-dle Son Perfectos para Aprender Idiomas" },
+    descriptionI18n: { ko: "간격 반복, 호기심 기반 학습, 문화적 맥락에 대한 연구가 같은 방향을 가리킵니다.", es: "La investigación sobre repetición espaciada y aprendizaje por curiosidad apunta en la misma dirección." },
     date: "2026-02-17",
     tags: ["K-dle", "Education", "Language Learning"],
     content: `There's a moment that many Korean drama fans describe: you're watching a show with subtitles, and you realize you understood a sentence before you read the translation. It might be a simple phrase — "잠깐만요" (just a moment) or "진짜요?" (really?) — but something clicked. You learned a word without trying to.
@@ -816,6 +842,8 @@ Start your daily K-dle habit today — [Drama-dle](/drama-dle), [Idol-dle](/idol
     slug: "complete-guide-kdrama-awards-baeksang-blue-dragon",
     title: "Complete Guide to K-Drama Awards: Baeksang, Blue Dragon & More",
     description: "From the prestigious Baeksang Arts Awards to the glamorous Blue Dragon Series Awards, here's everything you need to know about the ceremonies that celebrate Korean entertainment excellence.",
+    titleI18n: { ko: "K-드라마 시상식 완벽 가이드: 백상, 청룡 등", es: "Guía Completa de Premios de K-Drama: Baeksang, Blue Dragon y Más" },
+    descriptionI18n: { ko: "백상예술대상부터 청룡시리즈어워즈까지, 한국 엔터테인먼트 우수성을 기리는 시상식의 모든 것.", es: "Desde los prestigiosos Premios Baeksang hasta los Blue Dragon Series Awards, todo sobre las ceremonias." },
     date: "2025-12-10",
     tags: ["K-Drama", "Awards", "Culture"],
     content: `Award season in South Korea is a spectacle unto itself. Red carpets stretch across Seoul's most prestigious venues, fashion choices dominate social media for weeks, and acceptance speeches become viral moments. But Korean entertainment awards are more than celebrity glamour — they reflect the evolving values of an industry that has become one of the world's most influential cultural exporters.
@@ -880,6 +908,8 @@ Think you know which K-Dramas won big? Test your knowledge of award-winning show
     slug: "kpop-fan-culture-fan-chants-streaming-parties",
     title: "K-Pop Fan Culture: From Fan Chants to Streaming Parties",
     description: "K-Pop fandoms have developed unique cultural practices that go far beyond listening to music. Explore the organized, passionate, and surprisingly influential world of K-Pop fan culture.",
+    titleI18n: { ko: "K-Pop 팬 문화: 응원법부터 스트리밍 파티까지", es: "Cultura Fan de K-Pop: De los Fan Chants a las Fiestas de Streaming" },
+    descriptionI18n: { ko: "K-Pop 팬덤은 음악 듣기를 넘어선 독특한 문화 활동을 발전시켰습니다.", es: "Los fandoms de K-Pop han desarrollado prácticas culturales únicas que van más allá de escuchar música." },
     date: "2025-12-20",
     tags: ["K-Pop", "Fan Culture", "Community"],
     content: `K-Pop fan culture is one of the most complex and organized fan ecosystems in entertainment history. What began as local fan clubs supporting Korean pop groups has evolved into a global network of communities with their own rituals, hierarchies, creative traditions, and even political influence. Understanding K-Pop fan culture means understanding how millions of people around the world have built meaningful social identities around the artists they love.
@@ -958,6 +988,8 @@ How well do you know the K-Pop idols that inspire this incredible fan culture? T
     slug: "evolution-of-kdrama-winter-sonata-to-squid-game",
     title: "The Evolution of K-Drama: From Winter Sonata to Squid Game",
     description: "Korean television has undergone a dramatic transformation over two decades. Trace the creative, technological, and cultural shifts that turned K-Dramas into a global entertainment force.",
+    titleI18n: { ko: "K-드라마의 진화: 겨울연가에서 오징어 게임까지", es: "La Evolución del K-Drama: De Winter Sonata a Squid Game" },
+    descriptionI18n: { ko: "20년간 한국 TV의 극적인 변화를 추적합니다. 창의적, 기술적, 문화적 전환의 기록.", es: "La televisión coreana ha experimentado una transformación dramática en dos décadas." },
     date: "2026-01-05",
     tags: ["K-Drama", "History", "Analysis"],
     content: `In 2002, a romantic drama about amnesia, first love, and a snowy Korean landscape became one of the most-watched television shows in Japanese history. Two decades later, a dystopian thriller about desperate people playing children's games for survival money became the most-watched series on the world's largest streaming platform. The journey from **Winter Sonata** to **Squid Game** tells the story of how Korean television evolved from a regional curiosity into a global entertainment powerhouse.
@@ -1033,6 +1065,8 @@ How well do you know K-Drama history? Test your knowledge across eras in [Drama-
     slug: "kpop-choreography-art-behind-iconic-dance-moves",
     title: "K-Pop Choreography: The Art Behind Iconic Dance Moves",
     description: "K-Pop choreography is a unique art form that combines athletic precision with emotional storytelling. Discover how choreographers create the moves that millions of fans learn and love.",
+    titleI18n: { ko: "K-Pop 안무: 상징적 댄스 무브 뒤의 예술", es: "Coreografía K-Pop: El Arte Detrás de los Movimientos de Baile Icónicos" },
+    descriptionI18n: { ko: "K-Pop 안무는 운동적 정밀함과 감정적 스토리텔링을 결합하는 독특한 예술 형식입니다.", es: "La coreografía K-Pop es una forma de arte única que combina precisión atlética con narrativa emocional." },
     date: "2026-01-12",
     tags: ["K-Pop", "Dance", "Choreography"],
     content: `When BLACKPINK's "Pink Venom" dropped in 2022, the choreography's snake-like arm movements were being replicated by millions of TikTok users within hours. When BTS performed "Butter" at the American Music Awards, the synchronized footwork was so precise that viewers questioned whether they were watching live performance or pre-recorded footage. When aespa's "Supernova" went viral, it was the point dance — a single, repeated hand gesture — that became the defining image.
@@ -1126,6 +1160,8 @@ Think you know the idols behind these iconic moves? Test your K-Pop knowledge in
     slug: "best-kdrama-osts-that-defined-a-generation",
     title: "Best K-Drama OSTs That Defined a Generation",
     description: "These original soundtracks didn't just accompany Korean dramas — they became cultural phenomena that defined emotional moments for millions of viewers worldwide.",
+    titleI18n: { ko: "한 세대를 정의한 최고의 K-드라마 OST", es: "Los Mejores OSTs de K-Drama que Definieron una Generación" },
+    descriptionI18n: { ko: "이 OST들은 드라마를 위한 배경음악이 아니라 수백만 시청자의 감정적 순간을 정의한 문화 현상입니다.", es: "Estas bandas sonoras no solo acompañaron dramas — se convirtieron en fenómenos culturales." },
     date: "2026-01-20",
     tags: ["K-Drama", "OST", "Music"],
     content: `There is a particular kind of emotional memory that only a K-Drama OST can trigger. You hear the opening piano notes of "Stay With Me" and you're back in Goblin's snowy landscape. The first chord of "Everytime" transports you to Song Joong-ki standing in a military uniform. "I Love You Boy" plays and suddenly it's raining in a courtroom. These songs have become inseparable from the stories they accompanied, and for millions of fans worldwide, they define what Korean television sounds like.
@@ -1214,6 +1250,8 @@ Think you can recognize these iconic songs from their lyrics alone? Challenge yo
     slug: "understanding-kpop-agencies-hybe-sm-jyp-yg",
     title: "Understanding K-Pop Agencies: HYBE, SM, JYP, and YG",
     description: "The four major K-Pop entertainment companies have distinct philosophies, training methods, and artistic identities that shape the groups they produce. Here's how to tell them apart.",
+    titleI18n: { ko: "K-Pop 소속사 이해하기: HYBE, SM, JYP, YG", es: "Entendiendo las Agencias de K-Pop: HYBE, SM, JYP y YG" },
+    descriptionI18n: { ko: "빅 4 엔터테인먼트 회사는 각각 고유한 훈련 방식과 예술적 정체성을 가지고 있습니다.", es: "Las cuatro grandes compañías de K-Pop tienen filosofías distintas que moldean los grupos que producen." },
     date: "2026-02-02",
     tags: ["K-Pop", "Industry", "Guide"],
     content: `In K-Pop, the entertainment company matters almost as much as the artist. While Western pop fans rarely know or care which label their favorite artist is signed to, K-Pop fans track company affiliations closely — and for good reason. The "Big 4" Korean entertainment companies each have distinctive training philosophies, musical identities, visual aesthetics, and fan engagement strategies that fundamentally shape the artists they produce. Understanding these companies is essential to understanding K-Pop itself.
@@ -1308,6 +1346,8 @@ Now that you understand the companies, test your knowledge of the idols they've 
     slug: "kdrama-filming-locations-travel-guide",
     title: "K-Drama Filming Locations You Can Actually Visit",
     description: "From the palaces of Seoul to the beaches of Jeju, Korean drama filming locations have become some of Asia's most popular tourist destinations. Here's your complete travel guide.",
+    titleI18n: { ko: "실제로 방문할 수 있는 K-드라마 촬영지 여행 가이드", es: "Locaciones de Filmación de K-Drama: Guía de Viaje" },
+    descriptionI18n: { ko: "서울의 궁궐부터 제주 해변까지, K-드라마 촬영지는 아시아 최고의 관광 명소가 되었습니다.", es: "Desde los palacios de Seúl hasta las playas de Jeju, las locaciones de K-Drama son destinos turísticos populares." },
     date: "2026-02-09",
     tags: ["K-Drama", "Travel", "Guide"],
     content: `K-Drama tourism is a billion-dollar industry. Every year, millions of visitors travel to South Korea specifically to visit locations they first saw in their favorite Korean dramas. Hotels report guests requesting specific rooms featured in shows. Restaurants display screenshots from dramas filmed on their premises. Entire neighborhoods have been economically revitalized by the foot traffic that a single successful drama can generate.
@@ -1415,6 +1455,8 @@ Recognized some of these locations from dramas you've watched? Test your knowled
     slug: "how-daily-puzzle-games-changed-online-gaming",
     title: "How Daily Puzzle Games Like Wordle Changed Online Gaming",
     description: "From Wordle's viral explosion to a thriving ecosystem of daily puzzle games, the simple concept of one puzzle per day has transformed how millions of people engage with games online.",
+    titleI18n: { ko: "Wordle 같은 데일리 퍼즐 게임이 온라인 게이밍을 바꾼 방법", es: "Cómo los Juegos de Puzzles Diarios Como Wordle Cambiaron los Juegos Online" },
+    descriptionI18n: { ko: "Wordle의 바이럴 폭발부터 번성하는 데일리 퍼즐 생태계까지, 하루 한 퍼즐의 단순한 개념이 변화를 가져왔습니다.", es: "De la explosión viral de Wordle a un ecosistema próspero, el concepto de un puzzle por día transformó los juegos online." },
     date: "2026-02-14",
     tags: ["Gaming", "Puzzle Games", "K-dle"],
     content: `On January 1st, 2022, most people had never heard of Wordle. By February, it was the most talked-about game on the internet. By March, The New York Times had purchased it for a reported seven-figure sum. The story of Wordle — and the daily puzzle game revolution it sparked — is a fascinating study in how simplicity, constraint, and shared experience can create cultural phenomena in the digital age.

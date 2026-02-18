@@ -245,6 +245,32 @@ export default function HomeContent() {
               {t("home.moreAbout")} →
             </Link>
           </div>
+
+          {/* Extended SEO Content */}
+          <section className="mt-8 mb-8 text-sm leading-relaxed text-[var(--color-muted)]">
+            <h2 className="text-lg font-semibold text-[var(--color-text)] mb-4">{t("home.seo.title")}</h2>
+            <p className="mb-4">{t("home.seo.p1")}</p>
+            <p className="mb-4">{t("home.seo.p2")}</p>
+
+            <h2 className="text-lg font-semibold text-[var(--color-text)] mb-4 mt-8">{t("home.seo.modesTitle")}</h2>
+
+            <h3 className="text-base font-semibold text-[var(--color-text)] mb-3 mt-6">{t("home.seo.dramaTitle")}</h3>
+            <p className="mb-4">{t("home.seo.dramaText")}</p>
+
+            <h3 className="text-base font-semibold text-[var(--color-text)] mb-3 mt-6">{t("home.seo.idolTitle")}</h3>
+            <p className="mb-4">{t("home.seo.idolText")}</p>
+
+            <h3 className="text-base font-semibold text-[var(--color-text)] mb-3 mt-6">{t("home.seo.lyricTitle")}</h3>
+            <p className="mb-4">{t("home.seo.lyricText")}</p>
+
+            <h3 className="text-base font-semibold text-[var(--color-text)] mb-3 mt-6">{t("home.seo.sceneTitle")}</h3>
+            <p className="mb-4">{t("home.seo.sceneText")}</p>
+
+            <h2 className="text-lg font-semibold text-[var(--color-text)] mb-4 mt-8">{t("home.seo.hallyuTitle")}</h2>
+            <p className="mb-4">{t("home.seo.hallyuP1")}</p>
+            <p className="mb-4">{t("home.seo.hallyuP2")}</p>
+            <p className="mb-4">{t("home.seo.hallyuP3")}</p>
+          </section>
         </div>
       </main>
 
